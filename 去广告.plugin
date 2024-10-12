@@ -14,22 +14,7 @@ IP-CIDR, 122.229.8.47/32, REJECT, no-resolve
 IP-CIDR, 122.229.29.89/32, REJECT, no-resolve
 # 12306
 DOMAIN, ad.12306.cn, DIRECT
-# Apple
-DOMAIN, ca.iadsdk.apple.com, DIRECT
-DOMAIN-SUFFIX, advp.apple.com, REJECT
-DOMAIN-SUFFIX, iad-apple.com, REJECT
-DOMAIN-SUFFIX, iadsdk.apple.com, REJECT
-DOMAIN, advertising.apple.com, REJECT
-DOMAIN, api-adservices.apple.com, REJECT
-DOMAIN, apple.comscoreresearch.com, REJECT
-DOMAIN, banners.itunes.apple.com, REJECT
-DOMAIN, iad.apple.com, REJECT
-DOMAIN, iadcontent.apple.com, REJECT
-DOMAIN, iadctest.qwapi.com, REJECT
-DOMAIN, iadmoo.apple.com, REJECT
-DOMAIN, iadworkbench.apple.com, REJECT
-DOMAIN, launch.apple.com, REJECT
-DOMAIN, qwapi.apple.com, REJECT
+
 # DNS 无响应
 DOMAIN, adttrackingprd.hwwt8.com, REJECT
 # httpdns
