@@ -1,0 +1,71 @@
+#!name = 去广告
+#!desc = 水饺自用去广告
+#!icon =https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/id.jpg
+
+[Rule]
+# 米家
+DOMAIN, sdkconfig.ad.xiaomi.com, REJECT
+# 中国电信
+DOMAIN, ad.21cn.com, REJECT
+DOMAIN, ad.k.21cn.com, REJECT
+DOMAIN, admarket.21cn.com, REJECT
+DOMAIN, adshows.21cn.com, REJECT
+IP-CIDR, 122.229.8.47/32, REJECT, no-resolve
+IP-CIDR, 122.229.29.89/32, REJECT, no-resolve
+# 12306
+DOMAIN, ad.12306.cn, DIRECT
+# Apple
+DOMAIN, ca.iadsdk.apple.com, DIRECT
+DOMAIN-SUFFIX, advp.apple.com, REJECT
+DOMAIN-SUFFIX, iad-apple.com, REJECT
+DOMAIN-SUFFIX, iadsdk.apple.com, REJECT
+DOMAIN, advertising.apple.com, REJECT
+DOMAIN, api-adservices.apple.com, REJECT
+DOMAIN, apple.comscoreresearch.com, REJECT
+DOMAIN, banners.itunes.apple.com, REJECT
+DOMAIN, iad.apple.com, REJECT
+DOMAIN, iadcontent.apple.com, REJECT
+DOMAIN, iadctest.qwapi.com, REJECT
+DOMAIN, iadmoo.apple.com, REJECT
+DOMAIN, iadworkbench.apple.com, REJECT
+DOMAIN, launch.apple.com, REJECT
+DOMAIN, qwapi.apple.com, REJECT
+# DNS 无响应
+DOMAIN, adttrackingprd.hwwt8.com, REJECT
+# httpdns
+DOMAIN-KEYWORD, httpdns., REJECT
+DOMAIN-KEYWORD, httpdns-, REJECT
+DOMAIN, hdns.ksyun.com, REJECT
+# 美团
+DOMAIN, maplocatesdksnapshot.d.meituan.net, REJECT
+DOMAIN, metrics-picture.d.meituan.net, REJECT
+IP-CIDR, 103.37.155.60/32, REJECT, no-resolve
+
+[Rewrite]
+# 米家
+^https:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|carousel\/banners|myTab|openingBanner) reject-dict
+^https:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|myTab)\? reject-dict
+
+# 航旅纵横 @Dragon
+# 首页悬浮标签
+^http:\/\/home\.umetrip\.com\/gateway\/api\/umetrip\/native reject
+# 我的页面轮播图
+^http:\/\/umerp\.umetrip\.com\/gateway\/api\/umetrip\/native reject
+
+# 掌上英雄联盟 @𝑨梦 @𝑪𝒉𝒙𝒎𝟏𝟎𝟐𝟑
+^https?:\/\/us\.l\.qq\.com\/exapp reject-200
+
+# 微信 //mp.weixin.qq.com
+^https:\/\/mp\.weixin\.qq\.com\/mp\/(?:cps_product_info|getappmsgad|jsmonitor|masonryfeed|relatedarticle) reject-dict
+
+# 中国移动开屏广告
+^https:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(explorePage\/getAdverList|init\/startInit) reject
+# 美团 & 美团外卖 //flowplus.meituan.net, img.meituan.net, s3plus.meituan.net
+^http:\/\/wmapi\.meituan\.com\/api\/v7\/(?:loadInfo|openscreen|startpicture) reject-dict
+^https:\/\/flowplus\.meituan\.net\/v1\/mss_\w+\/linglong\/\d+\.jpg reject-dict
+^https:\/\/img\.meituan\.net\/bizad\/bizad_brandCpt_\d+\.jpg reject-dict
+^https:\/\/s3plus\.meituan\.net\/ocean-blk-index\/index\/blk_conf_\d+\.json reject-dict
+^https:\/\/s3plus\.meituan\.net\/v1\/mss_\w+\/(?:brandcpt-vedio|waimai-alita)\/\w+\.zip$ reject-dict
+
+[MitM]
+hostname = home.mi.com,home.umetrip.com,umerp.umetrip.com,m.qianbao.qq.com,us.l.qq.com,api.xiangji.qq.com,client.app.coc.10086.cn,flowplus.meituan.net, img.meituan.net, s3plus.meituan.net,mp.weixin.qq.com
