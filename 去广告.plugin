@@ -15,12 +15,6 @@ IP-CIDR, 122.229.29.89/32, REJECT, no-resolve
 # 12306
 DOMAIN, ad.12306.cn, DIRECT
 
-# DNS 无响应
-DOMAIN, adttrackingprd.hwwt8.com, REJECT
-# httpdns
-DOMAIN-KEYWORD, httpdns., REJECT
-DOMAIN-KEYWORD, httpdns-, REJECT
-DOMAIN, hdns.ksyun.com, REJECT
 # 美团
 DOMAIN, maplocatesdksnapshot.d.meituan.net, REJECT
 DOMAIN, metrics-picture.d.meituan.net, REJECT
