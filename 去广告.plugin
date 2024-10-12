@@ -40,9 +40,6 @@ IP-CIDR, 103.37.155.60/32, REJECT, no-resolve
 # 掌上英雄联盟 @𝑨梦 @𝑪𝒉𝒙𝒎𝟏𝟎𝟐𝟑
 ^https?:\/\/us\.l\.qq\.com\/exapp reject-200
 
-# 微信 //mp.weixin.qq.com
-^https:\/\/mp\.weixin\.qq\.com\/mp\/(?:cps_product_info|getappmsgad|jsmonitor|masonryfeed|relatedarticle) reject-dict
-
 # 中国移动开屏广告
 ^https:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(explorePage\/getAdverList|init\/startInit) reject
 # 美团 & 美团外卖 //flowplus.meituan.net, img.meituan.net, s3plus.meituan.net
@@ -53,4 +50,4 @@ IP-CIDR, 103.37.155.60/32, REJECT, no-resolve
 ^https:\/\/s3plus\.meituan\.net\/v1\/mss_\w+\/(?:brandcpt-vedio|waimai-alita)\/\w+\.zip$ reject-dict
 
 [MitM]
-hostname = home.mi.com,home.umetrip.com,umerp.umetrip.com,m.qianbao.qq.com,us.l.qq.com,api.xiangji.qq.com,client.app.coc.10086.cn,flowplus.meituan.net, img.meituan.net, s3plus.meituan.net,mp.weixin.qq.com
+hostname = home.mi.com,home.umetrip.com,umerp.umetrip.com,m.qianbao.qq.com,us.l.qq.com,api.xiangji.qq.com,client.app.coc.10086.cn,flowplus.meituan.net, img.meituan.net, s3plus.meituan.net
