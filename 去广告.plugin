@@ -54,7 +54,7 @@ IP-CIDR, 103.37.155.60/32, REJECT, no-resolve
 # 信息流广告
 ^https:\/\/pan\.baidu\.com\/act\/api\/activityentry reject-dict
 # 我的 - 游戏中心
-^https:\/\/pan\.baidu\.com\/rest\/2\.0\/membership\/user\?method=gamecenter reject-dict
+#^https:\/\/pan\.baidu\.com\/rest\/2\.0\/membership\/user\?method=gamecenter reject-dict
 # 我的页面 - 其他推广
 ^https:\/\/pan\.baidu\.com\/act\/v2\/welfare\/list reject-dict
 # 广告配置
