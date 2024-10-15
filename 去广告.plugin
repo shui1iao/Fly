@@ -43,22 +43,6 @@ IP-CIDR, 103.37.155.60/32, REJECT, no-resolve
 ^https:\/\/s3plus\.meituan\.net\/ocean-blk-index\/index\/blk_conf_\d+\.json reject-dict
 ^https:\/\/s3plus\.meituan\.net\/v1\/mss_\w+\/(?:brandcpt-vedio|waimai-alita)\/\w+\.zip$ reject-dict
 
-#百度网盘
-# 应用配置
-^https:\/\/pan\.baidu\.com\/api\/getconfig reject-dict
-^https:\/\/pan\.baidu\.com\/api\/getsyscfg reject-dict
-# 签到任务配置
-^https:\/\/pan\.baidu\.com\/api\/taskscore\/tasklist reject-dict
-# 弹窗配置
-^https:\/\/pan\.baidu\.com\/act\/api\/activityentry reject-dict
-# 信息流广告
-^https:\/\/pan\.baidu\.com\/act\/api\/activityentry reject-dict
-# 我的 - 游戏中心
-#^https:\/\/pan\.baidu\.com\/rest\/2\.0\/membership\/user\?method=gamecenter reject-dict
-# 我的页面 - 其他推广
-^https:\/\/pan\.baidu\.com\/act\/v2\/welfare\/list reject-dict
-# 广告配置
-^https:\/\/pan\.baidu\.com\/rest\/\d\.\d\/pcs\/adv reject-dict
 
 [MitM]
 hostname = home.mi.com,home.umetrip.com,umerp.umetrip.com,m.qianbao.qq.com,us.l.qq.com,api.xiangji.qq.com,client.app.coc.10086.cn,flowplus.meituan.net, img.meituan.net, s3plus.meituan.net,pan.baidu.com
