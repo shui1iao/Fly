@@ -209,6 +209,7 @@ rules:
   - RULE-SET,微软服务,微软服务
   - RULE-SET,Google,Google
   - RULE-SET,Spotify,Spotify
+  - RULE-SET,国际媒体,国际媒体
   - RULE-SET,全球服务,全球服务  
   - RULE-SET,直连,DIRECT
   - GEOIP, CN, DIRECT
