@@ -85,6 +85,17 @@ proxy-groups:
       - 日本节点
       - 美国节点
 
+  - name: "国际媒体"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ForeignMedia.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 手动选择
+      - 自动选择
+      - 日本节点
+      - 美国节点
+      
   - name: "全球服务"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
@@ -236,12 +247,19 @@ rule-providers:
     path: ./Spotify/Spotify.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify_No_Resolve.yaml
 
+  国际媒体:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Global/Global.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GlobalMedia/GlobalMedia_Classical_No_Resolve.yaml
+
   全球服务:
     behavior: classical
     interval: 86400
     type: http
     path: ./Global/Global.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global_Classical_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Proxy/Proxy_Classical_No_Resolve.yaml
 
 
   苹果服务:
