@@ -245,7 +245,7 @@ rule-providers:
     interval: 86400
     type: http
     path: ./AI/AI.yaml
-    url: https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Clash/Rule/AI.yaml
+    url: https://raw.githubusercontent.com/luestr/ProxyResource/refs/heads/main/Tool/Clash/Rule/AI.yaml
 
   微软服务:
     behavior: classical
