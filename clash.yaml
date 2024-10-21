@@ -231,7 +231,7 @@ rule-providers:
     interval: 86400
     type: http
     path: ./Apple/Apple_Classical.yaml
-    url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Apple/Apple_Classical_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple_Classical_No_Resolve.yaml
 
   Telegram:
     behavior: classical
