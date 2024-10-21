@@ -46,6 +46,16 @@ proxy-groups:
       - DIRECT
       - 手动选择
       - 美国节点
+
+  - name: "Paypal"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 自动选择
+      - 手动选择
+      - 美国节点
       
   - name: "Telegram"
     type: select
@@ -212,6 +222,7 @@ rules:
 #  - IP-CIDR, 192.168.0.0/16, DIRECT
 
   - RULE-SET,苹果服务,苹果服务 
+  - RULE-SET,Paypal,Paypal 
   - RULE-SET,Telegram,Telegram  
   - RULE-SET,AI,AI
   - RULE-SET,微软服务,微软服务
@@ -233,6 +244,13 @@ rule-providers:
     type: http
     path: ./Apple/Apple_Classical.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple_Classical_No_Resolve.yaml
+
+  Paypal:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Paypal/Paypal.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/PayPal/PayPal_No_Resolve.yaml
 
   Telegram:
     behavior: classical
