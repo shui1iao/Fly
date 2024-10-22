@@ -264,7 +264,7 @@ rule-providers:
     interval: 86400
     type: http
     path: ./AI/AI.yaml
-    url: https://proxyresource.pages.dev/Tool/Clash/Rule/AI.yaml
+    url: https://kelee.one/Tool/Clash/Rule/AI.yaml
 
   微软服务:
     behavior: classical
