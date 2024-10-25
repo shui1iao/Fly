@@ -47,6 +47,16 @@ proxy-groups:
       - 手动选择
       - 美国节点
 
+  - name: "Amazon"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Amazon_1.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 自动选择
+      - 手动选择
+      - 美国节点
+
   - name: "Paypal"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/PayPal.png
@@ -222,6 +232,7 @@ rules:
 #  - IP-CIDR, 192.168.0.0/16, DIRECT
 
   - RULE-SET,苹果服务,苹果服务 
+  - RULE-SET,Amazon,Amazon
   - RULE-SET,Paypal,Paypal 
   - RULE-SET,Telegram,Telegram  
   - RULE-SET,AI,AI
@@ -245,6 +256,13 @@ rule-providers:
     path: ./Apple/Apple_Classical.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple_Classical_No_Resolve.yaml
 
+  Paypal:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Amazon/Amazon.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Amazon/Amazon.yaml
+    
   Paypal:
     behavior: classical
     interval: 86400
