@@ -1,13 +1,3 @@
-dns:
-  prefer-h3: true
-  default-nameserver:
-    - tls://223.5.5.5
-  nameserver:
-    - https://dns.alidns.com/dns-query
-  proxy-server-nameserver:
-    - https://dns.alidns.com/dns-query
-
-    
 # [策略组]
 proxy-groups:
 
