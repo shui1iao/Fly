@@ -1,3 +1,6 @@
+dns:
+  enable: false
+
 # [策略组]
 proxy-groups:
 
