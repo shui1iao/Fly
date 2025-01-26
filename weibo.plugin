@@ -10,7 +10,7 @@
 
 [Rule]
 DOMAIN-SUFFIX,uve.weibo.com,DIRECT
-DOMAIN,huodong.weibo.cn,REJECT
+#DOMAIN,huodong.weibo.cn,REJECT
 DOMAIN-SUFFIX,biz.weibo.com,REJECT
 
 [Rewrite]
