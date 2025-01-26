@@ -12,8 +12,6 @@ DOMAIN, admarket.21cn.com, REJECT
 DOMAIN, adshows.21cn.com, REJECT
 IP-CIDR, 122.229.8.47/32, REJECT, no-resolve
 IP-CIDR, 122.229.29.89/32, REJECT, no-resolve
-# 12306
-DOMAIN, ad.12306.cn, DIRECT
 
 # 美团
 DOMAIN, maplocatesdksnapshot.d.meituan.net, REJECT
@@ -25,14 +23,12 @@ IP-CIDR, 103.37.155.60/32, REJECT, no-resolve
 ^https:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|carousel\/banners|myTab|openingBanner) reject-dict
 ^https:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|myTab)\? reject-dict
 
-# 航旅纵横 @Dragon
-# 首页悬浮标签
-^http:\/\/home\.umetrip\.com\/gateway\/api\/umetrip\/native reject
-# 我的页面轮播图
-^http:\/\/umerp\.umetrip\.com\/gateway\/api\/umetrip\/native reject
-
-# 掌上英雄联盟 @𝑨梦 @𝑪𝒉𝒙𝒎𝟏𝟎𝟐𝟑
+# > 掌上英雄联盟
+# hostname = us.l.qq.com, ossweb-img.qq.com, mlol.qt.qq.com
+# 开屏广告 感谢【𝑨梦 𝑪𝒉𝒙𝒎𝟏𝟎𝟐𝟑】分享
 ^https?:\/\/us\.l\.qq\.com\/exapp reject-200
+^https?:\/\/ossweb-img\.qq\.com\/upload\/adw\/image\/[0-9]{3}\/202[0-9]{5}\/[a-z0-9]{32}\.(jpg|jpeg) reject-200
+^https?:\/\/mlol\.qt\.qq\.com\/go\/recommend reject
 
 # 中国移动开屏广告
 ^https:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(explorePage\/getAdverList|init\/startInit) reject
@@ -43,6 +39,10 @@ IP-CIDR, 103.37.155.60/32, REJECT, no-resolve
 ^https:\/\/s3plus\.meituan\.net\/ocean-blk-index\/index\/blk_conf_\d+\.json reject-dict
 ^https:\/\/s3plus\.meituan\.net\/v1\/mss_\w+\/(?:brandcpt-vedio|waimai-alita)\/\w+\.zip$ reject-dict
 
+[Script]
+# > 12306
+http-request ^https?:\/\/ad\.12306\.cn\/ad\/ser\/getAdList script-path=https://raw.githubusercontent.com/kokoryh/Script/master/js/12306.js, requires-body=true, timeout=60, tag=12306
+
 
 [MitM]
-hostname = home.mi.com,home.umetrip.com,umerp.umetrip.com,m.qianbao.qq.com,us.l.qq.com,api.xiangji.qq.com,client.app.coc.10086.cn,flowplus.meituan.net, img.meituan.net, s3plus.meituan.net
+hostname = home.mi.com,home.umetrip.com,umerp.umetrip.com,m.qianbao.qq.com,us.l.qq.com,api.xiangji.qq.com,client.app.coc.10086.cn,flowplus.meituan.net, img.meituan.net, s3plus.meituan.net,ad.12306.cn, ossweb-img.qq.com, mlol.qt.qq.com
