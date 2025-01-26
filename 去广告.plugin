@@ -3,8 +3,6 @@
 #!icon =https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/id.jpg
 
 [Rule]
-# 米家
-DOMAIN, sdkconfig.ad.xiaomi.com, REJECT
 # 中国电信
 DOMAIN, ad.21cn.com, REJECT
 DOMAIN, ad.k.21cn.com, REJECT
@@ -13,15 +11,44 @@ DOMAIN, adshows.21cn.com, REJECT
 IP-CIDR, 122.229.8.47/32, REJECT, no-resolve
 IP-CIDR, 122.229.29.89/32, REJECT, no-resolve
 
-# 美团
-DOMAIN, maplocatesdksnapshot.d.meituan.net, REJECT
-DOMAIN, metrics-picture.d.meituan.net, REJECT
-IP-CIDR, 103.37.155.60/32, REJECT, no-resolve
+# > 中国移动
+IP-CIDR, 120.240.95.37/32, no-resolve, REJECT
+
+# > 虎牙直播 开屏广告
+DOMAIN, pp-cdnfile2pcdn.msstatic.com, REJECT
+DOMAIN, livewebbs2pcdn.msstatic.com, REJECT
+DOMAIN, huyafile.msstatic.com, REJECT
+DOMAIN, livewebbs2.msstatic.com, REJECT
+DOMAIN, business.msstatic.com, REJECT
+DOMAIN-SUFFIX,v1d.szbdyd.com, REJECT
+
+# > 美团
+DOMAIN, flowplus.meituan.net, REJECT
+DOMAIN-SUFFIX,analytics.meituan.net, REJECT
+DOMAIN-SUFFIX,meituan.xn, REJECT
+DOMAIN-SUFFIX,meituan.yoga, REJECT
+DOMAIN-SUFFIX,meituangov.cn, REJECT
+DOMAIN-SUFFIX,report.meituan.com, REJECT
+DOMAIN-SUFFIX,wmlog.meituan.com, REJECT
+DOMAIN-SUFFIX,ad.e.waimai.sankuai.com, REJECT
+DOMAIN-SUFFIX,mads.meituan.com, REJECT
+DOMAIN-SUFFIX,dreport.meituan.net, REJECT
+DOMAIN-SUFFIX,d.meituan.net, REJECT
+
+# > 小米米家
+DOMAIN, sdkconfig.ad.xiaomi.com, REJECT
 
 [Rewrite]
-# 米家
-^https:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|carousel\/banners|myTab|openingBanner) reject-dict
-^https:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|myTab)\? reject-dict
+# > 米家
+# hostname = home.mi.com
+^https?:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|carousel\/banners|myTab|openingBanner) reject-dict
+
+# > 虎牙直播
+# hostname = cdn.wup.huya.com, business.msstatic.com, cdnfile1.msstatic.com, live-ads.huya.com
+^https?:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns$ reject
+^https?:\/\/business\.msstatic\.com\/advertiser\/material reject
+^https?:\/\/cdnfile1\.msstatic\.com\/cdnfile\/appad\/ reject-img
+^https?://live-ads\.huya\.com/live/getAllEntrance.*$ reject-dict
 
 # > 掌上英雄联盟
 # hostname = us.l.qq.com, ossweb-img.qq.com, mlol.qt.qq.com
@@ -30,14 +57,31 @@ IP-CIDR, 103.37.155.60/32, REJECT, no-resolve
 ^https?:\/\/ossweb-img\.qq\.com\/upload\/adw\/image\/[0-9]{3}\/202[0-9]{5}\/[a-z0-9]{32}\.(jpg|jpeg) reject-200
 ^https?:\/\/mlol\.qt\.qq\.com\/go\/recommend reject
 
-# 中国移动开屏广告
-^https:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(explorePage\/getAdverList|init\/startInit) reject
-# 美团 & 美团外卖 //flowplus.meituan.net, img.meituan.net, s3plus.meituan.net
-^http:\/\/wmapi\.meituan\.com\/api\/v7\/(?:loadInfo|openscreen|startpicture) reject-dict
-^https:\/\/flowplus\.meituan\.net\/v1\/mss_\w+\/linglong\/\d+\.jpg reject-dict
-^https:\/\/img\.meituan\.net\/bizad\/bizad_brandCpt_\d+\.jpg reject-dict
-^https:\/\/s3plus\.meituan\.net\/ocean-blk-index\/index\/blk_conf_\d+\.json reject-dict
-^https:\/\/s3plus\.meituan\.net\/v1\/mss_\w+\/(?:brandcpt-vedio|waimai-alita)\/\w+\.zip$ reject-dict
+# > 腾讯视频
+# hostname = vv.video.qq.com
+# ^https?:\/\/[\d\.:]*\/?(defaultts\.tc|vmind\.qqvideo\.tc|finderpdd\.video)\.qq\.com\/\w+ reject
+# ^https?:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+ reject
+# ^https?:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|vmind\.qqvideo)\.tc\.qq\.com\/\w+ reject
+# ^https?:\/\/vv\.video\.qq\.com\/(diff|get)vmind reject-dict
+# ^https?:\/\/vv\.video\.qq\.com\/getvinfo response-body-replace-regex &sppreviewtype=\d(.*)&spsrt=\d &sppreviewtype=0$1&spsrt=0
+
+# > 中国移动
+# hostname = client.app.coc.10086.cn, h.client.app.coc.10086.cn, app.10086.cn
+^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/init\/startInit reject-200
+^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/explorePage\/getAdverList reject
+
+# > 中国电信
+# hostname = cloud.189.cn, zt-app.go189.cn
+^https?:\/\/cloud\.189\.cn\/include\/splash\/ reject
+^https?:\/\/zt-app\.go189\.cn\/zt-app\/welcome\/.*?Animation reject-img
+
+# > 美团 & 美团外卖
+# hostname = img.meituan.net, s3plus.meituan.net, flowplus.meituan.net
+^https?:\/\/wmapi\.meituan\.com\/api\/v7\/(loadInfo|openscreen|startpicture)\? reject-dict
+^https?:\/\/(s3plus|flowplus)\.meituan\.net\/v\d\/\w+\/linglong\/\w+\.(gif|jpg|mp4) reject-dict
+^https?:\/\/img\.meituan\.net\/bizad\/bizad_brandCpt_\d+\.jpg reject-dict
+^https?:\/\/s3plus\.meituan\.net\/ocean-blk-index\/index\/blk_conf_73\.json reject-dict
+^https?:\/\/s3plus\.meituan\.net\/v1\/mss_\w+\/(brandcpt-vedio|waimai-alita)\/\w+\.zip$ reject-dict
 
 [Script]
 # > 12306
@@ -45,4 +89,4 @@ http-request ^https?:\/\/ad\.12306\.cn\/ad\/ser\/getAdList script-path=https://r
 
 
 [MitM]
-hostname = home.mi.com,home.umetrip.com,umerp.umetrip.com,m.qianbao.qq.com,us.l.qq.com,api.xiangji.qq.com,client.app.coc.10086.cn,flowplus.meituan.net, img.meituan.net, s3plus.meituan.net,ad.12306.cn, ossweb-img.qq.com, mlol.qt.qq.com
+hostname = home.mi.com, ad.12306.cn, ossweb-img.qq.com, mlol.qt.qq.com,vv.video.qq.com,img.meituan.net, s3plus.meituan.net, flowplus.meituan.net, client.app.coc.10086.cn, h.client.app.coc.10086.cn, app.10086.cn,cloud.189.cn, zt-app.go189.cn, cdn.wup.huya.com, business.msstatic.com, cdnfile1.msstatic.com, live-ads.huya.com
