@@ -1,6 +1,6 @@
-#!name=Weibo
-#!desc=Weibo
-#!icon=https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1034.png
+#!name=微博去广告
+#!desc=微博
+#!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Weibo-00.png
 
 [Rewrite]
 # > 微博_首页顶部直播推荐Tab@ddgksf2013
