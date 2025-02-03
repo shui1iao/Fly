@@ -13,8 +13,7 @@ policy_groups:
     name: 节点
     type: select
     urls:
-    - https://fba01.fbsubcn01.cc:2096/flydsubal/4xarrraafyaylxur?quantumult=1&extend=1
-    - https://wd-purple.com/subscribe/qbmgpv-atgaq_nd
+
     filter: ^
     interval: 1800
     tolerance: 50
