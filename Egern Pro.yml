@@ -1,0 +1,289 @@
+# Egern Pro 
+# study
+# 20250201
+ipv6: false
+http_port: 3080
+socks_port: 3090
+allow_external_connections: true
+vif_only: true
+geoip_db_url: https://geodata.kelee.one/Country-Masaiki.mmdb
+asn_db_url: https://geodata.kelee.one/GeoLite2-ASN-P3TERX.mmdb
+compat_route: false
+dns:
+  bootstrap:
+  - system
+  upstreams:
+    google:
+    - https://8.8.8.8
+    - https://8.8.4.4
+  forward:
+  - proxy_rule_set:
+      match: https://kelee.one/Tool/Loon/Rule/ApplePushNotificationService.list
+      value: system
+  - wildcard:
+      match: '*.cn'
+      value: system
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaMax/ChinaMax_All.list
+      value: system
+  - proxy_rule_set:
+      match: https://kelee.one/Tool/Loon/Rule/AppStore.list
+      value: system
+  - regex:
+      match: ^ad\..*|^ads\..*
+      value: quic://dns.adguard-dns.com
+  - wildcard:
+      match: '*'
+      value: google
+  public_ip_lookup_url: https://ifconfig.me/ip
+policy_groups:
+- auto_test:
+    name: 代理选择
+    policies:
+    - 🇭🇰 香港节点
+    - 🇨🇳 台湾节点
+    - 🇯🇵 日本节点
+    - 🇰🇷 韩国节点
+    - 🇸🇬 狮城节点
+    - 🇺🇲 美国节点
+    - ✈️ 我的节点
+    flatten: false
+    interval: 60
+    icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
+    hidden: false
+- select:
+    name: Telegram
+    policies:
+    - 代理选择
+    - 🇭🇰 香港节点
+    - 🇨🇳 台湾节点
+    - 🇯🇵 日本节点
+    - 🇰🇷 韩国节点
+    - 🇸🇬 狮城节点
+    - 🇺🇲 美国节点
+    - ✈️ 我的节点
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+- select:
+    name: OpenAI
+    policies:
+    - 🇨🇳 台湾节点
+    - 🇯🇵 日本节点
+    - 🇰🇷 韩国节点
+    - 🇸🇬 狮城节点
+    - 🇺🇲 美国节点
+    - ✈️ 我的节点
+    icon: https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/ChatGPT.png
+- select:
+    name: YouTube
+    policies:
+    - 代理选择
+    - 🇭🇰 香港节点
+    - 🇨🇳 台湾节点
+    - 🇯🇵 日本节点
+    - 🇰🇷 韩国节点
+    - 🇸🇬 狮城节点
+    - 🇺🇲 美国节点
+    flatten: false
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+- select:
+    name: TikTok
+    policies:
+    - 🇨🇳 台湾节点
+    - 🇯🇵 日本节点
+    - 🇰🇷 韩国节点
+    - 🇸🇬 狮城节点
+    - 🇺🇲 美国节点
+    - ✈️ 我的节点
+    icon: https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/TikTok.png
+- select:
+    name: Netfilx
+    policies:
+    - 代理选择
+    - 🇭🇰 香港节点
+    - 🇨🇳 台湾节点
+    - 🇯🇵 日本节点
+    - 🇰🇷 韩国节点
+    - 🇸🇬 狮城节点
+    - 🇺🇲 美国节点
+    - ✈️ 我的节点
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
+- select:
+    name: Disney
+    policies:
+    - 代理选择
+    - 🇭🇰 香港节点
+    - 🇨🇳 台湾节点
+    - 🇯🇵 日本节点
+    - 🇰🇷 韩国节点
+    - 🇸🇬 狮城节点
+    - 🇺🇲 美国节点
+    - ✈️ 我的节点
+    flatten: false
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney.png
+- select:
+    name: HBOMAX
+    policies:
+    - 代理选择
+    - 🇭🇰 香港节点
+    - 🇨🇳 台湾节点
+    - 🇯🇵 日本节点
+    - 🇰🇷 韩国节点
+    - 🇸🇬 狮城节点
+    - 🇺🇲 美国节点
+    - ✈️ 我的节点
+    icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/HBO.png
+- auto_test:
+    name: 🇭🇰 香港节点
+    policies:
+    - ✈️ 我的节点
+    flatten: true
+    filter: (🇭🇰)|(香港)|(Hong)|(HK)
+    interval: 60
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+- auto_test:
+    name: 🇨🇳 台湾节点
+    policies:
+    - ✈️ 我的节点
+    flatten: true
+    filter: (🇨🇳)|(台湾)|(Tai)|(TW)
+    interval: 60
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
+- auto_test:
+    name: 🇯🇵 日本节点
+    policies:
+    - ✈️ 我的节点
+    flatten: true
+    filter: (🇯🇵)|(日本)|(Japan)|(JP)
+    interval: 60
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+- auto_test:
+    name: 🇰🇷 韩国节点
+    policies:
+    - ✈️ 我的节点
+    flatten: true
+    filter: (🇰🇷)|(韩国)|(首尔)|(KR)
+    interval: 60
+    icon: https://raw.githubusercontent.com/Semporia/Hand-Painted-icon/master/Rounded_Rectangle/South_Korea.png
+- auto_test:
+    name: 🇸🇬 狮城节点
+    policies:
+    - ✈️ 我的节点
+    flatten: true
+    filter: (🇸🇬)|(新加坡)|(Singapore)|(SG)
+    interval: 60
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+- auto_test:
+    name: 🇺🇲 美国节点
+    policies:
+    - ✈️ 我的节点
+    flatten: true
+    filter: (🇺🇸)|(美国)|(States)|(US)
+    interval: 60
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+- external:
+    name: ✈️ 我的节点
+    type: select
+    urls:
+    - 你的订阅地址
+    interval: 120
+    icon: https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/fallback.png
+rules:
+- domain_regex:
+    match: ^ad\..*|^ads\..*
+    policy: REJECT
+    disabled: false
+- domain:
+    match: ifconfig.me
+    policy: DIRECT
+- rule_set:
+    match: https://kelee.one/Tool/Loon/Rule/AppStore.list
+    policy: DIRECT
+    disabled: false
+- rule_set:
+    match: https://kelee.one/Tool/Loon/Rule/ApplePushNotificationService.list
+    policy: DIRECT
+- rule_set:
+    match: https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Surge/Block/Ads_ml.list
+    policy: REJECT
+    disabled: false
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Telegram/Telegram.list
+    policy: Telegram
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/OpenAI/OpenAI.list
+    policy: OpenAI
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/YouTube/YouTube.list
+    policy: YouTube
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list
+    policy: TikTok
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list
+    policy: Netfilx
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Disney/Disney.list
+    policy: Disney
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/HBO/HBO.list
+    policy: HBOMAX
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/GitHub/GitHub.list
+    policy: 代理选择
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Proxy/Proxy.list
+    policy: 代理选择
+- domain_suffix:
+    match: cn
+    policy: DIRECT
+- geoip:
+    match: CN
+    policy: DIRECT
+    no_resolve: true
+    disabled: false
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaMax/ChinaMax_All.list
+    policy: DIRECT
+    disabled: false
+- ip_cidr:
+    match: 192.168.0.0/16
+    policy: DIRECT
+- ip_cidr:
+    match: 10.0.0.0/8
+    policy: DIRECT
+- ip_cidr:
+    match: 127.0.0.0/8
+    policy: DIRECT
+- ip_cidr:
+    match: 172.16.0.0/12
+    policy: DIRECT
+- ip_cidr:
+    match: 192.128.0.0/16
+    policy: DIRECT
+- ip_cidr:
+    match: 224.0.0.0/24
+    policy: DIRECT
+- default:
+    policy: 代理选择
+modules:
+- name: 广告联盟去广告
+  url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Official/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F.official.sgmodule
+  enabled: true
+- name: 去除小程序和其他应用广告
+  url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Official/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%92%8C%E5%BA%94%E7%94%A8%E6%87%92%E4%BA%BA%E5%8E%BB%E5%B9%BF%E5%91%8A%E5%90%88%E9%9B%86.official.sgmodule
+  enabled: true
+- name: HTTPDNS.Block
+  url: https://github.com/VirgilClyne/GetSomeFries/raw/main/sgmodule/HTTPDNS.Block.sgmodule
+  enabled: true
+- name: 微信去广告
+  url: https://yfamily.vercel.app/module/wechatad.module
+  enabled: true
+- name: B站自动换区
+  url: https://yfamily.vercel.app/module/bili-region.module
+  enabled: true
+- name: B站高清
+  url: https://yfamily.vercel.app/module/bili.module
+  enabled: true
+- name: BiliBili广告
+  url: https://raw.githubusercontent.com/app2smile/rules/master/module/bilibili.sgmodule
+  enabled: true
