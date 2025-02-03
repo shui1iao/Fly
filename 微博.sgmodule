@@ -1,5 +1,14 @@
-#!name=Weibo
-#!desc=Weibo
+#!name=微博去广告
+
+[Rule]
+DOMAIN-SUFFIX,uve.weibo.com,DIRECT,extended-matching
+DOMAIN,huodong.weibo.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,biz.weibo.com,REJECT,extended-matching,pre-matching
+DOMAIN,dns.weibo.cn,REJECT,extended-matching,pre-matching
+IP-CIDR,39.97.130.51/32,REJECT,no-resolve,pre-matching
+IP-CIDR,39.97.128.148/32,REJECT,no-resolve,pre-matching
+URL-REGEX,"^http:\/\/api\.weibo\.cn\/2\/httpdns\/config",REJECT,extended-matching
+URL-REGEX,"^http:\/\/api\.weibo\.cn\/httpdns\/config",REJECT,extended-matching
 
 [URL Rewrite]
 # > 微博_应用内弹窗广告@ddgksf2013
