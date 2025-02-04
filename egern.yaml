@@ -5,7 +5,7 @@ geoip_db_url: https://github.com/Masaiki/GeoIP2-CN/raw/release/Country.mmdb
 proxy_latency_test_url: http://cp.cloudflare.com/generate_204
 direct_latency_test_url: http://taobao.com/
 compat_route: false
-
+dns: {}
 policy_groups:
 - external:
     name: 节点
@@ -118,20 +118,6 @@ policy_groups:
     - 美国节点
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Instagram.png
 - select:
-    name: 国际媒体
-    policies:
-    - 手动选择
-    - 自动选择
-    - DIRECT
-    - 香港节点
-    - 台湾节点
-    - 日本节点
-    - 韩国节点
-    - 新加坡节点
-    - 美国节点
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ForeignMedia.png
-    hidden: false
-- select:
     name: 全球服务
     policies:
     - 手动选择
@@ -219,7 +205,6 @@ policy_groups:
     filter: ^(?!.*(香港|HK|Hong Kong|HongKong|台湾|TW|Tai|日本|JP|Japan|美国|USA|US|United States|新加坡|狮城|SG|Singapore)).*
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/World_Map.png
     hidden: false
-
 rules:
 - domain:
     match: dns.weibo.cn
@@ -235,6 +220,7 @@ rules:
     match: https://rule.kelee.one/Loon/GitHub.list
     policy: 自动选择
     update_interval: 86400
+    disabled: false
 - ip_cidr:
     match: 172.16.0.0/12
     policy: DIRECT
@@ -279,6 +265,7 @@ rules:
     match: https://rule.kelee.one/Loon/YouTube.list
     policy: YouTube
     update_interval: 86400
+    disabled: false
 - rule_set:
     match: https://rule.kelee.one/Loon/Microsoft.list
     policy: Microsoft
@@ -291,11 +278,6 @@ rules:
     match: https://rule.kelee.one/Loon/Instagram.list
     policy: Instagram
     update_interval: 86400
-- rule_set:
-    match: https://rule.kelee.one/Loon/GlobalMedia.list
-    policy: 国际媒体
-    update_interval: 86400
-    disabled: false
 - rule_set:
     match: https://rule.kelee.one/Loon/Proxy.list
     policy: 全球服务
