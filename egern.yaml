@@ -228,9 +228,6 @@ policy_groups:
     hidden: false
 
 rules:
-- domain:
-    match: dns.weibo.cn
-    policy: 日本节点
 - domain_keyword:
     match: scripthub
     policy: 自动选择
@@ -332,7 +329,7 @@ mitm:
   ca_passphrase: egern
 modules:
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Beta/拦截HTTPDNS.beta.sgmodule
-  enabled: false
+  enabled: true
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Beta/广告平台拦截器.beta.sgmodule
   enabled: true
 - url: https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/去广告.sgmodule
