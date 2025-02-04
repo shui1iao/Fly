@@ -308,7 +308,7 @@ mitm:
 modules:
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Beta/拦截HTTPDNS.beta.sgmodule
   enabled: false
-- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Beta/广告平台拦截器.beta.sgmodule
+- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/广告平台拦截器.sgmodule
   enabled: true
 - url: https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/去广告.sgmodule
   update_interval: 86400
@@ -327,15 +327,15 @@ modules:
   enabled: true
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Beta/小红书去广告.beta.sgmodule
   enabled: false
-- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Beta/菜鸟去广告.beta.sgmodule
+- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/菜鸟去广告.sgmodule
   enabled: true
-- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Beta/Spotify去广告.beta.sgmodule
+- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Spotify去广告.sgmodule
   enabled: true
-- url: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/refs/heads/master/Surge/Rewrite/YouTube.sgmodule
+- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Official/YouTube去广告[Maasea].official.sgmodule
   enabled: true
 - url: https://github.com/NSRingo/TestFlight/releases/latest/download/iRingo.TestFlight.yaml
   enabled: true
-- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Beta/Google重定向.beta.sgmodule
+- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Google重定向.sgmodule
   enabled: true
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/快捷搜索.sgmodule
   enabled: true
