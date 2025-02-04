@@ -5,13 +5,6 @@ geoip_db_url: https://github.com/Masaiki/GeoIP2-CN/raw/release/Country.mmdb
 proxy_latency_test_url: http://cp.cloudflare.com/generate_204
 direct_latency_test_url: http://taobao.com/
 compat_route: false
-dns:
-  bootstrap:
-    - system  # 使用系统默认的DNS配置作为引导。
-  forward:  # 转发DNS请求的规则。
-  - regex:
-      match: ^ad\..*|^ads\..*  # 正则表达式匹配以"ad."或"ads."开头的域名（通常是广告相关的域名）。
-      value: quic://dns.adguard-dns.com  # 这些广告相关的域名使用AdGuard的QUIC DNS服务器。
 
 policy_groups:
 - external:
@@ -228,6 +221,9 @@ policy_groups:
     hidden: false
 
 rules:
+- domain:
+    match: dns.weibo.cn
+    policy: 日本节点
 - domain_keyword:
     match: scripthub
     policy: 自动选择
@@ -329,7 +325,7 @@ mitm:
   ca_passphrase: egern
 modules:
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Beta/拦截HTTPDNS.beta.sgmodule
-  enabled: true
+  enabled: false
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Beta/广告平台拦截器.beta.sgmodule
   enabled: true
 - url: https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/去广告.sgmodule
