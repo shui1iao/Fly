@@ -284,11 +284,6 @@ rules:
     update_interval: 86400
     disabled: false
 - rule_set:
-    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/China/China_All_No_Resolve.list
-    policy: DIRECT
-    update_interval: 86400
-    disabled: true
-- rule_set:
     match: https://rule.kelee.one/Loon/Lan.list
     policy: DIRECT
     update_interval: 86400
