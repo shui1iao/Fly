@@ -44,12 +44,13 @@ DOMAIN,sdkconfig.ad.xiaomi.com,REJECT
 ^https?:\/\/cloud\.189\.cn\/include\/splash\/ - reject
 
 [Map Local]
-#农业银行开屏广告
-^https:\/\/midc\.cdn-static\.abchina\.com\.cn\/distributecenterimg\/file\/download\/(bdfb4|86fb9|7aa68) data-type=text data="{}" status-code=200
+# 农业银行
+^https?:\/\/midc\.cdn-static\.abchina\.com\.cn\/distributecenterimg\/file\/download\/(?!bbc2|f015|1655|0992|a194|d8e2|c513|0ee1|166e|05ca|c882|d5b8|22ed|a0dc|a55a|6f89|3bf9|3c71|52ec|5b62|ve7a|001c|923d|accf|4a10|0bd7|be7a|5b62|5dd6|1f24|006c|775d|bd02|b983|5251|806b|d119|db14|43c9|41d3|8570|2c10|85ea|1435|814e|f422|aec7|738c|d7c8|0538|02b4|fd20|7647|f6ef|07c5|885b|e4cb|685b|30aa|c23b|9603|f27f|eaf8|8011|a5eb|409d|724c|3f2a|e07f|6744|60a6|158c|8ce3) data-type=text data="{}" status-code=200
+^https?:\/\/enjoy\.cdn-static\.abchina\.com\/yx-engine-web\/file\/download\/(?!7dc2|fe96|cea3|06a8|1b11|d57b|6918|61db|2d58|aa23|) data-type=text data=" " status-code=200
+^https?:\/\/firefly\.abchina\.com\.cn\/firefly-collection\/Collect data-type=text data=" " status-code=200
 
 # hostname = home.mi.com
 ^https?:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|carousel\/banners|myTab|openingBanner) data-type=text data="{}" status-code=200
-
 ^https?:\/\/cdnfile1\.msstatic\.com\/cdnfile\/appad\/ data-type=tiny-gif status-code=200
 
 ^https?://live-ads\.huya\.com/live/getAllEntrance.*$ data-type=text data="{}" status-code=200
@@ -80,4 +81,5 @@ DOMAIN,sdkconfig.ad.xiaomi.com,REJECT
 12306 = type=http-request, pattern=^https?:\/\/ad\.12306\.cn\/ad\/ser\/getAdList, script-path=https://raw.githubusercontent.com/kokoryh/Script/master/js/12306.js, requires-body=true, timeout=60
 
 [MITM]
-hostname = %APPEND% home.mi.com, ad.12306.cn, ossweb-img.qq.com, mlol.qt.qq.com, vv.video.qq.com, img.meituan.net, s3plus.meituan.net, flowplus.meituan.net, client.app.coc.10086.cn, h.client.app.coc.10086.cn, app.10086.cn, cloud.189.cn, zt-app.go189.cn, cdn.wup.huya.com, business.msstatic.com, cdnfile1.msstatic.com, enjoy.cdn-static.abchina.com,live-ads.huya.com
+hostname = %APPEND% home.mi.com, ad.12306.cn, ossweb-img.qq.com, mlol.qt.qq.com, vv.video.qq.com, img.meituan.net, s3plus.meituan.net, flowplus.meituan.net, client.app.coc.10086.cn, h.client.app.coc.10086.cn, app.10086.cn, cloud.189.cn, zt-app.go189.cn, cdn.wup.huya.com, business.msstatic.com, cdnfile1.msstatic.com, 
+,midc.cdn-static.abchina.com.cn, enjoy.cdn-static.abchina.com, firefly.abchina.com.cnlive-ads.huya.com
