@@ -1,1 +1,11 @@
-https://script.hub/file/_start_/https://raw.githubusercontent.com/zmqcherish/proxy-script/refs/heads/main/weibo.sgmodule/_end_/weibo.plugin?type=surge-module&target=loon-plugin&del=true
+#!name=微博配置
+#!desc=删除多数微博广告和一些自定义配置
+#!icon=https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1014.png
+
+[Script]
+http-response ^https?://m?api\.weibo\.c(n|om)/2/(cardlist|searchall|page|messageflow|statuses/(unread_)?friends(/|_)timeline|groups/timeline|statuses/(container_timeline|unread_hot_timeline|extend|video_mixtimeline|repost_timeline)|profile/(me|container_timeline)|video/(community_tab|remind_info|tiny_stream_video_list)|checkin/show|\!/live/media_homelist|comments/build_comments|container/get_item|search/(finder|container_timeline|container_discover)) script-path=https://raw.githubusercontent.com/zmqcherish/proxy-script/main/weibo_main.js, requires-body=true, tag=weibo_main
+
+http-response ^https?://(sdk|wb)app\.uve\.weibo\.com(/interface/sdk/sdkad.php|/wbapplua/wbpullad.lua) script-path=https://raw.githubusercontent.com/zmqcherish/proxy-script/main/weibo_launch.js, requires-body=true, tag=weibo_launch
+
+[MITM]
+hostname = api.weibo.cn, mapi.weibo.com, *.uve.weibo.com
