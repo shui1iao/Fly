@@ -12,7 +12,6 @@ policy_groups:
     type: select
     urls:
     - 
-    - 
     filter: ^
     interval: 1800
     tolerance: 50
@@ -209,6 +208,7 @@ rules:
 - domain:
     match: dns.weibo.cn
     policy: 日本节点
+    disabled: false
 - domain_keyword:
     match: scripthub
     policy: 自动选择
@@ -284,6 +284,11 @@ rules:
     update_interval: 86400
     disabled: false
 - rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/China/China_All_No_Resolve.list
+    policy: DIRECT
+    update_interval: 86400
+    disabled: true
+- rule_set:
     match: https://rule.kelee.one/Loon/Lan.list
     policy: DIRECT
     update_interval: 86400
@@ -306,14 +311,14 @@ mitm:
   ca_p12: egern.p12
   ca_passphrase: egern
 modules:
-- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Beta/拦截HTTPDNS.beta.sgmodule
+- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/拦截HTTPDNS.sgmodule
   enabled: false
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/广告平台拦截器.sgmodule
   enabled: true
 - url: https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/去广告.sgmodule
   update_interval: 86400
   enabled: true
-- url: https://script.hub/file/_start_/https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/Weibo.conf/_end_/Weibo.sgmodule?type=qx-rewrite&target=surge-module&del=true
+- url: https://raw.githubusercontent.com/zmqcherish/proxy-script/refs/heads/main/weibo.sgmodule
   enabled: true
 - url: https://github.com/BiliUniverse/ADBlock/releases/latest/download/BiliBili.ADBlock.sgmodule
   compat_arguments:
