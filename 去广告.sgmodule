@@ -44,6 +44,9 @@ DOMAIN,sdkconfig.ad.xiaomi.com,REJECT
 ^https?:\/\/cloud\.189\.cn\/include\/splash\/ - reject
 
 [Map Local]
+#农业银行开屏广告
+^https:\/\/midc\.cdn-static\.abchina\.com\.cn\/distributecenterimg\/file\/download\/(bdfb4|86fb9|7aa68) data-type=text data="{}" status-code=200
+
 # hostname = home.mi.com
 ^https?:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|carousel\/banners|myTab|openingBanner) data-type=text data="{}" status-code=200
 
