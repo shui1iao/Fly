@@ -284,11 +284,6 @@ rules:
     update_interval: 86400
     disabled: false
 - rule_set:
-    match: https://raw.githubusercontent.com/luestr/ShuntRules/refs/heads/main/Loon/China.list
-    policy: DIRECT
-    update_interval: 86400
-    disabled: false
-- rule_set:
     match: https://rule.kelee.one/Loon/Lan.list
     policy: DIRECT
     update_interval: 86400
