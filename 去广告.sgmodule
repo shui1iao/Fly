@@ -19,18 +19,7 @@ DOMAIN,huyafile.msstatic.com,REJECT
 DOMAIN,livewebbs2.msstatic.com,REJECT
 DOMAIN,business.msstatic.com,REJECT
 DOMAIN-SUFFIX,v1d.szbdyd.com,REJECT
-# > 美团
-DOMAIN,flowplus.meituan.net,REJECT
-DOMAIN-SUFFIX,analytics.meituan.net,REJECT
-DOMAIN-SUFFIX,meituan.xn,REJECT
-DOMAIN-SUFFIX,meituan.yoga,REJECT
-DOMAIN-SUFFIX,meituangov.cn,REJECT
-DOMAIN-SUFFIX,report.meituan.com,REJECT
-DOMAIN-SUFFIX,wmlog.meituan.com,REJECT
-DOMAIN-SUFFIX,ad.e.waimai.sankuai.com,REJECT
-DOMAIN-SUFFIX,mads.meituan.com,REJECT
-DOMAIN-SUFFIX,dreport.meituan.net,REJECT
-DOMAIN-SUFFIX,d.meituan.net,REJECT
+
 # > 小米米家
 DOMAIN,sdkconfig.ad.xiaomi.com,REJECT
 
@@ -40,6 +29,7 @@ DOMAIN,sdkconfig.ad.xiaomi.com,REJECT
 ^https?:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns$ - reject
 ^https?:\/\/business\.msstatic\.com\/advertiser\/material - reject
 ^https?:\/\/mlol\.qt\.qq\.com\/go\/recommend - reject
+
 #中国移动
 ^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/explorePage\/getAdverList - reject
 #中国电信
@@ -47,6 +37,15 @@ DOMAIN,sdkconfig.ad.xiaomi.com,REJECT
 ^https?:\/\/cloud\.189\.cn\/include\/splash\/ - reject
 #航旅纵横
 ^https?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native - reject
+# > 美团
+^http:\/\/s3plus\.meituan\.net\/.*\/brandcpt-vedio\/.*\?time - reject
+^https?:\/\/(s3plus|flowplus)\.meituan\.net\/v\d\/\w+\/linglong\/\w+\.(gif|jpg|mp4) - reject
+^https?:\/\/.*\.meituan\.com\/api\/v\d\/(openscreen\?ad|appstatus\?ad|loadInfo\?|startpicture) - reject
+^https?:\/\/img\.meituan\.net\/(adunion|display|midas)\/\w+\.(gif|jpg|jpg\.webp)$ - reject
+^https?:\/\/img\.meituan\.net\/(bizad|brandCpt)\/\w+\.(png|jpg) - reject
+^https?:\/\/p\d\.meituan\.net\/(bizad|wmbanner)\/\w+\.jpg - reject
+^https?:\/\/p\d\.meituan\.net\/movie\/\w+\.jpg\?may_covertWebp - reject
+^https?:\/\/peisongapi\.meituan\.com\/client\/getInitiateImage - reject
 
 [Map Local]
 #米家
@@ -65,13 +64,6 @@ DOMAIN,sdkconfig.ad.xiaomi.com,REJECT
 # hostname = client.app.coc.10086.cn, h.client.app.coc.10086.cn, app.10086.cn
 ^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/init\/startInit data-type=text data=" " status-code=200
 ^https?:\/\/zt-app\.go189\.cn\/zt-app\/welcome\/.*?Animation data-type=tiny-gif status-code=200
-#美团
-# hostname = img.meituan.net, s3plus.meituan.net, flowplus.meituan.net
-^https?:\/\/wmapi\.meituan\.com\/api\/v7\/(loadInfo|openscreen|startpicture)\? data-type=text data="{}" status-code=200
-^https?:\/\/(s3plus|flowplus)\.meituan\.net\/v\d\/\w+\/linglong\/\w+\.(gif|jpg|mp4) data-type=text data="{}" status-code=200
-^https?:\/\/img\.meituan\.net\/bizad\/bizad_brandCpt_\d+\.jpg data-type=text data="{}" status-code=200
-^https?:\/\/s3plus\.meituan\.net\/ocean-blk-index\/index\/blk_conf_73\.json data-type=text data="{}" status-code=200
-^https?:\/\/s3plus\.meituan\.net\/v1\/mss_\w+\/(brandcpt-vedio|waimai-alita)\/\w+\.zip$ data-type=text data="{}" status-code=200
 
 [Script]
 hanglvzongheng.js =type=http-response, pattern=^https?:\/\/.*umetrip\.com\.cn\/gateway\/api\/umetrip\/native$, script-path=https://github.com/ddgksf2013/Scripts/raw/master/hanglvzongheng.js, requires-body=true, max-size=-1, timeout=60
@@ -79,4 +71,4 @@ abchina = type=http-response, pattern=^https?:\/\/mobilepaas\.abchina\.com\.cn:4
 12306 = type=http-request, pattern=^https?:\/\/ad\.12306\.cn\/ad\/ser\/getAdList, script-path=https://raw.githubusercontent.com/kokoryh/Script/master/js/12306.js, requires-body=true, timeout=60
 
 [MITM]
-hostname = %APPEND% home.mi.com, *.umetrip.com, ad.12306.cn,mobilepaas.abchina.com.cn, ossweb-img.qq.com, mlol.qt.qq.com, vv.video.qq.com, img.meituan.net, s3plus.meituan.net, flowplus.meituan.net, client.app.coc.10086.cn, h.client.app.coc.10086.cn, app.10086.cn, cloud.189.cn, zt-app.go189.cn, cdn.wup.huya.com, business.msstatic.com, cdnfile1.msstatic.com,live-ads.huya.com
+hostname = %APPEND% home.mi.com, *.umetrip.com, ad.12306.cn,mobilepaas.abchina.com.cn, ossweb-img.qq.com, mlol.qt.qq.com, vv.video.qq.com, p*.meituan.net, wmapi.meituan.com, www.meituan.com, peisongapi.meituan.com, img.meituan.net, s3plus.meituan.net, flowplus.meituan.net, client.app.coc.10086.cn, h.client.app.coc.10086.cn, app.10086.cn, cloud.189.cn, zt-app.go189.cn, cdn.wup.huya.com, business.msstatic.com, cdnfile1.msstatic.com,live-ads.huya.com
