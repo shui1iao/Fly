@@ -5,7 +5,27 @@ geoip_db_url: https://github.com/Masaiki/GeoIP2-CN/raw/release/Country.mmdb
 proxy_latency_test_url: http://cp.cloudflare.com/generate_204
 direct_latency_test_url: http://taobao.com/
 compat_route: false
-dns: {}
+dns:
+  bootstrap:
+  - system
+  upstreams:
+    out:
+    - https://8.8.8.8/dns-query
+    - https://1.1.1.1/dns-query
+    in:
+    - quic://223.5.5.5:853
+  forward:
+  - wildcard:
+      match: '*.cn'
+      value: in
+  - proxy_rule_set:
+      match: https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/ChinaDomain.list
+      value: in
+      update_interval: 86400
+  - wildcard:
+      match: '*'
+      value: out
+  public_ip_lookup_url: https://ifconfig.me/ip
 policy_groups:
 - external:
     name: 节点
@@ -205,6 +225,15 @@ policy_groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/World_Map.png
     hidden: false
 rules:
+- rule_set:
+    match: https://rule.kelee.one/Loon/Speedtest.list
+    policy: DIRECT
+    update_interval: 86400
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/AdvertisingLite/AdvertisingLite_All_No_Resolve.list
+    policy: REJECT
+    update_interval: 86400
+    disabled: true
 - domain:
     match: dns.weibo.cn
     policy: 日本节点
@@ -306,27 +335,23 @@ mitm:
   ca_p12: egern.p12
   ca_passphrase: egern
 modules:
-- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/拦截HTTPDNS.sgmodule
-  enabled: false
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/广告平台拦截器.sgmodule
   enabled: true
 - url: https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/去广告.sgmodule
   update_interval: 86400
   enabled: true
-- url: https://raw.githubusercontent.com/zmqcherish/proxy-script/refs/heads/main/weibo.sgmodule
+- url: https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/微博/weibo.sgmodule
   enabled: true
 - url: https://github.com/BiliUniverse/ADBlock/releases/latest/download/BiliBili.ADBlock.sgmodule
   compat_arguments:
     Feed.Activity: 'true'
-  enabled: true
+  enabled: false
 - url: https://github.com/BiliUniverse/Enhanced/releases/latest/download/BiliBili.Enhanced.yaml
   compat_arguments:
     Bottom: home,dynamic,我的Bottom
-  enabled: true
+  enabled: false
 - url: https://github.com/NSRingo/WeatherKit/releases/latest/download/iRingo.WeatherKit.yaml
   enabled: true
-- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Beta/小红书去广告.beta.sgmodule
-  enabled: false
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/菜鸟去广告.sgmodule
   enabled: true
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Spotify去广告.sgmodule
@@ -338,6 +363,8 @@ modules:
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Google重定向.sgmodule
   enabled: true
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/快捷搜索.sgmodule
+  enabled: true
+- url: https://raw.githubusercontent.com/sub-store-org/Sub-Store/refs/heads/master/config/Surge.sgmodule
   enabled: true
 - url: https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.surge.sgmodule
   enabled: true
