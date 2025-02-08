@@ -229,6 +229,13 @@ rules:
 # [远程规则]
 rule-providers:
 
+  Speedtest:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Speedtest/Speedtest.yaml
+    url: https://raw.githubusercontent.com/luestr/ShuntRules/refs/heads/main/Clash/Speedtest.yaml
+    
   苹果服务:
     behavior: classical
     interval: 86400
@@ -289,7 +296,7 @@ rule-providers:
     behavior: classical
     interval: 86400
     type: http
-    path: ./Apple/Apple_Classical.yaml
+    path: ./GitHub/GitHubl.yaml
     url: https://raw.githubusercontent.com/luestr/ShuntRules/refs/heads/main/Clash/GitHub.yaml
 
   全球服务:
