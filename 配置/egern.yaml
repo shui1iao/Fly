@@ -1,4 +1,4 @@
-ipv6: true
+ipv6: false
 vif_only: true
 hide_vpn_icon: false
 geoip_db_url: https://github.com/Masaiki/GeoIP2-CN/raw/release/Country.mmdb
@@ -20,6 +20,10 @@ dns:
       value: in
   - proxy_rule_set:
       match: https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/ChinaDomain.list
+      value: in
+      update_interval: 86400
+  - proxy_rule_set:
+      match: https://rule.kelee.one/Loon/Apple.list
       value: in
       update_interval: 86400
   - wildcard:
@@ -376,9 +380,9 @@ modules:
   enabled: true
 - url: https://raw.githubusercontent.com/Rabbit-Spec/Surge/Master/Module/Panel/Sub-info/Moore/Sub-info_Max.sgmodule
   compat_arguments:
-    NAME_1: 飞鸟
+    NAME_1: 
     URL_1: 
-    NAME_2: 西数
+    NAME_2: 
     URL_2: 
   enabled: true
 - url: https://whatshub.top/sgmodule/ip-api.sgmodule
