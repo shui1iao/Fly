@@ -2,6 +2,7 @@ ipv6: false
 vif_only: true
 hide_vpn_icon: false
 geoip_db_url: https://github.com/Masaiki/GeoIP2-CN/raw/release/Country.mmdb
+asn_db_url: https://raw.githubusercontent.com/P3TERX/GeoLite.mmdb/download/GeoLite2-ASN.mmdb
 proxy_latency_test_url: http://cp.cloudflare.com/generate_204
 direct_latency_test_url: http://taobao.com/
 compat_route: false
@@ -10,8 +11,8 @@ dns:
   - system
   upstreams:
     out:
-    - https://8.8.8.8/dns-query
     - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
     in:
     - quic://223.5.5.5:853
   forward:
@@ -233,11 +234,7 @@ rules:
     match: https://rule.kelee.one/Loon/Speedtest.list
     policy: DIRECT
     update_interval: 86400
-- rule_set:
-    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/AdvertisingLite/AdvertisingLite_All_No_Resolve.list
-    policy: REJECT
-    update_interval: 86400
-    disabled: true
+    disabled: false
 - domain:
     match: dns.weibo.cn
     policy: 日本节点
@@ -374,18 +371,20 @@ modules:
   enabled: true
 - url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/modules/script-hub.surge.sgmodule
   enabled: true
+- url: https://raw.githubusercontent.com/Keywos/rule/refs/heads/main/script/api_ping/api_ping.sgmodule
+  enabled: true
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Official/流媒体解锁检测.official.sgmodule
   enabled: true
 - url: https://whatshub.top/sgmodule/gpt.sgmodule
   enabled: true
+- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Official/网络信息 X.official.sgmodule
+  enabled: true
 - url: https://raw.githubusercontent.com/Rabbit-Spec/Surge/Master/Module/Panel/Sub-info/Moore/Sub-info_Max.sgmodule
   compat_arguments:
-    NAME_1: 
+    NAME_1: 飞鸟
     URL_1: 
-    NAME_2: 
+    NAME_2: 西数
     URL_2: 
-  enabled: true
-- url: https://whatshub.top/sgmodule/ip-api.sgmodule
   enabled: true
 - url: https://raw.githubusercontent.com/getsomecat/GetSomeCats/Surge/modules/Connectivity_Test.sgmodule
   enabled: true
