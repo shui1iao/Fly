@@ -1,41 +1,4 @@
-dns:
-  enable: true
-  prefer-h3: true
-  use-hosts: true
-  use-system-hosts: true
-  respect-rules: false
-  listen: 0.0.0.0:1053
-  ipv6: false
-  default-nameserver:
-    - 223.5.5.5
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter-mode: blacklist
-  fake-ip-filter:
-    - '*.lan'
-  nameserver-policy:
-    - quic://223.5.5.5:53
-  nameserver:
-    - quic://223.5.5.5:53
-  fallback:
-    - tls://8.8.4.4
-    - tls://1.1.1.1
-  proxy-server-nameserver:
-    - quic://223.5.5.5:53
-  direct-nameserver:
-    - 223.5.5.5
-  direct-nameserver-follow-policy: false
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-    geosite:
-      - gfw
-    ipcidr:
-      - 240.0.0.0/4
-    domain:
-      - '+.google.com'
-      - '+.facebook.com'
-      - '+.youtube.com'
+
 
 # [策略组]
 proxy-groups:
