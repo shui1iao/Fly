@@ -14,8 +14,7 @@ dns:
   fake-ip-filter:
     - '*.lan'
   nameserver-policy:
-    '+.arpa': '10.0.0.1'
-    'rule-set:cn':
+    '+.arpa': '10.0.0.1':
     - quic://223.5.5.5:53
   nameserver:
     - quic://223.5.5.5:53
