@@ -263,7 +263,7 @@ rules:
     update_interval: 86400
     disabled: false
 - rule_set:
-    match: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Surge/OKX/OKX.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/OKX/OKX.list
     policy: 台湾节点
     update_interval: 86400
 - rule_set:
