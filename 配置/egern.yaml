@@ -36,8 +36,7 @@ policy_groups:
     name: 节点
     type: select
     urls:
-    - 
-    - 
+    
     filter: ^
     interval: 1800
     tolerance: 50
@@ -232,7 +231,7 @@ policy_groups:
     hidden: false
 rules:
 - rule_set:
-    match: https://rule.kelee.one/Loon/Speedtest.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Speedtest/Speedtest.list
     policy: DIRECT
     update_interval: 86400
     disabled: false
@@ -248,7 +247,7 @@ rules:
     match: boxjs
     policy: 自动选择
 - rule_set:
-    match: https://rule.kelee.one/Loon/GitHub.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/GitHub/GitHub.list
     policy: 自动选择
     update_interval: 86400
     disabled: false
@@ -264,15 +263,15 @@ rules:
     update_interval: 86400
     disabled: false
 - rule_set:
-    match: https://rule.kelee.one/Loon/OKX.list
+    match: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Surge/OKX/OKX.list
     policy: 台湾节点
     update_interval: 86400
 - rule_set:
-    match: https://rule.kelee.one/Loon/Binance.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Binance/Binance.list
     policy: 台湾节点
     update_interval: 86400
 - rule_set:
-    match: https://rule.kelee.one/Loon/Apple.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Apple/Apple_All_No_Resolve.list
     policy: 苹果服务
     update_interval: 86400
     disabled: false
@@ -281,41 +280,41 @@ rules:
     policy: AI
     update_interval: 86400
 - rule_set:
-    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Amazon/Amazon.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Amazon/Amazon.list
     policy: Amazon
     update_interval: 86400
 - rule_set:
-    match: https://rule.kelee.one/Loon/Google.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Google/Google.list
     policy: 'Google '
     update_interval: 86400
 - rule_set:
-    match: https://rule.kelee.one/Loon/Telegram.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Telegram/Telegram.list
     policy: Telegram
     update_interval: 86400
 - rule_set:
-    match: https://rule.kelee.one/Loon/YouTube.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/YouTube/YouTube.list
     policy: YouTube
     update_interval: 86400
     disabled: false
 - rule_set:
-    match: https://rule.kelee.one/Loon/Microsoft.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Microsoft/Microsoft.list
     policy: Microsoft
     update_interval: 86400
 - rule_set:
-    match: https://rule.kelee.one/Loon/Spotify.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Spotify/Spotify.list
     policy: 'Spotify '
     update_interval: 86400
 - rule_set:
-    match: https://rule.kelee.one/Loon/Instagram.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Instagram/Instagram.list
     policy: Instagram
     update_interval: 86400
 - rule_set:
-    match: https://rule.kelee.one/Loon/Proxy.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Proxy/Proxy_All_No_Resolve.list
     policy: 全球服务
     update_interval: 86400
     disabled: false
 - rule_set:
-    match: https://rule.kelee.one/Loon/Lan.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Lan/Lan.list
     policy: DIRECT
     update_interval: 86400
     disabled: false
