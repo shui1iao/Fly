@@ -235,7 +235,7 @@ rule-providers:
     interval: 86400
     type: http
     path: ./Speedtest/Speedtest.yaml
-    url: https://raw.githubusercontent.com/luestr/ShuntRules/refs/heads/main/Clash/Speedtest.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest_No_Resolve.yaml
     
   苹果服务:
     behavior: classical
@@ -298,14 +298,14 @@ rule-providers:
     interval: 86400
     type: http
     path: ./GitHub/GitHubl.yaml
-    url: https://raw.githubusercontent.com/luestr/ShuntRules/refs/heads/main/Clash/GitHub.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GitHub/GitHub_No_Resolve.yaml
 
   全球服务:
     behavior: classical
     interval: 86400
     type: http
     path: ./Global/Global.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Proxy/Proxy_Classical_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global_Classical_No_Resolve.yaml
 
   LAN:
     behavior: classical
