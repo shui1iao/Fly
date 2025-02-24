@@ -249,7 +249,7 @@ rule-providers:
     interval: 86400
     type: http
     path: ./Amazon/Amazon.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Amazon/Amazon.list
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Amazon/Amazon_No_Resolve.yaml
     
   Paypal:
     behavior: classical
