@@ -309,7 +309,7 @@ rules:
     policy: Instagram
     update_interval: 86400
 - rule_set:
-    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Proxy/Proxy_All_No_Resolve.list
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Global/Global_All_No_Resolve.list
     policy: 全球服务
     update_interval: 86400
     disabled: false
