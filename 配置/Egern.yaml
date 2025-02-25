@@ -6,31 +6,6 @@ asn_db_url: https://raw.githubusercontent.com/P3TERX/GeoLite.mmdb/download/GeoLi
 proxy_latency_test_url: http://cp.cloudflare.com/generate_204
 direct_latency_test_url: http://taobao.com/
 compat_route: false
-dns:
-  bootstrap:
-  - system
-  upstreams:
-    out:
-    - https://1.1.1.1/dns-query
-    - https://8.8.8.8/dns-query
-    in:
-    - quic://223.5.5.5:853
-  forward:
-  - wildcard:
-      match: '*.cn'
-      value: in
-  - proxy_rule_set:
-      match: https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/ChinaDomain.list
-      value: in
-      update_interval: 86400
-  - proxy_rule_set:
-      match: https://rule.kelee.one/Loon/Apple.list
-      value: in
-      update_interval: 86400
-  - wildcard:
-      match: '*'
-      value: out
-  public_ip_lookup_url: https://ifconfig.me/ip
 policy_groups:
 - external:
     name: 节点
