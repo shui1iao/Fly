@@ -36,38 +36,12 @@ policy_groups:
     name: 节点
     type: select
     urls:
-    
     filter: ^
     interval: 1800
     tolerance: 50
     timeout: 5
     update_interval: 86400
-    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/Static.png
-    hidden: false
-- select:
-    name: 手动选择
-    policies:
-    - 日本节点
-    - 美国节点
-    - 新加坡节点
-    - 台湾节点
-    - 香港节点
-    flatten: false
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Area.png
-- auto_test:
-    name: 自动选择
-    policies:
-    - 香港节点
-    - 台湾节点
-    - 日本节点
-    - 新加坡节点
-    - 美国节点
-    flatten: true
-    filter: ^
-    interval: 1800
-    tolerance: 50
-    timeout: 5
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     hidden: false
 - select:
     name: 苹果服务
@@ -83,29 +57,38 @@ policy_groups:
 - select:
     name: Telegram
     policies:
+    - 新加坡节点
     - 香港节点
-    - 手动选择
+    - 日本节点
+    - 台湾节点
+    - 美国节点
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
 - select:
     name: 'Google '
     policies:
     - 日本节点
     - 美国节点
-    - 手动选择
+    - 新加坡节点
+    - 台湾节点
+    - 香港节点
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
 - select:
     name: AI
     policies:
     - 日本节点
-    - 手动选择
     - 美国节点
+    - 新加坡节点
+    - 台湾节点
+    - 香港节点
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
 - select:
     name: 'Spotify '
     policies:
     - 美国节点
-    - 手动选择
     - 香港节点
+    - 新加坡节点
+    - 日本节点
+    - 台湾节点
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
 - select:
     name: Microsoft
@@ -113,29 +96,32 @@ policy_groups:
     - DIRECT
     - 日本节点
     - 美国节点
-    - 手动选择
-    - 自动选择
+    - 新加坡节点
+    - 台湾节点
+    - 香港节点
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
 - select:
     name: Amazon
     policies:
     - 美国节点
-    - DIRECT
-    - 手动选择
+    - 新加坡节点
+    - 日本节点
+    - 台湾节点
+    - 香港节点
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Amazon_1.png
 - select:
     name: YouTube
     policies:
     - 日本节点
-    - 手动选择
     - 美国节点
+    - 新加坡节点
+    - 台湾节点
+    - 香港节点
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
 - select:
     name: Instagram
     policies:
     - 香港节点
-    - 手动选择
-    - 自动选择
     - 台湾节点
     - 日本节点
     - 新加坡节点
@@ -144,8 +130,6 @@ policy_groups:
 - select:
     name: 全球服务
     policies:
-    - 手动选择
-    - 自动选择
     - 香港节点
     - 美国节点
     - 新加坡节点
@@ -155,13 +139,9 @@ policy_groups:
 - select:
     name: 黑白名单
     policies:
-    - 手动选择
-    - 自动选择
-    - DIRECT
     - 香港节点
     - 台湾节点
     - 日本节点
-    - 韩国节点
     - 新加坡节点
     - 美国节点
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/Final.png
@@ -221,35 +201,18 @@ policy_groups:
     timeout: 5
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     hidden: false
-- select:
-    name: 其他区域
-    policies:
-    - 节点
-    flatten: true
-    filter: ^(?!.*(香港|HK|Hong Kong|HongKong|台湾|TW|Tai|日本|JP|Japan|美国|USA|US|United States|新加坡|狮城|SG|Singapore)).*
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/World_Map.png
-    hidden: false
 rules:
-- rule_set:
-    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Speedtest/Speedtest.list
-    policy: DIRECT
-    update_interval: 86400
-    disabled: false
+- asn:
+    match: '44907'
+    policy: 新加坡节点
+    no_resolve: true
+- asn:
+    match: '62014'
+    policy: 新加坡节点
+    no_resolve: true
 - domain:
     match: dns.weibo.cn
     policy: 日本节点
-    disabled: false
-- domain_keyword:
-    match: scripthub
-    policy: 自动选择
-    disabled: false
-- domain_keyword:
-    match: boxjs
-    policy: 自动选择
-- rule_set:
-    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/GitHub/GitHub.list
-    policy: 自动选择
-    update_interval: 86400
     disabled: false
 - ip_cidr:
     match: 172.16.0.0/12
@@ -258,31 +221,34 @@ rules:
     match: alipay.hk
     policy: DIRECT
 - rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/GitHub/GitHub.list
+    policy: 日本节点
+    disabled: false
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Speedtest/Speedtest.list
+    policy: DIRECT
+    disabled: false
+- rule_set:
     match: https://raw.githubusercontent.com/SIJULY/Rules/main/Surge/talkatone.list
-    policy: 其他区域
-    update_interval: 86400
+    policy: 节点
     disabled: false
 - rule_set:
     match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/OKX/OKX.list
-    policy: 台湾节点
-    update_interval: 86400
+    policy: 日本节点
 - rule_set:
     match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Binance/Binance.list
-    policy: 台湾节点
+    policy: 日本节点
     update_interval: 86400
 - rule_set:
     match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Apple/Apple_All_No_Resolve.list
     policy: 苹果服务
-    update_interval: 86400
     disabled: false
 - rule_set:
     match: https://kelee.one/Tool/Loon/Rule/AI.list
     policy: AI
-    update_interval: 86400
 - rule_set:
     match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Amazon/Amazon.list
     policy: Amazon
-    update_interval: 86400
 - rule_set:
     match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Google/Google.list
     policy: 'Google '
@@ -294,16 +260,13 @@ rules:
 - rule_set:
     match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/YouTube/YouTube.list
     policy: YouTube
-    update_interval: 86400
     disabled: false
 - rule_set:
     match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Microsoft/Microsoft.list
     policy: Microsoft
-    update_interval: 86400
 - rule_set:
     match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Spotify/Spotify.list
     policy: 'Spotify '
-    update_interval: 86400
 - rule_set:
     match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Instagram/Instagram.list
     policy: Instagram
@@ -311,12 +274,10 @@ rules:
 - rule_set:
     match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Global/Global_All_No_Resolve.list
     policy: 全球服务
-    update_interval: 86400
     disabled: false
 - rule_set:
     match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Lan/Lan.list
     policy: DIRECT
-    update_interval: 86400
     disabled: false
 - geoip:
     match: CN
@@ -380,11 +341,6 @@ modules:
 - url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Official/网络信息 X.official.sgmodule
   enabled: true
 - url: https://raw.githubusercontent.com/Rabbit-Spec/Surge/Master/Module/Panel/Sub-info/Moore/Sub-info_Max.sgmodule
-  compat_arguments:
-    NAME_1: 飞鸟
-    URL_1: 
-    NAME_2: 西数
-    URL_2: 
   enabled: true
 - url: https://raw.githubusercontent.com/getsomecat/GetSomeCats/Surge/modules/Connectivity_Test.sgmodule
   enabled: true
