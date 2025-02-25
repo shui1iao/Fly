@@ -2,33 +2,14 @@
 
 # [策略组]
 proxy-groups:
-
-  - name: "自动选择"
-    type: url-test
-    lazy: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
+  - name: "节点"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     timeout: 2000
     max-failed-times: 3
     include-all: true
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 1800
 
-  - name: "手动选择"
-    type: select
-    lazy: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Area.png
-    timeout: 2000
-    max-failed-times: 3
-    proxies: 
-      - DIRECT
-      - 自动选择
-      - 香港节点
-      - 台湾节点
-      - 日本节点
-      - 新加坡节点
-      - 美国节点
-      - 其他地区选择
-
+    
   - name: "苹果服务"
     type: select
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/Apple-2.png
@@ -36,8 +17,11 @@ proxy-groups:
     max-failed-times: 3
     proxies: 
       - DIRECT
-      - 手动选择
+      - 香港节点
       - 美国节点
+      - 日本节点
+      - 新加坡节点
+      - 台湾节点
 
   - name: "Amazon"
     type: select
@@ -45,9 +29,11 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 自动选择
-      - 手动选择
       - 美国节点
+      - 香港节点
+      - 日本节点
+      - 新加坡节点
+      - 台湾节点
 
   - name: "Paypal"
     type: select
@@ -55,9 +41,11 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 自动选择
-      - 手动选择
       - 美国节点
+      - 香港节点
+      - 日本节点
+      - 新加坡节点
+      - 台湾节点
       
   - name: "Telegram"
     type: select
@@ -65,9 +53,11 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 自动选择
-      - 手动选择
+      - 新加坡节点
+      - 香港节点
+      - 日本节点
       - 美国节点
+      - 台湾节点
 
   - name: "微软服务"
     type: select
@@ -76,8 +66,11 @@ proxy-groups:
     max-failed-times: 3
     proxies: 
       - DIRECT
-      - 手动选择
-      - 自动选择
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 新加坡节点
+      - 台湾节点
   
   - name: "AI"
     type: select
@@ -85,9 +78,11 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 手动选择
       - 日本节点
       - 美国节点
+      - 香港节点
+      - 新加坡节点
+      - 台湾节点
 
   - name: "Google"
     type: select
@@ -95,12 +90,11 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 手动选择
-      - 自动选择
-      - DIRECT
       - 日本节点
       - 美国节点
+      - 香港节点
       - 新加坡节点
+      - 台湾节点
 
   - name: "Spotify"
     type: select
@@ -108,10 +102,11 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 手动选择
-      - DIRECT
-      - 日本节点
       - 美国节点
+      - 日本节点
+      - 香港节点
+      - 新加坡节点
+      - 台湾节点
       
   - name: "全球服务"
     type: select
@@ -119,10 +114,11 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 手动选择
-      - 自动选择
       - 日本节点
       - 美国节点
+      - 香港节点
+      - 新加坡节点
+      - 台湾节点
 
   - name: "黑白名单"
     type: select
@@ -130,14 +126,11 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 手动选择
-      - 自动选择
-      - DIRECT
-      - 香港节点
-      - 台湾节点
       - 日本节点
-      - 新加坡节点
       - 美国节点
+      - 香港节点
+      - 新加坡节点
+      - 台湾节点
 
   - name: "香港节点"
     type: url-test
@@ -194,23 +187,14 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
 
-  - name: "其他地区选择"
-    type: select
-    lazy: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/World_Map.png
-    filter: "^(?!.*(香港|HK|Hong Kong|HongKong|台湾|TW|Tai|日本|JP|Japan|美国|USA|US|United States|新加坡|狮城|SG|Singapore)).*"
-    timeout: 2000
-    max-failed-times: 3
-    include-all: true
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 1800
-
 # [本地规则]
 rules:
+  - IP-ASN, 44907, 新加坡节点
+  - IP-ASN, 62014, 新加坡节点
 #  - IP-CIDR, 10.0.0.0/8, DIRECT
   - IP-CIDR, 172.16.0.0/12, DIRECT
 #  - IP-CIDR, 192.168.0.0/16, DIRECT
-
+  - RULE-SET,GitHub,日本节点
   - RULE-SET,Speedtest,DIRECT
   - RULE-SET,苹果服务,苹果服务 
   - RULE-SET,Amazon,Amazon
@@ -220,7 +204,6 @@ rules:
   - RULE-SET,微软服务,微软服务
   - RULE-SET,Google,Google
   - RULE-SET,Spotify,Spotify
-  - RULE-SET,GitHub,自动选择
   - RULE-SET,全球服务,全球服务  
   - RULE-SET,LAN,DIRECT 
   - GEOIP, CN,DIRECT
