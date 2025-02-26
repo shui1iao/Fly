@@ -30,6 +30,8 @@ dns:
   - wildcard:
       match: '*'
       value: out
+  hosts:
+    aaa.cqust.edu.cn: system
   public_ip_lookup_url: https://ifconfig.me/ip
   
 policy_groups:
