@@ -133,12 +133,10 @@ proxy-groups:
 
 # [本地规则]
 rules:
-  - IP-ASN, 44907, 新加坡节点
-  - IP-ASN, 62014, 新加坡节点
 #  - IP-CIDR, 10.0.0.0/8, DIRECT
   - IP-CIDR, 172.16.0.0/12, DIRECT
 #  - IP-CIDR, 192.168.0.0/16, DIRECT
-  - RULE-SET,GitHub,日本节点
+  - RULE-SET,GitHub,香港节点
   - RULE-SET,Speedtest,DIRECT
   - RULE-SET,苹果服务,苹果服务 
   - RULE-SET,Amazon,Amazon
