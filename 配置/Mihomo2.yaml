@@ -1,20 +1,21 @@
-
-
 # [策略组]
 proxy-groups:
+  
+  - name: "代理链"
+    type: select
+    proxies:
+      - 
+      - 
+
   - name: "节点"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     timeout: 2000
     max-failed-times: 3
     include-all: true
-    
-# Traffic: Clash <-> http <-> vmess <-> ss1 <-> ss2 <-> Internet
-  - name: "代理链"
-    type: relay
     proxies:
-      - 香港节点
-      - 日本节点
+      - 代理链
+
     
   - name: "苹果服务"
     type: select
