@@ -1,0 +1,242 @@
+
+
+# [策略组]
+proxy-groups:
+  - name: "节点"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
+    timeout: 2000
+    max-failed-times: 3
+    include-all: true
+    
+# Traffic: Clash <-> http <-> vmess <-> ss1 <-> ss2 <-> Internet
+  - name: "代理链"
+    type: relay
+    proxies:
+      - 香港节点
+      - 日本节点
+    
+  - name: "苹果服务"
+    type: select
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/Apple-2.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - DIRECT
+      - 香港节点
+      - 日本节点
+
+  - name: "Amazon"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Amazon_1.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 香港节点
+      - 日本节点
+
+  - name: "Paypal"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/PayPal.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 香港节点
+      - 日本节点
+      
+  - name: "Telegram"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 香港节点
+      - 日本节点
+
+  - name: "微软服务"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - DIRECT
+      - 香港节点
+      - 日本节点
+  
+  - name: "AI"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 日本节点
+      - 香港节点
+
+  - name: "Google"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 香港节点
+      - 日本节点
+
+  - name: "Spotify"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 香港节点
+      - 日本节点
+      
+  - name: "全球服务"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 香港节点
+      - 日本节点
+
+  - name: "黑白名单"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 香港节点
+      - 日本节点
+
+
+  - name: "香港节点"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/HK.png
+    timeout: 2000
+    max-failed-times: 3
+    filter: "香港|港|HK|🇭🇰|(?i)Hong"
+    include-all: true
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+
+  - name: "日本节点"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/JP.png
+    timeout: 2000
+    max-failed-times: 3
+    filter: "日本|日|JP|🇯🇵|(?i)Japan"
+    include-all: true
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+
+# [本地规则]
+rules:
+  - IP-ASN, 44907, 新加坡节点
+  - IP-ASN, 62014, 新加坡节点
+#  - IP-CIDR, 10.0.0.0/8, DIRECT
+  - IP-CIDR, 172.16.0.0/12, DIRECT
+#  - IP-CIDR, 192.168.0.0/16, DIRECT
+  - RULE-SET,GitHub,日本节点
+  - RULE-SET,Speedtest,DIRECT
+  - RULE-SET,苹果服务,苹果服务 
+  - RULE-SET,Amazon,Amazon
+  - RULE-SET,Paypal,Paypal 
+  - RULE-SET,Telegram,Telegram  
+  - RULE-SET,AI,AI
+  - RULE-SET,微软服务,微软服务
+  - RULE-SET,Google,Google
+  - RULE-SET,Spotify,Spotify
+  - RULE-SET,全球服务,全球服务  
+  - RULE-SET,LAN,DIRECT 
+  - GEOIP, CN,DIRECT
+  - MATCH,黑白名单
+  
+
+# [远程规则]
+rule-providers:
+
+  Speedtest:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Speedtest/Speedtest.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest_No_Resolve.yaml
+    
+  苹果服务:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Apple/Apple_Classical.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple_Classical_No_Resolve.yaml
+
+  Amazon:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Amazon/Amazon.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Amazon/Amazon_No_Resolve.yaml
+    
+  Paypal:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Paypal/Paypal.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/PayPal/PayPal_No_Resolve.yaml
+
+  Telegram:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Telegram/Telegram.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml
+    
+  AI:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./AI/AI.yaml
+    url: https://kelee.one/Tool/Clash/Rule/AI.yaml
+
+  微软服务:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Microsoft/Microsoft.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft_No_Resolve.yaml
+
+  Google:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Google/Google.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml
+
+  Spotify:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Spotify/Spotify.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify_No_Resolve.yaml
+
+  GitHub:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./GitHub/GitHubl.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GitHub/GitHub_No_Resolve.yaml
+
+  全球服务:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./Global/Global.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global_Classical_No_Resolve.yaml
+
+  LAN:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./LAN/LAN.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml
