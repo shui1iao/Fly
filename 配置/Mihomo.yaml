@@ -7,6 +7,14 @@ proxy-groups:
     max-failed-times: 3
     include-all: true
     
+  - name: "省流节点"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
+    timeout: 2000
+    max-failed-times: 3
+    filter: "0.2"
+    include-all: true
+    
   - name: "苹果服务"
     type: select
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/Apple-2.png
@@ -19,6 +27,15 @@ proxy-groups:
       - 日本节点
       - 新加坡节点
       - 台湾节点
+
+  - name: "Emby"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - DIRECT
+      - 省流节点
       
   - name: "Telegram"
     type: select
@@ -159,9 +176,10 @@ proxy-groups:
     include-all: true
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
-
+    
 # [本地规则]
 rules:
+  - DOMAIN-KEYWORD, emby, Emby
   - IP-ASN, 44907, 新加坡节点
   - IP-ASN, 62014, 新加坡节点
 #  - IP-CIDR, 10.0.0.0/8, DIRECT
@@ -169,7 +187,7 @@ rules:
 #  - IP-CIDR, 192.168.0.0/16, DIRECT
   - RULE-SET,GitHub,香港节点
   - RULE-SET,Speedtest,DIRECT
-  - RULE-SET,Emby,节点
+  - RULE-SET,Emby,Emby
   - RULE-SET,苹果服务,苹果服务 
   - RULE-SET,Amazon,美国节点
   - RULE-SET,Telegram,Telegram  
