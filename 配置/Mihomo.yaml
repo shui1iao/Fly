@@ -1,5 +1,3 @@
-
-
 # [策略组]
 proxy-groups:
   - name: "节点"
@@ -19,30 +17,6 @@ proxy-groups:
       - DIRECT
       - 香港节点
       - 美国节点
-      - 日本节点
-      - 新加坡节点
-      - 台湾节点
-
-  - name: "Amazon"
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Amazon_1.png
-    timeout: 2000
-    max-failed-times: 3
-    proxies: 
-      - 美国节点
-      - 香港节点
-      - 日本节点
-      - 新加坡节点
-      - 台湾节点
-
-  - name: "Paypal"
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/PayPal.png
-    timeout: 2000
-    max-failed-times: 3
-    proxies: 
-      - 美国节点
-      - 香港节点
       - 日本节点
       - 新加坡节点
       - 台湾节点
@@ -90,9 +64,9 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 日本节点
-      - 美国节点
       - 香港节点
+      - 美国节点
+      - 日本节点
       - 新加坡节点
       - 台湾节点
 
@@ -103,8 +77,8 @@ proxy-groups:
     max-failed-times: 3
     proxies: 
       - 美国节点
-      - 日本节点
       - 香港节点
+      - 日本节点
       - 新加坡节点
       - 台湾节点
       
@@ -114,9 +88,9 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
+      - 香港节点
       - 日本节点
       - 美国节点
-      - 香港节点
       - 新加坡节点
       - 台湾节点
 
@@ -126,9 +100,9 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
+      - 香港节点
       - 日本节点
       - 美国节点
-      - 香港节点
       - 新加坡节点
       - 台湾节点
 
@@ -160,7 +134,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/JP.png
     timeout: 2000
     max-failed-times: 3
-    filter: "日本|日|JP|🇯🇵|(?i)Japan"
+    filter: "日本|JP|🇯🇵|(?i)Japan"
     include-all: true
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
@@ -194,11 +168,10 @@ rules:
 #  - IP-CIDR, 10.0.0.0/8, DIRECT
   - IP-CIDR, 172.16.0.0/12, DIRECT
 #  - IP-CIDR, 192.168.0.0/16, DIRECT
-  - RULE-SET,GitHub,日本节点
+  - RULE-SET,GitHub,香港节点
   - RULE-SET,Speedtest,DIRECT
   - RULE-SET,苹果服务,苹果服务 
-  - RULE-SET,Amazon,Amazon
-  - RULE-SET,Paypal,Paypal 
+  - RULE-SET,Amazon,美国节点
   - RULE-SET,Telegram,Telegram  
   - RULE-SET,AI,AI
   - RULE-SET,微软服务,微软服务
@@ -233,13 +206,6 @@ rule-providers:
     type: http
     path: ./Amazon/Amazon.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Amazon/Amazon_No_Resolve.yaml
-    
-  Paypal:
-    behavior: classical
-    interval: 86400
-    type: http
-    path: ./Paypal/Paypal.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/PayPal/PayPal_No_Resolve.yaml
 
   Telegram:
     behavior: classical
@@ -268,6 +234,13 @@ rule-providers:
     type: http
     path: ./Google/Google.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml
+
+  YouTube:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./YouTub/YouTub.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTub/YouTub.yaml
 
   Spotify:
     behavior: classical
