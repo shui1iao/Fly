@@ -25,8 +25,8 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 香港节点
       - 新加坡节点
+      - 香港节点
       - 美国节点
 
   - name: "微软服务"
@@ -56,8 +56,8 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 新加坡节点
       - 香港节点
+      - 新加坡节点
       - 美国节点
 
   - name: "Spotify"
@@ -66,9 +66,9 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 新加坡节点
-      - 香港节点
       - 美国节点
+      - 香港节点
+      - 新加坡节点
       
   - name: "全球服务"
     type: select
@@ -76,8 +76,8 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 新加坡节点
       - 香港节点
+      - 新加坡节点
       - 美国节点
 
   - name: "黑白名单"
@@ -86,10 +86,9 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 新加坡节点
       - 香港节点
+      - 新加坡节点
       - 美国节点
-
 
   - name: "香港节点"
     type: url-test
