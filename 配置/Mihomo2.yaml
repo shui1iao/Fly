@@ -7,7 +7,7 @@ proxy-groups:
     max-failed-times: 3
     include-all: true
     proxies:
-      - 🇯🇵 Akile <- 🇭🇰 Claw   
+      - 🇯🇵 Akile <- Claw   
 
   - name: "🇯🇵 Akile <- Claw"
     type: relay
