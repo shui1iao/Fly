@@ -1,12 +1,20 @@
 # [策略组]
 proxy-groups:
-
   - name: "节点"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     timeout: 2000
     max-failed-times: 3
     include-all: true
+    proxies:
+      - 🇯🇵 Akile <- 🇭🇰 Claw   
+
+  - name: "🇯🇵 Akile <- 🇭🇰 Claw"
+    type: relay
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
+    proxies:
+      - 🇭🇰 Claw
+      - 🇯🇵 Akile     
     
   - name: "苹果服务"
     type: select
@@ -19,24 +27,14 @@ proxy-groups:
       - 新加坡节点
       - 美国节点
       
-  - name: "Emby"
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
-    timeout: 2000
-    max-failed-times: 3
-    proxies: 
-      - 美国节点
-      - 新加坡节点
-      - 香港节点
-      
   - name: "Telegram"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 新加坡节点
       - 香港节点
+      - 新加坡节点
       - 美国节点
 
   - name: "微软服务"
@@ -66,8 +64,8 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 香港节点
       - 新加坡节点
+      - 香港节点
       - 美国节点
 
   - name: "Spotify"
@@ -76,9 +74,9 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 美国节点
-      - 香港节点
       - 新加坡节点
+      - 香港节点
+      - 美国节点
       
   - name: "全球服务"
     type: select
@@ -86,8 +84,8 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 香港节点
       - 新加坡节点
+      - 香港节点
       - 美国节点
 
   - name: "黑白名单"
@@ -96,9 +94,10 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 香港节点
       - 新加坡节点
+      - 香港节点
       - 美国节点
+
 
   - name: "香港节点"
     type: url-test
@@ -136,14 +135,12 @@ proxy-groups:
 
 # [本地规则]
 rules:
-  - DOMAIN-KEYWORD, emby, Emby
 #  - IP-CIDR, 10.0.0.0/8, DIRECT
   - IP-CIDR, 172.16.0.0/12, DIRECT
 #  - IP-CIDR, 192.168.0.0/16, DIRECT
   - RULE-SET,GitHub,香港节点
   - RULE-SET,Speedtest,DIRECT
   - RULE-SET,苹果服务,苹果服务 
-  - RULE-SET,Emby,Emby
   - RULE-SET,Amazon,美国节点
   - RULE-SET,Telegram,Telegram  
   - RULE-SET,AI,AI
@@ -172,13 +169,6 @@ rule-providers:
     type: http
     path: ./Apple/Apple_Classical.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple_Classical_No_Resolve.yaml
-
-  Emby:
-    behavior: classical
-    interval: 86400
-    type: http
-    path: ./Emby/Emby.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Emby/Emby.yaml
 
   Amazon:
     behavior: classical
