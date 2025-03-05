@@ -1,0 +1,67 @@
+#下载最新版sing-box
+#curl -s https://api.github.com/repos/SagerNet/sing-box/releases/latest | grep "browser_download_url.*amd64.deb" | grep linux | cut -d'"' -f4 | wget -i -
+#安装sing-box
+#dpkg -i *amd64.deb
+#生成密码
+#sing-box generate rand --base64 16
+#修改配置
+#nano /etc/sing-box/config.json
+#重启服务
+#systemctl restart sing-box
+{
+	"log": {
+		"disabled": true
+	},
+	"dns": {
+		"servers": [
+			{
+				"address": "tls://8.8.8.8"
+			}
+		]
+	},
+	"inbounds": [
+		{
+			"type": "shadowtls",
+			"listen": "::",
+			"listen_port": 8443,
+			"version": 3,
+			"users": [
+				{
+					"name": "shuijiao",
+					"password": "shadowtls密码"
+				}
+			],
+			"handshake": {
+				"server": "www.tesla.com",
+				"server_port": 443
+			},
+      "strict_mode": true,
+			"detour": "shadowsocks-in"
+		},
+		{
+			"type": "shadowsocks",
+			"tag": "shadowsocks-in",
+			"listen": "127.0.0.1",
+			"network": "tcp",
+			"method": "2022-blake3-aes-128-gcm",
+			"password": "ss2022密码"
+		}
+	],
+	"outbounds": [
+		{
+			"type": "direct"
+		},
+		{
+			"type": "dns",
+			"tag": "dns-out"
+		}
+	],
+	"route": {
+		"rules": [
+			{
+				"protocol": "dns",
+				"outbound": "dns-out"
+			}
+		]
+	}
+}
