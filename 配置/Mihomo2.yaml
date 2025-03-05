@@ -9,7 +9,7 @@ proxy-groups:
     proxies:
       - 🇯🇵 Akile <- 🇭🇰 Claw   
 
-  - name: "🇯🇵 Akile <- 🇭🇰 Claw"
+  - name: "🇯🇵 Akile <- Claw"
     type: relay
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     proxies:
