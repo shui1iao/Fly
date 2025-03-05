@@ -24,7 +24,7 @@ proxy-groups:
     proxies: 
       - DIRECT
       - 香港节点
-      - 新加坡节点
+      - 日本节点
       - 美国节点
       
   - name: "Telegram"
@@ -34,7 +34,7 @@ proxy-groups:
     max-failed-times: 3
     proxies: 
       - 香港节点
-      - 新加坡节点
+      - 日本节点
       - 美国节点
 
   - name: "微软服务"
@@ -45,7 +45,7 @@ proxy-groups:
     proxies: 
       - DIRECT
       - 香港节点
-      - 新加坡节点
+      - 日本节点
       - 美国节点
   
   - name: "AI"
@@ -54,7 +54,7 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 新加坡节点
+      - 日本节点
       - 香港节点
       - 美国节点
 
@@ -64,8 +64,8 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 新加坡节点
       - 香港节点
+      - 日本节点
       - 美国节点
 
   - name: "Spotify"
@@ -74,9 +74,9 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 新加坡节点
-      - 香港节点
       - 美国节点
+      - 香港节点
+      - 日本节点
       
   - name: "全球服务"
     type: select
@@ -84,7 +84,7 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 新加坡节点
+      - 日本节点
       - 香港节点
       - 美国节点
 
@@ -94,7 +94,7 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 新加坡节点
+      - 日本节点
       - 香港节点
       - 美国节点
 
@@ -110,13 +110,13 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
     
-  - name: "新加坡节点"
+  - name: "日本节点"
     type: url-test
     lazy: true
     icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/SG.png
     timeout: 2000
     max-failed-times: 3
-    filter: "新加坡|狮|SG|🇸🇬|(?i)Singapore"
+    filter: "日本|JP|🇯🇵|(?i)Japan"
     include-all: true
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
