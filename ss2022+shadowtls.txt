@@ -1,13 +1,15 @@
-#下载最新版sing-box
-#curl -s https://api.github.com/repos/SagerNet/sing-box/releases/latest | grep "browser_download_url.*amd64.deb" | grep linux | cut -d'"' -f4 | wget -i -
-#安装sing-box
-#dpkg -i *amd64.deb
-#生成密码
-#sing-box generate rand --base64 16
-#修改配置
-#nano /etc/sing-box/config.json
-#重启服务
-#systemctl restart sing-box
+下载最新版sing-box
+curl -s https://api.github.com/repos/SagerNet/sing-box/releases/latest | grep "browser_download_url.*amd64.deb" | grep linux | cut -d'"' -f4 | wget -i -
+安装sing-box
+dpkg -i *amd64.deb
+生成密码
+sing-box generate rand --base64 16
+修改配置
+nano /etc/sing-box/config.json
+设置自启
+stemctl enable sing-box
+重启服务
+systemctl restart sing-box
 {
 	"log": {
 		"disabled": true
