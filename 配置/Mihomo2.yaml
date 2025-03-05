@@ -135,6 +135,10 @@ proxy-groups:
     include-all: true
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
+    proxies: 
+      - 🇯🇵 Akile <- Claw
+
+
 
   - name: "新加坡节点"
     type: url-test
