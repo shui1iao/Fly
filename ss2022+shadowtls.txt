@@ -7,7 +7,7 @@ sing-box generate rand --base64 16
 修改配置
 nano /etc/sing-box/config.json
 设置自启
-stemctl enable sing-box
+systemctl enable sing-box
 重启服务
 systemctl restart sing-box
 {
