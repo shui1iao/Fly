@@ -114,7 +114,6 @@ proxy-groups:
       - 新加坡节点
       - 台湾节点
 
-
   - name: "香港节点"
     type: url-test
     lazy: true
@@ -129,7 +128,7 @@ proxy-groups:
   - name: "日本节点"
     type: url-test
     lazy: true
-    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/SG.png
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/JP.png
     timeout: 2000
     max-failed-times: 3
     filter: "日本|JP|🇯🇵|(?i)Japan"
