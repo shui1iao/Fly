@@ -7,14 +7,14 @@ proxy-groups:
     max-failed-times: 3
     include-all: true
     proxies:
-      - 🇯🇵 Akile <- Claw   
+      - 🇸🇬 ByteVirt <- Claw     
 
-  - name: "🇯🇵 Akile <- Claw"
+  - name: "🇸🇬 ByteVirt <- Claw"
     type: relay
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     proxies:
       - 🇭🇰 Claw
-      - 🇯🇵 Akile     
+      - 🇸🇬 ByteVirt    
     
   - name: "苹果服务"
     type: select
@@ -135,10 +135,6 @@ proxy-groups:
     include-all: true
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
-    proxies: 
-      - 🇯🇵 Akile <- Claw
-
-
 
   - name: "新加坡节点"
     type: url-test
@@ -150,6 +146,8 @@ proxy-groups:
     include-all: true
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
+    proxies: 
+      - 🇸🇬 ByteVirt <- Claw
 
   - name: "台湾节点"
     type: url-test
