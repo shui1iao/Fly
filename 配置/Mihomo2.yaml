@@ -108,7 +108,7 @@ proxy-groups:
   - name: "香港节点"
     type: url-test
     lazy: true
-    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/HK.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     timeout: 2000
     max-failed-times: 3
     filter: "香港|港|HK|🇭🇰|(?i)Hong"
@@ -119,7 +119,7 @@ proxy-groups:
   - name: "日本节点"
     type: url-test
     lazy: true
-    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/JP.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     timeout: 2000
     max-failed-times: 3
     filter: "日本|JP|🇯🇵|(?i)Japan"
@@ -130,7 +130,7 @@ proxy-groups:
   - name: "新加坡节点"
     type: url-test
     lazy: true
-    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/SG.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     timeout: 2000
     max-failed-times: 3
     filter: "新加坡|狮|SG|🇸🇬|(?i)Singapore"
@@ -141,7 +141,7 @@ proxy-groups:
   - name: "台湾节点"
     type: url-test
     lazy: true
-    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/TW.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
     timeout: 2000
     max-failed-times: 3
     filter: "台湾|台|TW|🇹🇼|(?i)Taiwan"
@@ -152,7 +152,7 @@ proxy-groups:
   - name: "美国节点"
     type: url-test
     lazy: true
-    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/US.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "美国|美|US|🇺🇸|(?i)States"
     timeout: 2000
     max-failed-times: 3
