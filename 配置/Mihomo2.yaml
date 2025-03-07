@@ -1,6 +1,6 @@
 # [策略组]
 proxy-groups:
-  - name: "节点"
+  - name: "代理"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     timeout: 2000
@@ -15,10 +15,8 @@ proxy-groups:
     proxies: 
       - DIRECT
       - 香港节点
-      - 日本节点
       - 美国节点
       - 新加坡节点
-      - 台湾节点
       
   - name: "Telegram"
     type: select
@@ -29,8 +27,6 @@ proxy-groups:
       - 香港节点
       - 新加坡节点
       - 美国节点
-      - 日本节点
-      - 台湾节点
 
   - name: "微软服务"
     type: select
@@ -40,10 +36,8 @@ proxy-groups:
     proxies: 
       - DIRECT
       - 香港节点
-      - 日本节点
       - 美国节点
       - 新加坡节点
-      - 台湾节点
   
   - name: "AI"
     type: select
@@ -51,11 +45,9 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 日本节点
       - 新加坡节点
       - 美国节点
       - 香港节点
-      - 台湾节点
 
   - name: "Google"
     type: select
@@ -64,10 +56,8 @@ proxy-groups:
     max-failed-times: 3
     proxies: 
       - 香港节点
-      - 日本节点
       - 美国节点
       - 新加坡节点
-      - 台湾节点
 
   - name: "Spotify"
     type: select
@@ -77,9 +67,7 @@ proxy-groups:
     proxies: 
       - 美国节点
       - 香港节点
-      - 日本节点
       - 新加坡节点
-      - 台湾节点
       
   - name: "全球服务"
     type: select
@@ -88,10 +76,8 @@ proxy-groups:
     max-failed-times: 3
     proxies: 
       - 香港节点
-      - 日本节点
       - 美国节点
       - 新加坡节点
-      - 台湾节点
 
   - name: "黑白名单"
     type: select
@@ -100,10 +86,8 @@ proxy-groups:
     max-failed-times: 3
     proxies: 
       - 香港节点
-      - 日本节点
       - 美国节点
       - 新加坡节点
-      - 台湾节点
 
   - name: "香港节点"
     type: url-test
@@ -114,18 +98,7 @@ proxy-groups:
     filter: "香港|港|HK|🇭🇰|(?i)Hong"
     include-all: true
     url: "https://cp.cloudflare.com/generate_204"
-    interval: 1800
-    
-  - name: "日本节点"
-    type: url-test
-    lazy: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    timeout: 2000
-    max-failed-times: 3
-    filter: "日本|JP|🇯🇵|(?i)Japan"
-    include-all: true
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 1800
+    interval: 1800   
 
   - name: "新加坡节点"
     type: url-test
@@ -138,17 +111,6 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
 
-  - name: "台湾节点"
-    type: url-test
-    lazy: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
-    timeout: 2000
-    max-failed-times: 3
-    filter: "台湾|台|TW|🇹🇼|(?i)Taiwan"
-    include-all: true
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 1800
- 
   - name: "美国节点"
     type: url-test
     lazy: true
