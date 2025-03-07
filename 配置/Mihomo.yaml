@@ -1,6 +1,6 @@
 # [策略组]
 proxy-groups:
-  - name: "节点"
+  - name: "代理"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     timeout: 2000
