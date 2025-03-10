@@ -49,6 +49,22 @@ proxy-groups:
   - {name: 新加坡节点, <<: *url-test, filter: "新加坡|狮|SG|🇸🇬|(?i)Singapore", icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png}
   - {name: 美国节点, <<: *url-test, filter: "(?i)🇭🇰|香港|(\b(HK|Hong)\b)", icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png}
 
+# [远程规则]
+rule-providers:
+  Speedtest: {<<: *c, path: ./rules/Speedtest.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest_No_Resolve.yaml}
+  GitHub: {<<: *c, path: ./rules/GitHub.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GitHub/GitHub_No_Resolve.yaml}
+  苹果服务: {<<: *c, path: ./rules/Apple.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple_Classical_No_Resolve.yaml}
+  Emby: {<<: *c, path: ./rules/Emby.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Emby/Emby.yaml}
+  Amazon: {<<: *c, path: ./rules/Amazon.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Amazon/Amazon_No_Resolve.yaml}
+  Telegram: {<<: *c, path: ./rules/Telegram.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml}
+  AI: {<<: *c, path: ./rules/AI.yaml, url: https://kelee.one/Tool/Clash/Rule/AI.yaml}
+  微软服务: {<<: *c, path: ./rules/Microsoft.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft_No_Resolve.yaml}
+  Google: {<<: *c, path: ./rules/Google.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml}
+  YouTube: {<<: *c, path: ./rules/YouTube.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube_No_Resolve.yaml}
+  Spotify: {<<: *c, path: ./rules/Spotify.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify_No_Resolve.yaml}
+  全球服务: {<<: *c, path: ./rules/Global.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global_Classical_No_Resolve.yaml}
+  LAN: {<<: *c, path: ./rules/LAN.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global_Classical_No_Resolve.yaml}
+
 # [本地规则]
 rules:
   - DOMAIN-KEYWORD, emby, Emby
@@ -71,19 +87,3 @@ rules:
   - RULE-SET,LAN,DIRECT 
   - GEOIP, CN,DIRECT
   - MATCH,黑白名单
-
-# [远程规则]
-rule-providers:
-  Speedtest: {<<: *c, path: ./rules/Speedtest.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest_No_Resolve.yaml}
-  GitHub: {<<: *c, path: ./rules/GitHub.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GitHub/GitHub_No_Resolve.yaml}
-  苹果服务: {<<: *c, path: ./rules/Apple.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple_Classical_No_Resolve.yaml}
-  Emby: {<<: *c, path: ./rules/Emby.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Emby/Emby.yaml}
-  Amazon: {<<: *c, path: ./rules/Amazon.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Amazon/Amazon_No_Resolve.yaml}
-  Telegram: {<<: *c, path: ./rules/Telegram.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml}
-  AI: {<<: *c, path: ./rules/AI.yaml, url: https://kelee.one/Tool/Clash/Rule/AI.yaml}
-  微软服务: {<<: *c, path: ./rules/Microsoft.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft_No_Resolve.yaml}
-  Google: {<<: *c, path: ./rules/Google.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml}
-  YouTube: {<<: *c, path: ./rules/YouTube.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube_No_Resolve.yaml}
-  Spotify: {<<: *c, path: ./rules/Spotify.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify_No_Resolve.yaml}
-  全球服务: {<<: *c, path: ./rules/Global.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global_Classical_No_Resolve.yaml}
-  LAN: {<<: *c, path: ./rules/LAN.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global_Classical_No_Resolve.yaml}
