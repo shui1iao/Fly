@@ -2,7 +2,7 @@ p: &p {type: http, interval: 86400, health-check: {enable: true, url: http://www
 
 proxy-providers:
   Subscribe: 
-    url: ***
+    url: http://abcd
     <<: *p
 
 geodata-mode: true
