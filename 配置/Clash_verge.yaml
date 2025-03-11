@@ -12,18 +12,6 @@ geox-url:
   mmdb: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb"
   asn: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-ASN.mmdb"
   
-tun:
-  enable: true
-  stack: mixed
-  dns-hijack: [any:53]
-        
-dns:
-  enable: true
-  ipv6: false
-  enhanced-mode: fake-ip
-  listen: :1053
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter: ['*', '+.lan', '+.local', '+.direct', '+.msftconnecttest.com', '+.msftncsi.com']
 
 # 锚点参数
 pg: &pg {type: select, proxies: [香港节点, 美国节点, 新加坡节点, DIRECT]}
