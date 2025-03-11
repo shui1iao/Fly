@@ -180,8 +180,6 @@ proxy-groups:
 # [本地规则]
 rules:
   - DOMAIN-KEYWORD, emby, Emby
-  - IP-ASN, 44907, 新加坡节点
-  - IP-ASN, 62014, 新加坡节点
 #  - IP-CIDR, 10.0.0.0/8, DIRECT
   - IP-CIDR, 172.16.0.0/12, DIRECT
 #  - IP-CIDR, 192.168.0.0/16, DIRECT
