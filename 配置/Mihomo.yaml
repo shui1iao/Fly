@@ -192,6 +192,7 @@ rules:
   - RULE-SET,AI,AI
   - RULE-SET,微软服务,微软服务
   - RULE-SET,Google,Google
+  - RULE-SET,YouTube,Google
   - RULE-SET,Spotify,Spotify
   - RULE-SET,全球服务,全球服务  
   - RULE-SET,LAN,DIRECT 
