@@ -10,6 +10,7 @@ nano /etc/sing-box/config.json
 systemctl enable sing-box
 重启服务
 systemctl restart sing-box
+配置示例：1 = ss,ip地址, 8443, encrypt-method=2022-blake3-aes-128-gcm, password=ss密码, udp-relay=true, shadow-tls-password=tls密码, shadow-tls-sni=www.muji.com, shadow-tls-version=3, tfo=false, udp-port=443
 {
 	"log": {
 		"disabled": true
@@ -34,7 +35,7 @@ systemctl restart sing-box
 				}
 			],
 			"handshake": {
-				"server": "www.tesla.com",
+				"server": "www.muji.com",
 				"server_port": 443
 			},
       "strict_mode": true,
