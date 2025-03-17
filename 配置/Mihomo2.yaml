@@ -150,7 +150,7 @@ rules:
   - IP-CIDR, 172.16.0.0/12, DIRECT
 #  - IP-CIDR, 192.168.0.0/16, DIRECT
   - RULE-SET,GitHub,香港节点
-  - RULE-SET,Speedtest,DIRECT
+  - RULE-SET,Speedtest,代理
   - RULE-SET,Emby,Emby
   - RULE-SET,苹果服务,苹果服务 
   - RULE-SET,Amazon,美国节点
