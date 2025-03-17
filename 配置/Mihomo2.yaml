@@ -37,17 +37,6 @@ proxy-groups:
       - 香港节点
       - 新加坡节点
       - 美国节点
-
-  - name: "微软服务"
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
-    timeout: 2000
-    max-failed-times: 3
-    proxies: 
-      - DIRECT
-      - 香港节点
-      - 美国节点
-      - 新加坡节点
   
   - name: "AI"
     type: select
@@ -68,7 +57,28 @@ proxy-groups:
       - 美国节点
       - 香港节点
       - 新加坡节点
+      
+  - name: "YouTube"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - 香港节点
+      - 美国节点
+      - 新加坡节点
 
+  - name: "微软服务"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - DIRECT
+      - 香港节点
+      - 美国节点
+      - 新加坡节点
+      
   - name: "Spotify"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
@@ -148,7 +158,7 @@ rules:
   - RULE-SET,AI,AI
   - RULE-SET,微软服务,微软服务
   - RULE-SET,Google,Google
-  - RULE-SET,YouTube,Google
+  - RULE-SET,YouTube,YouTube
   - RULE-SET,Spotify,Spotify
   - RULE-SET,全球服务,全球服务  
   - RULE-SET,LAN,DIRECT 
