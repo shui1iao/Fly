@@ -90,7 +90,7 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
 
-  - name: US"
+  - name: "US"
     type: url-test
     lazy: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
