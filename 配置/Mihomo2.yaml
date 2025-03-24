@@ -58,6 +58,16 @@ proxy-groups:
       - HK
       - SG
 
+  - name: "YouTube"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png_Search.png
+    timeout: 2000
+    max-failed-times: 3
+    proxies: 
+      - HK
+      - US
+      - SG
+
   - name: "Final"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
@@ -111,6 +121,7 @@ rules:
   - RULE-SET,Telegram,Telegram  
   - RULE-SET,AI,AI
   - RULE-SET,Google,Google
+  - RULE-SET,YouTube,YouTube
   - RULE-SET,Spotify,US
   - RULE-SET,LAN,DIRECT 
   - GEOIP, CN,DIRECT
@@ -160,7 +171,14 @@ rule-providers:
     type: http
     path: ./Google/Google.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml
-    
+
+  YouTube:
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./YouTub/YouTub.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTub/YouTub.yaml    
+  
   Spotify:
     behavior: classical
     interval: 86400
