@@ -49,7 +49,7 @@ proxy-groups:
 
   - name: "YouTube"
     type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png_Search.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
@@ -59,7 +59,7 @@ proxy-groups:
 
   - name: "Final"
     type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Direct.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
