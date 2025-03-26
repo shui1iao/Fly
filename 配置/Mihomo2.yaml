@@ -136,6 +136,7 @@ rule-providers:
     behavior: classical
     interval: 86400
     type: http
+    format: text
     path: ./Emby/Emby.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Emby.list
 
@@ -150,8 +151,9 @@ rule-providers:
     behavior: classical
     interval: 86400
     type: http
-    path: ./AI/AI.yaml
-    url: https://kelee.one/Tool/Clash/Rule/AI.yaml
+    format: text
+    path: ./AI/AI.lsit
+    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/AI.list
 
   Google:
     behavior: classical
