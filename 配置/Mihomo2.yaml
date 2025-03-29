@@ -1,73 +1,73 @@
 # [策略组]
 proxy-groups:
-  - name: "Proxy"
+  - name: "𝗣𝗿𝗼𝘅𝘆"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     timeout: 2000
     max-failed-times: 3
     include-all: true
 
-  - name: "Emby"
+  - name: "𝗘𝗺𝗯𝘆"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - US
-      - HK
-      - SG
+      - 𝗨𝗦
+      - 𝗛𝗞
+      - 𝗦𝗚
       
-  - name: "Telegram"
+  - name: "𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - HK
-      - SG
-      - US
+      - 𝗛𝗞
+      - 𝗦𝗚
+      - 𝗨𝗦
   
-  - name: "AI"
+  - name: "𝗔𝗜"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - SG
-      - US
-      - HK
+      - 𝗦𝗚
+      - 𝗨𝗦
+      - 𝗛𝗞
 
-  - name: "Google"
+  - name: "𝗚𝗼𝗼𝗴𝗹𝗲"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - US
-      - HK
-      - SG
+      - 𝗨𝗦
+      - 𝗛𝗞
+      - 𝗦𝗚
 
-  - name: "YouTube"
+  - name: "𝗬𝗼𝘂𝘁𝘂𝗯𝗲"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - HK
-      - US
-      - SG
+      - 𝗛𝗞
+      - 𝗦𝗚
+      - 𝗨𝗦
 
-  - name: "Final"
+  - name: "𝗙𝗶𝗻𝗮𝗹"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Direct.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - HK
-      - SG
-      - US
+      - 𝗛𝗞
+      - 𝗦𝗚
+      - 𝗨𝗦
 
-  - name: "HK"
+  - name: "𝗛𝗞"
     type: url-test
     lazy: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
@@ -78,7 +78,7 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800   
 
-  - name: "SG"
+  - name: "𝗦𝗚"
     type: url-test
     lazy: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
@@ -89,7 +89,7 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
 
-  - name: "US"
+  - name: "𝗨𝗦"
     type: url-test
     lazy: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
@@ -103,36 +103,36 @@ proxy-groups:
 
 # [本地规则]
 rules:
-  - RULE-SET,Speedtest,Proxy
-  - RULE-SET,Emby,Emby
-  - RULE-SET,Apple,DIRECT
-  - RULE-SET,Telegram,Telegram  
-  - RULE-SET,AI,AI
-  - RULE-SET,Google,Google
-  - RULE-SET,YouTube,YouTube
-  - RULE-SET,Spotify,US
-  - RULE-SET,LAN,DIRECT 
-  - GEOIP, CN,DIRECT
-  - MATCH,Final
+  - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,𝗣𝗿𝗼𝘅𝘆
+  - RULE-SET,𝗘𝗺𝗯𝘆,𝗘𝗺𝗯𝘆
+  - RULE-SET,𝗔𝗽𝗽𝗹𝗲,DIRECT
+  - RULE-SET,𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺,𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺
+  - RULE-SET,𝗔𝗜,𝗔𝗜
+  - RULE-SET,𝗚𝗼𝗼𝗴𝗹𝗲,𝗚𝗼𝗼𝗴𝗹𝗲
+  - RULE-SET,𝗬𝗼𝘂𝘁𝘂𝗯𝗲,𝗬𝗼𝘂𝘁𝘂𝗯𝗲
+  - RULE-SET,𝗦𝗽𝗼𝘁𝗶𝗳𝘆,𝗨𝗦
+  - RULE-SET,𝗟𝗔𝗡,DIRECT 
+  - GEOIP,CN,DIRECT
+  - MATCH,𝗙𝗶𝗻𝗮𝗹
 
 # [远程规则]
 rule-providers:
 
-  Speedtest:
+  𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁:
     behavior: classical
     interval: 86400
     type: http
     path: ./Speedtest/Speedtest.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest.yaml
     
-  Apple:
+  𝗔𝗽𝗽𝗹𝗲:
     behavior: classical
     interval: 86400
     type: http
     path: ./Apple/Apple_Classical.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple_Classical.yaml
     
-  Emby:
+  𝗘𝗺𝗯𝘆:
     behavior: classical
     interval: 86400
     type: http
@@ -140,14 +140,14 @@ rule-providers:
     path: ./Emby/Emby.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Emby.list
 
-  Telegram:
+  𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺:
     behavior: classical
     interval: 86400
     type: http
     path: ./Telegram/Telegram.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram.yaml
     
-  AI:
+  𝗔𝗜:
     behavior: classical
     interval: 86400
     type: http
@@ -155,28 +155,28 @@ rule-providers:
     path: ./AI/AI.lsit
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/AI.list
 
-  Google:
+  𝗚𝗼𝗼𝗴𝗹𝗲:
     behavior: classical
     interval: 86400
     type: http
     path: ./Google/Google.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml
 
-  YouTube:
+  𝗬𝗼𝘂𝘁𝘂𝗯𝗲:
     behavior: classical
     interval: 86400
     type: http
     path: ./YouTub/YouTub.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/YouTube/YouTube.yaml
   
-  Spotify:
+  𝗦𝗽𝗼𝘁𝗶𝗳𝘆:
     behavior: classical
     interval: 86400
     type: http
     path: ./Spotify/Spotify.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify.yaml
 
-  LAN:
+  𝗟𝗔𝗡:
     behavior: classical
     interval: 86400
     type: http
