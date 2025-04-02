@@ -1,74 +1,74 @@
 # [策略组]
 proxy-groups:
-  - name: "𝗣𝗿𝗼𝘅𝘆"
+  - name: "Proxy"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     timeout: 2000
     max-failed-times: 3
     include-all: true
 
-  - name: "𝗘𝗺𝗯𝘆"
+  - name: "Emby"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 𝗨𝗦
-      - 𝗛𝗞
-      - 𝗦𝗚
+      - HK
+      - SG
+      - US
       
-  - name: "𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺"
+  - name: "Telegram"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 𝗛𝗞
-      - 𝗦𝗚
-      - 𝗨𝗦
+      - HK
+      - SG
+      - US
   
-  - name: "𝗔𝗜"
+  - name: "AI"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 𝗦𝗚
-      - 𝗨𝗦
-      - 𝗛𝗞
+      - SG
+      - US
+      - HK
 
-  - name: "𝗚𝗼𝗼𝗴𝗹𝗲"
+  - name: "Google"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 𝗨𝗦
-      - 𝗛𝗞
-      - 𝗦𝗚
+      - US
+      - HK
+      - SG
 
-  - name: "𝗬𝗼𝘂𝘁𝘂𝗯𝗲"
+  - name: "YouTube"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 𝗛𝗞
-      - 𝗦𝗚
-      - 𝗨𝗦
-
-  - name: "𝗙𝗶𝗻𝗮𝗹"
+      - HK
+      - SG
+      - US
+      
+  - name: "Final"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Direct.png
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - 𝗛𝗞
-      - 𝗦𝗚
-      - 𝗨𝗦
+      - HK
+      - SG
+      - US
 
-  - name: "𝗛𝗞"
-    type: url-test
+  - name: "HK"
+    type: fallback
     lazy: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     timeout: 2000
@@ -78,7 +78,7 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800   
 
-  - name: "𝗦𝗚"
+  - name: "SG"
     type: url-test
     lazy: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
@@ -89,7 +89,7 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
 
-  - name: "𝗨𝗦"
+  - name: "US"
     type: url-test
     lazy: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
@@ -103,17 +103,17 @@ proxy-groups:
 
 # [本地规则]
 rules:
-  - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,𝗣𝗿𝗼𝘅𝘆
-  - RULE-SET,𝗘𝗺𝗯𝘆,𝗘𝗺𝗯𝘆
+  - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,Proxy
+  - RULE-SET,𝗘𝗺𝗯𝘆,Emby
   - RULE-SET,𝗔𝗽𝗽𝗹𝗲,DIRECT
-  - RULE-SET,𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺,𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺
-  - RULE-SET,𝗔𝗜,𝗔𝗜
-  - RULE-SET,𝗚𝗼𝗼𝗴𝗹𝗲,𝗚𝗼𝗼𝗴𝗹𝗲
-  - RULE-SET,𝗬𝗼𝘂𝘁𝘂𝗯𝗲,𝗬𝗼𝘂𝘁𝘂𝗯𝗲
-  - RULE-SET,𝗦𝗽𝗼𝘁𝗶𝗳𝘆,𝗨𝗦
+  - RULE-SET,𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺,Telegram
+  - RULE-SET,𝗔𝗜,AI
+  - RULE-SET,𝗚𝗼𝗼𝗴𝗹𝗲,Google
+  - RULE-SET,𝗬𝗼𝘂𝗧𝘂𝗯𝗲,YouTube
+  - RULE-SET,𝗦𝗽𝗼𝘁𝗶𝗳𝘆,US
   - RULE-SET,𝗟𝗔𝗡,DIRECT 
   - GEOIP,CN,DIRECT
-  - MATCH,𝗙𝗶𝗻𝗮𝗹
+  - MATCH,Final
 
 # [远程规则]
 rule-providers:
@@ -162,7 +162,7 @@ rule-providers:
     path: ./Google/Google.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml
 
-  𝗬𝗼𝘂𝘁𝘂𝗯𝗲:
+  𝗬𝗼𝘂𝗧𝘂𝗯𝗲:
     behavior: classical
     interval: 86400
     type: http
