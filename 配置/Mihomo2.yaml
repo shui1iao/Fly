@@ -79,7 +79,7 @@ proxy-groups:
     interval: 1800   
 
   - name: "SG"
-    type: url-test
+    type: fallback
     lazy: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     timeout: 2000
