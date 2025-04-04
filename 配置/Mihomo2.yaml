@@ -14,18 +14,6 @@ proxy-groups:
     max-failed-times: 3
     proxies: 
       - US
-      - SG
-
-  - name: "SG"
-    type: fallback
-    lazy: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    timeout: 2000
-    max-failed-times: 3
-    filter: "新加坡|狮|SG|🇸🇬|(?i)Singapore"
-    include-all: true
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 1800
 
   - name: "US"
     type: url-test
