@@ -8,7 +8,7 @@ proxy-groups:
     include-all: true
       
   - name: "Final"
-    type: fallback
+    type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     timeout: 2000
     max-failed-times: 3
