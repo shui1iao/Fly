@@ -46,6 +46,7 @@ rules:
   - RULE-SET,𝗔𝗽𝗽𝗹𝗲,DIRECT
   - RULE-SET,𝗔𝗜,US
   - RULE-SET,𝗚𝗼𝗼𝗴𝗹𝗲,US
+  - RULE-SET,𝗬𝗼𝘂𝗧𝘂𝗯𝗲,US
   - RULE-SET,𝗦𝗽𝗼𝘁𝗶𝗳𝘆,US
   - RULE-SET,𝗟𝗔𝗡,DIRECT 
   - GEOIP,CN,DIRECT
@@ -83,6 +84,13 @@ rule-providers:
      type: http
      path: ./Google/Google.yaml
      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml
+
+  𝗬𝗼𝘂𝗧𝘂𝗯𝗲:
+     behavior: classical
+     interval: 86400
+     type: http
+     path: ./YouTube/YouTube.yaml
+     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml
 
   𝗦𝗽𝗼𝘁𝗶𝗳𝘆:
      behavior: classical
