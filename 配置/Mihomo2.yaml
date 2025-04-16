@@ -13,14 +13,14 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     proxies: 
-      - HK
+      - SG
       - US
       
-  - name: "HK"
+  - name: "SG"
     type: url-test
     lazy: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
-    filter: "香港|港|HK|🇭🇰|Hong"
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    filter: "新加坡|狮|SG|🇸🇬|sing"
     timeout: 2000
     max-failed-times: 3
     include-all: true
@@ -44,7 +44,6 @@ rules:
   - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,Proxy
   - RULE-SET,𝗘𝗺𝗯𝘆,US
   - RULE-SET,𝗔𝗽𝗽𝗹𝗲,DIRECT
-  - RULE-SET,𝗔𝗜,US
   - RULE-SET,𝗚𝗼𝗼𝗴𝗹𝗲,US
   - RULE-SET,𝗬𝗼𝘂𝗧𝘂𝗯𝗲,US
   - RULE-SET,𝗦𝗽𝗼𝘁𝗶𝗳𝘆,US
@@ -70,13 +69,6 @@ rule-providers:
      path: ./Emby/Emby.list
      url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Emby.list
 
-  𝗔𝗜:
-     behavior: classical
-     interval: 86400
-     type: http
-     format: text
-     path: ./AI/AI.lsit
-     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/AI.list
 
   𝗚𝗼𝗼𝗴𝗹𝗲:
      behavior: classical
