@@ -42,7 +42,7 @@ proxy-groups:
   - name: "HK"
     type: url-test
     lazy: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_kong.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     filter: "香港|港|HK|🇭🇰|HONG"
     timeout: 2000
     max-failed-times: 3
