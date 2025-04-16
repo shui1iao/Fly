@@ -72,11 +72,11 @@ rule-providers:
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest.yaml
     
   𝗣𝗮𝘆𝗣𝗮𝗹:
-     behavior: classical
-     interval: 86400
-     type: http
-     path: ./PayPal/PayPal.yaml
-     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/PayPal/PayPal.yaml
+    behavior: classical
+    interval: 86400
+    type: http
+    path: ./PayPal/PayPal.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/PayPal/PayPal.yaml
 
   𝗘𝗺𝗯𝘆:
      behavior: classical
