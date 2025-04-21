@@ -15,8 +15,9 @@ proxy-groups:
     proxies: 
       - SG
       - US
+      - JP
       - HK
-      
+
   - name: "SG"
     type: url-test
     lazy: true
@@ -50,6 +51,16 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
 
+  - name: "JP"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+    filter: "日本|JP|Japan|🇯🇵"
+    timeout: 2000
+    max-failed-times: 3
+    include-all: true
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
 
 # [本地规则]
 rules:
