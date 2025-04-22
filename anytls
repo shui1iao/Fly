@@ -7,6 +7,7 @@ mkdir -p /etc/sing-box/certs
 openssl ecparam -genkey -name prime256v1 -out /etc/sing-box/certs/private.key
 openssl req -new -x509 -days 36500 -key /etc/sing-box/certs/private.key -out /etc/sing-box/certs/cert.pem -subj "/CN=bing.com"
 #编辑配置文件
+nano /etc/sing-box/config.json
 {
   "inbounds": [
     {
