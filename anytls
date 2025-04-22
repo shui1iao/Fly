@@ -12,7 +12,7 @@ nano /etc/sing-box/config.json
   "inbounds": [
     {
       "type": "anytls",
-      "tag": "节点",
+      "tag": "anytls in",
       "listen": "::",
       "listen_port": 443,
       "users": [
