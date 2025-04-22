@@ -53,7 +53,6 @@ proxy-groups:
 # [本地规则]
 rules:
   - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,Proxy
-  - RULE-SET,𝗔𝗜,US
   - RULE-SET,𝗣𝗮𝘆𝗣𝗮𝗹,HK
   - RULE-SET,𝗘𝗺𝗯𝘆,US
   - RULE-SET,𝗔𝗽𝗽𝗹𝗲,DIRECT
