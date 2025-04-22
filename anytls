@@ -33,4 +33,4 @@ nano /etc/sing-box/config.json
 sudo systemctl start sing-box
 sudo systemctl enable sing-box
 sudo systemctl status sing-box
-{ "name": "名, "type": "anytls", "server": "ip", "port": 端口, "password": "密码", "client-fingerprint": "chrome", "udp": true, "sni": "bing.com", "skip-cert-verify": true }
+{ "name": "名", "type": "anytls", "server": "ip", "port": 端口, "password": "密码", "client-fingerprint": "chrome", "udp": true, "sni": "bing.com", "skip-cert-verify": true }
