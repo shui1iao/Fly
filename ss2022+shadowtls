@@ -32,7 +32,7 @@ nano /etc/sing-box/config.json
       "listen":"127.0.0.1",
       "network":"tcp",
       "method":"2022-blake3-aes-128-gcm",
-      "password":"ss2022密码",
+      "password":"ss2022密码"
     }
   ]
 }
