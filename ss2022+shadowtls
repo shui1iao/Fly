@@ -8,32 +8,32 @@ sing-box generate rand --base64 16
 nano /etc/sing-box/config.json
 {
   "inbounds": [
-   {
-        "type":"shadowtls",
-        "tag":"ShadowTLS",
-        "listen":"::",
-        "listen_port":端口,
-        "detour":"shadowtls-in",
-        "version":3,
-        "users":[
-            {
-                "password":"shadowtls密码"
-            }
-        ],
-        "handshake":{
-            "server":"www.muji.com",
-            "server_port":443
-        },
-        "strict_mode":true
+    {
+      "type":"shadowtls",
+      "tag":"ShadowTLS", 
+      "listen":"::",
+      "listen_port":端口,
+      "detour":"shadowtls-in",
+      "version":3, 
+      "users":[
+        {
+          "password":"shadowtls密码"
+        }
+      ],
+      "handshake":{
+        "server":"www.muji.com",
+        "server_port":443
+      },
+      "strict_mode":true
     },
     {
-        "type":"shadowsocks",
-        "tag":"shadowtls-in",
-        "listen":"127.0.0.1",
-        "network":"tcp",
-        "method":"2022-blake3-aes-128-gcm",
-        "password":"ss2022密码",
-        }
+      "type":"shadowsocks",
+      "tag":"shadowtls-in",
+      "listen":"127.0.0.1",
+      "network":"tcp",
+      "method":"2022-blake3-aes-128-gcm",
+      "password":"ss2022密码",
+    }
   ]
 }
 
