@@ -15,6 +15,7 @@ proxy-groups:
     proxies: 
       - SG
       - US
+      - JP
       - HK
 
   - name: "SG"
@@ -33,6 +34,17 @@ proxy-groups:
     lazy: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "美国|美|US|🇺🇸|(?i)States"
+    timeout: 2000
+    max-failed-times: 3
+    include-all: true
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+
+  - name: "JP"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+    filter: "JP|日本|Japn|🇯🇵"
     timeout: 2000
     max-failed-times: 3
     include-all: true
