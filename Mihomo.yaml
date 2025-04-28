@@ -6,59 +6,16 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     include-all: true
-      
-  - name: "Final"
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
-    timeout: 2000
-    max-failed-times: 3
-    proxies: 
-      - SG
-      - US
-      - JP
-
-  - name: "SG"
-    type: url-test
-    lazy: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    filter: "新加坡|狮|SG|🇸🇬|sing"
-    timeout: 2000
-    max-failed-times: 3
-    include-all: true
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 1800
-     
-  - name: "US"
-    type: url-test
-    lazy: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: "美国|美|US|🇺🇸|(?i)States"
-    timeout: 2000
-    max-failed-times: 3
-    include-all: true
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 1800
-
-  - name: "JP"
-    type: url-test
-    lazy: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: "JP|日本|Japn|🇯🇵"
-    timeout: 2000
-    max-failed-times: 3
-    include-all: true
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 1800
     
 # [本地规则]
 rules:
   - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,Proxy
   - RULE-SET,𝗣𝗮𝘆𝗣𝗮𝗹,DIRECT
-  - RULE-SET,𝗘𝗺𝗯𝘆,US
+  - RULE-SET,𝗘𝗺𝗯𝘆,🇺🇸 𝗕𝗪𝗚
   - RULE-SET,𝗔𝗽𝗽𝗹𝗲,DIRECT
   - RULE-SET,𝗟𝗔𝗡,DIRECT 
   - GEOIP,CN,DIRECT
-  - MATCH,Final
+  - MATCH,Proxy
 
 # [远程规则]
 rule-providers:
