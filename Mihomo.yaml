@@ -16,7 +16,6 @@ proxy-groups:
       - SG
       - US
       - JP
-      - HK
 
   - name: "SG"
     type: url-test
@@ -50,18 +49,7 @@ proxy-groups:
     include-all: true
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
-
-  - name: "HK"
-    type: url-test
-    lazy: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
-    filter: "香港|港|HK|🇭🇰|HONG"
-    timeout: 2000
-    max-failed-times: 3
-    include-all: true
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 1800
-
+    
 # [本地规则]
 rules:
   - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,Proxy
