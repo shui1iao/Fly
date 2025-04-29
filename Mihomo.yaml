@@ -13,7 +13,6 @@ proxy-groups:
     proxies: 
       - SG
       - US
-      - HK
       - JP
 
   - name: "SG"
@@ -31,14 +30,6 @@ proxy-groups:
     filter: "美国|美|US|🇺🇸|(?i)States"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
-
-  - name: "HK"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
-    filter: "香港|港|HK|🇭🇰|(?i)Hong"
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 1800
     
   - name: "JP"
     type: url-test
@@ -51,7 +42,7 @@ proxy-groups:
 # [本地规则]
 rules:
   - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,Proxy
-  - RULE-SET,𝗣𝗮𝘆𝗣𝗮𝗹,HK
+  - RULE-SET,𝗣𝗮𝘆𝗣𝗮𝗹,DIRECT
   - RULE-SET,𝗘𝗺𝗯𝘆,US
   - RULE-SET,𝗔𝗽𝗽𝗹𝗲,DIRECT
   - RULE-SET,𝗟𝗔𝗡,DIRECT 
