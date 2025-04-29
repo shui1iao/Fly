@@ -6,17 +6,58 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     include-all: true
+
+  - name: "Final"
+    type: select
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/Final.png
+    proxies: 
+      - SG
+      - US
+      - HK
+      - JP
+
+  - name: "SG"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    filter: "新加坡|狮|SG|🇸🇬|(?i)Singapore"
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+ 
+  - name: "US"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+    filter: "美国|美|US|🇺🇸|(?i)States"
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+
+  - name: "HK"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+    filter: "香港|港|HK|🇭🇰|(?i)Hong"
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
     
+  - name: "JP"
+    type: url-test
+    lazy: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+    filter: "日本|日|JP|🇯🇵|(?i)Japan"
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+
 # [本地规则]
 rules:
   - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,Proxy
-  - RULE-SET,𝗣𝗮𝘆𝗣𝗮𝗹,DIRECT
-  - RULE-SET,𝗘𝗺𝗯𝘆,🇺🇸 𝗕𝗪𝗚
+  - RULE-SET,𝗣𝗮𝘆𝗣𝗮𝗹,HK
+  - RULE-SET,𝗘𝗺𝗯𝘆,US
   - RULE-SET,𝗔𝗽𝗽𝗹𝗲,DIRECT
   - RULE-SET,𝗟𝗔𝗡,DIRECT 
   - GEOIP,CN,DIRECT
-  - MATCH,Proxy
-
+  - MATCH,Final
+  
 # [远程规则]
 rule-providers:
 
@@ -26,14 +67,6 @@ rule-providers:
     type: http
     path: ./Speedtest/Speedtest.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest.yaml
-
-  𝗔𝗜:
-    behavior: classical
-    interval: 86400
-    type: http
-    format: text
-    path: ./AI/AI.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/AI.list
   
   𝗣𝗮𝘆𝗣𝗮𝗹:
     behavior: classical
