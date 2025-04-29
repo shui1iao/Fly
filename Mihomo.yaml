@@ -18,7 +18,7 @@ proxy-groups:
 
   - name: "SG"
     type: url-test
-    lazy: true
+    include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     filter: "新加坡|狮|SG|🇸🇬|(?i)Singapore"
     url: "https://cp.cloudflare.com/generate_204"
@@ -26,7 +26,7 @@ proxy-groups:
  
   - name: "US"
     type: url-test
-    lazy: true
+    include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "美国|美|US|🇺🇸|(?i)States"
     url: "https://cp.cloudflare.com/generate_204"
@@ -34,7 +34,7 @@ proxy-groups:
 
   - name: "HK"
     type: url-test
-    lazy: true
+    include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     filter: "香港|港|HK|🇭🇰|(?i)Hong"
     url: "https://cp.cloudflare.com/generate_204"
@@ -42,7 +42,7 @@ proxy-groups:
     
   - name: "JP"
     type: url-test
-    lazy: true
+    include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "日本|日|JP|🇯🇵|(?i)Japan"
     url: "https://cp.cloudflare.com/generate_204"
