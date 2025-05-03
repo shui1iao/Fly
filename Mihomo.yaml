@@ -42,6 +42,7 @@ proxy-groups:
 
 # [本地规则]
 rules:
+  - DOMAIN-KEYWORD,emby,US
   - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,Proxy
   - RULE-SET,𝗘𝗺𝗯𝘆,US
   - RULE-SET,𝗔𝗽𝗽𝗹𝗲,DIRECT
