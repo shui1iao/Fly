@@ -9,10 +9,10 @@ chmod +x /usr/local/bin/snell-server
 # 创建文件夹
 mkdir /etc/snell
 # 编写配置文件
-nano  /etc/snell/snell-server.conf
+nano /etc/snell/snell-server.conf
 [snell-server]
-listen = 0.0.0.0:[端口]
-psk = [密码]
+listen = 0.0.0.0:端口
+psk = 密码
 ipv6 = false
 
 # 配置 Systemd 服务文件
