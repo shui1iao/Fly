@@ -1,3 +1,5 @@
+# 安装nano、wget、unzip
+apt update && apt install nano wget unzip
 # 下载
 wget https://dl.nssurge.com/snell/snell-server-v4.1.1-linux-amd64.zip
 # 解压
