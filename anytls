@@ -1,0 +1,34 @@
+curl -fsSL https://sing-box.app/install.sh | sh -s -- --beta
+
+mkdir -p /etc/sing-box/cert
+openssl ecparam -genkey -name prime256v1 -out /etc/sing-box/cert/private.key
+openssl req -new -x509 -days 36500 -key /etc/sing-box/cert/private.key -out /etc/sing-box/cert/cert.pem -subj "/CN=bing.com"
+
+nano /etc/sing-box/config.json                                            
+{
+    "inbounds":[
+        {
+            "type":"anytls",
+            "tag":"Anytls",
+            "listen":"::",
+            "listen_port":端口,
+            "users":[
+                {
+                    "password":"密码"
+                }
+            ],
+            "padding_scheme":[],
+            "tls":{
+                "enabled":true,
+                "certificate_path":"/etc/sing-box/cert/cert.pem",
+                "key_path":"/etc/sing-box/cert/private.key"
+            }
+        }
+    ]
+}
+
+systemctl start sing-box
+systemctl enable sing-box
+systemctl status sing-box
+
+{ "name": "节点名", "type": "anytls", "server": "服务器", "port": 443, "password": "0cdfe9f1b663", "client-fingerprint": "chrome", "udp": true, "sni": "bing.com", "skip-cert-verify": true }
