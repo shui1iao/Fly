@@ -35,8 +35,9 @@ SyslogIdentifier=snell-server
 [Install]
 WantedBy=multi-user.target
 
-systemctl daemon-reload
 systemctl enable snell
 systemctl start snell
+systemctl status snell
+systemctl daemon-reload
 
 vps = snell, ip , 端口, psk=密码, version=4, reuse=true
