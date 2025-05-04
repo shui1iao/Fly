@@ -1,22 +1,22 @@
-# 安装nano、wget、unzip
 apt update && apt install nano wget unzip
-# 下载
+
 wget https://dl.nssurge.com/snell/snell-server-v4.1.1-linux-amd64.zip
-# 解压
+
 unzip snell-server-v4.1.1-linux-amd64.zip -d /usr/local/bin
-# 添加权限
+
 chmod +x /usr/local/bin/snell-server
-# 创建文件夹
+
 mkdir /etc/snell
-# 编写配置文件
+
 nano /etc/snell/snell-server.conf
+
 [snell-server]
 listen = 0.0.0.0:端口
 psk = 密码
 ipv6 = false
 
-# 配置 Systemd 服务文件
 nano /lib/systemd/system/snell.service
+
 [Unit]
 Description=Snell Proxy Service
 After=network.target
