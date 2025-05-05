@@ -1,13 +1,13 @@
 # [策略组]
 proxy-groups:
-  - name: "Proxy"
+  - name: "𝗣𝗿𝗼𝘅𝘆"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     timeout: 2000
     max-failed-times: 3
     include-all: true
 
-  - name: "Final"
+  - name: "𝗙𝗶𝗻𝗮𝗹"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
@@ -15,7 +15,7 @@ proxy-groups:
       - JP
       - US
       
-  - name: "AI"
+  - name: "𝗔𝗜"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies: 
@@ -23,7 +23,7 @@ proxy-groups:
       - SG
       - US
 
-  - name: "SG"
+  - name: "𝗦𝗚"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
@@ -31,7 +31,7 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
     
-  - name: "JP"
+  - name: "𝗝𝗣"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
@@ -39,7 +39,7 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
  
-  - name: "US"
+  - name: "𝗨𝗦"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
@@ -50,14 +50,14 @@ proxy-groups:
 
 # [本地规则]
 rules:
-  - DOMAIN-KEYWORD,emby,US
-  - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,Proxy
-  - RULE-SET,𝗔𝗜,AI
-  - RULE-SET,𝗘𝗺𝗯𝘆,US
+  - DOMAIN-KEYWORD,emby,𝗨𝗦
+  - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,𝗣𝗿𝗼𝘅𝘆
+  - RULE-SET,𝗔𝗜,𝐀𝐈
+  - RULE-SET,𝗘𝗺𝗯𝘆,𝐔𝐒
   - RULE-SET,𝗔𝗽𝗽𝗹𝗲,DIRECT
   - RULE-SET,𝗟𝗔𝗡,DIRECT 
   - GEOIP,CN,DIRECT
-  - MATCH,Final
+  - MATCH,𝐅𝐢𝐧𝐚𝐥
   
 # [远程规则]
 rule-providers:
