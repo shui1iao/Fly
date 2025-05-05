@@ -52,8 +52,8 @@ proxy-groups:
 rules:
   - DOMAIN-KEYWORD,emby,𝗨𝗦
   - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,𝗣𝗿𝗼𝘅𝘆
-  - RULE-SET,𝗔𝗜,𝐀𝐈
-  - RULE-SET,𝗘𝗺𝗯𝘆,𝐔𝐒
+  - RULE-SET,𝗔𝗜,𝗔𝗜
+  - RULE-SET,𝗘𝗺𝗯𝘆,𝗨𝗦
   - RULE-SET,𝗔𝗽𝗽𝗹𝗲,DIRECT
   - RULE-SET,𝗟𝗔𝗡,DIRECT 
   - GEOIP,CN,DIRECT
