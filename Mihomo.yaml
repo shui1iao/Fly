@@ -11,17 +11,17 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
-      - SG
-      - JP
-      - US
+      - 𝗦𝗚
+      - 𝗝𝗣
+      - 𝗨𝗦
       
   - name: "𝗔𝗜"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies: 
-      - JP
-      - SG
-      - US
+      - 𝗝𝗣
+      - 𝗦𝗚
+      - 𝗨𝗦
 
   - name: "𝗦𝗚"
     type: url-test
