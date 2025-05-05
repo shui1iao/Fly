@@ -57,7 +57,7 @@ rules:
   - RULE-SET,𝗔𝗽𝗽𝗹𝗲,DIRECT
   - RULE-SET,𝗟𝗔𝗡,DIRECT 
   - GEOIP,CN,DIRECT
-  - MATCH,𝐅𝐢𝐧𝐚𝐥
+  - MATCH,𝗙𝗶𝗻𝗮𝗹
   
 # [远程规则]
 rule-providers:
