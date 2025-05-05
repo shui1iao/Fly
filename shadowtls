@@ -1,4 +1,5 @@
 curl -fsSL https://sing-box.app/install.sh | sh -s -- --beta
+sing-box generate rand --base64 16
 nano /etc/sing-box/config.json  
 {
     "inbounds":[
