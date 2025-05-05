@@ -1,6 +1,6 @@
 wget https://github.com/shadowsocks/shadowsocks-rust/releases/download/v1.23.2/shadowsocks-v1.23.2.x86_64-unknown-linux-gnu.tar.xz
 tar -xvf shadowsocks-v1.23.2.x86_64-unknown-linux-gnu.tar.xz
-mv shadowsocks-v1.23.2.x86_64-unknown-linux-gnu/ssserver /usr/local/bin/
+sudo mv ssserver /usr/local/bin/
 mkdir -p /etc/ss-rust
 sing-box generate rand --base64 16
 nano /etc/ss-rust/config.json
@@ -16,17 +16,16 @@ nano /etc/systemd/system/ss-rust.service
 [Unit]
 Description=Shadowsocks Rust Server
 After=network.target
-
 [Service]
 ExecStart=/usr/local/bin/ssserver -c /etc/ss-rust/config.json
 Restart=always
 User=root
-
 [Install]
 WantedBy=multi-user.target
 
-sudo systemctl enable ss-rust
-sudo systemctl start ss-rust
+systemctl enable ss-rust
+systemctl start ss-rust
+systemctl status ss-rust
 
 wget https://github.com/ihciah/shadow-tls/releases/download/v0.2.25/shadow-tls-x86_64-unknown-linux-musl -O shadow-tls
 chmod +x shadow-tls
@@ -35,19 +34,16 @@ nano /etc/systemd/system/shadowtls.service
 
 [Unit]
 Description=Shadow-TLS Server for SS2022
-After=network.target
-
+After=network-online.target
+Wants=network-online.target
 [Service]
-ExecStart=/usr/local/bin/shadow-tls --v3 server \
-  --listen ::0:443 \
-  --server 127.0.0.1:ss端口 \
-  --tls www.muji.com \
-  --password stls密码
+Type=simple
+ExecStart=/usr/local/bin/shadow-tls --v3 --strict server --listen [::]:443 --server 127.0.0.1:ss端口 --tls www.muji.com --password stls密码
 Restart=always
 User=root
-
 [Install]
 WantedBy=multi-user.target
 
-sudo systemctl enable shadowtls
-sudo systemctl start shadowtls
+systemctl enable shadowtls
+systemctl start shadowtls
+systemctl status shadowtls
