@@ -1,49 +1,37 @@
-wget https://github.com/shadowsocks/shadowsocks-rust/releases/download/v1.23.2/shadowsocks-v1.23.2.x86_64-unknown-linux-gnu.tar.xz
-tar -xvf shadowsocks-v1.23.2.x86_64-unknown-linux-gnu.tar.xz
-sudo mv ssserver /usr/local/bin/
-mkdir -p /etc/ss-rust
-sing-box generate rand --base64 16
-nano /etc/ss-rust/config.json
+curl -fsSL https://sing-box.app/install.sh | sh -s -- --beta
+nano /etc/sing-box/config.json  
 {
-    "server": "0.0.0.0",
-    "server_port": ss端口,
-    "password": "ss密码",
-    "method": "2022-blake3-aes-128-gcm",
-    "fast_open": false
+    "inbounds":[
+        {
+            "type":"shadowtls",
+            "tag":"SHADOWTLS",
+            "listen":"::",
+            "listen_port":443,
+            "detour":"shadowtls-in",
+            "version":3,
+            "users":[
+                {
+                    "password":"stls密码"
+                }
+            ],
+            "handshake":{
+                "server":"www.muji.com",
+                "server_port":443
+            },
+            "strict_mode":true
+        },
+        {
+            "type":"shadowsocks",
+            "tag":"shadowtls-in",
+            "listen":"::",
+            "listen_port":ss端口,
+            "method":"2022-blake3-aes-128-gcm",
+            "password":"ss密码",
+        }
+    ]
 }
+systemctl start sing-box
+systemctl enable sing-box
+systemctl status sing-box
 
-nano /etc/systemd/system/ss-rust.service
-[Unit]
-Description=Shadowsocks Rust Server
-After=network.target
-[Service]
-ExecStart=/usr/local/bin/ssserver -c /etc/ss-rust/config.json
-Restart=always
-User=root
-[Install]
-WantedBy=multi-user.target
-
-systemctl enable ss-rust
-systemctl start ss-rust
-systemctl status ss-rust
-
-wget https://github.com/ihciah/shadow-tls/releases/download/v0.2.25/shadow-tls-x86_64-unknown-linux-musl -O shadow-tls
-chmod +x shadow-tls
-mv shadow-tls /usr/local/bin/
-nano /etc/systemd/system/shadowtls.service
-
-[Unit]
-Description=Shadow-TLS Server for SS2022
-After=network-online.target
-Wants=network-online.target
-[Service]
-Type=simple
-ExecStart=/usr/local/bin/shadow-tls --v3 --strict server --listen [::]:443 --server 127.0.0.1:ss端口 --tls www.muji.com --password stls密码
-Restart=always
-User=root
-[Install]
-WantedBy=multi-user.target
-
-systemctl enable shadowtls
-systemctl start shadowtls
-systemctl status shadowtls
+名称 = ss, IP地址, 443, encrypt-method=2022-blake3-aes-128-gcm, password=ss密码, shadow-tls-password=stls密码, shadow-tls-sni=www.microsoft.com, shadow-tls-version=3, udp-relay=true,udp-port=ss端口
