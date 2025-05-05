@@ -7,20 +7,20 @@ proxy-groups:
     max-failed-times: 3
     include-all: true
 
-  - name: "AI"
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
-    proxies: 
-      - JP
-      - SG
-      - US
-
   - name: "Final"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
       - SG
       - JP
+      - US
+      
+  - name: "AI"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
+    proxies: 
+      - JP
+      - SG
       - US
 
   - name: "SG"
