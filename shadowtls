@@ -1,0 +1,40 @@
+curl -fsSL https://sing-box.app/install.sh | sh -s -- --beta
+
+nano /etc/sing-box/config.json
+
+{
+    "inbounds":[
+        {
+            "type":"shadowtls",
+            "tag":"SHADOWTLS",
+            "listen":"::",
+            "listen_port":端口,
+            "detour":"shadowtls-in",
+            "version":3,
+            "users":[
+                {
+                    "password":"stls密码"
+                }
+            ],
+            "handshake":{
+                "server":"www.muji.com",
+                "server_port":443
+            },
+            "strict_mode":true
+        },
+        {
+            "type":"shadowsocks",
+            "tag":"shadowtls-in",
+            "listen":"127.0.0.1",
+            "network":"tcp",
+            "method":"2022-blake3-aes-128-gcm",
+            "password":"ss密码",
+        }
+    ]
+}
+
+systemctl start sing-box
+systemctl enable sing-box
+systemctl status sing-box
+
+名称 = ss, IP地址, 443, encrypt-method=2022-blake3-aes-128-gcm, password=ss密码, shadow-tls-password=stls密码, shadow-tls-sni=www.muji.com, shadow-tls-version=3, udp-relay=true,udp-port=端口
