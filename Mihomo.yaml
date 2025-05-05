@@ -7,6 +7,14 @@ proxy-groups:
     max-failed-times: 3
     include-all: true
 
+  - name: "AI"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+    proxies: 
+      - JP
+      - SG
+      - US
+
   - name: "Final"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
@@ -44,6 +52,7 @@ proxy-groups:
 rules:
   - DOMAIN-KEYWORD,emby,US
   - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,Proxy
+  - RULE-SET,𝗔𝗜,AI
   - RULE-SET,𝗘𝗺𝗯𝘆,US
   - RULE-SET,𝗔𝗽𝗽𝗹𝗲,DIRECT
   - RULE-SET,𝗟𝗔𝗡,DIRECT 
@@ -67,6 +76,14 @@ rule-providers:
      format: text
      path: ./Emby/Emby.list
      url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Emby.list
+
+  𝗔𝗜:
+     behavior: classical
+     interval: 86400
+     type: http
+     format: text
+     path: ./AI/AI.list
+     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/AI.list
      
   𝗔𝗽𝗽𝗹𝗲:
     behavior: classical
