@@ -35,4 +35,4 @@ systemctl start sing-box
 systemctl enable sing-box
 systemctl status sing-box
 
-名称 = ss, IP地址, 443, encrypt-method=2022-blake3-aes-128-gcm, password=ss密码, shadow-tls-password=stls密码, shadow-tls-sni=www.microsoft.com, shadow-tls-version=3, udp-relay=true,udp-port=ss端口
+名称 = ss, IP地址, 443, encrypt-method=2022-blake3-aes-128-gcm, password=ss密码, shadow-tls-password=stls密码, shadow-tls-sni=www.muji.com, shadow-tls-version=3, udp-relay=true,udp-port=ss端口
