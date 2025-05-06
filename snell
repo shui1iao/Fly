@@ -13,7 +13,6 @@ nano /etc/snell/snell-server.conf
 [snell-server]
 listen = 0.0.0.0:端口
 psk = 密码
-ipv6 = false
 
 nano /lib/systemd/system/snell.service
 
