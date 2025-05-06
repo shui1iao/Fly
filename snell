@@ -36,5 +36,6 @@ systemctl enable snell
 systemctl start snell
 systemctl status snell
 systemctl daemon-reload
+systemctl restart snell
 
 vps = snell, ip , 端口, psk=密码, version=4, reuse=true
