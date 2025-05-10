@@ -1,7 +1,7 @@
 # [策略组]
 proxy-groups:
   - name: "𝗣𝗿𝗼𝘅𝘆"
-    type: fallback
+    type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     timeout: 2000
     max-failed-times: 3
