@@ -12,24 +12,14 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies: 
       - 𝗝𝗣
-      - 𝗦𝗚
       - 𝗨𝗦
-
-  - name: "𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺"
-    type: fallback
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
-    proxies: 
-      - 𝗛𝗞
-      - 𝗦𝗚
-      - 𝗝𝗣
 
   - name: "𝗚𝗼𝗼𝗴𝗹𝗲"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
     proxies: 
       - 𝗨𝗦
-      - 𝗦𝗚
-      - 𝗝𝗣
+      - 𝗛𝗞
 
   - name: "𝗘𝗺𝗯𝘆"
     type: fallback
@@ -43,14 +33,6 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     filter: "香港|港|🇭🇰|(?i)Hongkong"
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 1800
-    
-  - name: "𝗦𝗚"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    filter: "新加坡|狮|🇸🇬|(?i)Singapore"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
     
@@ -79,7 +61,6 @@ rules:
   - RULE-SET,𝗘𝗺𝗯𝘆,𝗘𝗺𝗯𝘆
   - RULE-SET,𝗚𝗼𝗼𝗴𝗹𝗲,𝗚𝗼𝗼𝗴𝗹𝗲
   - RULE-SET,𝗬𝗼𝘂𝗧𝘂𝗯𝗲,𝗚𝗼𝗼𝗴𝗹𝗲
-  - RULE-SET,𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺,𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺
   - RULE-SET,𝗟𝗔𝗡,DIRECT 
   - GEOIP,CN,DIRECT
   - MATCH,𝗣𝗿𝗼𝘅𝘆
@@ -133,14 +114,6 @@ rule-providers:
      format: text
      path: ./YouTube/YouTube.list
      url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/YouTube.list
-     
-  𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺:
-     behavior: classical
-     interval: 86400
-     type: http
-     format: text
-     path: ./Telegram/Telegram.list
-     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Telegram.list
      
   𝗟𝗔𝗡:
     behavior: classical
