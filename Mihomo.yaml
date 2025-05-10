@@ -25,7 +25,7 @@ proxy-groups:
 
   - name: "𝗚𝗼𝗼𝗴𝗹𝗲"
     type: fallback
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
     proxies: 
       - 𝗨𝗦
       - 𝗦𝗚
