@@ -1,20 +1,11 @@
 # [策略组]
 proxy-groups:
   - name: "𝗣𝗿𝗼𝘅𝘆"
-    type: select
+    type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     timeout: 2000
     max-failed-times: 3
     include-all: true
-
-  - name: "𝗙𝗶𝗻𝗮𝗹"
-    type: fallback
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
-    proxies: 
-      - 𝗛𝗞
-      - 𝗦𝗚
-      - 𝗝𝗣
-      - 𝗨𝗦
       
   - name: "𝗔𝗜"
     type: fallback
@@ -22,6 +13,29 @@ proxy-groups:
     proxies: 
       - 𝗝𝗣
       - 𝗦𝗚
+      - 𝗨𝗦
+
+  - name: "𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺"
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+    proxies: 
+      - 𝗛𝗞
+      - 𝗦𝗚
+      - 𝗝𝗣
+
+  - name: "𝗚𝗼𝗼𝗴𝗹𝗲"
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png
+    proxies: 
+      - 𝗨𝗦
+      - 𝗦𝗚
+      - 𝗝𝗣
+
+  - name: "𝗘𝗺𝗯𝘆"
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
+    proxies: 
+      - 𝗝𝗣
       - 𝗨𝗦
 
   - name: "𝗛𝗞"
@@ -56,18 +70,18 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
 
-
 # [本地规则]
 rules:
-  - DOMAIN-KEYWORD,emby,𝗨𝗦
+  - DOMAIN-KEYWORD,emby,𝗘𝗺𝗯𝘆
   - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,𝗣𝗿𝗼𝘅𝘆
   - RULE-SET,𝗣𝗮𝘆𝗣𝗮𝗹,𝗛𝗞
   - RULE-SET,𝗔𝗜,𝗔𝗜
-  - RULE-SET,𝗘𝗺𝗯𝘆,𝗨𝗦
-  - RULE-SET,𝗔𝗽𝗽𝗹𝗲,DIRECT
+  - RULE-SET,𝗘𝗺𝗯𝘆,𝗘𝗺𝗯𝘆
+  - RULE-SET,𝗚𝗼𝗼𝗴𝗹𝗲,𝗚𝗼𝗼𝗴𝗹𝗲
+  - RULE-SET,𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺,𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺
   - RULE-SET,𝗟𝗔𝗡,DIRECT 
   - GEOIP,CN,DIRECT
-  - MATCH,𝗙𝗶𝗻𝗮𝗹
+  - MATCH,𝗣𝗿𝗼𝘅𝘆
   
 # [远程规则]
 rule-providers:
@@ -103,13 +117,22 @@ rule-providers:
      path: ./AI/AI.list
      url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/AI.list
      
-  𝗔𝗽𝗽𝗹𝗲:
-    behavior: classical
-    interval: 86400
-    type: http
-    path: ./Apple/Apple_Classical.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple_Classical.yaml
-
+  𝗚𝗼𝗼𝗴𝗹𝗲:
+     behavior: classical
+     interval: 86400
+     type: http
+     format: text
+     path: ./Google/Google.list
+     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Google.list
+     
+  𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺:
+     behavior: classical
+     interval: 86400
+     type: http
+     format: text
+     path: ./Telegram/Telegram.list
+     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Telegram.list
+     
   𝗟𝗔𝗡:
     behavior: classical
     interval: 86400
