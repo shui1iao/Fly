@@ -11,8 +11,9 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies: 
-      - 𝗝𝗣
       - 𝗨𝗦
+      - 𝗝𝗣
+      - 𝗦𝗚
 
   - name: "𝗚𝗼𝗼𝗴𝗹𝗲"
     type: fallback
@@ -52,11 +53,17 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
 
+  - name: "𝗦𝗚"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    filter: "新加坡|新|新加坡|(?i)Singapore"
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+
 # [本地规则]
 rules:
   - DOMAIN-KEYWORD,emby,𝗘𝗺𝗯𝘆
-  - RULE-SET,𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁,𝗣𝗿𝗼𝘅𝘆
-  - RULE-SET,𝗣𝗮𝘆𝗣𝗮𝗹,𝗛𝗞
   - RULE-SET,𝗔𝗜,𝗔𝗜
   - RULE-SET,𝗘𝗺𝗯𝘆,𝗘𝗺𝗯𝘆
   - RULE-SET,𝗚𝗼𝗼𝗴𝗹𝗲,𝗚𝗼𝗼𝗴𝗹𝗲
@@ -68,21 +75,6 @@ rules:
 # [远程规则]
 rule-providers:
 
-  𝗦𝗽𝗲𝗲𝗱𝘁𝗲𝘀𝘁:
-    behavior: classical
-    interval: 86400
-    type: http
-    path: ./Speedtest/Speedtest.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest.yaml
-
-  𝗣𝗮𝘆𝗣𝗮𝗹:
-     behavior: classical
-     interval: 86400
-     type: http
-     format: text
-     path: ./PayPal/PayPal.list
-     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/PayPal.list
-  
   𝗘𝗺𝗯𝘆:
      behavior: classical
      interval: 86400
