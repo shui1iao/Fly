@@ -69,13 +69,6 @@ proxy-groups:
     filter: "🇸🇬|新加坡|新|新加坡|(?i)Singapore"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
-    
-  - name: GLOBAL
-    type: select
-    icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Glob\
-      al.png "
-    hidden: true
-    include-all: true
 
 # [本地规则]
 rules:
