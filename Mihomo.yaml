@@ -13,7 +13,6 @@ proxy-groups:
     proxies: 
       - 𝗛𝗞
       - 𝗨𝗦
-      - 𝗦𝗚
       - 𝗝𝗣
       
   - name: "𝗔𝗜"
@@ -22,7 +21,6 @@ proxy-groups:
     proxies: 
       - 𝗨𝗦
       - 𝗝𝗣
-      - 𝗦𝗚
 
   - name: "𝗚𝗼𝗼𝗴𝗹𝗲"
     type: fallback
@@ -30,7 +28,6 @@ proxy-groups:
     proxies: 
       - 𝗨𝗦
       - 𝗛𝗞
-      - 𝗦𝗚
 
   - name: "𝗘𝗺𝗯𝘆"
     type: fallback
@@ -63,13 +60,6 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
 
-  - name: "𝗦𝗚"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    filter: "🇸🇬|新加坡|新|新加坡|(?i)Singapore"
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 1800
 
 # [本地规则]
 rules:
