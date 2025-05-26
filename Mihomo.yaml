@@ -27,7 +27,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
     proxies: 
       - US
-      - CNFaster<-HK
+      - 🇭🇰 CNFaster<-HK
 
   - name: "Emby"
     type: fallback
