@@ -11,7 +11,7 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
-      - HK
+      - CNFaster<-HK
       - US
       - JP
       
