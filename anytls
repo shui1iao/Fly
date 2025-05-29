@@ -27,6 +27,8 @@ nano /etc/sing-box/config.json
     ]
 }
 
+useradd -r -s /bin/false -d /var/lib/sing-box sing-box
+
 systemctl start sing-box
 systemctl enable sing-box
 systemctl status sing-box
