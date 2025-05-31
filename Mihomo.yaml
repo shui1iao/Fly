@@ -40,7 +40,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
-    filter: "🇭🇰"
+    filter: "🇭🇰|ISIF"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
     
