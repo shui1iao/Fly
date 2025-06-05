@@ -6,7 +6,9 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     include-all: true
-    filter: "ISIF|CNF|wap|BWH|netcup|BackWaves"
+    filter: "ISIF|wap|BWH|netcup|BackWaves"
+    proxies: 
+      - 🇭🇰 CNF<-Dler
 
   - name: "Final"
     type: fallback
@@ -60,6 +62,16 @@ proxy-groups:
     filter: "BWH|BackWaves"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
+
+  - name: "🇭🇰 CNF<-Dler"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
+    timeout: 2000
+    max-failed-times: 3
+    include-all: true
+    filter: "CNF<-Dler"
+
+
 
 # [本地规则]
 rules:
