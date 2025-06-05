@@ -6,7 +6,7 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     include-all: true
-    filter: "ISIF|CNF|wap|BWH|netcup"
+    filter: "ISIF|CNF|wap|BWH|netcup|BackWaves"
 
   - name: "Final"
     type: fallback
@@ -41,7 +41,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
-    filter: "🇭🇰"
+    filter: "CNF|ISIF"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
     
@@ -49,7 +49,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: "日本|日|🇯🇵|(?i)Japan"
+    filter: "wap"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
  
@@ -57,7 +57,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: "美国|美|🇺🇸|(?i)States"
+    filter: "BWH|BackWaves"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
 
