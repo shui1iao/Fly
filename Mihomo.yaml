@@ -6,6 +6,7 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     include-all: true
+    filter: "ISIF|CNF|wap|BWH|netcup"
 
   - name: "Final"
     type: fallback
@@ -60,11 +61,19 @@ proxy-groups:
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
 
-  - name: "Fly"
+  - name: "Dler-HK"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
-    filter: "2.00"
+    filter: "HK"
+    url: "https://cp.cloudflare.com/generate_204"
+    interval: 1800
+
+  - name: "Dler-JP"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+    filter: "JP"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
 
