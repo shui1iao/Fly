@@ -9,13 +9,14 @@ proxy-groups:
     filter: "ISIF|wap|BWH|netcup|BackWaves"
     proxies: 
       - 🇭🇰 CNF<-Dler
+      - 🇯🇵 wap<-Dler
 
   - name: "Final"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
       - HK
-      - JP
+      - 🇯🇵 wap<-Dler
       - US
       
   - name: "AI"
@@ -23,7 +24,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies: 
       - US
-      - JP
+      - 🇯🇵 wap<-Dler
 
   - name: "Google"
     type: fallback
@@ -37,17 +38,19 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
     proxies: 
       - US
-      - JP
+      - 🇯🇵 wap<-Dler
 
   - name: "HK"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
-    filter: "🇭🇰"
+    filter: "ISIF"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
+    proxies: 
+      - 🇭🇰 CNF<-Dler
     
-  - name: "JP"
+  - name: "🇯🇵 wap<-Dler"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
@@ -64,14 +67,11 @@ proxy-groups:
     interval: 1800
 
   - name: "🇭🇰 CNF<-Dler"
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
-    timeout: 2000
-    max-failed-times: 3
+    type: url-test
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
+    interval: 1800
     include-all: true
     filter: "CNF<-Dler"
-
-
 
 # [本地规则]
 rules:
