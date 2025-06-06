@@ -54,7 +54,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: "🇺🇸"
+    filter: "KXY"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
 
