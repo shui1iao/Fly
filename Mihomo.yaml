@@ -6,11 +6,11 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     include-all: true
-    filter: "ISIF|BWH|netcup|BackWaves"
+    filter: "ISIF|KXY|netcup|BackWaves"
     proxies: 
       - 🇭🇰 CNF<-Dler
       - 🇯🇵 wap<-Dler
-
+      
   - name: "Final"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
@@ -54,7 +54,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: "🇺🇸"
+    filter: "KXY"
     url: "https://cp.cloudflare.com/generate_204"
     interval: 1800
 
