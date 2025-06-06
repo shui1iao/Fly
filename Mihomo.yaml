@@ -6,7 +6,7 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     include-all: true
-    filter: "ISIF|KXY|netcup|BackWaves"
+    filter: "ISIF|KXY|netcup"
     proxies: 
       - 🇭🇰 CNF<-Dler
       - 🇯🇵 wap<-Dler
