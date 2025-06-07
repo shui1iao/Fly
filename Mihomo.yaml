@@ -9,6 +9,7 @@ proxy-groups:
     filter: "ISIF|KXY|netcup"
     proxies: 
       - 🇭🇰 CNF<-Dler
+      - 🇭🇰 Bage<-Dler
       - 🇯🇵 wap<-Dler
       
   - name: "Final"
@@ -59,6 +60,13 @@ proxy-groups:
     interval: 1800
     include-all: true
     filter: "CNF<-Dler"
+
+  - name: "🇭🇰 Bage<-Dler"
+    type: url-test
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
+    interval: 1800
+    include-all: true
+    filter: "Bage<-Dler"
 
   - name: "🇯🇵 wap<-Dler"
     type: url-test
