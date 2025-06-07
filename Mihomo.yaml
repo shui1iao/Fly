@@ -28,11 +28,9 @@ proxy-groups:
   - name: "Emby"
     type: load-balance
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
-    include-all: true
-    filter: “ISIF|KXY”
     proxies: 
-      - 🇭🇰 CNF<-Dler
-      - 🇭🇰 Bage<-Dler
+      - HK
+      - US
       - 🇯🇵 wap<-Dler
 
   - name: "HK"
