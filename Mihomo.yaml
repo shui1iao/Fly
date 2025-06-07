@@ -33,7 +33,7 @@ proxy-groups:
       - 🇺🇸 KXY<-BWH
       - 🇯🇵 wap<-Dler
 
-  - name: "HK"
+  - name: "🇭🇰 HK"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
