@@ -16,13 +16,13 @@ proxy-groups:
     proxies: 
       - HK
       - 🇯🇵 wap<-Dler
-      - US
+      - 🇺🇸 KXY<-BWH
       
   - name: "AI"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies: 
-      - US
+      - 🇺🇸 KXY<-BWH
       - 🇯🇵 wap<-Dler
 
   - name: "Emby"
@@ -30,7 +30,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
     proxies: 
       - HK
-      - US
+      - 🇺🇸 KXY<-BWH
       - 🇯🇵 wap<-Dler
 
   - name: "HK"
@@ -43,14 +43,6 @@ proxy-groups:
     proxies: 
       - 🇭🇰 CNF<-Dler
       - 🇭🇰 Bage<-Dler
-      
-  - name: "US"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: "KXY"
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 1800
 
   - name: "🇭🇰 CNF<-Dler"
     type: url-test
