@@ -3,8 +3,6 @@ proxy-groups:
   - name: "Proxy"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
-    timeout: 2000
-    max-failed-times: 3
     include-all: true
     filter: "ISIF|KXY"
     proxies: 
