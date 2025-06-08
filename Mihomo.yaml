@@ -6,7 +6,6 @@ proxy-groups:
     include-all: true
     filter: "ISIF|KXY"
     proxies: 
-      - 🇭🇰 CNF<-Dler
       - 🇭🇰 Bage<-Dler
       - 🇯🇵 wap<-Dler
       
@@ -41,16 +40,7 @@ proxy-groups:
     url: "http://connectivitycheck.gstatic.com/generate_204"
     interval: 1800
     proxies: 
-      - 🇭🇰 CNF<-Dler
       - 🇭🇰 Bage<-Dler
-
-  - name: "🇭🇰 CNF<-Dler"
-    type: url-test
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
-    url: "http://connectivitycheck.gstatic.com/generate_204"
-    interval: 1800
-    include-all: true
-    filter: "CNF<-Dler"
 
   - name: "🇭🇰 Bage<-Dler"
     type: url-test
