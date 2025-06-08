@@ -4,7 +4,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
-    filter: "ISIF|KXY"
+    filter: "KXY"
     proxies: 
       - 🇭🇰 Bage<-Dler
       - 🇯🇵 wap<-Dler
@@ -13,7 +13,7 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
-      - 🇭🇰 HK
+      - 🇭🇰 Bage<-Dler
       - 🇯🇵 wap<-Dler
       - 🇺🇸 KXY<-BWH
       
@@ -28,19 +28,9 @@ proxy-groups:
     type: load-balance
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
     proxies: 
-      - 🇭🇰 HK
+      - 🇭🇰 Bage<-Dler
       - 🇺🇸 KXY<-BWH
       - 🇯🇵 wap<-Dler
-
-  - name: "🇭🇰 HK"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
-    filter: "ISIF"
-    url: "http://connectivitycheck.gstatic.com/generate_204"
-    interval: 1800
-    proxies: 
-      - 🇭🇰 Bage<-Dler
 
   - name: "🇭🇰 Bage<-Dler"
     type: url-test
@@ -48,7 +38,7 @@ proxy-groups:
     url: "http://connectivitycheck.gstatic.com/generate_204"
     interval: 1800
     include-all: true
-    filter: "Bage<-Dler"
+    filter: "🇭🇰"
 
   - name: "🇯🇵 wap<-Dler"
     type: url-test
