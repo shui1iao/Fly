@@ -16,13 +16,6 @@ proxy-groups:
       - 🇭🇰 Bage<-Dler
       - 🇯🇵 wap<-Dler
       - 🇺🇸 KXY<-BWH
-      
-  - name: "AI"
-    type: fallback
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
-    proxies: 
-      - 🇺🇸 KXY<-BWH
-      - 🇯🇵 wap<-Dler
 
   - name: "Emby"
     type: load-balance
@@ -34,7 +27,7 @@ proxy-groups:
 
   - name: "🇭🇰 Bage<-Dler"
     type: url-test
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
     url: "http://connectivitycheck.gstatic.com/generate_204"
     interval: 1800
     include-all: true
@@ -43,7 +36,7 @@ proxy-groups:
   - name: "🇯🇵 wap<-Dler"
     type: url-test
     include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
     filter: "🇯🇵"
     url: "http://connectivitycheck.gstatic.com/generate_204"
     interval: 1800
@@ -51,7 +44,7 @@ proxy-groups:
   - name: "Dler"
     type: select
     include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
     filter: "^(?!.*(🇭🇰|🇯🇵))(?!.*🇺🇸.*KXY).*$"
     timeout: 2000
     max-failed-times: 3
@@ -60,7 +53,7 @@ proxy-groups:
 rules:
   - DOMAIN-KEYWORD,emby,Emby
   - RULE-SET,Speedtest,Proxy
-  - RULE-SET,AI,AI
+  - RULE-SET,AI,🇺🇸 KXY<-BWH
   - RULE-SET,Emby,Emby
   - RULE-SET,LAN,DIRECT 
   - GEOIP,CN,DIRECT
