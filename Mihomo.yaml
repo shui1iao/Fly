@@ -27,7 +27,7 @@ proxy-groups:
 
   - name: "🇭🇰 Bage<-Dler"
     type: url-test
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     url: "http://cp.cloudflare.com/generate_204"
     interval: 1800
     include-all: true
@@ -36,7 +36,7 @@ proxy-groups:
   - name: "🇯🇵 Bage<-Dler"
     type: url-test
     include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "🇯🇵"
     url: "http://cp.cloudflare.com/generate_204"
     interval: 1800
