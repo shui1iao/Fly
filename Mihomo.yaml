@@ -7,14 +7,14 @@ proxy-groups:
     filter: "KXY"
     proxies: 
       - 🇭🇰 Bage<-Dler
-      - 🇯🇵 wap<-Dler
+      - 🇯🇵 Bage<-Dler
       
   - name: "Final"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
       - 🇭🇰 Bage<-Dler
-      - 🇯🇵 wap<-Dler
+      - 🇯🇵 Bage<-Dler
       - 🇺🇸 KXY<-BWH
 
   - name: "Emby"
@@ -23,7 +23,7 @@ proxy-groups:
     proxies: 
       - 🇭🇰 Bage<-Dler
       - 🇺🇸 KXY<-BWH
-      - 🇯🇵 wap<-Dler
+      - 🇯🇵 Bage<-Dler
 
   - name: "🇭🇰 Bage<-Dler"
     type: url-test
@@ -33,7 +33,7 @@ proxy-groups:
     include-all: true
     filter: "🇭🇰"
 
-  - name: "🇯🇵 wap<-Dler"
+  - name: "🇯🇵 Bage<-Dler"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
