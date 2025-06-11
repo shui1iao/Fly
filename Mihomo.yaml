@@ -26,7 +26,7 @@ proxy-groups:
 
   - name: "Google"
     type: fallback
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/google(2).png
     proxies: 
       - 🇺🇸 KXY<-BWH
       - 🇭🇰 Bage<-Dler
