@@ -4,43 +4,40 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
-    filter: "KXY"
-    proxies: 
-      - 🇭🇰 Bage<-Dler
-      - 🇯🇵 Dler
+    filter: "KXY|🇭🇰|🇯🇵"
       
   - name: "Final"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
-      - 🇭🇰 Bage<-Dler
-      - 🇯🇵 Dler
-      - 🇺🇸 KXY<-BWH
+      - HK
+      - JP
+      - US
 
   - name: "AI"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies: 
-      - 🇺🇸 KXY<-BWH
-      - 🇯🇵 Dler
+      - US
+      - JP
 
   - name: "Google"
     type: fallback
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/google(2).png
     proxies: 
-      - 🇺🇸 KXY<-BWH
-      - 🇭🇰 Bage<-Dler
-      - 🇯🇵 Dler
+      - US
+      - HK
+      - JP
 
   - name: "Emby"
     type: load-balance
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
     proxies: 
-      - 🇭🇰 Bage<-Dler
-      - 🇺🇸 KXY<-BWH
-      - 🇯🇵 Dler
+      - HK
+      - US
+      - JP
 
-  - name: "🇭🇰 Bage<-Dler"
+  - name: "HK"
     type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     url: "http://1.1.1.1/generate_204"
@@ -48,11 +45,19 @@ proxy-groups:
     include-all: true
     filter: "🇭🇰"
 
-  - name: "🇯🇵 Dler"
+  - name: "JP"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "🇯🇵"
+    url: "http://1.1.1.1/generate_204"
+    interval: 1800
+
+  - name: "US"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+    filter: "KXY"
     url: "http://1.1.1.1/generate_204"
     interval: 1800
 
