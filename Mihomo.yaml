@@ -4,7 +4,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
-    filter: "KXY|🇭🇰"
+    filter: "KXY|🇭🇰|🇯🇵"
       
   - name: "Final"
     type: fallback
