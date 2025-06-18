@@ -33,7 +33,7 @@ proxy-groups:
       - JP
 
   - name: "Emby"
-    type: load-balance
+    type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
     proxies: 
       - HK
