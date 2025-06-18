@@ -4,13 +4,14 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
-    filter: "KXY|🇭🇰|🇯🇵"
+    filter: "KXY|🇭🇰|🇯🇵|🇸🇬"
       
   - name: "Final"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
       - HK
+      - SG
       - JP
       - US
 
@@ -20,6 +21,7 @@ proxy-groups:
     proxies: 
       - US
       - JP
+      - SG
 
   - name: "Google"
     type: fallback
@@ -27,6 +29,7 @@ proxy-groups:
     proxies: 
       - US
       - HK
+      - SG
       - JP
 
   - name: "Emby"
@@ -36,6 +39,7 @@ proxy-groups:
       - HK
       - US
       - JP
+      - SG
 
   - name: "HK"
     type: url-test
@@ -50,6 +54,14 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "🇯🇵"
+    url: "http://1.1.1.1/generate_204"
+    interval: 1800
+
+  - name: "SG"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    filter: "🇸🇬"
     url: "http://1.1.1.1/generate_204"
     interval: 1800
 
