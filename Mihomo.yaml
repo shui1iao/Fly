@@ -23,16 +23,6 @@ proxy-groups:
       - JP
       - SG
 
-  - name: "Apple"
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
-    proxies: 
-      - HK
-      - SG
-      - US
-      - JP
-      - DIRECT
-
   - name: "Google"
     type: fallback
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/google(2).png
@@ -50,6 +40,16 @@ proxy-groups:
       - US
       - JP
       - SG
+
+  - name: "Apple"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
+    proxies: 
+      - HK
+      - SG
+      - US
+      - JP
+      - DIRECT
 
   - name: "HK"
     type: url-test
