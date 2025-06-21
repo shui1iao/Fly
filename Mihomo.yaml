@@ -45,11 +45,11 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
     proxies: 
+      - DIRECT
       - HK
       - SG
       - US
       - JP
-      - DIRECT
 
   - name: "HK"
     type: url-test
