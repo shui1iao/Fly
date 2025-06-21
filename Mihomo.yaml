@@ -23,9 +23,9 @@ proxy-groups:
       - JP
       - SG
 
-    - name: "Apple"
+  - name: "Apple"
     type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
     proxies: 
       - HK
       - SG
@@ -149,7 +149,7 @@ rule-providers:
      behavior: classical
      interval: 86400
      type: http
-     path: ./YouTube/YouTube.yaml
+     path: ./Apple/Apple_Classical.yaml
      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple_Classical.yaml
 
   LAN:
