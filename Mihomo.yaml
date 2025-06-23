@@ -45,9 +45,9 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
     proxies: 
-      - DIRECT
       - HK
       - SG
+      - DIRECT
       - US
       - JP
 
