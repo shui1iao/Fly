@@ -112,7 +112,7 @@ rule-providers:
 
   Speedtest:
      type: http
-     behavior: classical
+     behavior: domain
      format: text
      interval: 86400
      url: https://ruleset.skk.moe/Clash/domainset/speedtest.txt
