@@ -115,7 +115,7 @@ rule-providers:
      interval: 86400
      type: http
      format: text
-     path: ./Speedtest/Speedtest.txt
+     path: ./speedtest.txt
      url: https://ruleset.skk.moe/Clash/domainset/speedtest.txt
   Emby:
      behavior: classical
