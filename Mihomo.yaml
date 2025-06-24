@@ -111,18 +111,19 @@ rules:
 rule-providers:
 
   Speedtest:
-     behavior: classical
-     interval: 86400
      type: http
+     behavior: classical
      format: text
-     path: ./speedtest.txt
+     interval: 86400
      url: https://ruleset.skk.moe/Clash/domainset/speedtest.txt
+     path: ./speedtest.txt
+
   Emby:
      behavior: classical
      interval: 86400
      type: http
      format: text
-     path: ./Emby/Emby.list
+     path: ./Emby.list
      url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Emby.list
 
   AI:
@@ -130,47 +131,47 @@ rule-providers:
      interval: 86400
      type: http
      format: text
-     path: ./AI/AI.list
+     path: ./AI.list
      url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/AI.list
   
   Google:
      behavior: classical
      interval: 86400
      type: http
-     path: ./Google/Google_No_Resolve.yaml
+     path: ./Google_No_Resolve.yaml
      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml
 
   YouTube:
      behavior: classical
      interval: 86400
      type: http
-     path: ./YouTube/YouTube_No_Resolve.yaml
+     path: ./YouTube_No_Resolve.yaml
      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube_No_Resolve.yaml
 
   Apple:
      behavior: classical
      interval: 86400
      type: http
-     path: ./Apple/Apple_Classical_No_Resolve.yaml
+     path: ./Apple_Classical_No_Resolve.yaml
      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple_Classical_No_Resolve.yaml
           
   Global:
      behavior: classical
      interval: 86400
      type: http
-     path: ./Global/Global_Classical_No_Resolve.yaml
+     path: ./Global_Classical_No_Resolve.yaml
      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global_Classical_No_Resolve.yaml
      
   China:
      behavior: classical
      interval: 86400
      type: http
-     path: ./China/China_Classical_No_Resolve.yaml
+     path: ./China_Classical_No_Resolve.yaml
      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/China/China_Classical_No_Resolve.yaml
 
   LAN:
     behavior: classical
     interval: 86400
     type: http
-    path: ./LAN/LAN.yaml
+    path: ./LAN.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml
