@@ -42,12 +42,12 @@ proxy-groups:
       - SG
 
   - name: "Apple"
-    type: fallback
+    type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
     proxies: 
+      - DIRECT
       - HK
       - SG
-      - DIRECT
       - US
       - JP
 
