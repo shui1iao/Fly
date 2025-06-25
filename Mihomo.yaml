@@ -98,16 +98,16 @@ rules:
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
   - RULE-SET,Emby,Emby
-  - RULE-SET,Cdn_domain,Final
-  - RULE-SET,Cdn,Final
   - RULE-SET,Apple_cn,DIRECT 
   - RULE-SET,Apple_cdn,Apple
   - RULE-SET,Apple_services,Apple
+  - RULE-SET,Google,Google
+  - RULE-SET,YouTube,Google
   - RULE-SET,Telegram,Final
   - RULE-SET,Telegram_asn,Final
   - RULE-SET,Telegram_ip,Final
-  - RULE-SET,Google,Google
-  - RULE-SET,YouTube,Google
+  - RULE-SET,Cdn_domain,Final
+  - RULE-SET,Cdn,Final
   - RULE-SET,Global,Final
   - RULE-SET,Domestic,DIRECT
   - RULE-SET,China,DIRECT
