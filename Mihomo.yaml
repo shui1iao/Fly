@@ -247,7 +247,7 @@ rule-providers:
      url: https://ruleset.skk.moe/Clash/ip/domestic.txt
 
   China:
-    behavior: classical
+    behavior: ipcidr
     interval: 86400
     type: http
     format: text
