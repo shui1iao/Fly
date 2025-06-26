@@ -31,16 +31,7 @@ proxy-groups:
       - SG
       - HK
       - JP
-
-  - name: "Emby"
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
-    proxies: 
-      - HK
-      - US
-      - JP
-      - SG
-
+      
   - name: "Apple"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
@@ -50,6 +41,24 @@ proxy-groups:
       - SG
       - US
       - JP
+      
+  - name: "Telegram"
+    type: fallback
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/google(2).png
+    proxies: 
+      - SG
+      - HK
+      - JP
+      - US
+      
+  - name: "Emby"
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
+    proxies: 
+      - HK
+      - US
+      - JP
+      - SG
 
   - name: "HK"
     type: url-test
@@ -103,9 +112,9 @@ rules:
   - RULE-SET,Apple_services,Apple
   - RULE-SET,Google,Google
   - RULE-SET,YouTube,Google
-  - RULE-SET,Telegram,Final
-  - RULE-SET,Telegram_asn,Final
-  - RULE-SET,Telegram_ip,Final
+  - RULE-SET,Telegram,Telegram
+  - RULE-SET,Telegram_asn,Telegram
+  - RULE-SET,Telegram_ip,Telegram
   - RULE-SET,Cdn_domain,Final
   - RULE-SET,Cdn,Final
   - RULE-SET,Global,Final
