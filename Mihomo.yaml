@@ -44,7 +44,7 @@ proxy-groups:
       
   - name: "Telegram"
     type: fallback
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/google(2).png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
     proxies: 
       - SG
       - HK
