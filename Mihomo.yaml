@@ -108,21 +108,13 @@ rules:
   - RULE-SET,AI,AI
   - RULE-SET,Emby,Emby
   - RULE-SET,Apple_cn,DIRECT 
-  - RULE-SET,Apple_cdn,Apple
-  - RULE-SET,Apple_services,Apple
+  - RULE-SET,Apple,Apple
+  - RULE-SET,Telegram,Telegram
   - RULE-SET,Google,Google
   - RULE-SET,YouTube,Google
-  - RULE-SET,Telegram,Telegram
-  - RULE-SET,Telegram_asn,Telegram
-  - RULE-SET,Telegram_ip,Telegram
-  - RULE-SET,Cdn_domain,Final
-  - RULE-SET,Cdn,Final
   - RULE-SET,Global,Final
-  - RULE-SET,Domestic,DIRECT
   - RULE-SET,China,DIRECT
-  - RULE-SET,Domestic_ip,DIRECT
   - RULE-SET,LAN,DIRECT 
-  - RULE-SET,LAN_ip,DIRECT 
   - GEOIP,CN,DIRECT
   - MATCH,Final
   
@@ -130,20 +122,20 @@ rules:
 rule-providers:
 
   Speedtest:
-     type: http
-     behavior: domain
-     format: text
-     interval: 86400
-     url: https://ruleset.skk.moe/Clash/domainset/speedtest.txt
-     path: ./speedtest.txt
-
+    behavior: classical
+    type: http
+    nterval: 86400
+    format: text
+    path: ./Speedtest.list
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest.list
+     
   Emby:
-     behavior: classical
-     interval: 86400
-     type: http
-     format: text
-     path: ./Emby.list
-     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Emby.list
+    behavior: classical
+    interval: 86400
+    type: http
+    format: text
+    path: ./Emby.list
+    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Emby.list
 
   AI:
      behavior: classical
@@ -151,21 +143,23 @@ rule-providers:
      type: http
      format: text
      path: ./AI.list
-     url: https://ruleset.skk.moe/Clash/non_ip/ai.txt
+     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/AI.list
   
   Google:
      behavior: classical
      interval: 86400
      type: http
-     path: ./Google_No_Resolve.yaml
-     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml
+     format: text
+     path: ./Google.list
+     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.list
 
   YouTube:
      behavior: classical
      interval: 86400
      type: http
-     path: ./YouTube_No_Resolve.yaml
-     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube_No_Resolve.yaml
+     format: text
+     path: ./YouTube.list
+     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.list
 
   Apple_cn:
      behavior: classical
@@ -175,106 +169,42 @@ rule-providers:
      path: ./apple_cn.txt
      url: https://ruleset.skk.moe/Clash/non_ip/apple_cn.txt
 
-  Apple_cdn:
+  Apple:
      behavior: classical
      interval: 86400
      type: http
      format: text
-     path: ./apple_cdn.txt
-     url: https://ruleset.skk.moe/Clash/non_ip/apple_cdn.txt
-
-  Apple_services:
-     behavior: classical
-     interval: 86400
-     type: http
-     format: text
-     path: ./apple_services.txt
-     url: https://ruleset.skk.moe/Clash/non_ip/apple_services.txt
-   
-  Cdn_domain:
-     behavior: domain
-     interval: 86400
-     type: http
-     format: text
-     path: ./cdn.txt
-     url: https://ruleset.skk.moe/Clash/domainset/cdn.txt
-
-  Cdn:
-     behavior: classical
-     interval: 86400
-     type: http
-     format: text
-     path: ./cdn.txt
-     url: https://ruleset.skk.moe/Clash/non_ip/cdn.txt
+     path: ./Apple.list
+     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple.list
 
   Telegram:
      behavior: classical
      interval: 86400
      type: http
      format: text
-     path: ./telegram.txt
-     url: https://ruleset.skk.moe/Clash/non_ip/telegram.txt
+     path: ./Telegram.list
+     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram.list
 
-  Telegram_asn:
-     behavior: classical
-     interval: 86400
-     type: http
-     format: text
-     path: ./telegram_asn.txt
-     url: https://ruleset.skk.moe/Clash/ip/telegram_asn.txt
-
-  Telegram_ip:
-     behavior: classical
-     interval: 86400
-     type: http
-     format: text
-     path: ./telegram_ip.txt
-     url: https://ruleset.skk.moe/Clash/ip/telegram.txt
-     
   Global:
      behavior: classical
      interval: 86400
      type: http
      format: text
-     path: ./global.txt
-     url: https://ruleset.skk.moe/Clash/non_ip/global.txt
-     
-  Domestic:
-     behavior: classical
-     interval: 86400
-     type: http
-     format: text
-     path: ./domestic.txt
-     url: https://ruleset.skk.moe/Clash/non_ip/domestic.txt
-
-  Domestic_ip:
-     behavior: classical
-     interval: 86400
-     type: http
-     format: text
-     path: ./domestic_ip.txt
-     url: https://ruleset.skk.moe/Clash/ip/domestic.txt
+     path: ./Global.list
+     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global.list
 
   China:
-    behavior: ipcidr
+    behavior: classical
     interval: 86400
     type: http
     format: text
-    path: ./lan_ip.txt
-    url: https://ruleset.skk.moe/Clash/ip/china_ip.txt
+    path: ./China.list
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/China/China.list
      
   LAN:
     behavior: classical
     interval: 86400
     type: http
     format: text
-    path: ./lan.txt
-    url: https://ruleset.skk.moe/Clash/non_ip/lan.txt
-
-  LAN_ip:
-    behavior: classical
-    interval: 86400
-    type: http
-    format: text
-    path: ./lan_ip.txt
-    url: https://ruleset.skk.moe/Clash/ip/lan.txt
+    path: ./Lan.list
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Lan/Lan.list
