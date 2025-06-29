@@ -3,23 +3,11 @@
 #!icon=https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/id.jpg
 
 [Rule]
-# > 虎牙直播 开屏广告
-DOMAIN,pp-cdnfile2pcdn.msstatic.com,REJECT
-DOMAIN,livewebbs2pcdn.msstatic.com,REJECT
-DOMAIN,huyafile.msstatic.com,REJECT
-DOMAIN,livewebbs2.msstatic.com,REJECT
-DOMAIN,business.msstatic.com,REJECT
-DOMAIN-SUFFIX,v1d.szbdyd.com,REJECT
 
 # > 小米米家
 DOMAIN,sdkconfig.ad.xiaomi.com,REJECT
 
 [URL Rewrite]
-#虎牙
-# hostname = cdn.wup.huya.com, business.msstatic.com, cdnfile1.msstatic.com, live-ads.huya.com
-^https?:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns$ - reject
-^https?:\/\/business\.msstatic\.com\/advertiser\/material - reject
-^https?:\/\/mlol\.qt\.qq\.com\/go\/recommend - reject
 
 #航旅纵横
 ^https?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native - reject
@@ -41,9 +29,6 @@ DOMAIN,sdkconfig.ad.xiaomi.com,REJECT
 # hostname = home.mi.com
 ^https?:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|carousel\/banners|myTab|openingBanner) data-type=text data="{}" status-code=200
 ^https?:\/\/cdnfile1\.msstatic\.com\/cdnfile\/appad\/ data-type=tiny-gif status-code=200
-
-#虎牙
-^https?://live-ads\.huya\.com/live/getAllEntrance.*$ data-type=text data="{}" status-code=200
 
 # 开屏广告 感谢【𝑨梦 𝑪𝒉𝒙𝒎𝟏𝟎𝟐𝟑】分享
 ^https?:\/\/us\.l\.qq\.com\/exapp data-type=text data=" " status-code=200
