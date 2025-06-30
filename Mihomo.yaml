@@ -52,13 +52,13 @@ proxy-groups:
     url: "http://1.1.1.1/generate_204"
     interval: 1800
     include-all: true
-    filter: "🇭🇰"
+    filter: "Bage"
 
   - name: "JP"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: "🇯🇵"
+    filter: "wap"
     url: "http://1.1.1.1/generate_204"
     interval: 1800
 
