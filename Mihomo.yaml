@@ -82,7 +82,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
-    filter: "🇭🇰.*(Ultra|Plus).*"
+    filter: "^(?!.*Bage).*🇭🇰.*(Ultra|AC).*"
     url: "http://1.1.1.1/generate_204"
     timeout: 2000
     max-failed-times: 3
