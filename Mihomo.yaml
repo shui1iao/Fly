@@ -100,6 +100,15 @@ proxy-groups:
     timeout: 2000
     max-failed-times: 3
     
+  - name: "Dler-HK"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
+    filter: "^(?!.*Bage).*🇭🇰.*(AC|Ultra).*"
+    url: "http://1.1.1.1/generate_204"
+    timeout: 2000
+    max-failed-times: 3  
+    
   - name: "Dler-US"
     type: url-test
     include-all: true
