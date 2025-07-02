@@ -31,6 +31,15 @@ proxy-groups:
       - HK
       - SG
       - JP
+
+  - name: "Telegram"
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+    proxies: 
+      - SG
+      - HK
+      - US
+      - JP
       
   - name: "Apple"
     type: select
@@ -109,7 +118,7 @@ rules:
   - RULE-SET,Emby,Emby
   - RULE-SET,Apple_cn,DIRECT
   - RULE-SET,Apple,Apple
-  - RULE-SET,Telegram,Final
+  - RULE-SET,Telegram,Telegram
   - RULE-SET,Google,Google
   - RULE-SET,YouTube,Google
   - RULE-SET,Global,Final
