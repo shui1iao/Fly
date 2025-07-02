@@ -72,7 +72,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    filter: "wap"
+    filter: "Legend"
     url: "http://1.1.1.1/generate_204"
     interval: 1800
     
