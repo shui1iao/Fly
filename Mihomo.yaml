@@ -4,7 +4,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
-    filter: "BWH|Bage|wap"
+    filter: "BW|Bage"
       
   - name: "Final"
     type: fallback
@@ -58,7 +58,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: "wap"
+    filter: "🇯🇵.*BW"
     url: "http://1.1.1.1/generate_204"
     interval: 1800
 
@@ -77,16 +77,7 @@ proxy-groups:
     filter: "^(?!.*(BWH|wap|Bage)).*$"
     timeout: 2000
     max-failed-times: 3
-    
-  - name: "Dler-US"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
-    filter: "^(?!.*BWH).*🇺🇸.*(AC|Plus).*"
-    url: "http://1.1.1.1/generate_204"
-    timeout: 2000
-    max-failed-times: 3
-
+  
 # [本地规则]
 rules:
   - DOMAIN-KEYWORD,emby,Emby
