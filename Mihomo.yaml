@@ -42,8 +42,8 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
     proxies: 
-      - HK
       - US
+      - HK
       - JP
 
   - name: "HK"
