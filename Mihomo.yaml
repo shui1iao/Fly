@@ -14,15 +14,6 @@ proxy-groups:
       - JP
       - US
       
-  - name: "Apple"
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
-    proxies: 
-      - HK
-      - DIRECT
-      - US
-      - JP
-      
   - name: "Emby"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
@@ -65,13 +56,9 @@ proxy-groups:
   
 # [本地规则]
 rules:
-  - DOMAIN-KEYWORD,emby,Emby
-  - DOMAIN,dragonli.misaka.be,Emby
   - DOMAIN,e.2233333.xyz,Emby
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,Emby,Emby
-  - RULE-SET,Apple_cn,DIRECT
-  - RULE-SET,Apple,Apple
   - RULE-SET,LAN,DIRECT 
   - GEOIP,CN,DIRECT
   - MATCH,Final
@@ -94,21 +81,6 @@ rule-providers:
     path: ./Emby.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Emby.list
 
-  Apple_cn:
-     behavior: classical
-     interval: 86400
-     type: http
-     format: text
-     path: ./apple_cn.txt
-     url: https://ruleset.skk.moe/Clash/non_ip/apple_cn.txt
-
-  Apple:
-     behavior: classical
-     interval: 86400
-     type: http
-     path: ./Apple.yaml
-     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple_Classical_No_Resolve.yaml
-     
   LAN:
     behavior: classical
     interval: 86400
