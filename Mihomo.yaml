@@ -4,7 +4,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
-    filter: "BW|Bage"
+    filter: "BW|RFC"
       
   - name: "Final"
     type: fallback
@@ -37,7 +37,7 @@ proxy-groups:
     url: "http://1.1.1.1/generate_204"
     interval: 1800
     include-all: true
-    filter: "Bage"
+    filter: "RFC"
     
   - name: "JP"
     type: url-test
