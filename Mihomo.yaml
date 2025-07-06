@@ -56,6 +56,7 @@ proxy-groups:
   
 # [本地规则]
 rules:
+  - DOMAIN,sharon.io,Final
   - DOMAIN,e.2233333.xyz,Emby
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,Emby,Emby
