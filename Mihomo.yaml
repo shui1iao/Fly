@@ -13,14 +13,6 @@ proxy-groups:
       - HK
       - JP
       - US
-      
-  - name: "Emby"
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
-    proxies: 
-      - US
-      - HK
-      - JP
 
   - name: "HK"
     type: url-test
@@ -57,9 +49,8 @@ proxy-groups:
 # [本地规则]
 rules:
   - DOMAIN,sharon.io,JP
-  - DOMAIN,e.2233333.xyz,Emby
+  - DOMAIN,e.tanhuatv.site,US
   - RULE-SET,Speedtest,Proxy
-  - RULE-SET,Emby,Emby
   - RULE-SET,LAN,DIRECT 
   - GEOIP,CN,DIRECT
   - MATCH,Final
@@ -73,14 +64,6 @@ rule-providers:
     nterval: 86400
     path: ./Speedtest.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest_No_Resolve.yaml
-     
-  Emby:
-    behavior: classical
-    interval: 86400
-    type: http
-    format: text
-    path: ./Emby.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Emby.list
 
   LAN:
     behavior: classical
