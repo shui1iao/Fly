@@ -49,7 +49,7 @@ proxy-groups:
 # [本地规则]
 rules:
   - DOMAIN,sharon.io,JP
-  - DOMAIN,e.tanhuatv.site,US
+  - DOMAIN,tanhuatv.site,US
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,LAN,DIRECT 
   - GEOIP,CN,DIRECT
