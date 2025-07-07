@@ -4,7 +4,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
-    filter: "BW|RFC"
+    filter: "BW|Bage"
       
   - name: "Final"
     type: fallback
@@ -13,6 +13,20 @@ proxy-groups:
       - HK
       - JP
       - US
+
+  - name: "AI"
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
+    proxies: 
+      - US
+      - JP
+
+  - name: "Google"
+    type: fallback
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/google(2).png
+    proxies: 
+      - US
+      - JP
 
   - name: "HK"
     type: url-test
@@ -48,8 +62,9 @@ proxy-groups:
   
 # [本地规则]
 rules:
-  - DOMAIN,sharon.io,JP
   - RULE-SET,Speedtest,Proxy
+  - RULE-SET,AI,AI
+  - RULE-SET,Google,Google
   - RULE-SET,LAN,DIRECT 
   - GEOIP,CN,DIRECT
   - MATCH,Final
@@ -63,6 +78,21 @@ rule-providers:
     nterval: 86400
     path: ./Speedtest.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest_No_Resolve.yaml
+
+  AI:
+    behavior: classical
+    type: http
+    format: text
+    nterval: 86400
+    path: ./AI.list
+    url: https://raw.githubusercontent.com/ConnersHua/RuleGo/refs/heads/master/Surge/Ruleset/Extra/AI.list
+
+  Google:
+    behavior: classical
+    type: http
+    nterval: 86400
+    path: ./Google.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google_No_Resolve.yaml
 
   LAN:
     behavior: classical
