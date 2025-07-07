@@ -3,7 +3,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
-    filter: "BW|Bage|RFC"
+    filter: "BW|Bage"
       
   - name: "Final"
     type: fallback
@@ -14,16 +14,19 @@ proxy-groups:
       - US
 
   - name: "AI"
-    type: load-balance
+    type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
-    include-all: true
-    filter: "BWH|RFC"
+    proxies: 
+      - US
+      - JP
 
   - name: "Google"
-    type: load-balance
+    type: fallback
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/google(2).png
-    include-all: true
-    filter: "BWH|RFC"
+    proxies: 
+      - US
+      - HK
+      - JP
 
   - name: "HK"
     type: url-test
@@ -31,7 +34,7 @@ proxy-groups:
     url: "http://1.1.1.1/generate_204"
     interval: 1800
     include-all: true
-    filter: "Bage|RFC"
+    filter: "Bage"
     
   - name: "JP"
     type: url-test
@@ -53,15 +56,7 @@ proxy-groups:
     type: select
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
-    filter: "^(?!.*(BW|RFC|Bage)).*$"
-    timeout: 2000
-    max-failed-times: 3
-
-  - name: "Dler-HK"
-    type: select
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
-    filter: "^(?!.*Bage)🇭🇰.*(AC|Ultra)"
+    filter: "^(?!.*(BW|Bage)).*$"
     timeout: 2000
     max-failed-times: 3
 
