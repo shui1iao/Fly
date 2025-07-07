@@ -34,7 +34,7 @@ proxy-groups:
     url: "http://1.1.1.1/generate_204"
     interval: 1800
     include-all: true
-    filter: "RFC"
+    filter: "Bage"
     
   - name: "JP"
     type: url-test
