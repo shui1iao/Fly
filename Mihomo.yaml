@@ -150,7 +150,7 @@ rules:
   - RULE-SET,Apple,DIRECT
   - RULE-SET,CDN,Final
   - RULE-SET,Proxy,Final
-  - RULE-SET,ChinaFomain,DIRECT
+  - RULE-SET,ChinaDomain,DIRECT
   - RULE-SET,LAN,DIRECT 
   - GEOIP,CN,DIRECT
   - MATCH,Final
