@@ -147,10 +147,10 @@ rules:
   - RULE-SET,Telegram,Final
   - RULE-SET,YouTube,Final
   - RULE-SET,Google,Google
-  - RULE-SET,Apple,Direct
+  - RULE-SET,Apple,DIRECT
   - RULE-SET,CDN,Final
   - RULE-SET,Proxy,Final
-  - RULE-SET,ChinaFomain,Direct
+  - RULE-SET,ChinaFomain,DIRECT
   - RULE-SET,LAN,DIRECT 
   - GEOIP,CN,DIRECT
   - MATCH,Final
