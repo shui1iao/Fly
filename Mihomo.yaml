@@ -3,7 +3,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
-    filter: "BW|Bage"
+    filter: "BW|Bage|Sharon"
       
   - name: "Final"
     type: fallback
