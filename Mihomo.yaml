@@ -103,7 +103,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
-    filter: "🇸🇬.(Legend)"
+    filter: "^(?!.*Sharon).*Legend.*"
     url: "http://1.1.1.1/generate_204"
     max-failed-times: 2
     lazy: true
