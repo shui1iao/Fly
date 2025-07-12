@@ -9,14 +9,12 @@ proxy-groups:
       - 🇭🇰 Bage<-Dler
       - 🇭🇰 CNF<-Dler
       - 🇯🇵 BW<-Dler
-      - 🇸🇬 Legend<-Dler
       
   - name: "Final"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
       - HK
-      - SG
       - JP
       - US
 
@@ -26,14 +24,12 @@ proxy-groups:
     proxies: 
       - US
       - JP
-      - SG
 
   - name: "Google"
     type: fallback
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/google(2).png
     proxies: 
       - US
-      - SG
       - HK
       - JP
 
@@ -45,15 +41,6 @@ proxy-groups:
     lazy: true
     include-all: true
     filter: "🇭🇰.*(Bage|Sharon|CNF)"
-
-  - name: "SG"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    filter: "Legend"
-    url: "http://1.1.1.1/generate_204"
-    max-failed-times: 2
-    lazy: true
     
   - name: "JP"
     type: url-test
@@ -95,15 +82,6 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
     filter: "^(?!.*Sharon).*CNF.*"
-    url: "http://1.1.1.1/generate_204"
-    max-failed-times: 2
-    lazy: true
-
-  - name: "🇸🇬 Legend<-Dler"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
-    filter: "^(?!.*Sharon).*Legend.*"
     url: "http://1.1.1.1/generate_204"
     max-failed-times: 2
     lazy: true
