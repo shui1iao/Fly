@@ -4,11 +4,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
     max-failed-times: 2
-    filter: "BWH|Sharon"
-    proxies: 
-      - 🇭🇰 Bage<-Dler
-      - 🇭🇰 CNF<-Dler
-      - 🇯🇵 BW<-Dler
+    filter: "BW|Sharon|Bage|CNF"
       
   - name: "Final"
     type: fallback
@@ -65,33 +61,6 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
     filter: "^(?!.*(BW|Bage|Sharon|CNF)).*$"
-    max-failed-times: 2
-    lazy: true
-
-  - name: "🇭🇰 Bage<-Dler"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
-    filter: "^(?!.*Sharon).*Bage.*"
-    url: "http://1.1.1.1/generate_204"
-    max-failed-times: 2
-    lazy: true
-
-  - name: "🇭🇰 CNF<-Dler"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
-    filter: "^(?!.*Sharon).*CNF.*"
-    url: "http://1.1.1.1/generate_204"
-    max-failed-times: 2
-    lazy: true
-
-  - name: "🇯🇵 BW<-Dler"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
-    filter: "🇯🇵.(BW)"
-    url: "http://1.1.1.1/generate_204"
     max-failed-times: 2
     lazy: true
 
