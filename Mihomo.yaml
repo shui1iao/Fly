@@ -37,6 +37,7 @@ proxy-groups:
     lazy: true
     include-all: true
     filter: "🇭🇰.*(Sharon|CNF)"
+    tolerance: 5
     
   - name: "JP"
     type: url-test
@@ -45,7 +46,7 @@ proxy-groups:
     filter: "🇯🇵.*BW"
     url: "http://1.1.1.1/generate_204"
     max-failed-times: 2
-    lazy: true
+    tolerance: 5
 
   - name: "US"
     type: url-test
@@ -54,15 +55,13 @@ proxy-groups:
     filter: "BWH"
     url: "http://1.1.1.1/generate_204"
     max-failed-times: 2
-    lazy: true
+    tolerance: 5
 
   - name: "Dler"
     type: select
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
     filter: "^(?!.*(BW|Sharon|CNF)).*$"
-    max-failed-times: 2
-    lazy: true
 
 rule-providers:
 
