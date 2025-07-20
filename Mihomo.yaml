@@ -61,7 +61,7 @@ proxy-groups:
     type: select
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
-    filter: "^(?!.*(BW|Sharon|CNF)).*$"
+    filter: "^(?!.*(BW|Sharon|CNF|Bage)).*$"
 
 rule-providers:
 
