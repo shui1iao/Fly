@@ -4,7 +4,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
     max-failed-times: 2
-    filter: "BW|Sharon|CNF"
+    filter: "BW|Sharon|CNF|Bage"
       
   - name: "Final"
     type: fallback
@@ -36,7 +36,7 @@ proxy-groups:
     max-failed-times: 2
     lazy: true
     include-all: true
-    filter: "🇭🇰.*(Sharon|CNF)"
+    filter: "🇭🇰.*(Sharon|CNF|Bage)"
     tolerance: 5
     
   - name: "JP"
