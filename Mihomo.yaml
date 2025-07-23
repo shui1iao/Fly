@@ -4,7 +4,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
     max-failed-times: 2
-    filter: "BW|Sharon|CNF|Bage"
+    filter: "BW|Sharon|CNF"
       
   - name: "Final"
     type: fallback
@@ -36,7 +36,7 @@ proxy-groups:
     max-failed-times: 2
     lazy: true
     include-all: true
-    filter: "🇭🇰.*(Sharon|CNF|Bage)"
+    filter: "🇭🇰.*(Sharon|CNF)"
     tolerance: 5
     
   - name: "JP"
@@ -61,7 +61,7 @@ proxy-groups:
     type: select
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
-    filter: "^(?!.*(BW|Sharon|CNF|Bage)).*$"
+    filter: "^(?!.*(BW|Sharon|CNF)).*$"
 
 rule-providers:
 
