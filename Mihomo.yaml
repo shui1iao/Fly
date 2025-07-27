@@ -4,7 +4,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
     max-failed-times: 2
-    filter: "BW|Sharon|CNF"
+    filter: "BW|Sharon|CNF|Legend"
       
   - name: "Final"
     type: fallback
@@ -12,6 +12,7 @@ proxy-groups:
     proxies: 
       - HK
       - JP
+      - SG
       - US
 
   - name: "AI"
@@ -20,12 +21,14 @@ proxy-groups:
     proxies: 
       - US
       - JP
+      - SG
 
   - name: "Google"
     type: fallback
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/google(2).png
     proxies: 
       - US
+      - SG
       - HK
       - JP
 
@@ -48,6 +51,15 @@ proxy-groups:
     max-failed-times: 2
     tolerance: 5
 
+  - name: "SG"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    filter: "🇸🇬.*Legend"
+    url: "http://1.1.1.1/generate_204"
+    max-failed-times: 2
+    tolerance: 5
+
   - name: "US"
     type: url-test
     include-all: true
@@ -61,7 +73,7 @@ proxy-groups:
     type: select
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
-    filter: "^(?!.*(BW|Sharon|CNF)).*$"
+    filter: "^(?!.*(BW|Sharon|CNF|Legend)).*$"
 
 rule-providers:
 
