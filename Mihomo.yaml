@@ -11,8 +11,8 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
       - HK
-      - JP
       - SG
+      - JP
       - US
 
   - name: "AI"
