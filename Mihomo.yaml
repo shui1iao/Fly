@@ -33,41 +33,37 @@ proxy-groups:
       - JP
 
   - name: "HK"
-    type: url-test
+    type: load-balance
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     url: "http://1.1.1.1/generate_204"
     max-failed-times: 2
-    lazy: true
     include-all: true
     filter: "🇭🇰.*(Sharon|DMIT)"
-    tolerance: 5
+    strategy: consistent-hashing
     
   - name: "JP"
-    type: url-test
+    type: load-balance
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "🇯🇵.*BW"
     url: "http://1.1.1.1/generate_204"
-    max-failed-times: 2
-    tolerance: 5
+    strategy: consistent-hashing
 
   - name: "SG"
-    type: url-test
+    type: load-balance
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     filter: "🇸🇬.*Legend"
     url: "http://1.1.1.1/generate_204"
-    max-failed-times: 2
-    tolerance: 5
+    strategy: consistent-hashing
 
   - name: "US"
-    type: url-test
+    type: load-balance
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "BWH"
     url: "http://1.1.1.1/generate_204"
-    max-failed-times: 2
-    tolerance: 5
+    strategy: consistent-hashing
 
   - name: "Dler"
     type: select
