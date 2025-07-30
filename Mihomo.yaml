@@ -42,7 +42,7 @@ proxy-groups:
     strategy: consistent-hashing
     
   - name: "JP"
-    type: load-balance
+    type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "🇯🇵.*BW"
