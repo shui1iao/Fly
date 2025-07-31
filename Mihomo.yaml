@@ -33,16 +33,15 @@ proxy-groups:
       - JP
 
   - name: "HK"
-    type: load-balance
+    type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     url: "http://1.1.1.1/generate_204"
     max-failed-times: 2
     include-all: true
     filter: "🇭🇰.*(Sharon|DMIT)"
-    strategy: consistent-hashing
     
   - name: "JP"
-    type: load-balance
+    type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "🇯🇵.*BW"
@@ -50,7 +49,7 @@ proxy-groups:
     strategy: consistent-hashing
 
   - name: "SG"
-    type: load-balance
+    type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     filter: "🇸🇬.*Legend"
@@ -58,7 +57,7 @@ proxy-groups:
     strategy: consistent-hashing
 
   - name: "US"
-    type: load-balance
+    type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "BWH"
