@@ -4,7 +4,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
     max-failed-times: 2
-    filter: "BW|Sharon|DMIT|Legend|HKT"
+    filter: "BW|Sharon|DMIT|Legend"
       
   - name: "Final"
     type: fallback
@@ -46,7 +46,7 @@ proxy-groups:
     url: "http://1.1.1.1/generate_204"
     max-failed-times: 2
     include-all: true
-    filter: "🇭🇰.*(Sharon|DMIT|HKT)"
+    filter: "🇭🇰.*(Sharon|DMIT)"
     
   - name: "JP"
     type: url-test
@@ -176,7 +176,7 @@ rules:
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,TikTok,JP
   - RULE-SET,AI,AI
-  - RULE-SET,PayPal,🇭🇰 HKT-AC
+  - RULE-SET,PayPal,Final
   - RULE-SET,Apple,DIRECT
   - RULE-SET,Telegram,Telegram
   - RULE-SET,YouTube,Final
