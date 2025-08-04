@@ -23,6 +23,14 @@ proxy-groups:
       - JP
       - SG
 
+  - name: "Telegram"
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+    proxies: 
+      - SG
+      - HK  
+      - JP
+
   - name: "Google"
     type: fallback
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/google(2).png
@@ -46,7 +54,6 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "🇯🇵.*BW"
     url: "http://1.1.1.1/generate_204"
-    strategy: consistent-hashing
 
   - name: "SG"
     type: url-test
@@ -54,7 +61,6 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     filter: "🇸🇬.*Legend"
     url: "http://1.1.1.1/generate_204"
-    strategy: consistent-hashing
 
   - name: "US"
     type: url-test
@@ -62,7 +68,6 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "BWH"
     url: "http://1.1.1.1/generate_204"
-    strategy: consistent-hashing
 
   - name: "Dler"
     type: select
@@ -173,7 +178,7 @@ rules:
   - RULE-SET,AI,AI
   - RULE-SET,PayPal,🇭🇰 HKT-AC
   - RULE-SET,Apple,DIRECT
-  - RULE-SET,Telegram,Final
+  - RULE-SET,Telegram,Telegram
   - RULE-SET,YouTube,Final
   - RULE-SET,Google,Google
   - RULE-SET,CDN,Final
