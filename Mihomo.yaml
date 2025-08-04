@@ -79,6 +79,14 @@ rule-providers:
     path: ./Speedtest.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest_No_Resolve.yaml
 
+  TikTok:
+    behavior: classical
+    type: http
+    format: text
+    nterval: 86400
+    path: ./TikTok.list
+    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/TikTok.list
+
   AI:
     behavior: classical
     type: http
@@ -94,7 +102,15 @@ rule-providers:
     nterval: 86400
     path: ./PayPal.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/PayPal.list
-    
+
+  Apple:
+    behavior: classical
+    type: http
+    format: text
+    nterval: 86400
+    path: ./Apple.list
+    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Apple.list
+
   Telegram:
     behavior: classical
     type: http
@@ -153,8 +169,10 @@ rule-providers:
   
 rules:
   - RULE-SET,Speedtest,Proxy
+  - RULE-SET,TikTok,JP
   - RULE-SET,AI,AI
   - RULE-SET,PayPal,🇭🇰 HKT-AC
+  - RULE-SET,Apple,DIRECT
   - RULE-SET,Telegram,Final
   - RULE-SET,YouTube,Final
   - RULE-SET,Google,Google
