@@ -156,6 +156,8 @@ rule-providers:
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/Clash/Rules/Lan.list
   
 rules:
+  - DOMAIN,emby.sakiko.de,DIRECT
+  - DOMAIN,emby.heisi.org,US
   - DOMAIN,lite.cn2gias.uk,US
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,TikTok,JP
