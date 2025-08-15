@@ -4,7 +4,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
     max-failed-times: 2
-    filter: "Sharon|BW|DMIT|Hytron"
+    filter: "Sharon|BW|DMIT|Hytron|RFC"
       
   - name: "Final"
     type: fallback
@@ -41,7 +41,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: "🇯🇵.*BW"
+    filter: "🇯🇵.*(BW|RFC)"
     url: "http://1.1.1.1/generate_204"
 
   - name: "US"
@@ -55,7 +55,7 @@ proxy-groups:
     type: select
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
-    filter: "^(?!.*(BW|Sharon|DMIT|Hytron)).*$"
+    filter: "^(?!.*(BW|Sharon|DMIT|Hytron|RFC)).*$"
 
 
 rule-providers:
