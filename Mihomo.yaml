@@ -153,6 +153,7 @@ rule-providers:
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/Clash/Rules/Lan.list
   
 rules:
+  - DOMAIN,nodeseek.com,JP
   - DOMAIN,emby-sharon.sakiko.de,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT  
   - RULE-SET,Speedtest,Proxy
