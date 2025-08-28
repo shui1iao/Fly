@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ==============================================================================
-# Sing-box 管理脚本 (模块化配置)
+# Sing-box 管理脚本 (模块化配置 + 安装检查)
 # ==============================================================================
 
 # --- 函数: 检查 sing-box 安装和运行状态 ---
@@ -76,7 +76,6 @@ install_singbox_core() {
     echo "现在，请从菜单中选择一个协议进行配置。"
 }
 
-
 # --- 函数: 生成自签名证书 ---
 generate_certificate() {
     local domain=$1
@@ -103,11 +102,21 @@ get_public_ip() {
     echo "$ip_address"
 }
 
+# --- 函数: 检查 sing-box 是否安装 ---
+check_singbox_installed() {
+    if [ ! -f /usr/local/bin/sing-box ]; then
+        echo -e "\033[31m错误：sing-box 核心未安装。\033[0m"
+        echo "请先从菜单中选择选项 '1' 来安装 sing-box。"
+        return 1
+    fi
+    return 0
+}
+
+
 # --- 函数: 配置 AnyTLS ---
 install_anytls() {
-    if [ ! -f /usr/local/bin/sing-box ]; then
-        echo "sing-box 核心未安装，将首先为您安装核心..."
-        install_core
+    if ! check_singbox_installed; then
+        return
     fi
 
     echo "--> 请输入 AnyTLS 配置信息..."
@@ -202,9 +211,8 @@ EOF
 
 # --- 函数: 配置 Shadowsocks ---
 install_shadowsocks() {
-    if [ ! -f /usr/local/bin/sing-box ]; then
-        echo "sing-box 核心未安装，将首先为您安装核心..."
-        install_core
+    if ! check_singbox_installed; then
+        return
     fi
 
     echo "--> 请输入 Shadowsocks 配置信息..."
@@ -272,9 +280,8 @@ EOF
 
 # --- 函数: 配置 ShadowTLS ---
 install_shadowtls() {
-    if [ ! -f /usr/local/bin/sing-box ]; then
-        echo "sing-box 核心未安装，将首先为您安装核心..."
-        install_core
+    if ! check_singbox_installed; then
+        return
     fi
 
     echo "--> 请输入 ShadowTLS 配置信息..."
