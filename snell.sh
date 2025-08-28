@@ -12,11 +12,12 @@ show_menu() {
     echo "=================================================="
     echo "1. 安装 Snell"
     echo "2. 查看 Snell 配置"
-    echo "3. 重启 Snell 服务"
+    echo "3. 启动 Snell 服务"
     echo "4. 停止 Snell 服务"
-    echo "5. 退出脚本"
+    echo "5. 重启 Snell 服务"
+    echo "0. 退出脚本"
     echo "=================================================="
-    echo -n "请输入选项 [1-5]: "
+    echo -n "请输入选项 [0-5]: "
 }
 
 # --- 函数: 检查 root 权限 ---
@@ -31,9 +32,11 @@ check_root() {
 install_snell() {
     # --- 步骤 1: 更新软件包列表并安装必要工具 ---
     echo "--> 更新软件包列表并安装必要工具 (nano, wget, unzip)..."
-    apt-get update > /dev/null
-    apt-get install -y nano wget unzip > /dev/null
-    if [ $? -ne 0 ]; then
+    if ! apt-get update > /dev/null; then
+        echo "错误：软件包列表更新失败。请检查网络连接或 apt 源。"
+        exit 1
+    fi
+    if ! apt-get install -y nano wget unzip > /dev/null; then
         echo "错误：工具安装失败。请检查 apt 源或网络连接。"
         exit 1
     fi
@@ -41,13 +44,16 @@ install_snell() {
 
     # --- 步骤 2: 下载、解压并部署 Snell ---
     echo "--> 正在下载、解压并部署 Snell 服务器程序..."
-    wget -q --show-progress https://dl.nssurge.com/snell/snell-server-v5.0.0-linux-amd64.zip -O snell.zip
-    if [ $? -ne 0 ]; then
+    if ! wget -q --show-progress https://dl.nssurge.com/snell/snell-server-v5.0.0-linux-amd64.zip -O snell.zip; then
         echo "错误：Snell 下载失败！请检查网络或链接是否有效。"
         exit 1
     fi
 
-    unzip -o snell.zip -d /usr/local/bin/ > /dev/null
+    if ! unzip -o snell.zip -d /usr/local/bin/ > /dev/null; then
+        echo "错误：Snell 解压失败！"
+        rm snell.zip
+        exit 1
+    fi
     chmod +x /usr/local/bin/snell-server
     mkdir -p /etc/snell
     rm snell.zip
@@ -117,6 +123,9 @@ EOF
     # --- 步骤 7: 显示结果 ---
     echo "--> 正在获取服务器公网 IP 地址..."
     ip_address=$(curl -s https://ipv4.icanhazip.com || curl -s https://api.ipify.org)
+    if [ -z "$ip_address" ]; then
+        echo "警告：无法获取公网 IP 地址，请手动检查。"
+    fi
 
     echo ""
     echo "=================================================="
@@ -132,7 +141,7 @@ EOF
     echo "---------- 客户端配置信息 ----------"
     echo "在Surge使用以下配置："
     echo ""
-    echo "vps = snell, ${ip_address}, ${snell_port}, psk=${snell_psk}, version=5"
+    echo "vps = snell, ${ip_address:-<您的服务器IP>}, ${snell_port}, psk=${snell_psk}, version=5"
     echo ""
     echo "=================================================="
 }
@@ -154,26 +163,25 @@ view_config() {
         psk=$(grep "psk" /etc/snell/snell-server.conf | cut -d'=' -f2 | tr -d ' ')
         echo ""
         echo "--> 客户端配置信息："
-        echo "vps = snell, ${ip_address}, ${port}, psk=${psk}, version=5"
+        echo "vps = snell, ${ip_address:-<您的服务器IP>}, ${port}, psk=${psk}, version=5"
     else
         echo "错误：Snell 配置文件不存在，可能尚未安装。"
     fi
 }
 
-# --- 函数: 重启 Snell 服务 ---
-restart_snell() {
-    if systemctl is-active --quiet snell || systemctl is-enabled --quiet snell; then
-        echo "--> 正在重启 Snell 服务..."
+# --- 函数: 启动 Snell 服务 ---
+start_snell() {
+    if [ -f /etc/systemd/system/snell.service ]; then
+        echo "--> 正在启动 Snell 服务..."
         systemctl daemon-reload
         systemctl enable snell > /dev/null 2>&1
-        systemctl restart snell
-        if systemctl is-active --quiet snell; then
-            echo "    Snell 服务已重启并启用。"
+        if systemctl start snell; then
+            echo "    Snell 服务已启动并启用。"
         else
-            echo "    错误：Snell 服务重启失败，请使用 'journalctl -u snell' 查看日志。"
+            echo "    错误：Snell 服务启动失败，请使用 'journalctl -u snell' 查看日志。"
         fi
     else
-        echo "错误：Snell 服务未安装或未运行。"
+        echo "错误：Snell 服务未安装。"
     fi
 }
 
@@ -186,6 +194,22 @@ stop_snell() {
         echo "    Snell 服务已停止并禁用。"
     else
         echo "错误：Snell 服务未安装或未运行。"
+    fi
+}
+
+# --- 函数: 重启 Snell 服务 ---
+restart_snell() {
+    if [ -f /etc/systemd/system/snell.service ]; then
+        echo "--> 正在重启 Snell 服务..."
+        systemctl daemon-reload
+        systemctl enable snell > /dev/null 2>&1
+        if systemctl restart snell; then
+            echo "    Snell 服务已重启并启用。"
+        else
+            echo "    错误：Snell 服务重启失败，请使用 'journalctl -u snell' 查看日志。"
+        fi
+    else
+        echo "错误：Snell 服务未安装。"
     fi
 }
 
@@ -203,17 +227,20 @@ while true; do
             view_config
             ;;
         3)
-            restart_snell
+            start_snell
             ;;
         4)
             stop_snell
             ;;
         5)
+            restart_snell
+            ;;
+        0)
             echo "退出脚本。"
             exit 0
             ;;
         *)
-            echo "无效选项，请输入 1-5。"
+            echo "无效选项，请输入 0-5。"
             ;;
     esac
     echo ""
