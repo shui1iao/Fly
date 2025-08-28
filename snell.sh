@@ -23,19 +23,21 @@ check_snell_status() {
 
 # --- 函数: 显示菜单 ---
 show_menu() {
+
     echo "=================================================="
     echo "        Snell v5 管理脚本"
     echo "=================================================="
     check_snell_status
     echo "1. 安装 Snell"
-    echo "2. 查看 Snell 配置"
-    echo "3. 查看 Snell 运行状态"
-    echo "4. 启动 Snell 服务"
-    echo "5. 停止 Snell 服务"
-    echo "6. 重启 Snell 服务"
+    echo "2. 修改 Snell 配置"
+    echo "3. 查看 Snell 配置"
+    echo "4. 查看 Snell 运行状态"
+    echo "5. 启动 Snell 服务"
+    echo "6. 停止 Snell 服务"
+    echo "7. 重启 Snell 服务"
     echo "0. 退出脚本"
     echo "=================================================="
-    echo -n "请输入选项 [0-6]: "
+    echo -n "请输入选项 [0-7]: "
 }
 
 # --- 函数: 检查 root 权限 ---
@@ -161,6 +163,70 @@ EOF
     echo "=================================================="
 }
 
+# --- 函数: 修改 Snell 配置 ---
+modify_config() {
+    if [ -f /etc/snell/snell-server.conf ]; then
+        # --- 步骤 1: 用户输入新端口和密码 ---
+        read -p "请输入新的 Snell 监听端口 (留空则随机生成): " snell_port
+        if [ -z "${snell_port}" ]; then
+            while true; do
+                snell_port=$(shuf -i 30001-65535 -n 1)
+                if ! ss -lntu | grep -q ":${snell_port} "; then
+                    echo "    端口未输入，使用随机端口: ${snell_port}"
+                    break
+                fi
+            done
+        fi
+
+        read -p "请输入新的 Snell 密码 (PSK，留空则随机生成): " snell_psk
+        if [ -z "${snell_psk}" ]; then
+            # 生成一个16位的随机密码，包含大小写字母、数字和指定特殊字符 @%$^&/-_+
+            snell_psk=$(< /dev/urandom tr -dc 'A-Za-z0-9@%$^&/-_+' | head -c 16)
+            echo "    密码未输入，使用随机密码: ${snell_psk}"
+        fi
+
+        # --- 步骤 2: 配置确认 ---
+        echo ""
+        echo "============================================="
+        echo "新端口 (Port):    ${snell_port}"
+        echo "新密码 (PSK):     ${snell_psk}"
+        echo "============================================="
+        echo "配置将在 2 秒后更新，按 Ctrl+C 取消"
+        sleep 2
+
+        # --- 步骤 3: 更新配置文件 ---
+        echo "--> 正在更新配置文件..."
+        cat > /etc/snell/snell-server.conf <<EOF
+[snell-server]
+listen = ::0:${snell_port}
+psk = ${snell_psk}
+EOF
+
+        # --- 步骤 4: 显示客户端配置信息 ---
+        echo "--> 正在获取服务器公网 IP 地址..."
+        ip_address=$(curl -s https://ipv4.icanhazip.com || curl -s https://api.ipify.org)
+        if [ -z "$ip_address" ]; then
+            echo "警告：无法获取公网 IP 地址，请手动检查。"
+        fi
+
+        echo ""
+        echo "=================================================="
+        echo "🎉 Snell 配置已更新！"
+        echo ""
+        echo "---------- 客户端配置信息 ----------"
+        echo "在Surge使用以下配置："
+        echo ""
+        echo "vps = snell, ${ip_address:-<您的服务器IP>}, ${snell_port}, psk=${snell_psk}, version=5"
+        echo ""
+        echo "=================================================="
+
+        # --- 步骤 5: 自动重启服务 ---
+        restart_snell
+    else
+        echo "错误：Snell 配置文件不存在，可能尚未安装。"
+    fi
+}
+
 # --- 函数: 查看 Snell 配置 ---
 view_config() {
     if [ -f /etc/snell/snell-server.conf ]; then
@@ -253,18 +319,21 @@ while true; do
             install_snell
             ;;
         2)
-            view_config
+            modify_config
             ;;
         3)
-            check_snell_running
+            view_config
             ;;
         4)
-            start_snell
+            check_snell_running
             ;;
         5)
-            stop_snell
+            start_snell
             ;;
         6)
+            stop_snell
+            ;;
+        7)
             restart_snell
             ;;
         0)
@@ -272,7 +341,7 @@ while true; do
             exit 0
             ;;
         *)
-            echo "无效选项，请输入 0-6。"
+            echo "无效选项，请输入 0-7。"
             ;;
     esac
     echo ""
