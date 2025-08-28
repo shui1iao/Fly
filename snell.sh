@@ -23,19 +23,19 @@ check_snell_status() {
 
 # --- 函数: 显示菜单 ---
 show_menu() {
-    echo ""
-    check_snell_status
     echo "=================================================="
     echo "        Snell v5 管理脚本"
     echo "=================================================="
+    check_snell_status
     echo "1. 安装 Snell"
     echo "2. 查看 Snell 配置"
-    echo "3. 启动 Snell 服务"
-    echo "4. 停止 Snell 服务"
-    echo "5. 重启 Snell 服务"
+    echo "3. 查看 Snell 运行状态"
+    echo "4. 启动 Snell 服务"
+    echo "5. 停止 Snell 服务"
+    echo "6. 重启 Snell 服务"
     echo "0. 退出脚本"
     echo "=================================================="
-    echo -n "请输入选项 [0-5]: "
+    echo -n "请输入选项 [0-6]: "
 }
 
 # --- 函数: 检查 root 权限 ---
@@ -151,11 +151,7 @@ EOF
     echo "🎉 Snell 服务器安装并配置成功！"
     echo ""
     echo "--------------- 服务状态 ---------------"
-    if systemctl is-active --quiet snell; then
-        echo "状态: Active (running)"
-    else
-        echo "状态: Inactive (dead) - 请使用 'journalctl -u snell' 查看日志"
-    fi
+    systemctl status snell
     echo ""
     echo "---------- 客户端配置信息 ----------"
     echo "在Surge使用以下配置："
@@ -171,21 +167,20 @@ view_config() {
         echo "--> Snell 配置文件内容："
         cat /etc/snell/snell-server.conf
         echo ""
-        echo "--> 服务状态："
-        if systemctl is-active --quiet snell; then
-            echo "状态: Active (running)"
-        else
-            echo "状态: Inactive (dead) - 请使用 'journalctl -u snell' 查看日志"
-        fi
         ip_address=$(curl -s https://ipv4.icanhazip.com || curl -s https://api.ipify.org)
         port=$(grep "listen" /etc/snell/snell-server.conf | cut -d':' -f2)
         psk=$(grep "psk" /etc/snell/snell-server.conf | cut -d'=' -f2 | tr -d ' ')
-        echo ""
         echo "--> 客户端配置信息："
         echo "vps = snell, ${ip_address:-<您的服务器IP>}, ${port}, psk=${psk}, version=5"
     else
         echo "错误：Snell 配置文件不存在，可能尚未安装。"
     fi
+}
+
+# --- 函数: 查看 Snell 运行状态 ---
+check_snell_running() {
+    echo "--> Snell 服务运行状态："
+    systemctl status snell
 }
 
 # --- 函数: 启动 Snell 服务 ---
@@ -196,8 +191,14 @@ start_snell() {
         systemctl enable snell > /dev/null 2>&1
         if systemctl start snell; then
             echo "    Snell 服务已启动并启用。"
+            echo ""
+            echo "--> Snell 服务运行状态："
+            systemctl status snell
         else
             echo "    错误：Snell 服务启动失败，请使用 'journalctl -u snell' 查看日志。"
+            echo ""
+            echo "--> Snell 服务运行状态："
+            systemctl status snell
         fi
     else
         echo "错误：Snell 服务未安装。"
@@ -211,6 +212,9 @@ stop_snell() {
         systemctl stop snell
         systemctl disable snell > /dev/null 2>&1
         echo "    Snell 服务已停止并禁用。"
+        echo ""
+        echo "--> Snell 服务运行状态："
+        systemctl status snell
     else
         echo "错误：Snell 服务未安装或未运行。"
     fi
@@ -224,8 +228,14 @@ restart_snell() {
         systemctl enable snell > /dev/null 2>&1
         if systemctl restart snell; then
             echo "    Snell 服务已重启并启用。"
+            echo ""
+            echo "--> Snell 服务运行状态："
+            systemctl status snell
         else
             echo "    错误：Snell 服务重启失败，请使用 'journalctl -u snell' 查看日志。"
+            echo ""
+            echo "--> Snell 服务运行状态："
+            systemctl status snell
         fi
     else
         echo "错误：Snell 服务未安装。"
@@ -246,12 +256,15 @@ while true; do
             view_config
             ;;
         3)
-            start_snell
+            check_snell_running
             ;;
         4)
-            stop_snell
+            start_snell
             ;;
         5)
+            stop_snell
+            ;;
+        6)
             restart_snell
             ;;
         0)
@@ -259,7 +272,7 @@ while true; do
             exit 0
             ;;
         *)
-            echo "无效选项，请输入 0-5。"
+            echo "无效选项，请输入 0-6。"
             ;;
     esac
     echo ""
