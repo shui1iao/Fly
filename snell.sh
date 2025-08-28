@@ -4,9 +4,27 @@
 # Snell v5 自动化管理脚本
 # ==============================================================================
 
+# --- 函数: 检查 Snell 安装和运行状态 ---
+check_snell_status() {
+    # 检查 Snell 是否安装
+    if [ -f /usr/local/bin/snell-server ] && [ -f /etc/snell/snell-server.conf ]; then
+        echo -e "\033[32mSnell 状态: 已安装\033[0m"
+    else
+        echo -e "\033[31mSnell 状态: 未安装\033[0m"
+    fi
+
+    # 检查 Snell 服务是否运行
+    if systemctl is-active --quiet snell; then
+        echo -e "\033[32m服务状态: 运行中\033[0m"
+    else
+        echo -e "\033[31m服务状态: 未运行\033[0m"
+    fi
+}
+
 # --- 函数: 显示菜单 ---
 show_menu() {
     echo ""
+    check_snell_status
     echo "=================================================="
     echo "        Snell v5 管理脚本"
     echo "=================================================="
