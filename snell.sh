@@ -4,31 +4,6 @@
 # Snell v5 自动化管理脚本
 # ==============================================================================
 
-# --- 函数: 自动安装脚本到 /usr/local/bin/snell ---
-install_script() {
-    if [ ! -f /usr/local/bin/snell ]; then
-        echo "--> 正在安装 snell 命令到 /usr/local/bin/snell..."
-        # 检查是否通过 curl 运行
-        if [ -n "$BASH_EXECUTION_STRING" ]; then
-            # 如果通过 curl 运行，将脚本内容写入 /usr/local/bin/snell
-            echo "$BASH_EXECUTION_STRING" > /usr/local/bin/snell
-        else
-            # 如果是本地运行，复制脚本自身
-            cp "$0" /usr/local/bin/snell
-        fi
-        chmod +x /usr/local/bin/snell
-        if [ $? -eq 0 ]; then
-            echo "    snell 命令安装成功！"
-            echo "    提示：现在您可以通过输入 'snell' 直接唤醒脚本。"
-        else
-            echo "    错误：snell 命令安装失败，请检查权限或磁盘空间。"
-            exit 1
-        fi
-    else
-        echo "    snell 命令已存在，跳过安装。"
-    fi
-}
-
 # --- 函数: 显示菜单 ---
 show_menu() {
     echo ""
@@ -238,11 +213,9 @@ restart_snell() {
     fi
 }
 
-# --- 主程序: 检查 root 权限并安装脚本 ---
+# --- 主程序: 检查 root 权限并显示菜单 ---
 check_root
-install_script
 
-# --- 显示菜单并处理用户输入 ---
 while true; do
     show_menu
     read choice
