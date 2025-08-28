@@ -1,15 +1,16 @@
-
 #!/bin/bash
 
 # ==============================================================================
-# Sing-box 管理脚本 (AnyTLS + SS2022 + ShadowTLS)
+# Sing-box 管理脚本 (模块化配置)
 # ==============================================================================
 
 # --- 函数: 检查 sing-box 安装和运行状态 ---
 check_singbox_status() {
     # 检查 sing-box 是否安装
     if [ -f /usr/local/bin/sing-box ] && [ -f /etc/sing-box/config.json ]; then
-        echo -e "\033[32msing-box 状态: 已安装\033[0m"
+        echo -e "\033[32msing-box 状态: 已安装并已配置\033[0m"
+    elif [ -f /usr/local/bin/sing-box ]; then
+        echo -e "\033[33msing-box 状态: 核心已安装，但未配置协议\033[0m"
     else
         echo -e "\033[31msing-box 状态: 未安装\033[0m"
     fi
@@ -27,12 +28,12 @@ show_menu() {
     echo ""
     check_singbox_status
     echo "=================================================="
-    echo "        sing-box 管理脚本"
+    echo "           sing-box 管理脚本"
     echo "=================================================="
-    echo "1. 安装 sing-box (AnyTLS + SS2022 + ShadowTLS)"
-    echo "2. 安装 AnyTLS"
-    echo "3. 安装 Shadowsocks"
-    echo "4. 安装 ShadowTLS"
+    echo "1. 安装 / 更新 sing-box 核心"
+    echo "2. 配置 AnyTLS"
+    echo "3. 配置 Shadowsocks (2022)"
+    echo "4. 配置 ShadowTLS"
     echo "0. 退出脚本"
     echo "=================================================="
     echo -n "请输入选项 [0-4]: "
@@ -46,7 +47,7 @@ check_root() {
     fi
 }
 
-# --- 函数: 安装核心程序 ---
+# --- 函数: 安装核心程序及依赖 ---
 install_core() {
     echo "--> 正在安装必要工具 (curl, openssl)..."
     if ! apt-get update > /dev/null; then
@@ -66,6 +67,15 @@ install_core() {
     fi
     echo "    sing-box 安装成功。"
 }
+
+# --- 函数: 安装/更新 sing-box 核心 ---
+install_singbox_core() {
+    install_core
+    echo ""
+    echo -e "\033[32msing-box 核心安装/更新成功。\033[0m"
+    echo "现在，请从菜单中选择一个协议进行配置。"
+}
+
 
 # --- 函数: 生成自签名证书 ---
 generate_certificate() {
@@ -93,170 +103,10 @@ get_public_ip() {
     echo "$ip_address"
 }
 
-# --- 函数: 安装 sing-box (AnyTLS + SS2022 + ShadowTLS) ---
-install_singbox() {
-    install_core
-
-    echo "--> 请输入您的配置信息..."
-    echo "    (对于端口和部分密码，留空将使用默认或随机值)"
-    echo ""
-
-    read -p "请输入您的域名 (用于证书和SNI，例如 my.domain.com): " domain
-    if [ -z "$domain" ]; then
-        echo "错误：域名不能为空！"
-        exit 1
-    fi
-
-    read -p "请输入 AnyTLS 的监听端口 (留空则随机): " anytls_port
-    read -p "请输入 ShadowTLS 的监听端口 (留空则默认为 8443): " shadowtls_port
-    read -p "请输入 Shadowsocks 的 UDP 端口 (留空则随机): " ss_port
-
-    [ -z "$shadowtls_port" ] && shadowtls_port="8443"
-
-    if [ -z "$anytls_port" ]; then
-        while true; do
-            anytls_port=$(shuf -i 30001-65535 -n 1)
-            if ! ss -lntu | grep -q ":${anytls_port} "; then break; fi
-        done
-        echo "    AnyTLS 端口未输入，使用随机端口: ${anytls_port}"
-    fi
-
-    if [ -z "$ss_port" ]; then
-        while true; do
-            ss_port=$(shuf -i 30001-65535 -n 1)
-            if [[ "${ss_port}" != "${anytls_port}" ]] && [[ "${ss_port}" != "${shadowtls_port}" ]] && ! ss -lntu | grep -q ":${ss_port} "; then break; fi
-        done
-        echo "    Shadowsocks 端口未输入，使用随机端口: ${ss_port}"
-    fi
-
-    read -p "请输入 AnyTLS 的密码 (留空则随机生成): " anytls_password
-    read -p "请输入 ShadowTLS 的密码 (留空则随机生成): " stls_password
-    read -p "请输入 Shadowsocks 的密码 (留空则自动生成): " ss_password
-
-    if [ -z "$anytls_password" ]; then
-        anytls_password=$(< /dev/urandom tr -dc 'A-Za-z0-9@%$^&/-_+' | head -c 16)
-        echo "    AnyTLS 密码未输入，使用随机密码: ${anytls_password}"
-    fi
-    if [ -z "$stls_password" ]; then
-        stls_password=$(< /dev/urandom tr -dc 'A-Za-z0-9@%$^&/-_+' | head -c 16)
-        echo "    ShadowTLS 密码未输入，使用随机密码: ${stls_password}"
-    fi
-    if [ -z "$ss_password" ]; then
-        ss_password=$(sing-box generate rand --base64 16)
-        echo "    Shadowsocks 密码未输入，使用随机密码: ${ss_password}"
-    fi
-
-    echo ""
-    echo "--> 配置信息"
-    echo "============================================="
-    echo "             最终配置详情"
-    echo "============================================="
-    echo "域名 (Domain/SNI):     ${domain}"
-    echo "---------------------------------------------"
-    echo "AnyTLS 端口:           ${anytls_port}"
-    echo "AnyTLS 密码:           ${anytls_password}"
-    echo "---------------------------------------------"
-    echo "ShadowTLS 端口:        ${shadowtls_port}"
-    echo "ShadowTLS 密码:        ${stls_password}"
-    echo "---------------------------------------------"
-    echo "Shadowsocks 端口:      ${ss_port}"
-    echo "Shadowsocks 密码:      ${ss_password}"
-    echo "============================================="
-    echo "配置将在 2 秒后应用，按 Ctrl+C 取消"
-    sleep 2
-
-    generate_certificate "$domain"
-
-    echo "--> 正在创建 sing-box 配置文件..."
-    cat > /etc/sing-box/config.json <<EOF
-{
-    "inbounds": [
-        {
-            "type": "anytls",
-            "tag": "anytls-in",
-            "listen": "::",
-            "listen_port": ${anytls_port},
-            "users": [
-                {
-                    "password": "${anytls_password}"
-                }
-            ],
-            "tls": {
-                "enabled": true,
-                "server_name": "${domain}",
-                "certificate_path": "/etc/sing-box/cert/cert.pem",
-                "key_path": "/etc/sing-box/cert/private.key"
-            }
-        },
-        {
-            "type": "shadowtls",
-            "tag": "shadowtls-in",
-            "listen": "::",
-            "listen_port": ${shadowtls_port},
-            "detour": "ss-in",
-            "version": 3,
-            "users": [
-                {
-                    "password": "${stls_password}"
-                }
-            ],
-            "handshake": {
-                "server": "${domain}",
-                "server_port": 443
-            },
-            "strict_mode": true
-        },
-        {
-            "type": "shadowsocks",
-            "tag": "ss-in",
-            "listen": "::",
-            "listen_port": ${ss_port},
-            "method": "2022-blake3-aes-128-gcm",
-            "password": "${ss_password}",
-            "udp_fragment": true
-        }
-    ]
-}
-EOF
-    echo "    配置文件创建成功。"
-
-    echo "--> 正在启动并设置 sing-box 开机自启..."
-    systemctl restart sing-box
-    systemctl enable sing-box
-
-    ip_address=$(get_public_ip)
-
-    echo ""
-    echo "=================================================="
-    echo "🎉 sing-box 安装并配置成功！"
-    echo ""
-    echo "--------------- 服务状态 ---------------"
-    systemctl status sing-box --no-pager -l | grep -E "Loaded|Active|Main PID"
-    echo ""
-    echo "---------- 客户端配置信息 (AnyTLS) ----------"
-    echo "请将下面的 JSON 代码块复制到支持的客户端中："
-    echo '{
-    "name": "AnyTLS-'$ip_address'",
-    "type": "anytls",
-    "server": "'$ip_address'",
-    "port": '$anytls_port',
-    "password": "'$anytls_password'",
-    "client-fingerprint": "chrome",
-    "udp": true,
-    "sni": "'$domain'",
-    "skip-cert-verify": true
-}'
-    echo ""
-    echo "---------- 客户端配置信息 (ShadowTLS + SS2022) ----------"
-    echo "请将下面的 Surge 格式节点信息复制到客户端中："
-    echo "SS-ShadowTLS = ss, ${ip_address}, ${shadowtls_port}, encrypt-method=2022-blake3-aes-128-gcm, password=${ss_password}, shadow-tls-password=${stls_password}, shadow-tls-sni=${domain}, shadow-tls-version=3, udp-relay=true, udp-port=${ss_port}"
-    echo ""
-    echo "=================================================="
-}
-
-# --- 函数: 安装 AnyTLS ---
+# --- 函数: 配置 AnyTLS ---
 install_anytls() {
     if [ ! -f /usr/local/bin/sing-box ]; then
+        echo "sing-box 核心未安装，将首先为您安装核心..."
         install_core
     fi
 
@@ -264,7 +114,7 @@ install_anytls() {
     read -p "请输入您的域名 (用于证书和SNI，例如 my.domain.com): " domain
     if [ -z "$domain" ]; then
         echo "错误：域名不能为空！"
-        exit 1
+        return 1
     fi
 
     read -p "请输入 AnyTLS 的监听端口 (留空则随机): " anytls_port
@@ -350,14 +200,15 @@ EOF
     echo "=================================================="
 }
 
-# --- 函数: 安装 Shadowsocks ---
+# --- 函数: 配置 Shadowsocks ---
 install_shadowsocks() {
     if [ ! -f /usr/local/bin/sing-box ]; then
+        echo "sing-box 核心未安装，将首先为您安装核心..."
         install_core
     fi
 
     echo "--> 请输入 Shadowsocks 配置信息..."
-    read -p "请输入 Shadowsocks 的 UDP 端口 (留空则随机): " ss_port
+    read -p "请输入 Shadowsocks 的监听端口 (留空则随机): " ss_port
     if [ -z "$ss_port" ]; then
         while true; do
             ss_port=$(shuf -i 30001-65535 -n 1)
@@ -375,8 +226,8 @@ install_shadowsocks() {
     echo ""
     echo "--> 配置信息"
     echo "============================================="
-    echo "Shadowsocks 端口:      ${ss_port}"
-    echo "Shadowsocks 密码:      ${ss_password}"
+    echo "Shadowsocks 端口:    ${ss_port}"
+    echo "Shadowsocks 密码:    ${ss_password}"
     echo "============================================="
     echo "配置将在 2 秒后应用，按 Ctrl+C 取消"
     sleep 2
@@ -419,29 +270,30 @@ EOF
     echo "=================================================="
 }
 
-# --- 函数: 安装 ShadowTLS ---
+# --- 函数: 配置 ShadowTLS ---
 install_shadowtls() {
     if [ ! -f /usr/local/bin/sing-box ]; then
+        echo "sing-box 核心未安装，将首先为您安装核心..."
         install_core
     fi
 
     echo "--> 请输入 ShadowTLS 配置信息..."
-    read -p "请输入您的域名 (用于证书和SNI，例如 my.domain.com): " domain
+    read -p "请输入您的域名 (用于 SNI，例如 my.domain.com): " domain
     if [ -z "$domain" ]; then
         echo "错误：域名不能为空！"
-        exit 1
+        return 1
     fi
 
-    read -p "请输入 ShadowTLS 的监听端口 (留空则默认为 8443): " shadowtls_port
-    [ -z "$shadowtls_port" ] && shadowtls_port="8443"
+    read -p "请输入 ShadowTLS 的监听端口 (留空则默认为 443): " shadowtls_port
+    [ -z "$shadowtls_port" ] && shadowtls_port="443"
 
-    read -p "请输入 Shadowsocks 的 UDP 端口 (留空则随机): " ss_port
+    read -p "请输入 Shadowsocks 的本地端口 (留空则随机): " ss_port
     if [ -z "$ss_port" ]; then
         while true; do
             ss_port=$(shuf -i 30001-65535 -n 1)
             if [[ "${ss_port}" != "${shadowtls_port}" ]] && ! ss -lntu | grep -q ":${ss_port} "; then break; fi
         done
-        echo "    Shadowsocks 端口未输入，使用随机端口: ${ss_port}"
+        echo "    Shadowsocks 本地端口未输入，使用随机端口: ${ss_port}"
     fi
 
     read -p "请输入 ShadowTLS 的密码 (留空则随机生成): " stls_password
@@ -459,18 +311,16 @@ install_shadowtls() {
     echo ""
     echo "--> 配置信息"
     echo "============================================="
-    echo "域名 (Domain/SNI):     ${domain}"
-    echo "ShadowTLS 端口:        ${shadowtls_port}"
-    echo "ShadowTLS 密码:        ${stls_password}"
-    echo "Shadowsocks 端口:      ${ss_port}"
-    echo "Shadowsocks 密码:      ${ss_password}"
+    echo "域名 (Domain/SNI):    ${domain}"
+    echo "ShadowTLS 端口:       ${shadowtls_port}"
+    echo "ShadowTLS 密码:       ${stls_password}"
+    echo "Shadowsocks 密码:     ${ss_password}"
+    echo "(Shadowsocks 本地端口: ${ss_port})"
     echo "============================================="
     echo "配置将在 2 秒后应用，按 Ctrl+C 取消"
     sleep 2
 
-    generate_certificate "$domain"
-
-    echo "--> 正在创建 ShadowTLS 配置文件..."
+    echo "--> 正在创建 ShadowTLS + SS 配置文件..."
     cat > /etc/sing-box/config.json <<EOF
 {
     "inbounds": [
@@ -495,7 +345,7 @@ install_shadowtls() {
         {
             "type": "shadowsocks",
             "tag": "ss-in",
-            "listen": "::",
+            "listen": "127.0.0.1",
             "listen_port": ${ss_port},
             "method": "2022-blake3-aes-128-gcm",
             "password": "${ss_password}",
@@ -521,7 +371,7 @@ EOF
     echo ""
     echo "---------- 客户端配置信息 (ShadowTLS + SS2022) ----------"
     echo "请将下面的 Surge 格式节点信息复制到客户端中："
-    echo "SS-ShadowTLS = ss, ${ip_address}, ${shadowtls_port}, encrypt-method=2022-blake3-aes-128-gcm, password=${ss_password}, shadow-tls-password=${stls_password}, shadow-tls-sni=${domain}, shadow-tls-version=3, udp-relay=true, udp-port=${ss_port}"
+    echo "SS-ShadowTLS = ss, ${ip_address}, ${shadowtls_port}, encrypt-method=2022-blake3-aes-128-gcm, password=${ss_password}, shadow-tls-password=${stls_password}, shadow-tls-sni=${domain}, shadow-tls-version=3, udp-relay=true"
     echo ""
     echo "=================================================="
 }
@@ -534,7 +384,7 @@ while true; do
     read choice
     case $choice in
         1)
-            install_singbox
+            install_singbox_core
             ;;
         2)
             install_anytls
