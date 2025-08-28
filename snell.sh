@@ -73,7 +73,8 @@ install_snell() {
 
     read -p "请输入 Snell 的密码 (PSK，留空则随机生成): " snell_psk
     if [ -z "${snell_psk}" ]; then
-        snell_psk=$(< /dev/urandom tr -dc 'A-Za-z0-9!@#$%^&*()_+-=' | head -c 16)
+        # 生成一个16位的随机密码，包含大小写字母、数字和指定特殊字符 @%$^&/-_+
+        snell_psk=$(< /dev/urandom tr -dc 'A-Za-z0-9@%$^&/-_+' | head -c 16)
         echo "    密码未输入，使用随机密码: ${snell_psk}"
     fi
 
