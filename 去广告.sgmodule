@@ -47,4 +47,4 @@ abchina = type=http-response, pattern=^https?:\/\/mobilepaas\.abchina\.com\.cn:4
 12306 = type=http-request, pattern=^https?:\/\/ad\.12306\.cn\/ad\/ser\/getAdList, script-path=https://raw.githubusercontent.com/kokoryh/Script/master/js/12306.js, requires-body=true, timeout=60
 
 [MITM]
-hostname = %APPEND% home.mi.com, *.umetrip.com, ad.12306.cn,mobilepaas.abchina.com.cn, ossweb-img.qq.com, mlol.qt.qq.com, vv.video.qq.com, peisongapi.meituan.com, img.meituan.net, www.meituan.com, s3plus.meituan.net, flowplus.meituan.net, p*.meituan.net, wmapi.meituan.com, cdn.wup.huya.com, business.msstatic.com, cdnfile1.msstatic.com,live-ads.huya.com
+hostname = %APPEND% *.amap.com, home.mi.com, *.umetrip.com, ad.12306.cn,mobilepaas.abchina.com.cn, ossweb-img.qq.com, mlol.qt.qq.com, vv.video.qq.com, peisongapi.meituan.com, img.meituan.net, www.meituan.com, s3plus.meituan.net, flowplus.meituan.net, p*.meituan.net, wmapi.meituan.com, cdn.wup.huya.com, business.msstatic.com, cdnfile1.msstatic.com,live-ads.huya.com
