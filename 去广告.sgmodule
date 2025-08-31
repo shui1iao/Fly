@@ -11,6 +11,9 @@ DOMAIN,sdkconfig.ad.xiaomi.com,REJECT
 
 [URL Rewrite]
 
+# > xianyu
+^https?:\/\/acs\.m\.goofish\.com\/gw\/mtop.*splash\.ads - reject
+
 #航旅纵横
 ^https?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native - reject
 
@@ -38,7 +41,7 @@ DOMAIN,sdkconfig.ad.xiaomi.com,REJECT
 
 [Script]
 # > 高德地图_开屏广告@ddgksf2013
-amap = type=http-response,pattern=^https?:\/\/.*\.amap\.com\/ws\/valueadded\/alimama\/splash_screen,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/amap.js
+amap=type=http-response,pattern=^https?:\/\/.*\.amap\.com\/ws\/valueadded\/alimama\/splash_screen,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/amap.js
 hanglvzongheng.js =type=http-response, pattern=^https?:\/\/.*umetrip\.com\.cn\/gateway\/api\/umetrip\/native$, script-path=https://github.com/ddgksf2013/Scripts/raw/master/hanglvzongheng.js, requires-body=true, max-size=-1, timeout=60
 abchina = type=http-response, pattern=^https?:\/\/mobilepaas\.abchina\.com\.cn:441\/mgw\.htm, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/master/abchina.js, timeout=60
 12306 = type=http-request, pattern=^https?:\/\/ad\.12306\.cn\/ad\/ser\/getAdList, script-path=https://raw.githubusercontent.com/kokoryh/Script/master/js/12306.js, requires-body=true, timeout=60
