@@ -4,21 +4,23 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
     max-failed-times: 2
-    filter: "Sharon|BW|DMIT|Legend"
+    filter: "Sharon|BW|DMIT|Legend|NMC"
       
   - name: "Final"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
       - HK
-      - JP
       - SG
+      - TW
+      - JP
       - US
 
   - name: "AI"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
-    proxies: 
+    proxies:
+      - TW
       - US
       - JP
       - SG
@@ -29,6 +31,7 @@ proxy-groups:
     proxies: 
       - US
       - HK
+      - TW
       - SG
       - JP
 
@@ -38,6 +41,12 @@ proxy-groups:
     max-failed-times: 2
     include-all: true
     filter: "🇭🇰.*(Sharon|DMIT)"
+
+  - name: "TW"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
+    filter: "🇨🇳.*(NMC)"
 
   - name: "SG"
     type: url-test
@@ -61,7 +70,7 @@ proxy-groups:
     type: select
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
-    filter: "^(?!.*(BW|Sharon|DMIT|Legend)).*$"
+    filter: "^(?!.*(BW|Sharon|DMIT|Legend|NMC)).*$"
 
 
 rule-providers:
