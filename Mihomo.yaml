@@ -4,7 +4,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
     max-failed-times: 2
-    filter: "Sharon|BW|DMIT|HKT"
+    filter: "Sharon|BW|DMIT|Legend"
       
   - name: "Final"
     type: fallback
@@ -12,6 +12,7 @@ proxy-groups:
     proxies: 
       - HK
       - JP
+      - SG
       - US
 
   - name: "AI"
@@ -20,6 +21,7 @@ proxy-groups:
     proxies: 
       - US
       - JP
+      - SG
 
   - name: "Google"
     type: fallback
@@ -27,6 +29,7 @@ proxy-groups:
     proxies: 
       - US
       - HK
+      - SG
       - JP
 
   - name: "HK"
@@ -34,7 +37,13 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     max-failed-times: 2
     include-all: true
-    filter: "🇭🇰.*(Sharon|DMIT|HKT)"
+    filter: "🇭🇰.*(Sharon|DMIT)"
+
+  - name: "SG"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    filter: "🇸🇬.*(Legend)"
     
   - name: "JP"
     type: url-test
@@ -52,7 +61,7 @@ proxy-groups:
     type: select
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
-    filter: "^(?!.*(BW|Sharon|DMIT|HKT)).*$"
+    filter: "^(?!.*(BW|Sharon|DMIT|Legend)).*$"
 
 
 rule-providers:
@@ -154,7 +163,7 @@ rule-providers:
   
 rules:
   - DOMAIN,lite.cn2gias.uk,US
-  - DOMAIN,nodeseek.com,JP
+  - DOMAIN,nodeseek.com,SG
   - DOMAIN,emby-sharon.sakiko.de,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT  
   - RULE-SET,Speedtest,Proxy
