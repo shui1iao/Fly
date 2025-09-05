@@ -4,7 +4,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
     max-failed-times: 2
-    filter: "Sharon|BW|DMIT|Legend|NMC"
+    filter: "Sharon|BW|DMIT|Legend"
       
   - name: "Final"
     type: fallback
@@ -12,7 +12,6 @@ proxy-groups:
     proxies: 
       - HK
       - SG
-      - TW
       - JP
       - US
 
@@ -20,7 +19,6 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies:
-      - TW
       - US
       - JP
       - SG
@@ -31,7 +29,6 @@ proxy-groups:
     proxies: 
       - US
       - HK
-      - TW
       - SG
       - JP
 
@@ -41,12 +38,6 @@ proxy-groups:
     max-failed-times: 2
     include-all: true
     filter: "🇭🇰.*(Sharon|DMIT)"
-
-  - name: "TW"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
-    filter: "🇨🇳.*(NMC)"
 
   - name: "SG"
     type: url-test
