@@ -331,7 +331,7 @@ Type=simple
 User=root
 Restart=on-failure
 RestartSec=5s
-ExecStart=/usr/local/bin/shadowtls --v3 --strict server --listen [::]:${LISTEN_PORT} --server 127.0.0.1:${SS_PORT} --tls ${SNI_HOST}:443 --password ${PASSWORD}
+ExecStart=/usr/local/bin/shadowtls --v3 --strict server --listen 0.0.0.0:${LISTEN_PORT} --server 127.0.0.1:${SS_PORT} --tls ${SNI_HOST}:443 --password ${PASSWORD}
 
 [Install]
 WantedBy=multi-user.target
@@ -423,7 +423,7 @@ modify_config_shadowtls() {
         PASSWORD=$(echo "$COMBINED_CHARS" | grep -o . | shuf | tr -d '\n')
     fi
 
-    local exec_line="ExecStart=/usr/local/bin/shadowtls --v3 --strict server --listen [::]:${LISTEN_PORT} --server 127.0.0.1:${SS_PORT} --tls ${SNI_HOST}:443 --password ${PASSWORD}"
+    local exec_line="ExecStart=/usr/local/bin/shadowtls --v3 --strict server --listen 0.0.0.0:${LISTEN_PORT} --server 127.0.0.1:${SS_PORT} --tls ${SNI_HOST}:443 --password ${PASSWORD}"
     sed -i "s|^ExecStart=.*|$exec_line|" /etc/systemd/system/shadowtls.service
     
     systemctl daemon-reload
