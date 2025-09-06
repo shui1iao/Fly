@@ -31,7 +31,7 @@ check_anytls_status() {
 show_menu() {
     clear
     echo "=================================================="
-    echo "            anytls-go 综合管理脚本"
+    echo "          anytls-go 综合管理脚本"
     echo "=================================================="
     check_anytls_status
     echo "--------------------------------------------------"
@@ -64,14 +64,14 @@ install_anytls() {
     fi
 
     echo "--> 正在准备安装环境..."
-    if ! command -v curl &> /dev/null || ! command -v unzip &> /dev/null; then
-        echo "--> 检测到 curl 或 unzip 未安装，正在尝试自动安装..."
+    if ! command -v curl &> /dev/null || ! command -v unzip &> /dev/null || ! command -v shuf &> /dev/null; then
+        echo "--> 检测到 curl, unzip 或 shuf 未安装，正在尝试自动安装..."
         if command -v apt-get &> /dev/null; then
-            apt-get update && apt-get install -y curl unzip
+            apt-get update && apt-get install -y curl unzip coreutils
         elif command -v yum &> /dev/null; then
-            yum install -y curl unzip
+            yum install -y curl unzip coreutils
         else
-            echo -e "${RED}无法确定包管理器，请手动安装 curl 和 unzip 后再运行此脚本。${NC}"
+            echo -e "${RED}无法确定包管理器，请手动安装 curl, unzip, coreutils (shuf) 后再运行此脚本。${NC}"
             exit 1
         fi
     fi
@@ -100,7 +100,22 @@ install_anytls() {
 
     read -p "请输入 anytls 的密码 (留空则随机生成): " PASSWORD
     if [ -z "$PASSWORD" ]; then
-        PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9@%\$\^&/-_+' | head -c 16)
+        # --- 新的密码生成逻辑 ---
+        # 1. 生成14位字母和数字
+        ALPHANUM=$(< /dev/urandom tr -dc 'A-Za-z0-9' | head -c 14)
+        
+        # 2. 从 '-/@' 中随机选择两个不同的特殊字符
+        SPECIAL_CHARS='-/@'
+        S1_INDEX=$(($RANDOM % 3))
+        S1=${SPECIAL_CHARS:$S1_INDEX:1}
+        REMAINING_CHARS=${SPECIAL_CHARS//$S1/} # 移除已选的字符
+        S2_INDEX=$(($RANDOM % 2))
+        S2=${REMAINING_CHARS:$S2_INDEX:1}
+        
+        # 3. 组合所有字符并打乱顺序
+        COMBINED_CHARS="${ALPHANUM}${S1}${S2}"
+        PASSWORD=$(echo "$COMBINED_CHARS" | grep -o . | shuf | tr -d '\n')
+        
         echo -e "    密码未输入，使用随机密码: ${GREEN}$PASSWORD${NC}"
     fi
 
@@ -191,7 +206,22 @@ modify_config() {
 
     read -p "请输入新的密码 (留空则随机生成): " PASSWORD
     if [ -z "$PASSWORD" ]; then
-        PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9@%\$\^&/-_+' | head -c 16)
+        # --- 新的密码生成逻辑 ---
+        # 1. 生成14位字母和数字
+        ALPHANUM=$(< /dev/urandom tr -dc 'A-Za-z0-9' | head -c 14)
+        
+        # 2. 从 '-/@' 中随机选择两个不同的特殊字符
+        SPECIAL_CHARS='-/@'
+        S1_INDEX=$(($RANDOM % 3))
+        S1=${SPECIAL_CHARS:$S1_INDEX:1}
+        REMAINING_CHARS=${SPECIAL_CHARS//$S1/} # 移除已选的字符
+        S2_INDEX=$(($RANDOM % 2))
+        S2=${REMAINING_CHARS:$S2_INDEX:1}
+        
+        # 3. 组合所有字符并打乱顺序
+        COMBINED_CHARS="${ALPHANUM}${S1}${S2}"
+        PASSWORD=$(echo "$COMBINED_CHARS" | grep -o . | shuf | tr -d '\n')
+        
         echo -e "    密码未输入，使用随机密码: ${GREEN}$PASSWORD${NC}"
     fi
 
@@ -254,7 +284,7 @@ view_config() {
     fi
 
     echo "------------------------------------------"
-    echo "         anytls 当前配置信息"
+    echo "          anytls 当前配置信息"
     echo "------------------------------------------"
     echo -e "端口 (Port)      : ${GREEN}${port}${NC}"
     echo -e "密码 (Password)  : ${GREEN}${password}${NC}"
@@ -342,4 +372,3 @@ while true; do
     echo "按 Enter 键返回菜单..."
     read -r
 done
-
