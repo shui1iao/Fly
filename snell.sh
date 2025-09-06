@@ -234,7 +234,7 @@ view_config() {
         cat /etc/snell/snell-server.conf
         echo ""
         ip_address=$(curl -s https://ipv4.icanhazip.com || curl -s https://api.ipify.org)
-        port=$(grep "listen" /etc/snell/snell-server.conf | cut -d':' -f2)
+        port=$(grep "listen" /etc/snell/snell-server.conf | awk -F':' '{print $NF}')
         psk=$(grep "psk" /etc/snell/snell-server.conf | cut -d'=' -f2 | tr -d ' ')
         echo "--> 客户端配置信息："
         echo "vps = snell, ${ip_address:-<您的服务器IP>}, ${port}, psk=${psk}, version=5"
