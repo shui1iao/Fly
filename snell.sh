@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ==============================================================================
-# Snell v5 自动化管理脚本
+# Snell v5 管理脚本
 # ==============================================================================
 
 # --- 函数: 检查 Snell 安装和运行状态 ---
@@ -23,21 +23,21 @@ check_snell_status() {
 
 # --- 函数: 显示菜单 ---
 show_menu() {
-
     echo "=================================================="
-    echo "        Snell v5 管理脚本"
+    echo "          Snell v5 管理脚本"
     echo "=================================================="
     check_snell_status
     echo "1. 安装 Snell"
-    echo "2. 修改 Snell 配置"
-    echo "3. 查看 Snell 配置"
-    echo "4. 查看 Snell 运行状态"
-    echo "5. 启动 Snell 服务"
-    echo "6. 停止 Snell 服务"
-    echo "7. 重启 Snell 服务"
+    echo "2. 卸载 Snell"
+    echo "3. 修改 Snell 配置"
+    echo "4. 查看 Snell 配置"
+    echo "5. 查看 Snell 运行状态"
+    echo "6. 启动 Snell 服务"
+    echo "7. 停止 Snell 服务"
+    echo "8. 重启 Snell 服务"
     echo "0. 退出脚本"
     echo "=================================================="
-    echo -n "请输入选项 [0-7]: "
+    echo -n "请输入选项 [0-8]: "
 }
 
 # --- 函数: 检查 root 权限 ---
@@ -93,7 +93,7 @@ install_snell() {
 
     read -p "请输入 Snell 的密码 (PSK，留空则随机生成): " snell_psk
     if [ -z "${snell_psk}" ]; then
-        # 生成一个16位的随机密码，包含大小写字母、数字和指定特殊字符 @%$^&/-_+
+        # 生成一个16位的随机密码
         snell_psk=$(< /dev/urandom tr -dc 'A-Za-z0-9@%$^&/-_+' | head -c 16)
         echo "    密码未输入，使用随机密码: ${snell_psk}"
     fi
@@ -163,6 +163,39 @@ EOF
     echo "=================================================="
 }
 
+# --- 函数: 卸载 Snell ---
+uninstall_snell() {
+    echo "警告：此操作将彻底卸载 Snell 并删除所有相关文件！"
+    read -p "确定要继续吗？(y/n): " confirm
+    if [ "$confirm" != "y" ]; then
+        echo "卸载操作已取消。"
+        return
+    fi
+
+    echo "--> 正在停止并禁用 Snell 服务..."
+    systemctl stop snell > /dev/null 2>&1
+    systemctl disable snell > /dev/null 2>&1
+
+    echo "--> 正在删除 Snell systemd 服务文件..."
+    rm -f /etc/systemd/system/snell.service
+    systemctl daemon-reload
+
+    echo "--> 正在删除 Snell 可执行文件..."
+    rm -f /usr/local/bin/snell-server
+
+    echo "--> 正在删除 Snell 配置文件..."
+    rm -rf /etc/snell
+
+    echo "--> 正在删除此脚本..."
+    rm -- "$0"
+
+    echo ""
+    echo "✅ Snell 已被彻底卸载。"
+    echo "脚本自身也已被删除。退出。"
+    exit 0
+}
+
+
 # --- 函数: 修改 Snell 配置 ---
 modify_config() {
     if [ -f /etc/snell/snell-server.conf ]; then
@@ -180,7 +213,6 @@ modify_config() {
 
         read -p "请输入新的 Snell 密码 (PSK，留空则随机生成): " snell_psk
         if [ -z "${snell_psk}" ]; then
-            # 生成一个16位的随机密码，包含大小写字母、数字和指定特殊字符 @%$^&/-_+
             snell_psk=$(< /dev/urandom tr -dc 'A-Za-z0-9@%$^&/-_+' | head -c 16)
             echo "    密码未输入，使用随机密码: ${snell_psk}"
         fi
@@ -234,6 +266,7 @@ view_config() {
         cat /etc/snell/snell-server.conf
         echo ""
         ip_address=$(curl -s https://ipv4.icanhazip.com || curl -s https://api.ipify.org)
+        # --- [BUG修复] 使用 awk 准确提取端口号 ---
         port=$(grep "listen" /etc/snell/snell-server.conf | awk -F':' '{print $NF}')
         psk=$(grep "psk" /etc/snell/snell-server.conf | cut -d'=' -f2 | tr -d ' ')
         echo "--> 客户端配置信息："
@@ -319,21 +352,24 @@ while true; do
             install_snell
             ;;
         2)
-            modify_config
+            uninstall_snell
             ;;
         3)
-            view_config
+            modify_config
             ;;
         4)
-            check_snell_running
+            view_config
             ;;
         5)
-            start_snell
+            check_snell_running
             ;;
         6)
-            stop_snell
+            start_snell
             ;;
         7)
+            stop_snell
+            ;;
+        8)
             restart_snell
             ;;
         0)
@@ -341,7 +377,7 @@ while true; do
             exit 0
             ;;
         *)
-            echo "无效选项，请输入 0-7。"
+            echo "无效选项，请输入 0-8。"
             ;;
     esac
     echo ""
