@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # =================================================================
-# shadowsocks-rust & shadow-tls 服务器端综合管理脚本
+# Shadowsocks-rust & shadow-tls 服务器端综合管理脚本
 # 描述: 提供一个主菜单，分别进入 ss-rust 和 shadow-tls 的管理界面。
 # =================================================================
 
@@ -249,13 +249,13 @@ STLS_URL="https://github.com/ihciah/shadow-tls/releases/download/v0.2.25/shadow-
 
 # --- 函数: 检查 shadow-tls 安装和运行状态 ---
 check_shadow_tls_status() {
-    if [ -f /usr/local/bin/shadow-tls ] && [ -f /etc/systemd/system/shadow-tls.service ]; then
+    if [ -f /usr/local/bin/shadow-tls ] && [ -f /etc/systemd/system/shadowtls.service ]; then
         echo -e "${GREEN}shadow-tls 状态: 已安装${NC}"
     else
         echo -e "${RED}shadow-tls 状态: 未安装${NC}"
     fi
 
-    if systemctl is-active --quiet shadow-tls; then
+    if systemctl is-active --quiet shadowtls; then
         echo -e "${GREEN}服务状态      : 运行中${NC}"
     else
         echo -e "${RED}服务状态      : 未运行${NC}"
@@ -283,10 +283,10 @@ install_shadow_tls() {
     [ -z "$SNI_HOST" ] && SNI_HOST="www.muji.com"
     
     read -p "请输入 shadow-tls 密码 (留空随机生成): " PASSWORD
-    [ -z "$PASSWORD" ] && PASSWORD=$(head -c 16 /dev/urandom | base64 -w 0)
+    [ -z "$PASSWORD" ] && PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9@%$^&/-_+' | head -c 16)
 
     echo "--> 正在创建 systemd 服务..."
-    cat > /etc/systemd/system/shadow-tls.service <<EOF
+    cat > /etc/systemd/system/shadowtls.service <<EOF
 [Unit]
 Description=Shadow-TLS Server Service
 After=network-online.target
@@ -302,8 +302,8 @@ WantedBy=multi-user.target
 EOF
 
     systemctl daemon-reload
-    systemctl enable shadow-tls > /dev/null 2>&1
-    systemctl start shadow-tls
+    systemctl enable shadowtls > /dev/null 2>&1
+    systemctl start shadowtls
     echo -e "${GREEN}🎉 shadow-tls 服务器安装并配置成功！${NC}"
     view_config_shadow_tls
 }
@@ -317,9 +317,9 @@ uninstall_shadow_tls() {
     if [[ ! "$confirm" =~ ^[yY]([eE][sS])?$ ]]; then
         echo "卸载操作已取消。"; return; fi
     
-    systemctl stop shadow-tls
-    systemctl disable shadow-tls > /dev/null 2>&1
-    rm -f /etc/systemd/system/shadow-tls.service
+    systemctl stop shadowtls
+    systemctl disable shadowtls > /dev/null 2>&1
+    rm -f /etc/systemd/system/shadowtls.service
     rm -f /usr/local/bin/shadow-tls
     systemctl daemon-reload
     echo -e "${GREEN}shadow-tls 已成功卸载。${NC}"
@@ -327,32 +327,39 @@ uninstall_shadow_tls() {
 
 # --- 函数: 查看 shadow-tls 配置 ---
 view_config_shadow_tls() {
-    if [ ! -f /etc/systemd/system/shadow-tls.service ]; then
+    if [ ! -f /etc/systemd/system/shadowtls.service ]; then
         echo -e "${RED}shadow-tls 未安装。${NC}"; return; fi
 
-    local exec_start=$(grep 'ExecStart=' /etc/systemd/system/shadow-tls.service)
+    local exec_start=$(grep 'ExecStart=' /etc/systemd/system/shadowtls.service)
     local listen_port=$(echo "$exec_start" | sed -n 's/.*--listen \[::\]:\([0-9]*\).*/\1/p')
     local server_port=$(echo "$exec_start" | sed -n 's/.*--server 127.0.0.1:\([0-9]*\).*/\1/p')
     local sni_host=$(echo "$exec_start" | sed -n 's/.*--tls \([^:]*\):443.*/\1/p')
-    local password=$(echo "$exec_start" | sed -n 's/.*--password \([^ ]*\).*/\1/p')
+    local stls_password=$(echo "$exec_start" | sed -n 's/.*--password \([^ ]*\).*/\1/p')
     local ip_address=$(curl -s https://ipv4.icanhazip.com || echo "<您的服务器IP>")
+    
+    local ss_password="<ss密码>"
+    local ss_method="2022-blake3-aes-128-gcm"
+    if [ -f /etc/ss-rust/config.json ] && ensure_jq; then
+        ss_password=$(jq -r .password /etc/ss-rust/config.json)
+        ss_method=$(jq -r .method /etc/ss-rust/config.json)
+    fi
 
     echo "------------------------------------------"
     echo "        shadow-tls 当前配置信息"
     echo "------------------------------------------"
     echo -e "监听端口   : ${GREEN}${listen_port}${NC}"
-    echo -e "密码       : ${GREEN}${password}${NC}"
+    echo -e "密码       : ${GREEN}${stls_password}${NC}"
     echo -e "后端 SS 端口: ${GREEN}${server_port}${NC}"
     echo -e "伪装域名   : ${GREEN}${sni_host}${NC}"
     echo "------------------------------------------"
-    echo "Surge 客户端配置 (请手动填入您的 ss-rust 信息):"
-    echo -e "${GREEN}VPS = ss, ${ip_address}, ${server_port}, encrypt-method=<ss-method>, password=<ss-password>, shadow-tls-password=${password}, shadow-tls-sni=${sni_host}, shadow-tls-version=v3, udp-relay=true${NC}"
+    echo "Surge 客户端配置:"
+    echo -e "${GREEN}VPS = ss, ${ip_address}, ${listen_port}, encrypt-method=${ss_method}, password=${ss_password}, shadow-tls-password=${stls_password}, shadow-tls-sni=${sni_host}, shadow-tls-version=v3, udp-relay=true, udp-port=${server_port}${NC}"
     echo "------------------------------------------"
 }
 
 # --- 函数: 修改 shadow-tls 配置 ---
 modify_config_shadow_tls() {
-    if [ ! -f /etc/systemd/system/shadow-tls.service ]; then
+    if [ ! -f /etc/systemd/system/shadowtls.service ]; then
         echo -e "${RED}shadow-tls 未安装。${NC}"; return; fi
 
     read -p "请输入新的 shadow-tls 监听端口 (留空随机): " LISTEN_PORT
@@ -363,30 +370,30 @@ modify_config_shadow_tls() {
         read -p "${RED}后端 ss-rust 端口不能为空，请重新输入: ${NC}" SS_PORT
     done
 
-    read -p "请输入新的伪装域名 (留空默认 www.muji.com): " SNI_HOST
+    read p "请输入新的伪装域名 (留空默认 www.muji.com): " SNI_HOST
     [ -z "$SNI_HOST" ] && SNI_HOST="www.muji.com"
     
     read -p "请输入新的 shadow-tls 密码 (留空随机): " PASSWORD
-    [ -z "$PASSWORD" ] && PASSWORD=$(head -c 16 /dev/urandom | base64 -w 0)
+    [ -z "$PASSWORD" ] && PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9@%$^&/-_+' | head -c 16)
 
     local exec_line="ExecStart=/usr/local/bin/shadow-tls --fastopen --v3 --strict server --wildcard-sni=authed --listen [::]:${LISTEN_PORT} --server 127.0.0.1:${SS_PORT} --tls ${SNI_HOST}:443 --password ${PASSWORD}"
-    sed -i "s|^ExecStart=.*|$exec_line|" /etc/systemd/system/shadow-tls.service
+    sed -i "s|^ExecStart=.*|$exec_line|" /etc/systemd/system/shadowtls.service
     
     systemctl daemon-reload
-    systemctl restart shadow-tls
+    systemctl restart shadowtls
     echo -e "${GREEN}🎉 shadow-tls 配置已更新！${NC}"
     view_config_shadow_tls
 }
 
 # --- 函数: shadow-tls 服务管理 ---
 manage_shadow_tls_service() {
-    if [ ! -f /etc/systemd/system/shadow-tls.service ]; then
+    if [ ! -f /etc/systemd/system/shadowtls.service ]; then
         echo -e "${RED}shadow-tls 未安装。${NC}"; return; fi
     case $1 in
-        start) systemctl start shadow-tls && echo -e "${GREEN}服务启动成功。${NC}" || echo -e "${RED}服务启动失败。${NC}" ;;
-        stop) systemctl stop shadow-tls && echo -e "${GREEN}服务已停止。${NC}" || echo -e "${RED}服务停止失败。${NC}" ;;
-        restart) systemctl restart shadow-tls && echo -e "${GREEN}服务重启成功。${NC}" || echo -e "${RED}服务重启失败。${NC}" ;;
-        status) systemctl status shadow-tls ;;
+        start) systemctl start shadowtls && echo -e "${GREEN}服务启动成功。${NC}" || echo -e "${RED}服务启动失败。${NC}" ;;
+        stop) systemctl stop shadowtls && echo -e "${GREEN}服务已停止。${NC}" || echo -e "${RED}服务停止失败。${NC}" ;;
+        restart) systemctl restart shadowtls && echo -e "${GREEN}服务重启成功。${NC}" || echo -e "${RED}服务重启失败。${NC}" ;;
+        status) systemctl status shadowtls ;;
     esac
 }
 
@@ -456,3 +463,4 @@ main_menu() {
 check_root
 main_menu
 echo "脚本已退出。"
+
