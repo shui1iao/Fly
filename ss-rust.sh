@@ -18,6 +18,19 @@ check_root() {
     fi
 }
 
+# --- 新增函数: 检查是否所有组件都已卸载，如果是则删除脚本 ---
+check_and_delete_script_if_all_uninstalled() {
+    # 检查 ss-rust 和 shadowtls 的二进制文件是否都不存在
+    if [ ! -f /usr/local/bin/ss-rust ] && [ ! -f /usr/local/bin/shadowtls ]; then
+        echo -e "${GREEN}检测到 ss-rust 和 shadowtls 均已卸载。${NC}"
+        echo "--> 正在删除此脚本..."
+        rm -- "$0"
+        echo "脚本自身也已被删除。即将退出。"
+        exit 0
+    fi
+}
+
+
 # =================================================================
 # S-S-R-U-S-T  M-A-N-A-G-E-M-E-N-T
 # =================================================================
@@ -156,6 +169,9 @@ uninstall_ss_rust() {
     rm -rf /etc/ss-rust
     systemctl daemon-reload
     echo -e "${GREEN}ss-rust 已成功卸载。${NC}"
+    
+    # 调用检查函数
+    check_and_delete_script_if_all_uninstalled
 }
 
 # --- 函数: 修改 ss-rust 配置 ---
@@ -343,6 +359,9 @@ uninstall_shadowtls() {
     rm -f /usr/local/bin/shadowtls
     systemctl daemon-reload
     echo -e "${GREEN}shadowtls 已成功卸载。${NC}"
+
+    # 调用检查函数
+    check_and_delete_script_if_all_uninstalled
 }
 
 # --- 函数: 查看 shadowtls 配置 ---
@@ -374,7 +393,7 @@ view_config_shadowtls() {
     echo -e "伪装域名    : ${GREEN}${sni_host}${NC}"
     echo "------------------------------------------"
     echo "Surge 客户端配置:"
-    echo -e "${GREEN}VPS = ss, ${ip_address}, ${listen_port}, encrypt-method=${ss_method}, password=${ss_password}, shadow-tls-password=${stls_password}, shadow-tls-sni=${sni_host}, shadow-tls-version=3, udp-relay=true${NC}"
+    echo -e "${GREEN}VPS = ss, ${ip_address}, ${listen_port}, encrypt-method=${ss_method}, password=${ss_password}, shadow-tls-password=${stls_password}, shadow-tls-sni=${sni_host}, shadow-tls-version=v3, udp-relay=true${NC}"
     echo "------------------------------------------"
 }
 
