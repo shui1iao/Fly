@@ -143,7 +143,7 @@ EOF
     echo -e "密码 (Password)  : ${GREEN}${PASSWORD}${NC}"
     echo "------------------------------------------"
     echo "mihimo 客户端配置:"
-    echo -e "${GREEN}{ \"name\": \"VPS\", \"type\": \"anytls\", \"server\": \"${ip_address}\", \"port\": ${PORT}, \"password\": \"${PASSWORD}\", \"client-fingerprint\": \"chrome\", \"udp\": true, \"skip-cert-verify\": true }${NC}"
+    echo -e "${GREEN}  - { \"name\": \"VPS\", \"type\": \"anytls\", \"server\": \"${ip_address}\", \"port\": ${PORT}, \"password\": \"${PASSWORD}\", \"client-fingerprint\": \"chrome\", \"udp\": true, \"skip-cert-verify\": true }${NC}"
     echo "------------------------------------------"
 }
 
