@@ -19,7 +19,7 @@ check_root() {
 }
 
 # =================================================================
-# S-S-R-U-S-T   M-A-N-A-G-E-M-E-N-T
+# S-S-R-U-S-T  M-A-N-A-G-E-M-E-N-T
 # =================================================================
 
 # --- ss-rust 变量定义 ---
@@ -72,11 +72,11 @@ install_ss_rust() {
 
     echo "--> 正在准备安装环境..."
     if command -v apt-get &> /dev/null; then
-         apt-get update && apt-get install -y wget tar xz-utils openssl jq
+         apt-get update && apt-get install -y wget tar xz-utils openssl jq coreutils
     elif command -v yum &> /dev/null; then
-         yum install -y wget tar xz-utils openssl jq
+         yum install -y wget tar xz-utils openssl jq coreutils
     else
-         echo -e "${RED}无法确定包管理器，请手动安装 wget, tar, xz-utils, openssl, jq。${NC}"
+         echo -e "${RED}无法确定包管理器，请手动安装 wget, tar, xz-utils, openssl, jq, coreutils。${NC}"
          exit 1
     fi
 
@@ -102,7 +102,15 @@ install_ss_rust() {
 
     echo "--> 正在创建配置文件..."
     cat > /etc/ss-rust/config.json <<EOF
-{ "server": "0.0.0.0", "server_port": ${PORT}, "password": "${PASSWORD}", "method": "2022-blake3-aes-128-gcm", "timeout": 300, "fast_open": false, "mode": "tcp_and_udp" }
+{
+    "server": "0.0.0.0",
+    "server_port": ${PORT},
+    "password": "${PASSWORD}",
+    "method": "2022-blake3-aes-128-gcm",
+    "timeout": 300,
+    "fast_open": false,
+    "mode": "tcp_and_udp"
+}
 EOF
 
     echo "--> 正在创建 systemd 服务..."
@@ -110,10 +118,12 @@ EOF
 [Unit]
 Description=Shadowsocks Rust Server
 After=network.target
+
 [Service]
 ExecStart=/usr/local/bin/ss-rust -c /etc/ss-rust/config.json
 Restart=always
 User=root
+
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -179,7 +189,7 @@ view_config_ss_rust() {
     local ip_address=$(curl -s https://ipv4.icanhazip.com || echo "<您的服务器IP>")
 
     echo "------------------------------------------"
-    echo "         ss-rust 当前配置信息"
+    echo "          ss-rust 当前配置信息"
     echo "------------------------------------------"
     echo -e "端口 (Port)      : ${GREEN}${port}${NC}"
     echo -e "密码 (Password)  : ${GREEN}${password}${NC}"
@@ -207,7 +217,7 @@ ss_rust_menu() {
     while true; do
         clear
         echo "=================================================="
-        echo "           shadowsocks-rust 管理界面"
+        echo "            shadowsocks-rust 管理界面"
         echo "=================================================="
         check_ss_rust_status
         echo "--------------------------------------------------"
@@ -241,7 +251,7 @@ ss_rust_menu() {
 
 
 # =================================================================
-# S-H-A-D-O-W-T-L-S   M-A-N-A-G-E-M-E-N-T
+# S-H-A-D-O-W-T-L-S  M-A-N-A-G-E-M-E-N-T
 # =================================================================
 
 # --- shadowtls 变量定义 ---
@@ -271,19 +281,26 @@ install_shadowtls() {
     curl -L "$STLS_URL" -o /usr/local/bin/shadowtls
     chmod +x /usr/local/bin/shadowtls
 
-    read -p "请输入 shadowtls 监听端口 (如 443, 留空随机): " LISTEN_PORT
-    [ -z "$LISTEN_PORT" ] && LISTEN_PORT=$((RANDOM % 55536 + 10000))
+    read -p "请输入 shadowtls 监听端口 (留空默认 8443): " LISTEN_PORT
+    [ -z "$LISTEN_PORT" ] && LISTEN_PORT=8443
     
     read -p "请输入后端的 ss-rust 端口: " SS_PORT
     while [ -z "$SS_PORT" ]; do
         read -p "${RED}后端 ss-rust 端口不能为空，请重新输入: ${NC}" SS_PORT
     done
 
-    read -p "请输入伪装域名 (如 www.bing.com, 留空默认): " SNI_HOST
+    read -p "请输入伪装域名 (留空默认 www.muji.com): " SNI_HOST
     [ -z "$SNI_HOST" ] && SNI_HOST="www.muji.com"
     
     read -p "请输入 shadowtls 密码 (留空随机生成): " PASSWORD
-    [ -z "$PASSWORD" ] && PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9@%$^&/-_+' | head -c 16)
+    if [ -z "$PASSWORD" ]; then
+        ALPHANUM=$(< /dev/urandom tr -dc 'A-Za-z0-9' | head -c 14)
+        SPECIAL_CHARS='-/@'
+        S1_INDEX=$(($RANDOM % 3)); S1=${SPECIAL_CHARS:$S1_INDEX:1}
+        REMAINING_CHARS=${SPECIAL_CHARS//$S1/}; S2_INDEX=$(($RANDOM % 2)); S2=${REMAINING_CHARS:$S2_INDEX:1}
+        COMBINED_CHARS="${ALPHANUM}${S1}${S2}"
+        PASSWORD=$(echo "$COMBINED_CHARS" | grep -o . | shuf | tr -d '\n')
+    fi
 
     echo "--> 正在创建 systemd 服务..."
     cat > /etc/systemd/system/shadowtls.service <<EOF
@@ -291,6 +308,7 @@ install_shadowtls() {
 Description=ShadowTLS Server Service
 After=network-online.target
 Wants=network-online.target systemd-networkd-wait-online.service
+
 [Service]
 LimitNOFILE=32767
 Type=simple
@@ -298,6 +316,7 @@ User=root
 Restart=on-failure
 RestartSec=5s
 ExecStart=/usr/local/bin/shadowtls --v3 --strict server --listen [::]:${LISTEN_PORT} --server 127.0.0.1:${SS_PORT} --tls ${SNI_HOST}:443 --password ${PASSWORD}
+
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -347,15 +366,15 @@ view_config_shadowtls() {
     fi
 
     echo "------------------------------------------"
-    echo "        shadowtls 当前配置信息"
+    echo "          shadowtls 当前配置信息"
     echo "------------------------------------------"
-    echo -e "监听端口   : ${GREEN}${listen_port}${NC}"
-    echo -e "密码       : ${GREEN}${stls_password}${NC}"
+    echo -e "监听端口    : ${GREEN}${listen_port}${NC}"
+    echo -e "密码        : ${GREEN}${stls_password}${NC}"
     echo -e "后端 SS 端口: ${GREEN}${server_port}${NC}"
-    echo -e "伪装域名   : ${GREEN}${sni_host}${NC}"
+    echo -e "伪装域名    : ${GREEN}${sni_host}${NC}"
     echo "------------------------------------------"
     echo "Surge 客户端配置:"
-    echo -e "${GREEN}VPS = ss, ${ip_address}, ${listen_port}, encrypt-method=${ss_method}, password=${ss_password}, shadow-tls-password=${stls_password}, shadow-tls-sni=${sni_host}, shadow-tls-version=v3, udp-relay=true, udp-port=${server_port}${NC}"
+    echo -e "${GREEN}VPS = ss, ${ip_address}, ${listen_port}, encrypt-method=${ss_method}, password=${ss_password}, shadow-tls-password=${stls_password}, shadow-tls-sni=${sni_host}, shadow-tls-version=v3, udp-relay=true${NC}"
     echo "------------------------------------------"
 }
 
@@ -364,8 +383,8 @@ modify_config_shadowtls() {
     if [ ! -f /etc/systemd/system/shadowtls.service ]; then
         echo -e "${RED}shadowtls 未安装。${NC}"; return; fi
 
-    read -p "请输入新的 shadowtls 监听端口 (留空随机): " LISTEN_PORT
-    [ -z "$LISTEN_PORT" ] && LISTEN_PORT=$((RANDOM % 55536 + 10000))
+    read -p "请输入新的 shadowtls 监听端口 (留空默认 8443): " LISTEN_PORT
+    [ -z "$LISTEN_PORT" ] && LISTEN_PORT=8443
     
     read -p "请输入新的后端 ss-rust 端口: " SS_PORT
     while [ -z "$SS_PORT" ]; do
@@ -376,7 +395,14 @@ modify_config_shadowtls() {
     [ -z "$SNI_HOST" ] && SNI_HOST="www.muji.com"
     
     read -p "请输入新的 shadowtls 密码 (留空随机): " PASSWORD
-    [ -z "$PASSWORD" ] && PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9@%$^&/-_+' | head -c 16)
+    if [ -z "$PASSWORD" ]; then
+        ALPHANUM=$(< /dev/urandom tr -dc 'A-Za-z0-9' | head -c 14)
+        SPECIAL_CHARS='-/@'
+        S1_INDEX=$(($RANDOM % 3)); S1=${SPECIAL_CHARS:$S1_INDEX:1}
+        REMAINING_CHARS=${SPECIAL_CHARS//$S1/}; S2_INDEX=$(($RANDOM % 2)); S2=${REMAINING_CHARS:$S2_INDEX:1}
+        COMBINED_CHARS="${ALPHANUM}${S1}${S2}"
+        PASSWORD=$(echo "$COMBINED_CHARS" | grep -o . | shuf | tr -d '\n')
+    fi
 
     local exec_line="ExecStart=/usr/local/bin/shadowtls --v3 --strict server --listen [::]:${LISTEN_PORT} --server 127.0.0.1:${SS_PORT} --tls ${SNI_HOST}:443 --password ${PASSWORD}"
     sed -i "s|^ExecStart=.*|$exec_line|" /etc/systemd/system/shadowtls.service
@@ -404,7 +430,7 @@ shadowtls_menu() {
     while true; do
         clear
         echo "=================================================="
-        echo "              shadowtls 管理界面"
+        echo "               shadowtls 管理界面"
         echo "=================================================="
         check_shadowtls_status
         echo "--------------------------------------------------"
@@ -438,13 +464,13 @@ shadowtls_menu() {
 
 
 # =================================================================
-# M-A-I-N   M-E-N-U
+# M-A-I-N  M-E-N-U
 # =================================================================
 main_menu() {
     while true; do
         clear
         echo "=================================================="
-        echo "      SS-Rust & ShadowTLS 综合管理脚本"
+        echo "       SS-Rust & ShadowTLS 综合管理脚本"
         echo "=================================================="
         echo "1. shadowsocks-rust 管理"
         echo "2. shadowtls 管理"
@@ -465,4 +491,3 @@ main_menu() {
 check_root
 main_menu
 echo "脚本已退出。"
-
