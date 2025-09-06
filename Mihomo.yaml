@@ -45,7 +45,7 @@ proxy-groups:
   - name: "TW"
     type: url-test
     include-all: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
     filter: "🇨🇳.*(NMC)"
     
   - name: "SG"
