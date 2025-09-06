@@ -23,10 +23,12 @@ check_snell_status() {
 
 # --- 函数: 显示菜单 ---
 show_menu() {
+    clear
     echo "=================================================="
     echo "          Snell v5 管理脚本"
     echo "=================================================="
     check_snell_status
+    echo "--------------------------------------------------"
     echo "1. 安装 Snell"
     echo "2. 卸载 Snell"
     echo "3. 修改 Snell 配置"
@@ -51,12 +53,13 @@ check_root() {
 # --- 函数: 安装 Snell ---
 install_snell() {
     # --- 步骤 1: 更新软件包列表并安装必要工具 ---
-    echo "--> 更新软件包列表并安装必要工具 (nano, wget, unzip)..."
+    echo "--> 更新软件包列表并安装必要工具 (wget, unzip, coreutils)..."
     if ! apt-get update > /dev/null; then
         echo "错误：软件包列表更新失败。请检查网络连接或 apt 源。"
         exit 1
     fi
-    if ! apt-get install -y nano wget unzip > /dev/null; then
+    # coreutils 包含 shuf 命令
+    if ! apt-get install -y wget unzip coreutils > /dev/null; then
         echo "错误：工具安装失败。请检查 apt 源或网络连接。"
         exit 1
     fi
@@ -93,8 +96,22 @@ install_snell() {
 
     read -p "请输入 Snell 的密码 (PSK，留空则随机生成): " snell_psk
     if [ -z "${snell_psk}" ]; then
-        # 生成一个16位的随机密码
-        snell_psk=$(< /dev/urandom tr -dc 'A-Za-z0-9@%$^&/-_+' | head -c 16)
+        # --- 新的密码生成逻辑 ---
+        # 1. 生成14位字母和数字
+        ALPHANUM=$(< /dev/urandom tr -dc 'A-Za-z0-9' | head -c 14)
+        
+        # 2. 从 '-/@' 中随机选择两个不同的特殊字符
+        SPECIAL_CHARS='-/@'
+        S1_INDEX=$(($RANDOM % 3))
+        S1=${SPECIAL_CHARS:$S1_INDEX:1}
+        REMAINING_CHARS=${SPECIAL_CHARS//$S1/} # 移除已选的字符
+        S2_INDEX=$(($RANDOM % 2))
+        S2=${REMAINING_CHARS:$S2_INDEX:1}
+        
+        # 3. 组合所有字符并打乱顺序
+        COMBINED_CHARS="${ALPHANUM}${S1}${S2}"
+        snell_psk=$(echo "$COMBINED_CHARS" | grep -o . | shuf | tr -d '\n')
+
         echo "    密码未输入，使用随机密码: ${snell_psk}"
     fi
 
@@ -213,7 +230,22 @@ modify_config() {
 
         read -p "请输入新的 Snell 密码 (PSK，留空则随机生成): " snell_psk
         if [ -z "${snell_psk}" ]; then
-            snell_psk=$(< /dev/urandom tr -dc 'A-Za-z0-9@%$^&/-_+' | head -c 16)
+            # --- 新的密码生成逻辑 ---
+            # 1. 生成14位字母和数字
+            ALPHANUM=$(< /dev/urandom tr -dc 'A-Za-z0-9' | head -c 14)
+
+            # 2. 从 '-/@' 中随机选择两个不同的特殊字符
+            SPECIAL_CHARS='-/@'
+            S1_INDEX=$(($RANDOM % 3))
+            S1=${SPECIAL_CHARS:$S1_INDEX:1}
+            REMAINING_CHARS=${SPECIAL_CHARS//$S1/} # 移除已选的字符
+            S2_INDEX=$(($RANDOM % 2))
+            S2=${REMAINING_CHARS:$S2_INDEX:1}
+
+            # 3. 组合所有字符并打乱顺序
+            COMBINED_CHARS="${ALPHANUM}${S1}${S2}"
+            snell_psk=$(echo "$COMBINED_CHARS" | grep -o . | shuf | tr -d '\n')
+
             echo "    密码未输入，使用随机密码: ${snell_psk}"
         fi
 
@@ -266,7 +298,7 @@ view_config() {
         cat /etc/snell/snell-server.conf
         echo ""
         ip_address=$(curl -s https://ipv4.icanhazip.com || curl -s https://api.ipify.org)
-        # --- [BUG修复] 使用 awk 准确提取端口号 ---
+        # --- 使用 awk 和 cut 准确提取配置 ---
         port=$(grep "listen" /etc/snell/snell-server.conf | awk -F':' '{print $NF}')
         psk=$(grep "psk" /etc/snell/snell-server.conf | cut -d'=' -f2 | tr -d ' ')
         echo "--> 客户端配置信息："
