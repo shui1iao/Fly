@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # =================================================================
-# Shadowsocks-rust & shadow-tls 服务器端综合管理脚本
+# shadowsocks-rust & shadow-tls 服务器端综合管理脚本
 # 描述: 提供一个主菜单，分别进入 ss-rust 和 shadow-tls 的管理界面。
 # =================================================================
 
@@ -331,8 +331,9 @@ view_config_shadow_tls() {
         echo -e "${RED}shadow-tls 未安装。${NC}"; return; fi
 
     local exec_start=$(grep 'ExecStart=' /etc/systemd/system/shadowtls.service)
-    local listen_port=$(echo "$exec_start" | sed -n 's/.*--listen \[::\]:\([0-9]*\).*/\1/p')
-    local server_port=$(echo "$exec_start" | sed -n 's/.*--server 127.0.0.1:\([0-9]*\).*/\1/p')
+    # 使用更通用的正则表达式解析端口，以提高兼容性
+    local listen_port=$(echo "$exec_start" | sed -n 's/.*--listen [^ ]*:\([0-9]*\).*/\1/p')
+    local server_port=$(echo "$exec_start" | sed -n 's/.*--server [^ ]*:\([0-9]*\).*/\1/p')
     local sni_host=$(echo "$exec_start" | sed -n 's/.*--tls \([^:]*\):443.*/\1/p')
     local stls_password=$(echo "$exec_start" | sed -n 's/.*--password \([^ ]*\).*/\1/p')
     local ip_address=$(curl -s https://ipv4.icanhazip.com || echo "<您的服务器IP>")
@@ -370,7 +371,7 @@ modify_config_shadow_tls() {
         read -p "${RED}后端 ss-rust 端口不能为空，请重新输入: ${NC}" SS_PORT
     done
 
-    read p "请输入新的伪装域名 (留空默认 www.muji.com): " SNI_HOST
+    read -p "请输入新的伪装域名 (留空默认 www.muji.com): " SNI_HOST
     [ -z "$SNI_HOST" ] && SNI_HOST="www.muji.com"
     
     read -p "请输入新的 shadow-tls 密码 (留空随机): " PASSWORD
