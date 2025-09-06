@@ -154,17 +154,26 @@ uninstall_anytls() {
         return
     fi
     
+    echo -e "${RED}警告：此操作将停止 anytls 服务并删除所有相关文件，包括此脚本本身。${NC}"
+    read -p "您确定要继续吗？[y/N]: " confirm
+    if [[ $confirm != [yY] && $confirm != [yY][eE][sS] ]]; then
+        echo "卸载操作已取消。"
+        return
+    fi
+    
     echo "--> 正在停止并禁用 anytls 服务..."
     systemctl stop anytls
     systemctl disable anytls > /dev/null 2>&1
     
     echo "--> 正在删除 anytls 文件..."
-    rm /etc/systemd/system/anytls.service
-    rm /usr/local/bin/anytls-server
+    rm -f /etc/systemd/system/anytls.service
+    rm -f /usr/local/bin/anytls-server
     
     systemctl daemon-reload
     
     echo -e "${GREEN}anytls 已成功卸载。${NC}"
+    echo "--> 正在删除此脚本..."
+    rm -- "$0"
 }
 
 # --- 函数: 修改配置 ---
