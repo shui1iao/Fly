@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # =================================================================
-# shadowsocks-rust 服务器端综合管理脚本
-# 描述: 提供菜单式操作，用于安装、卸载、配置和管理 ss-rust 服务。
+# shadowsocks-rust & shadow-tls 服务器端综合管理脚本
+# 描述: 提供一个主菜单，分别进入 ss-rust 和 shadow-tls 的管理界面。
 # =================================================================
 
 # 定义输出颜色
@@ -10,54 +10,35 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # 无颜色
 
-# 定义软件版本和下载链接
+# --- 通用函数 ---
+check_root() {
+    if [ "$(id -u)" -ne 0 ]; then
+        echo -e "${RED}错误：此脚本需要以 root 权限运行。${NC}" >&2
+        exit 1
+    fi
+}
+
+# =================================================================
+# S-S-R-U-S-T   M-A-N-A-G-E-M-E-N-T
+# =================================================================
+
+# --- ss-rust 变量定义 ---
 SS_VERSION="v1.23.5"
 SS_URL="https://github.com/shadowsocks/shadowsocks-rust/releases/download/${SS_VERSION}/shadowsocks-${SS_VERSION}.x86_64-unknown-linux-gnu.tar.xz"
 SS_TAR_FILE="shadowsocks-${SS_VERSION}.x86_64-unknown-linux-gnu.tar.xz"
 
 # --- 函数: 检查 ss-rust 安装和运行状态 ---
 check_ss_rust_status() {
-    # 检查 ss-rust 是否安装
     if [ -f /usr/local/bin/ss-rust ] && [ -f /etc/systemd/system/ss-rust.service ]; then
         echo -e "${GREEN}ss-rust 状态: 已安装${NC}"
     else
         echo -e "${RED}ss-rust 状态: 未安装${NC}"
     fi
 
-    # 检查 ss-rust 服务是否运行
     if systemctl is-active --quiet ss-rust; then
-        echo -e "${GREEN}服务状态: 运行中${NC}"
+        echo -e "${GREEN}服务状态    : 运行中${NC}"
     else
-        echo -e "${RED}服务状态: 未运行${NC}"
-    fi
-}
-
-# --- 函数: 显示菜单 ---
-show_menu() {
-    clear
-    echo "=================================================="
-    echo "          shadowsocks-rust 综合管理脚本"
-    echo "=================================================="
-    check_ss_rust_status
-    echo "--------------------------------------------------"
-    echo "1. 安装 ss-rust"
-    echo "2. 卸载 ss-rust"
-    echo "3. 修改 ss-rust 配置 (端口/密码)"
-    echo "4. 查看 ss-rust 配置"
-    echo "5. 启动 ss-rust 服务"
-    echo "6. 停止 ss-rust 服务"
-    echo "7. 重启 ss-rust 服务"
-    echo "8. 查看 ss-rust 运行状态"
-    echo "0. 退出脚本"
-    echo "=================================================="
-    echo -n "请输入选项 [0-8]: "
-}
-
-# --- 函数: 检查 root 权限 ---
-check_root() {
-    if [ "$(id -u)" -ne 0 ]; then
-        echo -e "${RED}错误：此脚本需要以 root 权限运行。${NC}" >&2
-        exit 1
+        echo -e "${RED}服务状态    : 未运行${NC}"
     fi
 }
 
@@ -105,11 +86,7 @@ install_ss_rust() {
         exit 1
     fi
 
-    if ! tar -xf "${SS_TAR_FILE}"; then
-        echo -e "${RED}解压 ss-rust 失败！${NC}"
-        rm -f "${SS_TAR_FILE}"
-        exit 1
-    fi
+    tar -xf "${SS_TAR_FILE}"
     mv ssserver /usr/local/bin/ss-rust
     chmod +x /usr/local/bin/ss-rust
     rm -f sslocal ssmanager ssurl "${SS_TAR_FILE}"
@@ -117,57 +94,36 @@ install_ss_rust() {
     
     mkdir -p /etc/ss-rust
 
-    # --- 用户输入端口和密码 ---
-    read -p "请输入 ss-rust 的监听端口 (留空则随机生成 10000-65535): " PORT
-    if [ -z "$PORT" ]; then
-        PORT=$((RANDOM % 55536 + 10000))
-        echo -e "    端口未输入，使用随机端口: ${GREEN}$PORT${NC}"
-    fi
-
+    read -p "请输入 ss-rust 的监听端口 (留空则随机生成): " PORT
+    [ -z "$PORT" ] && PORT=$((RANDOM % 55536 + 10000))
+    
     read -p "请输入 ss-rust 的密码 (留空则随机生成): " PASSWORD
-    if [ -z "$PASSWORD" ]; then
-        PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9@%\$\^&/-_+' | head -c 16)
-        echo -e "    密码未输入，使用随机密码: ${GREEN}$PASSWORD${NC}"
-    fi
+    [ -z "$PASSWORD" ] && PASSWORD=$(head -c 16 /dev/urandom | base64 -w 0)
 
-    # --- 创建配置文件 ---
     echo "--> 正在创建配置文件..."
     cat > /etc/ss-rust/config.json <<EOF
-{
-    "server": "0.0.0.0",
-    "server_port": ${PORT},
-    "password": "${PASSWORD}",
-    "method": "2022-blake3-aes-128-gcm",
-    "timeout": 300,
-    "fast_open": false,
-    "mode": "tcp_and_udp"
-}
+{ "server": "0.0.0.0", "server_port": ${PORT}, "password": "${PASSWORD}", "method": "2022-blake3-aes-128-gcm", "timeout": 300, "fast_open": false, "mode": "tcp_and_udp" }
 EOF
 
-    # --- 创建 systemd 服务文件 ---
     echo "--> 正在创建 systemd 服务..."
     cat > /etc/systemd/system/ss-rust.service <<EOF
 [Unit]
 Description=Shadowsocks Rust Server
 After=network.target
-
 [Service]
 ExecStart=/usr/local/bin/ss-rust -c /etc/ss-rust/config.json
 Restart=always
 User=root
-
 [Install]
 WantedBy=multi-user.target
 EOF
 
-    # --- 启动服务 ---
-    echo "--> 正在启动服务并设置开机自启..."
     systemctl daemon-reload
     systemctl enable ss-rust > /dev/null 2>&1
     systemctl start ss-rust
 
     echo -e "${GREEN}🎉 ss-rust 服务器安装并配置成功！${NC}"
-    view_config
+    view_config_ss_rust
 }
 
 # --- 函数: 卸载 ss-rust ---
@@ -177,74 +133,50 @@ uninstall_ss_rust() {
         return
     fi
     
-    echo -e "${RED}警告：此操作将停止 ss-rust 服务并删除所有相关文件，包括此脚本本身。${NC}"
-    read -p "您确定要继续吗？[y/N]: " confirm
-    if [[ $confirm != [yY] && $confirm != [yY][eE][sS] ]]; then
+    read -p "警告：确定要卸载 ss-rust 吗？[y/N]: " confirm
+    if [[ ! "$confirm" =~ ^[yY]([eE][sS])?$ ]]; then
         echo "卸载操作已取消。"
         return
     fi
     
     systemctl stop ss-rust
     systemctl disable ss-rust > /dev/null 2>&1
-    
     rm -f /etc/systemd/system/ss-rust.service
     rm -f /usr/local/bin/ss-rust
     rm -rf /etc/ss-rust
-    
     systemctl daemon-reload
-    
     echo -e "${GREEN}ss-rust 已成功卸载。${NC}"
-    echo "--> 正在删除此脚本..."
-    rm -- "$0"
 }
 
-# --- 函数: 修改配置 ---
-modify_config() {
+# --- 函数: 修改 ss-rust 配置 ---
+modify_config_ss_rust() {
     if [ ! -f /etc/ss-rust/config.json ]; then
-        echo -e "${RED}ss-rust 未安装，无法修改配置。${NC}"
-        return
-    fi
-    
+        echo -e "${RED}ss-rust 未安装，无法修改配置。${NC}"; return; fi
     ensure_jq || return
 
     read -p "请输入新的监听端口 (留空则随机生成): " PORT
-    if [ -z "$PORT" ]; then
-        PORT=$((RANDOM % 55536 + 10000))
-        echo -e "    端口未输入，使用随机端口: ${GREEN}$PORT${NC}"
-    fi
+    [ -z "$PORT" ] && PORT=$((RANDOM % 55536 + 10000))
 
     read -p "请输入新的密码 (留空则随机生成): " PASSWORD
-    if [ -z "$PASSWORD" ]; then
-        PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9@%\$\^&/-_+' | head -c 16)
-        echo -e "    密码未输入，使用随机密码: ${GREEN}$PASSWORD${NC}"
-    fi
+    [ -z "$PASSWORD" ] && PASSWORD=$(head -c 16 /dev/urandom | base64 -w 0)
 
-    # --- 更新配置文件 ---
-    jq ".server_port = ${PORT} | .password = \"${PASSWORD}\"" /etc/ss-rust/config.json > /etc/ss-rust/config.json.tmp && mv /etc/ss-rust/config.json.tmp /etc/ss-rust/config.json
+    jq ".server_port = ${PORT} | .password = \"${PASSWORD}\"" /etc/ss-rust/config.json > /tmp/ss-config.tmp && mv /tmp/ss-config.tmp /etc/ss-rust/config.json
 
     systemctl restart ss-rust
-    
     echo -e "${GREEN}🎉 ss-rust 配置已更新！${NC}"
-    view_config
+    view_config_ss_rust
 }
 
-# --- 函数: 查看配置 ---
-view_config() {
+# --- 函数: 查看 ss-rust 配置 ---
+view_config_ss_rust() {
     if [ ! -f /etc/ss-rust/config.json ]; then
-        echo -e "${RED}ss-rust 未安装，无法查看配置。${NC}"
-        return
-    fi
-    
+        echo -e "${RED}ss-rust 未安装，无法查看配置。${NC}"; return; fi
     ensure_jq || return
     
     local port=$(jq .server_port /etc/ss-rust/config.json)
     local password=$(jq -r .password /etc/ss-rust/config.json)
     local method=$(jq -r .method /etc/ss-rust/config.json)
-    
-    local ip_address=$(curl -s https://ipv4.icanhazip.com || curl -s https://api.ipify.org)
-    if [ -z "$ip_address" ]; then
-        ip_address="<您的服务器IP>"
-    fi
+    local ip_address=$(curl -s https://ipv4.icanhazip.com || echo "<您的服务器IP>")
 
     echo "------------------------------------------"
     echo "         ss-rust 当前配置信息"
@@ -258,67 +190,269 @@ view_config() {
     echo "------------------------------------------"
 }
 
-# --- 函数: 启动服务 ---
-start_ss_rust() {
-    if systemctl is-active --quiet ss-rust; then
-        echo -e "${GREEN}ss-rust 服务已经在运行中。${NC}"
-    else
-        systemctl start ss-rust && echo -e "${GREEN}ss-rust 服务启动成功。${NC}" || echo -e "${RED}ss-rust 服务启动失败。${NC}"
-    fi
-}
-
-# --- 函数: 停止服务 ---
-stop_ss_rust() {
-    if ! systemctl is-active --quiet ss-rust; then
-        echo -e "${GREEN}ss-rust 服务当前未运行。${NC}"
-    else
-        systemctl stop ss-rust && echo -e "${GREEN}ss-rust 服务已停止。${NC}" || echo -e "${RED}ss-rust 服务停止失败。${NC}"
-    fi
-}
-
-# --- 函数: 重启服务 ---
-restart_ss_rust() {
+# --- 函数: ss-rust 服务管理 ---
+manage_ss_rust_service() {
     if [ ! -f /etc/systemd/system/ss-rust.service ]; then
-        echo -e "${RED}ss-rust 未安装，无法重启。${NC}"
-        return
-    fi
-    systemctl restart ss-rust && echo -e "${GREEN}ss-rust 服务重启成功。${NC}" || echo -e "${RED}ss-rust 服务重启失败。${NC}"
-}
-
-# --- 函数: 检查运行状态 ---
-check_ss_rust_running() {
-    if [ ! -f /etc/systemd/system/ss-rust.service ]; then
-        echo -e "${RED}ss-rust 未安装，无法查看状态。${NC}"
-        return
-    fi
-    systemctl status ss-rust
-}
-
-# --- 主程序 ---
-check_root
-
-while true; do
-    show_menu
-    read choice
-    case $choice in
-        1) install_ss_rust ;;
-        2) uninstall_ss_rust ;;
-        3) modify_config ;;
-        4) view_config ;;
-        5) start_ss_rust ;;
-        6) stop_ss_rust ;;
-        7) restart_ss_rust ;;
-        8) check_ss_rust_running ;;
-        0)
-            echo "退出脚本。"
-            exit 0
-            ;;
-        *)
-            echo -e "${RED}无效选项，请输入 0-8。${NC}"
-            ;;
+        echo -e "${RED}ss-rust 未安装。${NC}"; return; fi
+    case $1 in
+        start) systemctl start ss-rust && echo -e "${GREEN}服务启动成功。${NC}" || echo -e "${RED}服务启动失败。${NC}" ;;
+        stop) systemctl stop ss-rust && echo -e "${GREEN}服务已停止。${NC}" || echo -e "${RED}服务停止失败。${NC}" ;;
+        restart) systemctl restart ss-rust && echo -e "${GREEN}服务重启成功。${NC}" || echo -e "${RED}服务重启失败。${NC}" ;;
+        status) systemctl status ss-rust ;;
     esac
-    echo ""
-    echo "按 Enter 键返回菜单..."
-    read -r
-done
+}
 
+# --- 函数: ss-rust 子菜单 ---
+ss_rust_menu() {
+    while true; do
+        clear
+        echo "=================================================="
+        echo "           shadowsocks-rust 管理界面"
+        echo "=================================================="
+        check_ss_rust_status
+        echo "--------------------------------------------------"
+        echo "1. 安装 ss-rust"
+        echo "2. 卸载 ss-rust"
+        echo "3. 修改 ss-rust 配置"
+        echo "4. 查看 ss-rust 配置"
+        echo "5. 启动 ss-rust"
+        echo "6. 停止 ss-rust"
+        echo "7. 重启 ss-rust"
+        echo "8. 查看运行状态"
+        echo "0. 返回主菜单"
+        echo "=================================================="
+        read -p "请输入选项 [0-8]: " choice
+
+        case $choice in
+            1) install_ss_rust ;;
+            2) uninstall_ss_rust ;;
+            3) modify_config_ss_rust ;;
+            4) view_config_ss_rust ;;
+            5) manage_ss_rust_service start ;;
+            6) manage_ss_rust_service stop ;;
+            7) manage_ss_rust_service restart ;;
+            8) manage_ss_rust_service status ;;
+            0) return ;;
+            *) echo -e "${RED}无效选项，请重试。${NC}" ;;
+        esac
+        [ "$choice" != "0" ] && read -p "按 Enter 键返回..."
+    done
+}
+
+
+# =================================================================
+# S-H-A-D-O-W---T-L-S   M-A-N-A-G-E-M-E-N-T
+# =================================================================
+
+# --- shadow-tls 变量定义 ---
+STLS_URL="https://github.com/ihciah/shadow-tls/releases/download/v0.2.25/shadow-tls-x86_64-unknown-linux-musl"
+
+# --- 函数: 检查 shadow-tls 安装和运行状态 ---
+check_shadow_tls_status() {
+    if [ -f /usr/local/bin/shadow-tls ] && [ -f /etc/systemd/system/shadow-tls.service ]; then
+        echo -e "${GREEN}shadow-tls 状态: 已安装${NC}"
+    else
+        echo -e "${RED}shadow-tls 状态: 未安装${NC}"
+    fi
+
+    if systemctl is-active --quiet shadow-tls; then
+        echo -e "${GREEN}服务状态      : 运行中${NC}"
+    else
+        echo -e "${RED}服务状态      : 未运行${NC}"
+    fi
+}
+
+# --- 函数: 安装 shadow-tls ---
+install_shadow_tls() {
+    if [ -f /usr/local/bin/shadow-tls ]; then
+        echo -e "${GREEN}shadow-tls 似乎已经安装。${NC}"; return; fi
+
+    echo "--> 正在下载 shadow-tls..."
+    curl -L "$STLS_URL" -o /usr/local/bin/shadow-tls
+    chmod +x /usr/local/bin/shadow-tls
+
+    read -p "请输入 shadow-tls 监听端口 (如 443, 留空随机): " LISTEN_PORT
+    [ -z "$LISTEN_PORT" ] && LISTEN_PORT=$((RANDOM % 55536 + 10000))
+    
+    read -p "请输入后端的 ss-rust 端口: " SS_PORT
+    while [ -z "$SS_PORT" ]; do
+        read -p "${RED}后端 ss-rust 端口不能为空，请重新输入: ${NC}" SS_PORT
+    done
+
+    read -p "请输入伪装域名 (如 www.bing.com, 留空默认): " SNI_HOST
+    [ -z "$SNI_HOST" ] && SNI_HOST="www.muji.com"
+    
+    read -p "请输入 shadow-tls 密码 (留空随机生成): " PASSWORD
+    [ -z "$PASSWORD" ] && PASSWORD=$(head -c 16 /dev/urandom | base64 -w 0)
+
+    echo "--> 正在创建 systemd 服务..."
+    cat > /etc/systemd/system/shadow-tls.service <<EOF
+[Unit]
+Description=Shadow-TLS Server Service
+After=network-online.target
+Wants=network-online.target
+[Service]
+Type=simple
+User=root
+Restart=on-failure
+RestartSec=5s
+ExecStart=/usr/local/bin/shadow-tls --fastopen --v3 --strict server --wildcard-sni=authed --listen [::]:${LISTEN_PORT} --server 127.0.0.1:${SS_PORT} --tls ${SNI_HOST}:443 --password ${PASSWORD}
+[Install]
+WantedBy=multi-user.target
+EOF
+
+    systemctl daemon-reload
+    systemctl enable shadow-tls > /dev/null 2>&1
+    systemctl start shadow-tls
+    echo -e "${GREEN}🎉 shadow-tls 服务器安装并配置成功！${NC}"
+    view_config_shadow_tls
+}
+
+# --- 函数: 卸载 shadow-tls ---
+uninstall_shadow_tls() {
+    if [ ! -f /usr/local/bin/shadow-tls ]; then
+        echo -e "${RED}shadow-tls 未安装。${NC}"; return; fi
+    
+    read -p "警告：确定要卸载 shadow-tls 吗？[y/N]: " confirm
+    if [[ ! "$confirm" =~ ^[yY]([eE][sS])?$ ]]; then
+        echo "卸载操作已取消。"; return; fi
+    
+    systemctl stop shadow-tls
+    systemctl disable shadow-tls > /dev/null 2>&1
+    rm -f /etc/systemd/system/shadow-tls.service
+    rm -f /usr/local/bin/shadow-tls
+    systemctl daemon-reload
+    echo -e "${GREEN}shadow-tls 已成功卸载。${NC}"
+}
+
+# --- 函数: 查看 shadow-tls 配置 ---
+view_config_shadow_tls() {
+    if [ ! -f /etc/systemd/system/shadow-tls.service ]; then
+        echo -e "${RED}shadow-tls 未安装。${NC}"; return; fi
+
+    local exec_start=$(grep 'ExecStart=' /etc/systemd/system/shadow-tls.service)
+    local listen_port=$(echo "$exec_start" | sed -n 's/.*--listen \[::\]:\([0-9]*\).*/\1/p')
+    local server_port=$(echo "$exec_start" | sed -n 's/.*--server 127.0.0.1:\([0-9]*\).*/\1/p')
+    local sni_host=$(echo "$exec_start" | sed -n 's/.*--tls \([^:]*\):443.*/\1/p')
+    local password=$(echo "$exec_start" | sed -n 's/.*--password \([^ ]*\).*/\1/p')
+    local ip_address=$(curl -s https://ipv4.icanhazip.com || echo "<您的服务器IP>")
+
+    echo "------------------------------------------"
+    echo "        shadow-tls 当前配置信息"
+    echo "------------------------------------------"
+    echo -e "监听端口   : ${GREEN}${listen_port}${NC}"
+    echo -e "密码       : ${GREEN}${password}${NC}"
+    echo -e "后端 SS 端口: ${GREEN}${server_port}${NC}"
+    echo -e "伪装域名   : ${GREEN}${sni_host}${NC}"
+    echo "------------------------------------------"
+    echo "Surge 客户端配置 (请手动填入您的 ss-rust 信息):"
+    echo -e "${GREEN}VPS = ss, ${ip_address}, ${server_port}, encrypt-method=<ss-method>, password=<ss-password>, shadow-tls-password=${password}, shadow-tls-sni=${sni_host}, shadow-tls-version=v3, udp-relay=true${NC}"
+    echo "------------------------------------------"
+}
+
+# --- 函数: 修改 shadow-tls 配置 ---
+modify_config_shadow_tls() {
+    if [ ! -f /etc/systemd/system/shadow-tls.service ]; then
+        echo -e "${RED}shadow-tls 未安装。${NC}"; return; fi
+
+    read -p "请输入新的 shadow-tls 监听端口 (留空随机): " LISTEN_PORT
+    [ -z "$LISTEN_PORT" ] && LISTEN_PORT=$((RANDOM % 55536 + 10000))
+    
+    read -p "请输入新的后端 ss-rust 端口: " SS_PORT
+    while [ -z "$SS_PORT" ]; do
+        read -p "${RED}后端 ss-rust 端口不能为空，请重新输入: ${NC}" SS_PORT
+    done
+
+    read -p "请输入新的伪装域名 (留空默认 www.muji.com): " SNI_HOST
+    [ -z "$SNI_HOST" ] && SNI_HOST="www.muji.com"
+    
+    read -p "请输入新的 shadow-tls 密码 (留空随机): " PASSWORD
+    [ -z "$PASSWORD" ] && PASSWORD=$(head -c 16 /dev/urandom | base64 -w 0)
+
+    local exec_line="ExecStart=/usr/local/bin/shadow-tls --fastopen --v3 --strict server --wildcard-sni=authed --listen [::]:${LISTEN_PORT} --server 127.0.0.1:${SS_PORT} --tls ${SNI_HOST}:443 --password ${PASSWORD}"
+    sed -i "s|^ExecStart=.*|$exec_line|" /etc/systemd/system/shadow-tls.service
+    
+    systemctl daemon-reload
+    systemctl restart shadow-tls
+    echo -e "${GREEN}🎉 shadow-tls 配置已更新！${NC}"
+    view_config_shadow_tls
+}
+
+# --- 函数: shadow-tls 服务管理 ---
+manage_shadow_tls_service() {
+    if [ ! -f /etc/systemd/system/shadow-tls.service ]; then
+        echo -e "${RED}shadow-tls 未安装。${NC}"; return; fi
+    case $1 in
+        start) systemctl start shadow-tls && echo -e "${GREEN}服务启动成功。${NC}" || echo -e "${RED}服务启动失败。${NC}" ;;
+        stop) systemctl stop shadow-tls && echo -e "${GREEN}服务已停止。${NC}" || echo -e "${RED}服务停止失败。${NC}" ;;
+        restart) systemctl restart shadow-tls && echo -e "${GREEN}服务重启成功。${NC}" || echo -e "${RED}服务重启失败。${NC}" ;;
+        status) systemctl status shadow-tls ;;
+    esac
+}
+
+# --- 函数: shadow-tls 子菜单 ---
+shadow_tls_menu() {
+    while true; do
+        clear
+        echo "=================================================="
+        echo "              shadow-tls 管理界面"
+        echo "=================================================="
+        check_shadow_tls_status
+        echo "--------------------------------------------------"
+        echo "1. 安装 shadow-tls"
+        echo "2. 卸载 shadow-tls"
+        echo "3. 修改 shadow-tls 配置"
+        echo "4. 查看 shadow-tls 配置"
+        echo "5. 启动 shadow-tls"
+        echo "6. 停止 shadow-tls"
+        echo "7. 重启 shadow-tls"
+        echo "8. 查看运行状态"
+        echo "0. 返回主菜单"
+        echo "=================================================="
+        read -p "请输入选项 [0-8]: " choice
+
+        case $choice in
+            1) install_shadow_tls ;;
+            2) uninstall_shadow_tls ;;
+            3) modify_config_shadow_tls ;;
+            4) view_config_shadow_tls ;;
+            5) manage_shadow_tls_service start ;;
+            6) manage_shadow_tls_service stop ;;
+            7) manage_shadow_tls_service restart ;;
+            8) manage_shadow_tls_service status ;;
+            0) return ;;
+            *) echo -e "${RED}无效选项，请重试。${NC}" ;;
+        esac
+        [ "$choice" != "0" ] && read -p "按 Enter 键返回..."
+    done
+}
+
+
+# =================================================================
+# M-A-I-N   M-E-N-U
+# =================================================================
+main_menu() {
+    while true; do
+        clear
+        echo "=================================================="
+        echo "      SS-Rust & Shadow-TLS 综合管理脚本"
+        echo "=================================================="
+        echo "1. shadowsocks-rust 管理"
+        echo "2. shadow-tls 管理"
+        echo "0. 退出脚本"
+        echo "=================================================="
+        read -p "请输入选项 [0-2]: " choice
+        
+        case $choice in
+            1) ss_rust_menu ;;
+            2) shadow_tls_menu ;;
+            0) break ;;
+            *) echo -e "${RED}无效选项，请重试。${NC}"; sleep 1 ;;
+        esac
+    done
+}
+
+# --- 脚本入口 ---
+check_root
+main_menu
+echo "脚本已退出。"
