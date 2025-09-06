@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # =================================================================
-# shadowsocks-rust & shadow-tls 管理脚本
-# 描述: 提供一个主菜单，分别进入 ss-rust 和 shadow-tls 的管理界面。
+# shadowsocks-rust & shadowtls 服务器端综合管理脚本
+# 描述: 提供一个主菜单，分别进入 ss-rust 和 shadowtls 的管理界面。
 # =================================================================
 
 # 定义输出颜色
@@ -241,18 +241,18 @@ ss_rust_menu() {
 
 
 # =================================================================
-# S-H-A-D-O-W---T-L-S   M-A-N-A-G-E-M-E-N-T
+# S-H-A-D-O-W-T-L-S   M-A-N-A-G-E-M-E-N-T
 # =================================================================
 
-# --- shadow-tls 变量定义 ---
+# --- shadowtls 变量定义 ---
 STLS_URL="https://github.com/ihciah/shadow-tls/releases/download/v0.2.25/shadow-tls-x86_64-unknown-linux-musl"
 
-# --- 函数: 检查 shadow-tls 安装和运行状态 ---
-check_shadow_tls_status() {
-    if [ -f /usr/local/bin/shadow-tls ] && [ -f /etc/systemd/system/shadowtls.service ]; then
-        echo -e "${GREEN}shadow-tls 状态: 已安装${NC}"
+# --- 函数: 检查 shadowtls 安装和运行状态 ---
+check_shadowtls_status() {
+    if [ -f /usr/local/bin/shadowtls ] && [ -f /etc/systemd/system/shadowtls.service ]; then
+        echo -e "${GREEN}shadowtls 状态: 已安装${NC}"
     else
-        echo -e "${RED}shadow-tls 状态: 未安装${NC}"
+        echo -e "${RED}shadowtls 状态: 未安装${NC}"
     fi
 
     if systemctl is-active --quiet shadowtls; then
@@ -262,16 +262,16 @@ check_shadow_tls_status() {
     fi
 }
 
-# --- 函数: 安装 shadow-tls ---
-install_shadow_tls() {
-    if [ -f /usr/local/bin/shadow-tls ]; then
-        echo -e "${GREEN}shadow-tls 似乎已经安装。${NC}"; return; fi
+# --- 函数: 安装 shadowtls ---
+install_shadowtls() {
+    if [ -f /usr/local/bin/shadowtls ]; then
+        echo -e "${GREEN}shadowtls 似乎已经安装。${NC}"; return; fi
 
-    echo "--> 正在下载 shadow-tls..."
-    curl -L "$STLS_URL" -o /usr/local/bin/shadow-tls
-    chmod +x /usr/local/bin/shadow-tls
+    echo "--> 正在下载 shadowtls..."
+    curl -L "$STLS_URL" -o /usr/local/bin/shadowtls
+    chmod +x /usr/local/bin/shadowtls
 
-    read -p "请输入 shadow-tls 监听端口 (如 443, 留空随机): " LISTEN_PORT
+    read -p "请输入 shadowtls 监听端口 (如 443, 留空随机): " LISTEN_PORT
     [ -z "$LISTEN_PORT" ] && LISTEN_PORT=$((RANDOM % 55536 + 10000))
     
     read -p "请输入后端的 ss-rust 端口: " SS_PORT
@@ -282,21 +282,22 @@ install_shadow_tls() {
     read -p "请输入伪装域名 (如 www.bing.com, 留空默认): " SNI_HOST
     [ -z "$SNI_HOST" ] && SNI_HOST="www.muji.com"
     
-    read -p "请输入 shadow-tls 密码 (留空随机生成): " PASSWORD
+    read -p "请输入 shadowtls 密码 (留空随机生成): " PASSWORD
     [ -z "$PASSWORD" ] && PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9@%$^&/-_+' | head -c 16)
 
     echo "--> 正在创建 systemd 服务..."
     cat > /etc/systemd/system/shadowtls.service <<EOF
 [Unit]
-Description=Shadow-TLS Server Service
+Description=ShadowTLS Server Service
 After=network-online.target
-Wants=network-online.target
+Wants=network-online.target systemd-networkd-wait-online.service
 [Service]
+LimitNOFILE=32767
 Type=simple
 User=root
 Restart=on-failure
 RestartSec=5s
-ExecStart=/usr/local/bin/shadow-tls --fastopen --v3 --strict server --wildcard-sni=authed --listen [::]:${LISTEN_PORT} --server 127.0.0.1:${SS_PORT} --tls ${SNI_HOST}:443 --password ${PASSWORD}
+ExecStart=/usr/local/bin/shadowtls --v3 --strict server --listen [::]:${LISTEN_PORT} --server 127.0.0.1:${SS_PORT} --tls ${SNI_HOST}:443 --password ${PASSWORD}
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -304,31 +305,31 @@ EOF
     systemctl daemon-reload
     systemctl enable shadowtls > /dev/null 2>&1
     systemctl start shadowtls
-    echo -e "${GREEN}🎉 shadow-tls 服务器安装并配置成功！${NC}"
-    view_config_shadow_tls
+    echo -e "${GREEN}🎉 shadowtls 服务器安装并配置成功！${NC}"
+    view_config_shadowtls
 }
 
-# --- 函数: 卸载 shadow-tls ---
-uninstall_shadow_tls() {
-    if [ ! -f /usr/local/bin/shadow-tls ]; then
-        echo -e "${RED}shadow-tls 未安装。${NC}"; return; fi
+# --- 函数: 卸载 shadowtls ---
+uninstall_shadowtls() {
+    if [ ! -f /usr/local/bin/shadowtls ]; then
+        echo -e "${RED}shadowtls 未安装。${NC}"; return; fi
     
-    read -p "警告：确定要卸载 shadow-tls 吗？[y/N]: " confirm
+    read -p "警告：确定要卸载 shadowtls 吗？[y/N]: " confirm
     if [[ ! "$confirm" =~ ^[yY]([eE][sS])?$ ]]; then
         echo "卸载操作已取消。"; return; fi
     
     systemctl stop shadowtls
     systemctl disable shadowtls > /dev/null 2>&1
     rm -f /etc/systemd/system/shadowtls.service
-    rm -f /usr/local/bin/shadow-tls
+    rm -f /usr/local/bin/shadowtls
     systemctl daemon-reload
-    echo -e "${GREEN}shadow-tls 已成功卸载。${NC}"
+    echo -e "${GREEN}shadowtls 已成功卸载。${NC}"
 }
 
-# --- 函数: 查看 shadow-tls 配置 ---
-view_config_shadow_tls() {
+# --- 函数: 查看 shadowtls 配置 ---
+view_config_shadowtls() {
     if [ ! -f /etc/systemd/system/shadowtls.service ]; then
-        echo -e "${RED}shadow-tls 未安装。${NC}"; return; fi
+        echo -e "${RED}shadowtls 未安装。${NC}"; return; fi
 
     local exec_start=$(grep 'ExecStart=' /etc/systemd/system/shadowtls.service)
     # 使用更通用的正则表达式解析端口，以提高兼容性
@@ -346,7 +347,7 @@ view_config_shadow_tls() {
     fi
 
     echo "------------------------------------------"
-    echo "        shadow-tls 当前配置信息"
+    echo "        shadowtls 当前配置信息"
     echo "------------------------------------------"
     echo -e "监听端口   : ${GREEN}${listen_port}${NC}"
     echo -e "密码       : ${GREEN}${stls_password}${NC}"
@@ -358,12 +359,12 @@ view_config_shadow_tls() {
     echo "------------------------------------------"
 }
 
-# --- 函数: 修改 shadow-tls 配置 ---
-modify_config_shadow_tls() {
+# --- 函数: 修改 shadowtls 配置 ---
+modify_config_shadowtls() {
     if [ ! -f /etc/systemd/system/shadowtls.service ]; then
-        echo -e "${RED}shadow-tls 未安装。${NC}"; return; fi
+        echo -e "${RED}shadowtls 未安装。${NC}"; return; fi
 
-    read -p "请输入新的 shadow-tls 监听端口 (留空随机): " LISTEN_PORT
+    read -p "请输入新的 shadowtls 监听端口 (留空随机): " LISTEN_PORT
     [ -z "$LISTEN_PORT" ] && LISTEN_PORT=$((RANDOM % 55536 + 10000))
     
     read -p "请输入新的后端 ss-rust 端口: " SS_PORT
@@ -374,22 +375,22 @@ modify_config_shadow_tls() {
     read -p "请输入新的伪装域名 (留空默认 www.muji.com): " SNI_HOST
     [ -z "$SNI_HOST" ] && SNI_HOST="www.muji.com"
     
-    read -p "请输入新的 shadow-tls 密码 (留空随机): " PASSWORD
+    read -p "请输入新的 shadowtls 密码 (留空随机): " PASSWORD
     [ -z "$PASSWORD" ] && PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9@%$^&/-_+' | head -c 16)
 
-    local exec_line="ExecStart=/usr/local/bin/shadow-tls --fastopen --v3 --strict server --wildcard-sni=authed --listen [::]:${LISTEN_PORT} --server 127.0.0.1:${SS_PORT} --tls ${SNI_HOST}:443 --password ${PASSWORD}"
+    local exec_line="ExecStart=/usr/local/bin/shadowtls --v3 --strict server --listen [::]:${LISTEN_PORT} --server 127.0.0.1:${SS_PORT} --tls ${SNI_HOST}:443 --password ${PASSWORD}"
     sed -i "s|^ExecStart=.*|$exec_line|" /etc/systemd/system/shadowtls.service
     
     systemctl daemon-reload
     systemctl restart shadowtls
-    echo -e "${GREEN}🎉 shadow-tls 配置已更新！${NC}"
-    view_config_shadow_tls
+    echo -e "${GREEN}🎉 shadowtls 配置已更新！${NC}"
+    view_config_shadowtls
 }
 
-# --- 函数: shadow-tls 服务管理 ---
-manage_shadow_tls_service() {
+# --- 函数: shadowtls 服务管理 ---
+manage_shadowtls_service() {
     if [ ! -f /etc/systemd/system/shadowtls.service ]; then
-        echo -e "${RED}shadow-tls 未安装。${NC}"; return; fi
+        echo -e "${RED}shadowtls 未安装。${NC}"; return; fi
     case $1 in
         start) systemctl start shadowtls && echo -e "${GREEN}服务启动成功。${NC}" || echo -e "${RED}服务启动失败。${NC}" ;;
         stop) systemctl stop shadowtls && echo -e "${GREEN}服务已停止。${NC}" || echo -e "${RED}服务停止失败。${NC}" ;;
@@ -398,36 +399,36 @@ manage_shadow_tls_service() {
     esac
 }
 
-# --- 函数: shadow-tls 子菜单 ---
-shadow_tls_menu() {
+# --- 函数: shadowtls 子菜单 ---
+shadowtls_menu() {
     while true; do
         clear
         echo "=================================================="
-        echo "              shadow-tls 管理界面"
+        echo "              shadowtls 管理界面"
         echo "=================================================="
-        check_shadow_tls_status
+        check_shadowtls_status
         echo "--------------------------------------------------"
-        echo "1. 安装 shadow-tls"
-        echo "2. 卸载 shadow-tls"
-        echo "3. 修改 shadow-tls 配置"
-        echo "4. 查看 shadow-tls 配置"
-        echo "5. 启动 shadow-tls"
-        echo "6. 停止 shadow-tls"
-        echo "7. 重启 shadow-tls"
+        echo "1. 安装 shadowtls"
+        echo "2. 卸载 shadowtls"
+        echo "3. 修改 shadowtls 配置"
+        echo "4. 查看 shadowtls 配置"
+        echo "5. 启动 shadowtls"
+        echo "6. 停止 shadowtls"
+        echo "7. 重启 shadowtls"
         echo "8. 查看运行状态"
         echo "0. 返回主菜单"
         echo "=================================================="
         read -p "请输入选项 [0-8]: " choice
 
         case $choice in
-            1) install_shadow_tls ;;
-            2) uninstall_shadow_tls ;;
-            3) modify_config_shadow_tls ;;
-            4) view_config_shadow_tls ;;
-            5) manage_shadow_tls_service start ;;
-            6) manage_shadow_tls_service stop ;;
-            7) manage_shadow_tls_service restart ;;
-            8) manage_shadow_tls_service status ;;
+            1) install_shadowtls ;;
+            2) uninstall_shadowtls ;;
+            3) modify_config_shadowtls ;;
+            4) view_config_shadowtls ;;
+            5) manage_shadowtls_service start ;;
+            6) manage_shadowtls_service stop ;;
+            7) manage_shadowtls_service restart ;;
+            8) manage_shadowtls_service status ;;
             0) return ;;
             *) echo -e "${RED}无效选项，请重试。${NC}" ;;
         esac
@@ -443,17 +444,17 @@ main_menu() {
     while true; do
         clear
         echo "=================================================="
-        echo "      SS-Rust & Shadow-TLS 综合管理脚本"
+        echo "      SS-Rust & ShadowTLS 综合管理脚本"
         echo "=================================================="
         echo "1. shadowsocks-rust 管理"
-        echo "2. shadow-tls 管理"
+        echo "2. shadowtls 管理"
         echo "0. 退出脚本"
         echo "=================================================="
         read -p "请输入选项 [0-2]: " choice
         
         case $choice in
             1) ss_rust_menu ;;
-            2) shadow_tls_menu ;;
+            2) shadowtls_menu ;;
             0) break ;;
             *) echo -e "${RED}无效选项，请重试。${NC}"; sleep 1 ;;
         esac
