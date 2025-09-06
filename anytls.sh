@@ -189,6 +189,8 @@ uninstall_anytls() {
     echo -e "${GREEN}anytls 已成功卸载。${NC}"
     echo "--> 正在删除此脚本..."
     rm -- "$0"
+    echo "脚本自身也已被删除。即将退出。"
+    exit 0
 }
 
 # --- 函数: 修改配置 ---
@@ -284,7 +286,7 @@ view_config() {
     fi
 
     echo "------------------------------------------"
-    echo "          anytls 当前配置信息"
+    echo "           anytls 当前配置信息"
     echo "------------------------------------------"
     echo -e "端口 (Port)      : ${GREEN}${port}${NC}"
     echo -e "密码 (Password)  : ${GREEN}${password}${NC}"
