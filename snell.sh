@@ -52,6 +52,12 @@ check_root() {
 
 # --- 函数: 安装 Snell ---
 install_snell() {
+    # --- 新增：检查 Snell 是否已安装 ---
+    if [ -f /usr/local/bin/snell-server ] && [ -f /etc/snell/snell-server.conf ]; then
+        echo -e "\033[32mSnell 似乎已经安装，无需重复安装。\033[0m"
+        return
+    fi
+
     # --- 步骤 1: 更新软件包列表并安装必要工具 ---
     echo "--> 更新软件包列表并安装必要工具 (wget, unzip, coreutils)..."
     if ! apt-get update > /dev/null; then
