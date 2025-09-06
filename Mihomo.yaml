@@ -159,7 +159,7 @@ rule-providers:
     type: http
     format: text
     path: ./Lan.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/Clash/Rules/Lan.list
+    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Lan.list
   
 rules:
   - DOMAIN,lite.cn2gias.uk,US
