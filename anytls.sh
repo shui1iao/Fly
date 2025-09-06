@@ -129,10 +129,21 @@ EOF
     systemctl enable anytls > /dev/null 2>&1
     systemctl start anytls
 
+    # --- 获取 IP 并显示最终配置 ---
+    echo "--> 正在获取服务器公网 IP 地址..."
+    local ip_address=$(curl -s https://ipv4.icanhazip.com || curl -s https://api.ipify.org)
+    if [ -z "$ip_address" ]; then
+        echo -e "${RED}警告：无法获取公网 IP 地址，请手动替换下面的 'IP' 字段。${NC}"
+        ip_address="<您的服务器IP>"
+    fi
+
     echo -e "${GREEN}🎉 anytls 服务器安装并配置成功！${NC}"
     echo "------------------------------------------"
     echo -e "端口 (Port)      : ${GREEN}${PORT}${NC}"
     echo -e "密码 (Password)  : ${GREEN}${PASSWORD}${NC}"
+    echo "------------------------------------------"
+    echo "mihimo 客户端配置:"
+    echo -e "${GREEN}{ \"name\": \"VPS\", \"type\": \"anytls\", \"server\": \"${ip_address}\", \"port\": ${PORT}, \"password\": \"${PASSWORD}\", \"client-fingerprint\": \"chrome\", \"udp\": true, \"skip-cert-verify\": true }${NC}"
     echo "------------------------------------------"
 }
 
@@ -197,10 +208,21 @@ EOF
     systemctl daemon-reload
     systemctl restart anytls
     
+    # --- 获取 IP 并显示最终配置 ---
+    echo "--> 正在获取服务器公网 IP 地址..."
+    local ip_address=$(curl -s https://ipv4.icanhazip.com || curl -s https://api.ipify.org)
+    if [ -z "$ip_address" ]; then
+        echo -e "${RED}警告：无法获取公网 IP 地址，请手动替换下面的 'IP' 字段。${NC}"
+        ip_address="<您的服务器IP>"
+    fi
+    
     echo -e "${GREEN}🎉 anytls 配置已更新！${NC}"
     echo "------------------------------------------"
     echo -e "新端口 (Port)      : ${GREEN}${PORT}${NC}"
     echo -e "新密码 (Password)  : ${GREEN}${PASSWORD}${NC}"
+    echo "------------------------------------------"
+    echo "mihimo 客户端配置:"
+    echo -e "${GREEN}{ \"name\": \"VPS\", \"type\": \"anytls\", \"server\": \"${ip_address}\", \"port\": ${PORT}, \"password\": \"${PASSWORD}\", \"client-fingerprint\": \"chrome\", \"udp\": true, \"skip-cert-verify\": true }${NC}"
     echo "------------------------------------------"
 }
 
@@ -215,11 +237,21 @@ view_config() {
     local port=$(echo "$exec_start_line" | sed -n 's/.*-l 0\.0\.0\.0:\([0-9]*\).*/\1/p')
     local password=$(echo "$exec_start_line" | sed -n 's/.*-p \(.*\)/\1/p')
     
+    echo "--> 正在获取服务器公网 IP 地址..."
+    local ip_address=$(curl -s https://ipv4.icanhazip.com || curl -s https://api.ipify.org)
+    if [ -z "$ip_address" ]; then
+        echo -e "${RED}警告：无法获取公网 IP 地址，请手动替换下面的 'IP' 字段。${NC}"
+        ip_address="<您的服务器IP>"
+    fi
+
     echo "------------------------------------------"
     echo "         anytls 当前配置信息"
     echo "------------------------------------------"
     echo -e "端口 (Port)      : ${GREEN}${port}${NC}"
     echo -e "密码 (Password)  : ${GREEN}${password}${NC}"
+    echo "------------------------------------------"
+    echo "mihimo 客户端配置:"
+    echo -e "${GREEN}{ \"name\": \"VPS\", \"type\": \"anytls\", \"server\": \"${ip_address}\", \"port\": ${port}, \"password\": \"${password}\", \"client-fingerprint\": \"chrome\", \"udp\": true, \"skip-cert-verify\": true }${NC}"
     echo "------------------------------------------"
 }
 
@@ -253,6 +285,10 @@ stop_anytls() {
 
 # --- 函数: 重启服务 ---
 restart_anytls() {
+    if [ ! -f /etc/systemd/system/anytls.service ]; then
+        echo -e "${RED}anytls 未安装，无法重启。${NC}"
+        return
+    fi
     echo "--> 正在重启 anytls 服务..."
     if systemctl restart anytls; then
         echo -e "${GREEN}anytls 服务重启成功。${NC}"
@@ -263,6 +299,10 @@ restart_anytls() {
 
 # --- 函数: 检查运行状态 ---
 check_anytls_running() {
+    if [ ! -f /etc/systemd/system/anytls.service ]; then
+        echo -e "${RED}anytls 未安装，无法查看状态。${NC}"
+        return
+    fi
     systemctl status anytls
 }
 
