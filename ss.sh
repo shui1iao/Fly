@@ -61,6 +61,27 @@ check_root() {
     fi
 }
 
+# --- 函数: 确保 jq 已安装 ---
+ensure_jq() {
+    if ! command -v jq &> /dev/null; then
+        echo "--> 检测到依赖工具 jq 未安装，正在尝试自动安装..."
+        if command -v apt-get &> /dev/null; then
+            apt-get update >/dev/null && apt-get install -y jq
+        elif command -v yum &> /dev/null; then
+            yum install -y jq
+        else
+            echo -e "${RED}无法自动安装 jq。请手动安装 (sudo apt install jq / sudo yum install jq) 后再试。${NC}"
+            return 1
+        fi
+        if ! command -v jq &> /dev/null; then
+            echo -e "${RED}jq 安装失败，请检查包管理器或手动安装。${NC}"
+            return 1
+        fi
+        echo "    jq 安装成功。"
+    fi
+    return 0
+}
+
 # --- 函数: 安装 ss-rust ---
 install_ss_rust() {
     if [ -f /usr/local/bin/ss-rust ]; then
@@ -69,9 +90,9 @@ install_ss_rust() {
     fi
 
     echo "--> 正在准备安装环境..."
-    if ! command -v apt-get &> /dev/null; then
+    if command -v apt-get &> /dev/null; then
          apt-get update && apt-get install -y wget tar xz-utils openssl jq
-    elif ! command -v yum &> /dev/null; then
+    elif command -v yum &> /dev/null; then
          yum install -y wget tar xz-utils openssl jq
     else
          echo -e "${RED}无法确定包管理器，请手动安装 wget, tar, xz-utils, openssl, jq。${NC}"
@@ -145,12 +166,6 @@ EOF
     systemctl enable ss-rust > /dev/null 2>&1
     systemctl start ss-rust
 
-    # --- 获取 IP 并显示最终配置 ---
-    local ip_address=$(curl -s https://ipv4.icanhazip.com || curl -s https://api.ipify.org)
-    if [ -z "$ip_address" ]; then
-        ip_address="<您的服务器IP>"
-    fi
-
     echo -e "${GREEN}🎉 ss-rust 服务器安装并配置成功！${NC}"
     view_config
 }
@@ -189,6 +204,8 @@ modify_config() {
         echo -e "${RED}ss-rust 未安装，无法修改配置。${NC}"
         return
     fi
+    
+    ensure_jq || return
 
     read -p "请输入新的监听端口 (留空则随机生成): " PORT
     if [ -z "$PORT" ]; then
@@ -217,6 +234,8 @@ view_config() {
         echo -e "${RED}ss-rust 未安装，无法查看配置。${NC}"
         return
     fi
+    
+    ensure_jq || return
     
     local port=$(jq .server_port /etc/ss-rust/config.json)
     local password=$(jq -r .password /etc/ss-rust/config.json)
@@ -302,3 +321,4 @@ while true; do
     echo "按 Enter 键返回菜单..."
     read -r
 done
+
