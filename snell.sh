@@ -134,7 +134,7 @@ install_snell() {
     echo "--> 正在创建配置文件..."
     cat > /etc/snell/snell-server.conf <<EOF
 [snell-server]
-listen = ::0:${snell_port}
+listen = 0.0.0.0:${snell_port}
 psk = ${snell_psk}
 EOF
 
