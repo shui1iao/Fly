@@ -68,10 +68,8 @@ generate_reality_simple_config() {
     read -p "请输入监听端口 (例如 443, 留空随机): " PORT
     [ -z "$PORT" ] && PORT=$((RANDOM % 55536 + 10000))
 
-    read -p "请输入伪装域名 (例如 www.bing.com): " SNI_DOMAIN
-    while [ -z "$SNI_DOMAIN" ]; do
-        read -p "${RED}伪装域名不能为空，请重新输入: ${NC}" SNI_DOMAIN
-    done
+    read -p "请输入伪装域名 (留空则默认为 icloud.com): " SNI_DOMAIN
+    [ -z "$SNI_DOMAIN" ] && SNI_DOMAIN="icloud.com"
 
     local sni_domain_cleaned=$(echo "${SNI_DOMAIN}" | cut -d':' -f1)
 
@@ -141,10 +139,8 @@ generate_reality_dokodemo_config() {
     read -p "请输入内部 VLESS 端口 (留空随机): " INT_PORT
     [ -z "$INT_PORT" ] && INT_PORT=$((RANDOM % 55536 + 10000))
     
-    read -p "请输入伪装域名 (例如 www.bing.com): " SNI_DOMAIN
-    while [ -z "$SNI_DOMAIN" ]; do
-        read -p "${RED}伪装域名不能为空，请重新输入: ${NC}" SNI_DOMAIN
-    done
+    read -p "请输入伪装域名 (留空则默认为 icloud.com): " SNI_DOMAIN
+    [ -z "$SNI_DOMAIN" ] && SNI_DOMAIN="icloud.com"
 
     local sni_domain_cleaned=$(echo "${SNI_DOMAIN}" | cut -d':' -f1)
 
@@ -244,6 +240,11 @@ install_xray_core() {
         return 1
     else
         echo -e "${GREEN}Xray 核心安装成功。${NC}"
+        echo "--> 正在清理旧的配置文件..."
+        systemctl stop xray >/dev/null 2>&1
+        rm -f "${XRAY_CONFIG_FILE}"
+        rm -f "${XRAY_KEYS_FILE}"
+        echo "    旧配置已清理。"
         return 0
     fi
 }
