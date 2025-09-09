@@ -397,7 +397,7 @@ xray_menu() {
     while true; do
         clear
         echo "=================================================="
-        echo "       XTLS-RPRX-VISION Reality 管理脚本"
+        echo "       XTLS-RPRX-VISION Reality 管理脚本111"
         echo "=================================================="
         check_xray_status
         echo "--------------------------------------------------"
