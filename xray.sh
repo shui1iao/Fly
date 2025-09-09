@@ -196,6 +196,13 @@ view_config_xray() {
         echo -e "${RED}Xray 未安装。${NC}"; return; fi
     ensure_jq || return
 
+    # 新增: 检查 JSON 文件有效性
+    if ! jq . "${XRAY_CONFIG_FILE}" >/dev/null 2>&1; then
+        echo -e "${RED}错误：配置文件 ${XRAY_CONFIG_FILE} 格式无效。${NC}"
+        echo -e "${RED}请使用选项 '3. 修改 Xray 配置' 来重新生成，或手动修复文件。${NC}"
+        return
+    fi
+
     local ip_address=$(curl -s https://ipv4.icanhazip.com || echo "<您的服务器IP>")
     
     # 使用更健壮的 jq 查询，通过 tag 和 protocol 定位，避免依赖数组索引
