@@ -197,11 +197,25 @@ view_config_xray() {
     ensure_jq || return
 
     local ip_address=$(curl -s https://ipv4.icanhazip.com || echo "<您的服务器IP>")
-    local ext_port=$(jq '.inbounds[0].port' "${XRAY_CONFIG_FILE}")
-    local uuid=$(jq -r '.inbounds[1].settings.clients[0].id' "${XRAY_CONFIG_FILE}")
-    local sni=$(jq -r '.inbounds[1].streamSettings.realitySettings.serverNames[0]' "${XRAY_CONFIG_FILE}")
-    local flow=$(jq -r '.inbounds[1].settings.clients[0].flow' "${XRAY_CONFIG_FILE}")
-    local public_key=$(grep 'PublicKey' "${XRAY_KEYS_FILE}" | awk '{print $2}')
+    
+    # 使用更健壮的 jq 查询，通过 tag 和 protocol 定位，避免依赖数组索引
+    local ext_port=$(jq '.inbounds[] | select(.tag=="dokodemo-in") | .port' "${XRAY_CONFIG_FILE}")
+    local vless_inbound=$(jq '.inbounds[] | select(.protocol=="vless")' "${XRAY_CONFIG_FILE}")
+
+    if [ -z "$vless_inbound" ]; then
+        echo -e "${RED}错误：在配置文件中找不到 VLESS 入站协议。${NC}"
+        return
+    fi
+
+    local uuid=$(echo "$vless_inbound" | jq -r '.settings.clients[0].id')
+    local flow=$(echo "$vless_inbound" | jq -r '.settings.clients[0].flow')
+    local sni=$(echo "$vless_inbound" | jq -r '.streamSettings.realitySettings.serverNames[0]')
+    local short_id=$(echo "$vless_inbound" | jq -r '.streamSettings.realitySettings.shortIds[0]')
+    
+    local public_key="<未找到>"
+    if [ -f "${XRAY_KEYS_FILE}" ]; then
+        public_key=$(grep 'PublicKey' "${XRAY_KEYS_FILE}" | awk '{print $2}')
+    fi
     
     echo "------------------------------------------"
     echo "     Xray (Reality) 当前配置信息"
@@ -211,10 +225,11 @@ view_config_xray() {
     echo -e "UUID       : ${GREEN}${uuid}${NC}"
     echo -e "Flow       : ${GREEN}${flow}${NC}"
     echo -e "伪装域名   : ${GREEN}${sni}${NC}"
+    echo -e "Short ID   : ${GREEN}${short_id}${NC}"
     echo -e "公钥 (pbk) : ${GREEN}${public_key}${NC}"
     echo "------------------------------------------"
     echo "VLESS 分享链接:"
-    local vless_link="vless://${uuid}@${ip_address}:${ext_port}?encryption=none&flow=${flow}&security=reality&sni=${sni}&fp=chrome&pbk=${public_key}&allowInsecure=1&type=tcp&headerType=none#VPS"
+    local vless_link="vless://${uuid}@${ip_address}:${ext_port}?encryption=none&flow=${flow}&security=reality&sni=${sni}&fp=chrome&pbk=${public_key}&sid=${short_id}&allowInsecure=1&type=tcp&headerType=none#VPS"
     echo -e "${GREEN}${vless_link}${NC}"
     echo "------------------------------------------"
 }
