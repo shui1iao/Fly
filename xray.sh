@@ -62,9 +62,9 @@ check_xray_status() {
 }
 
 
-# --- 函数: 生成 Reality (单端口) 配置 ---
+# --- 函数: 生成 Reality 配置 ---
 generate_reality_simple_config() {
-    echo "--> 正在配置 Reality (单端口)..."
+    echo "--> 正在配置 Reality..."
     read -p "请输入监听端口 (例如 443, 留空随机): " PORT
     [ -z "$PORT" ] && PORT=$((RANDOM % 55536 + 10000))
 
@@ -249,7 +249,7 @@ install_xray_core() {
     fi
 }
 
-# --- 函数: (包装器) 配置 Reality (单端口) ---
+# --- 函数: (包装器) 配置 Reality  ---
 configure_reality_simple() {
     if ! [ -f /usr/local/bin/xray ]; then
         echo "--> Xray 核心未安装，正在自动安装..."
@@ -270,7 +270,7 @@ configure_reality_simple() {
     
     systemctl restart xray
     systemctl enable xray > /dev/null 2>&1
-    echo -e "${GREEN}🎉 Xray Reality (单端口) 配置成功！${NC}"
+    echo -e "${GREEN}🎉 Xray Reality配置成功！${NC}"
     view_config_xray
 }
 
@@ -366,7 +366,7 @@ view_config_xray() {
         local sni=$(echo "$vless_inbound" | jq -r '.streamSettings.realitySettings.serverNames[0]')
         local short_id=$(echo "$vless_inbound" | jq -r '.streamSettings.realitySettings.shortIds[0]')
 
-        echo -e "配置类型   : ${GREEN}Reality (单端口)${NC}"
+        echo -e "配置类型   : ${GREEN}Reality ${NC}"
         echo -e "监听地址   : ${GREEN}${ip_address}${NC}"
         echo -e "端口       : ${GREEN}${port}${NC}"
         echo -e "UUID       : ${GREEN}${uuid}${NC}"
@@ -404,7 +404,7 @@ xray_menu() {
         check_xray_status
         echo "--------------------------------------------------"
         echo "1. 安装 Xray 核心"
-        echo "2. 配置 Reality (单端口)"
+        echo "2. 配置 Reality"
         echo "3. 配置 Reality (防偷)"
         echo "4. 卸载 Xray"
         echo "5. 查看 Xray 配置"
