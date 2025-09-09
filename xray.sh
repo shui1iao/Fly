@@ -73,11 +73,11 @@ generate_xray_config() {
     echo "--> 正在生成 UUID 和 Reality 密钥对..."
     local uuid=$(/usr/local/bin/xray uuid)
     local key_pair=$(/usr/local/bin/xray x25519)
-    local private_key=$(echo "$key_pair" | awk 'NR==1 {print $3}')
-    local public_key=$(echo "$key_pair" | awk 'NR==2 {print $3}')
+    local private_key=$(echo "$key_pair" | grep 'PrivateKey' | awk '{print $2}')
+    local public_key=$(echo "$key_pair" | grep 'Password' | awk '{print $2}')
     local short_id=$(openssl rand -hex 8)
     
-    # 保存公钥和私钥以便后续查看
+    # 保存私钥和公钥(Password)以便后续查看
     echo "PrivateKey: ${private_key}" > "${XRAY_KEYS_FILE}"
     echo "PublicKey: ${public_key}" >> "${XRAY_KEYS_FILE}"
 
@@ -200,7 +200,6 @@ view_config_xray() {
     local ext_port=$(jq '.inbounds[0].port' "${XRAY_CONFIG_FILE}")
     local uuid=$(jq -r '.inbounds[1].settings.clients[0].id' "${XRAY_CONFIG_FILE}")
     local sni=$(jq -r '.inbounds[1].streamSettings.realitySettings.serverNames[0]' "${XRAY_CONFIG_FILE}")
-    local short_id=$(jq -r '.inbounds[1].streamSettings.realitySettings.shortIds[0]' "${XRAY_CONFIG_FILE}")
     local flow=$(jq -r '.inbounds[1].settings.clients[0].flow' "${XRAY_CONFIG_FILE}")
     local public_key=$(grep 'PublicKey' "${XRAY_KEYS_FILE}" | awk '{print $2}')
     
@@ -212,11 +211,10 @@ view_config_xray() {
     echo -e "UUID       : ${GREEN}${uuid}${NC}"
     echo -e "Flow       : ${GREEN}${flow}${NC}"
     echo -e "伪装域名   : ${GREEN}${sni}${NC}"
-    echo -e "Short ID   : ${GREEN}${short_id}${NC}"
     echo -e "公钥 (pbk) : ${GREEN}${public_key}${NC}"
     echo "------------------------------------------"
     echo "VLESS 分享链接:"
-    local vless_link="vless://${uuid}@${ip_address}:${ext_port}?security=reality&sni=${sni}&fp=chrome&pbk=${public_key}&sid=${short_id}&type=tcp&flow=${flow}#Xray_Reality"
+    local vless_link="vless://${uuid}@${ip_address}:${ext_port}?encryption=none&flow=${flow}&security=reality&sni=${sni}&fp=chrome&pbk=${public_key}&allowInsecure=1&type=tcp&headerType=none#VPS"
     echo -e "${GREEN}${vless_link}${NC}"
     echo "------------------------------------------"
 }
@@ -295,3 +293,4 @@ xray_menu() {
 check_root
 xray_menu
 echo "脚本已退出。"
+
