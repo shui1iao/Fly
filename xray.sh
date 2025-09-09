@@ -64,7 +64,7 @@ check_xray_status() {
 
 # --- 函数: 生成 Reality 配置 ---
 generate_reality_simple_config() {
-    echo "--> 正在配置 Reality..."
+    echo "--> 正在配置 Reality 配置..."
     read -p "请输入监听端口 (例如 443, 留空随机): " PORT
     [ -z "$PORT" ] && PORT=$((RANDOM % 55536 + 10000))
 
@@ -78,7 +78,6 @@ generate_reality_simple_config() {
     local key_pair=$(/usr/local/bin/xray x25519)
     local private_key=$(echo "$key_pair" | grep 'PrivateKey' | awk '{print $2}')
     local public_key=$(echo "$key_pair" | grep 'Password' | awk '{print $2}')
-    local short_id=$(openssl rand -hex 8)
 
     echo "PrivateKey: ${private_key}" > "${XRAY_KEYS_FILE}"
     echo "PublicKey: ${public_key}" >> "${XRAY_KEYS_FILE}"
@@ -109,7 +108,7 @@ generate_reality_simple_config() {
                     "dest": "${sni_domain_cleaned}:443",
                     "serverNames": [ "${sni_domain_cleaned}" ],
                     "privateKey": "${private_key}",
-                    "shortIds": [ "${short_id}", "0123456789abcdef" ]
+                    "shortIds": [ "", "0123456789abcdef" ]
                 }
             },
             "sniffing": {
@@ -149,7 +148,6 @@ generate_reality_dokodemo_config() {
     local key_pair=$(/usr/local/bin/xray x25519)
     local private_key=$(echo "$key_pair" | grep 'PrivateKey' | awk '{print $2}')
     local public_key=$(echo "$key_pair" | grep 'Password' | awk '{print $2}')
-    local short_id=$(openssl rand -hex 8)
     
     echo "PrivateKey: ${private_key}" > "${XRAY_KEYS_FILE}"
     echo "PublicKey: ${public_key}" >> "${XRAY_KEYS_FILE}"
@@ -196,7 +194,7 @@ generate_reality_dokodemo_config() {
                     "dest": "${sni_domain_cleaned}:443",
                     "serverNames": [ "${sni_domain_cleaned}" ],
                     "privateKey": "${private_key}",
-                    "shortIds": [ "${short_id}", "0123456789abcdef" ]
+                    "shortIds": [ "", "0123456789abcdef" ]
                 }
             },
             "sniffing": {
@@ -249,7 +247,7 @@ install_xray_core() {
     fi
 }
 
-# --- 函数: (包装器) 配置 Reality  ---
+# --- 函数: (包装器) 配置 Reality ---
 configure_reality_simple() {
     if ! [ -f /usr/local/bin/xray ]; then
         echo "--> Xray 核心未安装，正在自动安装..."
@@ -270,7 +268,7 @@ configure_reality_simple() {
     
     systemctl restart xray
     systemctl enable xray > /dev/null 2>&1
-    echo -e "${GREEN}🎉 Xray Reality配置成功！${NC}"
+    echo -e "${GREEN}🎉 Xray Reality 配置成功！${NC}"
     view_config_xray
 }
 
@@ -358,7 +356,7 @@ view_config_xray() {
         echo -e "${GREEN}${vless_link}${NC}"
 
     else
-        # 单端口配置
+        # Reality 配置
         local vless_inbound=$(jq '.inbounds[] | select(.protocol=="vless")' "${XRAY_CONFIG_FILE}")
         local port=$(echo "$vless_inbound" | jq -r '.port')
         local uuid=$(echo "$vless_inbound" | jq -r '.settings.clients[0].id')
@@ -366,7 +364,7 @@ view_config_xray() {
         local sni=$(echo "$vless_inbound" | jq -r '.streamSettings.realitySettings.serverNames[0]')
         local short_id=$(echo "$vless_inbound" | jq -r '.streamSettings.realitySettings.shortIds[0]')
 
-        echo -e "配置类型   : ${GREEN}Reality ${NC}"
+        echo -e "配置类型   : ${GREEN}Reality 配置${NC}"
         echo -e "监听地址   : ${GREEN}${ip_address}${NC}"
         echo -e "端口       : ${GREEN}${port}${NC}"
         echo -e "UUID       : ${GREEN}${uuid}${NC}"
@@ -376,7 +374,7 @@ view_config_xray() {
         echo -e "公钥 (pbk) : ${GREEN}${public_key}${NC}"
         echo "------------------------------------------"
         echo "VLESS 分享链接:"
-        local vless_link="vless://${uuid}@${ip_address}:${port}?encryption=none&flow=${flow}&security=reality&sni=${sni}&fp=chrome&pbk=${public_key}&sid=${short_id}&allowInsecure=1&type=tcp&headerType=none#VPS_单端口"
+        local vless_link="vless://${uuid}@${ip_address}:${port}?encryption=none&flow=${flow}&security=reality&sni=${sni}&fp=chrome&pbk=${public_key}&sid=${short_id}&allowInsecure=1&type=tcp&headerType=none#VPS_Reality"
         echo -e "${GREEN}${vless_link}${NC}"
     fi
     echo "------------------------------------------"
