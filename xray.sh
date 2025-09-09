@@ -84,7 +84,9 @@ generate_xray_config() {
     echo "--> 正在创建配置文件 ${XRAY_CONFIG_FILE}..."
     cat > "${XRAY_CONFIG_FILE}" <<EOF
 {
-    "log": { "loglevel": "warning" },
+    "log": {
+        "loglevel": "warning"
+    },
     "inbounds": [
         {
             "tag": "dokodemo-in",
