@@ -172,8 +172,6 @@ rule-providers:
 rules:
   - DOMAIN,lite.cn2gias.uk,US
   - DOMAIN,nodeseek.com,SG
-  - DOMAIN,emby-sharon.sakiko.de,DIRECT
-  - DOMAIN,dragonli.misaka.be,DIRECT  
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,TikTok,Google
   - RULE-SET,AI,AI
