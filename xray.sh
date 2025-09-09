@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin.bash
 
 # =================================================================
 # Xray (xtls-rprx-vision Reality) 服务器端管理脚本
@@ -70,6 +70,9 @@ generate_xray_config() {
         read -p "${RED}伪装域名不能为空，请重新输入: ${NC}" SNI_DOMAIN
     done
 
+    # 新增：从用户输入中提取纯域名
+    local sni_domain_cleaned=$(echo "${SNI_DOMAIN}" | cut -d':' -f1)
+
     echo "--> 正在生成 UUID 和 Reality 密钥对..."
     local uuid=$(/usr/local/bin/xray uuid)
     local key_pair=$(/usr/local/bin/xray x25519)
@@ -120,8 +123,8 @@ generate_xray_config() {
                 "network": "tcp",
                 "security": "reality",
                 "realitySettings": {
-                    "dest": "${SNI_DOMAIN}:443",
-                    "serverNames": [ "${SNI_DOMAIN}" ],
+                    "dest": "${sni_domain_cleaned}:443",
+                    "serverNames": [ "${sni_domain_cleaned}" ],
                     "privateKey": "${private_key}",
                     "shortIds": [ "${short_id}", "0123456789abcdef" ]
                 }
@@ -141,7 +144,7 @@ generate_xray_config() {
         "rules": [
             {
                 "inboundTag": [ "dokodemo-in" ],
-                "domain": [ "${SNI_DOMAIN}" ],
+                "domain": [ "${sni_domain_cleaned}" ],
                 "outboundTag": "direct"
             },
             {
