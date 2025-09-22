@@ -4,7 +4,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
     max-failed-times: 2
-    filter: "Sharon|BW|DMIT|Legend|C1V|Ali"
+    filter: "Sharon|BW|DMIT|Legend|C1V|Ali|NMC"
       
   - name: "Final"
     type: fallback
@@ -13,12 +13,14 @@ proxy-groups:
       - HK
       - SG
       - JP
+      - TW
       - US
 
   - name: "AI"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies:
+      - TW
       - US
       - JP
       - SG
@@ -30,6 +32,7 @@ proxy-groups:
       - US
       - HK
       - SG
+      - TW
       - JP
 
   - name: "HK"
@@ -38,6 +41,13 @@ proxy-groups:
     max-failed-times: 2
     include-all: true
     filter: "🇭🇰.*(Sharon|DMIT)"
+
+  - name: "TW"
+    type: url-test
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
+    max-failed-times: 2
+    include-all: true
+    filter: "NMC"
     
   - name: "SG"
     type: url-test
@@ -61,7 +71,7 @@ proxy-groups:
     type: select
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
-    filter: "^(?!.*(BW|Sharon|DMIT|Legend|C1V|Ali)).*$"
+    filter: "^(?!.*(BW|Sharon|DMIT|Legend|C1V|Ali|NMC)).*$"
 
 
 rule-providers:
@@ -173,7 +183,7 @@ rules:
   - DOMAIN,lite.cn2gias.uk,US
   - DOMAIN,nodeseek.com,SG
   - RULE-SET,Speedtest,Proxy
-  - RULE-SET,TikTok,JP
+  - RULE-SET,TikTok,TW
   - RULE-SET,AI,AI
   - RULE-SET,PayPal,Final
   - RULE-SET,Apple,DIRECT
