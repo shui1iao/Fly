@@ -180,7 +180,7 @@ rule-providers:
   
 rules:
   - DOMAIN,lite.cn2gias.uk,US
-  - DOMAIN,nodeseek.com,SG
+  - DOMAIN-SUFFIX,nodeseek.com,SG
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,TikTok,JP
   - RULE-SET,AI,AI
