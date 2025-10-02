@@ -170,7 +170,7 @@ rule-providers:
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Lan.list
   
 rules:
-  - DOMAIN,lite.cn2gias.uk,US
+  - DOMAIN,cdn.lilyemby.my,DIRECT
   - DOMAIN-SUFFIX,nodeseek.com,SG
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,TikTok,JP
