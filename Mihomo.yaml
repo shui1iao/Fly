@@ -171,10 +171,10 @@ rule-providers:
   
 rules:
   - DOMAIN-SUFFIX,nodeseek.com,SG
+  - DOMAIN,dragonli.misaka.be,DIRECT
   - DOMAIN,cdn.lilyemby.my,DIRECT
   - DOMAIN,cdn.sexemby.com,US
   - DOMAIN,lite.cn2gias.uk,US
-  - DOMAIN,cdn.lilyemby.my,DIRECT
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,TikTok,JP
   - RULE-SET,AI,AI
