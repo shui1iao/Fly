@@ -4,7 +4,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
     max-failed-times: 2
-    filter: "Sharon|BW|DMIT|Legend|Ali|Bage|Stacks|Bero|BestVM|Neburst"
+    filter: "Sharon|BW|DMIT|Legend|Ali|Bage|Stacks|Bero|BestVM"
       
   - name: "Final"
     type: fallback
@@ -47,7 +47,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     max-failed-times: 2
     include-all: true
-    filter: "🇭🇰.*(Sharon|DMIT|Stacks|Neburst)"
+    filter: "🇭🇰.*(Sharon|DMIT|Stacks)"
     
   - name: "SG"
     type: url-test
