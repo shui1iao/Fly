@@ -352,7 +352,7 @@ view_config_xray() {
         echo -e "公钥 (pbk) : ${GREEN}${public_key}${NC}"
         echo "------------------------------------------"
         echo "VLESS 分享链接:"
-        local vless_link="vless://${uuid}@${ip_address}:${ext_port}?encryption=none&flow=${flow}&security=reality&sni=${sni}&fp=chrome&pbk=${public_key}&sid=${short_id}&allowInsecure=1&type=tcp&headerType=none#VPS_防偷"
+        local vless_link="vless://${uuid}@${ip_address}:${ext_port}?encryption=none&flow=${flow}&security=reality&sni=${sni}&fp=random&pbk=${public_key}&sid=${short_id}&allowInsecure=1&type=tcp&headerType=none#VPS_防偷"
         echo -e "${GREEN}${vless_link}${NC}"
 
     else
@@ -374,7 +374,7 @@ view_config_xray() {
         echo -e "公钥 (pbk) : ${GREEN}${public_key}${NC}"
         echo "------------------------------------------"
         echo "VLESS 分享链接:"
-        local vless_link="vless://${uuid}@${ip_address}:${port}?encryption=none&flow=${flow}&security=reality&sni=${sni}&fp=chrome&pbk=${public_key}&sid=${short_id}&allowInsecure=1&type=tcp&headerType=none#VPS_Reality"
+        local vless_link="vless://${uuid}@${ip_address}:${port}?encryption=none&flow=${flow}&security=reality&sni=${sni}&fp=random&pbk=${public_key}&sid=${short_id}&allowInsecure=1&type=tcp&headerType=none#VPS_Reality"
         echo -e "${GREEN}${vless_link}${NC}"
     fi
     echo "------------------------------------------"
