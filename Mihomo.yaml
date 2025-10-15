@@ -4,7 +4,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
     max-failed-times: 2
-    filter: "Sharon|BW|DMIT|Legend|Ali|Bage|Bero|BestVM|Seednet"
+    filter: "Sharon|BW|DMIT|Ali|Bage|Bero|Seednet"
       
   - name: "Final"
     type: fallback
@@ -53,13 +53,13 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    filter: "🇸🇬.*(Legend|Bage)"
+    filter: "🇸🇬.*(Bage)"
     
   - name: "JP"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: "🇯🇵.*(BW|BestVM)"
+    filter: "🇯🇵.*(BW)"
 
   - name: "US"
     type: url-test
@@ -71,7 +71,7 @@ proxy-groups:
     type: select
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
-    filter: "^(?!.*(BW|Sharon|DMIT|Legend|Ali|Bage|BestVM)).*$"
+    filter: "^(?!.*(BW|DMIT|Bage)).*$"
 
 
 rule-providers:
