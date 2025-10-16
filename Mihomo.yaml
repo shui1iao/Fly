@@ -65,7 +65,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: "BWH|Bage"
+    filter: "🇺🇸.*(BWH|Bage)"
 
   - name: "Dler"
     type: select
