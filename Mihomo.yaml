@@ -61,13 +61,13 @@ proxy-groups:
   - name: "🇭🇰 DMIT-Dler"
     type: url-test
     include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
     filter: "DMIT.*(AC|Ultra|Pro|Std)"
 
   - name: "🇸🇬 Bage-Dler"
     type: url-test
     include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
     filter: "Bage.*(AC|Ultra|Pro|Std)"
 
   - name: "🇯🇵 BW-Dler"
