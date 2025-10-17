@@ -28,7 +28,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     max-failed-times: 2
     include-all: true
-    filter: "🇭🇰.*(Sharon|DMIT)"
+    filter: "🇭🇰.*(Sharon|DMIT|Neburst)"
     
   - name: "SG"
     type: url-test
