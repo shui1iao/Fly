@@ -123,46 +123,50 @@ button.rounded-\[50px\][aria-haspopup="dialog"],
 /* 卡片高斯模糊 */
 .bg-card\/70 {
   background-color: rgba(255, 255, 255, 0.4) !important;
-  backdrop-filter: blur(15px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  backdrop-filter: blur(25px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 16px !important;  
   transition: all 0.3s ease;
 }
 
 /* 暗色模式下的背景处理 */
 .dark .bg-card\/70 {
-  background-color: rgba(0, 0, 0, 0.4) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  border: none !important;;
 }
 
-/* 悬停时背景和边框变亮 + 悬浮动画 */
+/* 悬停时仅放大（无变色） */
 .bg-card\/70:hover {
-  background-color: rgba(255, 255, 255, 0.6) !important;
-  border-color: rgba(255, 255, 255, 0.6) !important;
-  transform: scale(1.01);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+  transform: scale(1.02);
   cursor: pointer;
 }
+
 .dark .bg-card\/70:hover {
-  background-color: rgba(0, 0, 0, 0.5) !important;
-  border-color: rgba(255, 255, 255, 0.5) !important;
+  transform: scale(1.02);
 }
 
-/* ========== 在线按钮高斯模糊========== */
+
+/* ========== 在线按钮默认立体毛玻璃效果 ========== */
 .bg-white\/70,
 .bg-black\/70 {
+  position: relative;
   background-color: rgba(255, 255, 255, 0.4) !important;
-  -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
-  backdrop-filter: blur(15px) saturate(150%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(25px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  box-shadow: none !important;
+  transition: all 0.3s ease;
 }
+
+/* 暗色模式下的按钮立体样式 */
 .dark .bg-white\/70,
 .dark .bg-black\/70 {
   background-color: rgba(0, 0, 0, 0.4) !important;
-  -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
-  backdrop-filter: blur(15px) saturate(150%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* ========== 字体颜色 ========== */
@@ -184,26 +188,39 @@ button.rounded-\[50px\][aria-haspopup="dialog"],
 .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:first-child,
 .bg-secondary.h-\[3px\].rounded-sm {
   background-color: rgba(255,255,255,0.4) !important;
-  -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
-  backdrop-filter: blur(15px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
+  backdrop-filter: blur(25px) saturate(150%) !important;
 }
-.dark .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:first-child,
-.dark .bg-secondary.h-\[3px\].rounded-sm {
-  background-color: rgba(0,0,0,0.4) !important;
-  -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
-  backdrop-filter: blur(15px) saturate(150%) !important;
+.dark [class*="h-1.5"] > .absolute.inset-0.rounded-full,
+.dark [class*="bg-secondary"][class*="rounded-sm"][class*="h-3"] {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
+  backdrop-filter: blur(25px) saturate(150%) !important;
+  border-radius: 9999px !important;
+}
+
+/* ✅ 让进度条在暗色模式下保持绿����� */
+.relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:last-child,
+.bg-secondary.h-\[3px\].rounded-sm > .absolute.inset-0.rounded-full:last-child {
+  background: linear-gradient(90deg, #00d26a, #00b05c) !important;  /* 明亮绿色渐变 */
+}
+
+/* 暗色模式下仍保持相同绿色，不再被覆盖为黑色 */
+.dark .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:last-child,
+.dark .bg-secondary.h-\[3px\].rounded-sm > .absolute.inset-0.rounded-full:last-child {
+  background: linear-gradient(90deg, #00d26a, #00b05c) !important;
 }
 
 /* ========== 探针栏毛玻璃背景  ========== */
 section.flex.items-center.cursor-pointer.text-sm.font-medium,
 section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium {
   background-color: rgba(255, 255, 255, 0.3) !important;
-  backdrop-filter: blur(15px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(25px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(325px) saturate(150%) !important;
+  border: none !important;
   border-radius: 9999px !important;
   padding: 6px 12px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: none !important;
   transition: all 0.3s ease !important;
 }
 
@@ -222,22 +239,19 @@ section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium {
 /* ========== 管理后台按钮：毛玻璃 + 悬浮动画 ========== */
 a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50 {
   background-color: rgba(255, 255, 255, 0.4) !important;
-  backdrop-filter: blur(15px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(25px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
+  border: none !important;
   border-radius: 9999px !important;
   padding: 6px 12px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: none !important;
   transition: all 0.3s ease !important;
   opacity: 1 !important; /* 去除原有透明效果 */
 }
 
-/* 悬浮放大 + 光晕 */
+/* 悬浮放大 + 光晕（不变色） */
 a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50:hover {
-  background-color: rgba(255, 255, 255, 0.5) !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
-  transform: scale(1.01);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15) !important;
+  transform: scale(1.02);
   cursor: pointer;
 }
 
@@ -258,5 +272,30 @@ a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-5
   background-color: transparent !important;
 }
 
+/* ✅ 探针标题悬停效果（仅轻微放大，无光晕） */
+section.cursor-pointer.flex.items-center.sm\:text-base.text-sm.font-medium:hover,
+section.cursor-pointer.flex.items-center.text-sm.font-medium:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+  transition: transform .25s ease !important;
+}
+
+/* 暗色模式保持一致，无额外阴影 */
+.dark section.cursor-pointer.flex.items-center.sm\:text-base.text-sm.font-medium:hover,
+.dark section.cursor-pointer.flex.items-center.text-sm.font-medium:hover {
+  transform: scale(1.02);
+}
+
 
 </style>
+//去除搜索按钮
+<style>
+button[title="Search"] {
+  display: none !important;
+}
+
+section.flex.items-center.w-full.justify-between.gap-1 {
+  display: none !important;
+}
+</style>
+
