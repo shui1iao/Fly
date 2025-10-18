@@ -77,7 +77,7 @@ install_anytls() {
     fi
 
     echo "--> 正在下载、解压并部署 anytls..."
-    if ! curl -sL -o anytls.zip "https://github.com/anytls/anytls-go/releases/download/v0.0.8/anytls_0.0.8_linux_amd64.zip"; then
+    if ! curl -sL -o anytls.zip "https://github.com/anytls/anytls-go/releases/download/v0.0.11/anytls_0.0.11_linux_amd64.zip"; then
         echo -e "${RED}下载 anytls 失败！请检查网络或链接是否有效。${NC}"
         exit 1
     fi
