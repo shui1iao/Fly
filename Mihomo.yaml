@@ -63,18 +63,21 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
     filter: "DMIT.*(AC|Ultra|Pro|Std)"
+    hidden: true
 
   - name: "🇸🇬 Bage-Dler"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
     filter: "Bage.*(AC|Ultra|Pro|Std)"
+    hidden: true
 
   - name: "🇯🇵 BW-Dler"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
     filter: "BW.*(Plus|Max|BGP)"
+    hidden: true
 
 
 rule-providers:
