@@ -74,7 +74,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
-    filter: "Bage.*(Plus|Max|BGP)"
+    filter: "BW.*(Plus|Max|BGP)"
 
 
 rule-providers:
