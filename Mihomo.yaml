@@ -115,8 +115,6 @@ rule-providers:
   
 rules:
   - DOMAIN,cdn.lilyemby.my,DIRECT
-  - DOMAIN,cdn.sexemby.com,US
-  - DOMAIN,lite.cn2gias.uk,US
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
   - RULE-SET,PayPal,HK
