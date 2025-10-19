@@ -3,8 +3,6 @@
 #!icon=https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/id.jpg
 
 [Rule]
-# 农行去检测
-DOMAIN,msmp.abchina.com.cn,REJECT
 # 小米米家
 DOMAIN,sdkconfig.ad.xiaomi.com,REJECT
 # 淘宝开屏
