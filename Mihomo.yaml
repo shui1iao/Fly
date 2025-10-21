@@ -27,6 +27,24 @@ proxy-groups:
       - JP
       - SG
 
+  - name: "Google"
+    type: fallback
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/google(2).png
+    proxies:
+      - US
+      - HK
+      - SG
+      - JP
+
+ - name: "Telegram"
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+    proxies:
+      - SG
+      - HK
+      - JP
+      - US
+
   - name: "HK"
     type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
@@ -97,6 +115,22 @@ rule-providers:
     path: ./AI.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/AI.list
 
+  Google:
+    behavior: classical
+    type: http
+    format: text
+    nterval: 86400
+    path: ./Google.list
+    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Google.list
+
+  Telegram:
+    behavior: classical
+    type: http
+    format: text
+    nterval: 86400
+    path: ./Telegram.list
+    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Telegram.list
+    
   PayPal:
     behavior: classical
     type: http
@@ -104,7 +138,6 @@ rule-providers:
     nterval: 86400
     path: ./PayPal.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/PayPal.list
-
   LAN:
     behavior: classical
     interval: 86400
@@ -118,6 +151,8 @@ rules:
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
   - RULE-SET,PayPal,HK
+  - RULE-SET,Google,Google
+  - RULE-SET,Telegram,Telegram
   - RULE-SET,LAN,DIRECT 
   - GEOIP,CN,DIRECT
   - MATCH,Final
