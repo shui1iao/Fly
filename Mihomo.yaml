@@ -36,7 +36,7 @@ proxy-groups:
       - SG
       - JP
 
- - name: "Telegram"
+  - name: "Telegram"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
     proxies:
