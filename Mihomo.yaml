@@ -4,11 +4,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
     max-failed-times: 2
-    filter: "Sharon|BWH|Ali|Dler|Bero|Seednet|Neburst|Legend"
-    proxies: 
-      - 🇭🇰 DMIT-Dler
-      - 🇸🇬 Bage-Dler
-      - 🇯🇵 BW-Dler
+    filter: "Sharon|BWH|Ali|Bero|Neburst|Legend"
       
   - name: "Final"
     type: fallback
@@ -75,27 +71,6 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
     filter: "^(?!.*(BW|DMIT|Bage|Sharon|Neburst|Legend|Ali|Bero|Seednet|Dler)).*$"
-
-  - name: "🇭🇰 DMIT-Dler"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
-    filter: "DMIT.*(AC|Ultra|Pro|Std)"
-    hidden: true
-
-  - name: "🇸🇬 Bage-Dler"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
-    filter: "Bage.*(AC|Ultra|Pro|Std)"
-    hidden: true
-
-  - name: "🇯🇵 BW-Dler"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
-    filter: "BW.*(Plus|Max|BGP)"
-    hidden: true
 
 
 rule-providers:
