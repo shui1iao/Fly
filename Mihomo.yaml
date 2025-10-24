@@ -148,6 +148,7 @@ rule-providers:
   
 rules:
   - DOMAIN,cdn.lilyemby.my,DIRECT
+  - DOMAIN-SUFFIX,nodeseek.com,SG
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
   - RULE-SET,PayPal,HK
