@@ -46,7 +46,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     max-failed-times: 2
     include-all: true
-    filter: "🇭🇰.*(Sharon|DMIT|Neburst)"
+    filter: "🇭🇰.*(Sharon|Neburst)"
     
   - name: "SG"
     type: url-test
@@ -65,13 +65,6 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "🇺🇸.*(BWH|Bage)"
-
-  - name: "Dler"
-    type: select
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
-    filter: "^(?!.*(BW|DMIT|Bage|Sharon|Neburst|Legend|Ali|Bero|Seednet|Dler)).*$"
-
 
 rule-providers:
 
