@@ -4,7 +4,6 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
     max-failed-times: 2
-    filter: "Sharon|BWH|Ali|Bero|Neburst|Legend"
       
   - name: "Final"
     type: fallback
