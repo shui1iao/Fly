@@ -393,7 +393,7 @@ view_config_shadowtls() {
     echo -e "伪装域名    : ${GREEN}${sni_host}${NC}"
     echo "------------------------------------------"
     echo "Surge 客户端配置:"
-    echo -e "${GREEN}VPS = ss, ${ip_address}, ${listen_port}, encrypt-method=${ss_method}, password=${ss_password}, shadow-tls-password=${stls_password}, shadow-tls-sni=${sni_host}, shadow-tls-version=v3, udp-relay=true${NC}"
+    echo -e "${GREEN}VPS = ss, ${ip_address}, ${listen_port}, encrypt-method=${ss_method}, password=${ss_password}, shadow-tls-password=${stls_password}, shadow-tls-sni=${sni_host}, shadow-tls-version=3, udp-relay=true${NC}"
     echo "------------------------------------------"
 }
 
