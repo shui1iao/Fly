@@ -185,7 +185,7 @@ button.rounded-\[50px\][aria-haspopup="dialog"],
   background: linear-gradient(90deg, #00d26a, #00b05c) !important;
 }
 
-/* ========== 探针栏毛玻璃背景  ========== */
+/* ========== 探针栏毛玻璃背景 ========== */
 section.flex.items-center.cursor-pointer.text-sm.font-medium,
 section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium {
   background-color: rgba(255, 255, 255, 0.3) !important;
@@ -198,19 +198,29 @@ section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium {
   transition: all 0.3s ease !important;
 }
 
-/* 暗色模式下样式 */
+/* ========== 亮色模式下悬停变亮 ========== */
+section.flex.items-center.cursor-pointer.text-sm.font-medium:hover,
+section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium:hover {
+  background-color: rgba(255, 255, 255, 0.55) !important; /* 亮一点，与卡片一致 */
+  border-color: rgba(0, 0, 0, 0) !important;
+}
+
+/* ========== 暗色模式下样式 ========== */
 .dark section.flex.items-center.cursor-pointer.text-sm.font-medium,
 .dark section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium {
   background-color: rgba(0, 0, 0, 0.4) !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
 }
+
+/* ========== 暗色模式下悬停变亮 ========== */
 .dark section.flex.items-center.cursor-pointer.text-sm.font-medium:hover,
 .dark section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium:hover {
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.5) !important; /* 与卡片一致 */
   border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
-/* ========== 管理后台按钮：毛玻璃 + 悬浮动画 ========== */
+
+/* ========== 管理后台按钮：毛玻璃 + 悬停变亮 ========== */
 a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50 {
   background-color: rgba(255, 255, 255, 0.4) !important;
   backdrop-filter: blur(25px) saturate(150%) !important;
@@ -223,7 +233,19 @@ a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-5
   opacity: 1 !important; /* 去除原有透明效果 */
 }
 
+/* 亮色模式下悬停变亮 */
+a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50:hover {
+  background-color: rgba(255, 255, 255, 0.55) !important;
+}
+
+/* 暗色模式下悬停变亮 */
+.dark a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+
 </style>
+
 <style id="hover-color-no-scale">
 /* 卡片 */
 .bg-card\/70:hover {
@@ -234,6 +256,9 @@ a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-5
   transform: none !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
+</style>
+
+
 
 </style>
 //去除搜索按钮
@@ -246,4 +271,3 @@ section.flex.items-center.w-full.justify-between.gap-1 {
   display: none !important;
 }
 </style>
-
