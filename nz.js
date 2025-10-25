@@ -125,48 +125,28 @@ button.rounded-\[50px\][aria-haspopup="dialog"],
   background-color: rgba(255, 255, 255, 0.4) !important;
   backdrop-filter: blur(25px) saturate(150%) !important;
   -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 16px !important;  
-  transition: all 0.3s ease;
+  border: 1px solid rgba(0,0,0,0) !important;
+  transition: background-color .2s ease, color .2s ease, opacity .2s ease;
 }
 
-/* 暗色模式下的背景处理 */
 .dark .bg-card\/70 {
   background-color: rgba(0, 0, 0, 0.3) !important;
-  border: none !important;;
-}
-
-/* 悬停时仅放大（无变色） */
-.bg-card\/70:hover {
-  transform: scale(1.02);
-  cursor: pointer;
-}
-
-.dark .bg-card\/70:hover {
-  transform: scale(1.02);
+  border-color: rgba(255,255,255,.1) !important;
 }
 
 
 /* ========== 在线按钮默认立体毛玻璃效果 ========== */
-.bg-white\/70,
-.bg-black\/70 {
-  position: relative;
+.bg-white\/70, .bg-black\/70 {
   background-color: rgba(255, 255, 255, 0.4) !important;
   backdrop-filter: blur(25px) saturate(150%) !important;
   -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
-  border: none !important;
+  border: 1px solid rgba(0,0,0,0) !important;
   border-radius: 9999px !important;
-  box-shadow: none !important;
-  transition: all 0.3s ease;
+  transition: background-color .2s ease, color .2s ease, opacity .2s ease;
 }
-
-/* 暗色模式下的按钮立体样式 */
-.dark .bg-white\/70,
-.dark .bg-black\/70 {
+.dark .bg-white\/70, .dark .bg-black\/70 {
   background-color: rgba(0, 0, 0, 0.4) !important;
-  border: none !important;
-  box-shadow: none !important;
+  border-color: rgba(255,255,255,.14) !important;
 }
 
 /* ========== 字体颜色 ========== */
@@ -184,28 +164,22 @@ button.rounded-\[50px\][aria-haspopup="dialog"],
 .dark .text-neutral-400,
 .dark .text-neutral-300 { color: white !important; }
 
-/* ========== 进度条毛玻璃（和卡片一致） ========== */
+
+/* —— 进度条毛玻璃 —— */
 .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:first-child,
 .bg-secondary.h-\[3px\].rounded-sm {
   background-color: rgba(255,255,255,0.4) !important;
   -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
   backdrop-filter: blur(25px) saturate(150%) !important;
 }
-.dark [class*="h-1.5"] > .absolute.inset-0.rounded-full,
-.dark [class*="bg-secondary"][class*="rounded-sm"][class*="h-3"] {
-  background-color: rgba(0, 0, 0, 0.4) !important;
-  -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
-  backdrop-filter: blur(25px) saturate(150%) !important;
-  border-radius: 9999px !important;
+.dark .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:first-child,
+.dark .bg-secondary.h-\[3px\].rounded-sm {
+  background-color: rgba(0,0,0,0.4) !important;
 }
-
-/* ✅ 让进度条在暗色模式下保持绿����� */
 .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:last-child,
 .bg-secondary.h-\[3px\].rounded-sm > .absolute.inset-0.rounded-full:last-child {
-  background: linear-gradient(90deg, #00d26a, #00b05c) !important;  /* 明亮绿色渐变 */
+  background: linear-gradient(90deg, #00d26a, #00b05c) !important; /* 明亮绿色渐变 */
 }
-
-/* 暗色模式下仍保持相同绿色，不再被覆盖为黑色 */
 .dark .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:last-child,
 .dark .bg-secondary.h-\[3px\].rounded-sm > .absolute.inset-0.rounded-full:last-child {
   background: linear-gradient(90deg, #00d26a, #00b05c) !important;
@@ -249,43 +223,17 @@ a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-5
   opacity: 1 !important; /* 去除原有透明效果 */
 }
 
-/* 悬浮放大 + 光晕（不变色） */
-a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50:hover {
-  transform: scale(1.02);
-  cursor: pointer;
+</style>
+<style id="hover-color-no-scale">
+/* 卡片 */
+.bg-card\/70:hover {
+  transform: none !important;
+  background-color: rgba(255, 255, 255, 0.55) !important;
 }
-
-/* 暗色模式 */
-.dark a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50 {
-  background-color: rgba(0, 0, 0, 0.3) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
-.dark a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50:hover {
+.dark .bg-card\/70:hover {
+  transform: none !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
 }
-
-/* 去掉上传/下载标签的背景 */
-.inline-flex.bg-secondary,
-.inline-flex.hover\:bg-secondary\/80,
-.inline-flex.border-muted-50 {
-  background-color: transparent !important;
-}
-
-/* ✅ 探针标题悬停效果（仅轻微放大，无光晕） */
-section.cursor-pointer.flex.items-center.sm\:text-base.text-sm.font-medium:hover,
-section.cursor-pointer.flex.items-center.text-sm.font-medium:hover {
-  transform: scale(1.02);
-  cursor: pointer;
-  transition: transform .25s ease !important;
-}
-
-/* 暗色模式保持一致，无额外阴影 */
-.dark section.cursor-pointer.flex.items-center.sm\:text-base.text-sm.font-medium:hover,
-.dark section.cursor-pointer.flex.items-center.text-sm.font-medium:hover {
-  transform: scale(1.02);
-}
-
 
 </style>
 //去除搜索按钮
