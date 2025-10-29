@@ -1,0 +1,519 @@
+<script>
+    // 全局配置
+    window.ShowNetTransfer=true;
+    window.ForceUseSvgFlag=true;
+    window.CustomBackgroundImage = 'https://t.alcy.cc/ycy';
+    window.CustomMobileBackgroundImage = 'https://t.alcy.cc/ycy';
+    window.CustomLogo = 'https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/ID.PNG';
+    window.DisableAnimatedMan = true;
+    window.FixedTopServerName = true;
+</script>
+
+<style>
+/* ========== 通用隐藏样式 ========== */
+footer,
+p.text-base.font-semibold,
+p.text-sm.font-medium.opacity-50,
+.flex.text-sm.font-medium.mt-0\.5,
+[id="radix-:r0:"], [id="radix-:r2:"],
+button:has(.lucide-image-minus),
+button.rounded-\[50px\][aria-haspopup="dialog"],
+.flex.items-center.gap-2.w-full.overflow-hidden,
+.shrink-0.bg-border.mx-2.hidden.h-4.w-\[1px\].md\:block,
+.text-sm.font-medium.opacity-40.md\:block {
+  display: none !important;
+}
+
+/* 卡片高斯模糊 */
+.bg-card\/70 {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: blur(25px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
+  border: 1px solid rgba(0,0,0,0) !important;
+  transition: background-color .2s ease, color .2s ease, opacity .2s ease;
+}
+
+.dark .bg-card\/70 {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  border-color: rgba(255,255,255,.1) !important;
+}
+
+/* ========== 字体颜色 ========== */
+.text-muted-foreground { color: black !important; }
+.dark .text-muted-foreground,
+.dark .text-\[10px\].text-muted-foreground {
+    color: white !important;
+}
+.text-neutral-500,
+.text-neutral-800,
+.text-neutral-600 { color: black !important; }
+.dark .text-neutral-500,
+.dark .text-neutral-800,
+.dark .text-neutral-600,
+.dark .text-neutral-400,
+.dark .text-neutral-300 { color: white !important; }
+
+/* ========== 探针栏毛玻璃背景 ========== */
+section.flex.items-center.cursor-pointer.text-sm.font-medium,
+section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(25px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(325px) saturate(150%) !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  padding: 6px 12px !important;
+  box-shadow: none !important;
+  transition: all 0.3s ease !important;
+}
+
+/* ========== 亮色模式下悬停变亮 ========== */
+section.flex.items-center.cursor-pointer.text-sm.font-medium:hover,
+section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium:hover {
+  background-color: rgba(255, 255, 255, 0.55) !important; /* 亮一点，与卡片一致 */
+  border-color: rgba(0, 0, 0, 0) !important;
+}
+
+/* ========== 暗色模式下样式 ========== */
+.dark section.flex.items-center.cursor-pointer.text-sm.font-medium,
+.dark section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ========== 暗色模式下悬停变亮 ========== */
+.dark section.flex.items-center.cursor-pointer.text-sm.font-medium:hover,
+.dark section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important; /* 与卡片一致 */
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* 登录按钮：毛玻璃 + 圆角/尺寸保持不变 */
+button[title="登录"]{
+  background-color: rgba(255,255,255,0.30) !important;      /* 亮色基础 */
+  -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
+  backdrop-filter: blur(25px) saturate(150%) !important;
+  border: none !important;
+  box-shadow: none !important;
+  transition: all .3s ease !important;
+}
+
+/* 亮色模式下悬停变亮（与卡片一致） */
+button[title="登录"]:hover{
+  background-color: rgba(255,255,255,0.55) !important;
+  color: inherit !important;                      /* 防止 hover:text-accent-foreground 覆盖 */
+  border-color: transparent !important;
+}
+
+/* 暗色模式基础与悬停 */
+.dark button[title="登录"]{
+  background-color: rgba(0,0,0,0.40) !important;
+  border-color: rgba(255,255,255,0.10) !important;
+}
+.dark button[title="登录"]:hover{
+  background-color: rgba(0,0,0,0.50) !important;
+  border-color: rgba(255,255,255,0.40) !important;
+}
+
+/* 取消可能的 ring/outline 边框（避免出现紫色外圈） */
+button[title="登录"]:focus,
+button[title="登录"]:focus-visible {
+  outline: none !important;
+  border-color: transparent !important;
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-shadow: 0 0 #0000 !important;
+  box-shadow: none !important;
+}
+
+/* —— 进度条毛玻璃 —— */
+.relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:first-child,
+.bg-secondary.h-\[3px\].rounded-sm {
+  background-color: rgba(255,255,255,0.4) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
+  backdrop-filter: blur(25px) saturate(150%) !important;
+}
+.dark .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:first-child,
+.dark .bg-secondary.h-\[3px\].rounded-sm {
+  background-color: rgba(0,0,0,0.4) !important;
+}
+.relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:last-child,
+.bg-secondary.h-\[3px\].rounded-sm > .absolute.inset-0.rounded-full:last-child {
+  background: linear-gradient(90deg, #00d26a, #00b05c) !important; /* 明亮绿色渐变 */
+}
+.dark .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:last-child,
+.dark .bg-secondary.h-\[3px\].rounded-sm > .absolute.inset-0.rounded-full:last-child {
+  background: linear-gradient(90deg, #00d26a, #00b05c) !important;
+}
+
+
+/* 你的额外隐藏 */
+button[title="Search"] { display: none !important; }
+
+/* 隐藏最底下的 section（含 512 GiB / IPv4 标签） */
+.flex.flex-col.lg\:items-start.items-center.gap-2 > section:last-of-type {
+  display: none !important;
+}
+section.flex.items-center.w-full.justify-between.gap-1 {
+  display: none !important;
+}
+</style>
+
+<style id="hover-color-no-scale">
+/* 卡片 */
+.bg-card\/70:hover {
+  transform: none !important;
+  background-color: rgba(255, 255, 255, 0.55) !important;
+}
+.dark .bg-card\/70:hover {
+  transform: none !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+</style>
+<script>
+const selectorButton = '#root > div > main > div.mx-auto.w-full.max-w-5xl.px-0.flex.flex-col.gap-4.server-info > section > div.flex.justify-center.w-full.max-w-\\[200px\\] > div > div > div.relative.cursor-pointer.rounded-3xl.px-2\\.5.py-\\[8px\\].text-\\[13px\\].font-\\[600\\].transition-all.duration-500.text-stone-400.dark\\:text-stone-500';
+const selectorSection = '#root > div > main > div.mx-auto.w-full.max-w-5xl.px-0.flex.flex-col.gap-4.server-info > section';
+const selector3 = '#root > div > main > div.mx-auto.w-full.max-w-5xl.px-0.flex.flex-col.gap-4.server-info > div:nth-child(3)';
+const selector4 = '#root > div > main > div.mx-auto.w-full.max-w-5xl.px-0.flex.flex-col.gap-4.server-info > div:nth-child(4)';
+
+let hasClicked = false;
+let divVisible = false;
+let swapping = false;
+
+function forceBothVisible() {
+  const div3 = document.querySelector(selector3);
+  const div4 = document.querySelector(selector4);
+  if (div3 && div4) {
+    div3.style.display = 'block';
+    div4.style.display = 'block';
+  }
+}
+
+function hideSection() {
+  const section = document.querySelector(selectorSection);
+  if (section) {
+    section.style.display = 'none';
+  }
+}
+
+function tryClickButton() {
+  const btn = document.querySelector(selectorButton);
+  if (btn && !hasClicked) {
+    btn.click();
+    hasClicked = true;
+    setTimeout(forceBothVisible, 500);
+  }
+}
+
+function swapDiv3AndDiv4() {
+  if (swapping) return;
+  swapping = true;
+
+  const div3 = document.querySelector(selector3);
+  const div4 = document.querySelector(selector4);
+  if (!div3 || !div4) {
+    swapping = false;
+    return;
+  }
+  const parent = div3.parentNode;
+  if (parent !== div4.parentNode) {
+    swapping = false;
+    return;
+  }
+
+  // 交换 div3 和 div4 的位置
+  parent.insertBefore(div4, div3);
+  parent.insertBefore(div3, div4.nextSibling);
+
+  swapping = false;
+}
+
+const observer = new MutationObserver(() => {
+  const div3 = document.querySelector(selector3);
+  const div4 = document.querySelector(selector4);
+
+  const isDiv3Visible = div3 && getComputedStyle(div3).display !== 'none';
+  const isDiv4Visible = div4 && getComputedStyle(div4).display !== 'none';
+
+  const isAnyDivVisible = isDiv3Visible || isDiv4Visible;
+
+  if (isAnyDivVisible && !divVisible) {
+    hideSection();
+    tryClickButton();
+    setTimeout(swapDiv3AndDiv4, 100); 
+  } else if (!isAnyDivVisible && divVisible) {
+    hasClicked = false;
+  }
+
+  divVisible = isAnyDivVisible;
+
+  if (div3 && div4) {
+    if (!isDiv3Visible || !isDiv4Visible) {
+      forceBothVisible();
+    }
+  }
+});
+
+const root = document.querySelector('#root');
+if (root) {
+  observer.observe(root, {
+    childList: true,
+    attributes: true,
+    subtree: true,
+    attributeFilter: ['style', 'class']
+  });
+}
+</script>
+<script>
+(()=>{const kill=()=>{const n=[...document.querySelectorAll('div.p-6.px-6.py-3')].find(e=>/GPU[:：]?/i.test(e.textContent)); n?.closest('div.rounded-lg.border.text-card-foreground.shadow-lg')?.remove();}; new MutationObserver(kill).observe(document.documentElement,{childList:true,subtree:true}); kill();})();
+</script>
+
+<style id="km-traffic-css">
+/* --- 通用基础样式 --- */
+.km-traffic-wrap{opacity:1;transform:none}
+
+/* ===== 让文字显示在进度条上方 ===== */
+.km-traffic-wrap {
+  display: flex;
+  flex-direction: column-reverse; /* 默认是从上到下，这里反转顺序 */
+  gap: 5px;
+}
+
+/* --- 槽：毛玻璃底色（保持原高度与圆角） --- */
+.km-traffic-shell{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  border-radius:.25rem;
+  height:6px;
+  background-color:rgba(255,255,255,.28);
+  -webkit-backdrop-filter: blur(25px) saturate(150%);
+  backdrop-filter: blur(25px) saturate(150%);
+}
+.dark .km-traffic-shell{
+  background-color:rgba(0,0,0,.22);
+  -webkit-backdrop-filter: blur(25px) saturate(150%);
+  backdrop-filter: blur(25px) saturate(150%);
+}
+
+/* --- 进度条本体（JS控制颜色，防止被模糊盖住） --- */
+.km-traffic-bar{
+  position: relative;
+  z-index: 1;
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  transition: width .25s linear;
+  background-image: none !important; /* 防止旧渐变覆盖 */
+}
+
+/* --- 标签文字 --- */
+.km-traffic-label{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-size:10.5px;
+  margin-top:.25rem;
+  color:var(--muted-foreground,#666)
+}
+.dark .km-traffic-label{
+  color:var(--muted-foreground,#cfcfcf)
+}
+
+/* --- 骨架加载动画 --- */
+.km-traffic-skeleton{
+  background:linear-gradient(90deg, rgba(0,0,0,.08), rgba(0,0,0,.12), rgba(0,0,0,.08));
+  background-size:200% 100%;
+  animation:km-shine 1s linear infinite
+}
+@keyframes km-shine{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* --- 自定义颜色阈值（供 JS 调用） --- */
+:root{
+  --km-traffic-ok:   #22c55e; /* 绿 */
+  --km-traffic-warn: #f59e0b; /* 黄 */
+  --km-traffic-bad:  #dc2626; /* 红 */
+}
+</style>
+
+<script>
+(() => {
+  const CFG = {
+    refreshMs: 30000,
+    hideUnlimited: true,
+    matchCardSelector: '.rounded-lg.border.text-card-foreground',
+    nameSelector: 'p.font-bold.text-xs',
+    insertBeforeSelector: 'section.flex.gap-1.items-center.flex-wrap',
+    recentConcurrency: 4,
+    epsilonPct: 0.2,
+    debug: false,
+  };
+
+  const log = (...a) => CFG.debug && console.log('[traffic]', ...a);
+  const q  = (el, sel) => el.querySelector(sel);
+  const qa = (el, sel) => Array.from(el.querySelectorAll(sel));
+
+  /* ===== 工具函数 ===== */
+  const fmtBytes = n => {
+    if (!Number.isFinite(n)) return '-';
+    const u = ['B','KiB','MiB','GiB','TiB','PiB'];
+    let v = Number(n), i = 0;
+    while (v >= 1024 && i < u.length - 1) { v /= 1024; i++; }
+    return v.toFixed(v < 10 ? 2 : v < 100 ? 1 : 0) + ' ' + u[i];
+  };
+  const calcUsed = (type, up, down) => {
+    switch ((type || 'sum').toLowerCase()) {
+      case 'up':  return up;
+      case 'down':return down;
+      case 'max': return Math.max(up, down);
+      case 'min': return Math.min(up, down);
+      default:    return up + down;
+    }
+  };
+  const typeLabel = t => ({sum:'双向',up:'出向',down:'入向',max:'最大',min:'最小'})[(t||'sum').toLowerCase()] || t;
+  const colorOf = pct => pct >= 90 ? 'var(--km-traffic-bad)'
+                     : pct >= 50 ? 'var(--km-traffic-warn)'
+                                  : 'var(--km-traffic-ok)';
+
+  const snap = {
+    get: (name) => { try { return JSON.parse(sessionStorage.getItem('km-traffic:' + name) || 'null'); } catch { return null; } },
+    set: (name, obj) => { try { sessionStorage.setItem('km-traffic:' + name, JSON.stringify(obj)); } catch {} },
+    del: (name) => { try { sessionStorage.removeItem('km-traffic:' + name); } catch {} }
+  };
+
+  async function jget(url){ const r = await fetch(url, { credentials: 'include' }); if (!r.ok) throw new Error(url + ' ' + r.status); return r.json(); }
+  const getCardName = el => (q(el, CFG.nameSelector)?.textContent || '').trim();
+  const findInsertBefore = el => q(el, CFG.insertBeforeSelector) || qa(el, 'section').pop() || el.lastElementChild || el;
+
+  function pLimit(n){const q=[];let a=0;const run=async(f,res,rej)=>{a++;try{res(await f());}catch(e){rej(e);}finally{a--;if(q.length){const nx=q.shift();run(nx.fn,nx.res,nx.rej);}}};return fn=>new Promise((res,rej)=>{if(a<n)run(fn,res,rej);else q.push({fn,res,rej});});}
+  const limitRecent = pLimit(CFG.recentConcurrency);
+
+  let nodesCache=null,nodesCacheAt=0;
+  const priming=jget('/api/nodes').then(r=>r).catch(()=>null);
+  async function getNodes(force=false){
+    const now=Date.now();
+    if(!force&&nodesCache&&(now-nodesCacheAt<8000))return nodesCache;
+    const res=await(nodesCache?jget('/api/nodes'):(await priming||jget('/api/nodes')));
+    nodesCache=(res?.data||[]);nodesCacheAt=now;return nodesCache;
+  }
+
+  async function getUsedFromRecent(uuid){
+    const rec=await jget(`/api/recent/${encodeURIComponent(uuid)}`);
+    const arr=rec?.data||[];const last=arr[arr.length-1]||{};const net=last?.network||{};
+    return {up:Number(net.totalUp||0),down:Number(net.totalDown||0)};
+  }
+
+  function ensureWrap(card,anchor){
+    let wrap=q(card,'.km-traffic-wrap');
+    if(!wrap){wrap=document.createElement('div');wrap.className='km-traffic-wrap w-full mt-1';anchor?.parentNode?.insertBefore(wrap,anchor);}
+    else if(wrap.parentNode!==anchor?.parentNode){anchor?.parentNode?.insertBefore(wrap,anchor);}
+    return wrap;
+  }
+
+  function setSkeleton(wrap){
+    wrap.innerHTML='';
+    const shell=document.createElement('div');
+    shell.className='km-traffic-shell km-traffic-skeleton';
+    wrap.appendChild(shell);
+    const label=document.createElement('div');
+    label.className='km-traffic-label';
+    label.innerHTML=`<span>加载中…</span><span>—</span>`;
+    wrap.appendChild(label);
+    wrap.dataset.pct='';
+  }
+
+  function renderBar(wrap,info){
+    const pct=Math.max(0,Math.min(100,info.percent));
+    const prev=Number(wrap.dataset.pct||NaN);
+    const minor=Number.isFinite(prev)&&Math.abs(prev-pct)<CFG.epsilonPct;
+
+    if(!minor){
+      wrap.innerHTML='';
+      const shell=document.createElement('div');
+      shell.className='km-traffic-shell';
+      const bar=document.createElement('div');
+      bar.className='km-traffic-bar';
+      bar.style.width=pct.toFixed(2)+'%';
+      bar.style.background=colorOf(pct);
+      const label=document.createElement('div');
+      label.className='km-traffic-label';
+      label.innerHTML=`<span>${info.typeTxt}：${info.usedTxt} / ${info.limitTxt}</span><span>${pct.toFixed(1)}%</span>`;
+      shell.appendChild(bar);wrap.appendChild(shell);wrap.appendChild(label);
+    }else{
+      const bar=q(wrap,'.km-traffic-bar');
+      if(bar){bar.style.width=pct.toFixed(2)+'%';bar.style.background=colorOf(pct);}
+      const pctText=q(wrap,'.km-traffic-label span:last-child');
+      if(pctText)pctText.textContent=`${pct.toFixed(1)}%`;
+    }
+    wrap.dataset.pct=pct.toString();
+  }
+
+  /* ===== 渲染主逻辑 ===== */
+  let rendering=false;
+  async function renderOnce(){
+    if(rendering)return;
+    rendering=true;
+    try{
+      const cards=qa(document,CFG.matchCardSelector);
+      if(!cards.length){rendering=false;return;}
+
+      const prepareList=[];
+      for(const card of cards){
+        const name=getCardName(card);if(!name)continue;
+        const anchor=findInsertBefore(card);
+        const wrap=ensureWrap(card,anchor);
+        const cached=snap.get(name);
+        if(cached&&( !CFG.hideUnlimited || cached.limitTxt!=='无限制'))renderBar(wrap,cached);
+        else setSkeleton(wrap);
+        prepareList.push({card,name,wrap});
+      }
+
+      const nodes=await getNodes();
+      const mapByName=new Map(nodes.map(n=>[(n.name||'').trim(),n]));
+      const needRecent=[];
+      for(const item of prepareList){
+        const node=mapByName.get(item.name);
+        if(!node){snap.del(item.name);continue;}
+        const limit=Number(node.traffic_limit||0);
+        if(CFG.hideUnlimited&&!limit){const old=q(item.card,'.km-traffic-wrap');if(old)old.remove();snap.del(item.name);continue;}
+
+        const up=Number(node?.stats?.net_total_up??NaN);
+        const down=Number(node?.stats?.net_total_down??NaN);
+        if(Number.isFinite(up)&&Number.isFinite(down)){
+          const used=calcUsed(node.traffic_limit_type,up,down);
+          const percent=limit>0?(used/limit)*100:0;
+          const info={percent,usedTxt:fmtBytes(used),limitTxt:limit?fmtBytes(limit):'无限制',typeTxt:typeLabel(node.traffic_limit_type)};
+          renderBar(item.wrap,info);snap.set(item.name,info);
+        }else needRecent.push({...item,node,limit});
+      }
+
+      if(needRecent.length){
+        await Promise.allSettled(needRecent.map(it=>limitRecent(async()=>{
+          try{
+            const {up,down}=await getUsedFromRecent(it.node.uuid);
+            const used=calcUsed(it.node.traffic_limit_type,up,down);
+            const percent=it.limit>0?(used/it.limit)*100:0;
+            const info={percent,usedTxt:fmtBytes(used),limitTxt:it.limit?fmtBytes(it.limit):'无限制',typeTxt:typeLabel(it.node.traffic_limit_type)};
+            renderBar(it.wrap,info);snap.set(it.name,info);
+          }catch(e){log('recent failed:',it.node.name,e);}
+        })));
+      }
+    }catch(e){console.warn('renderOnce failed:',e);}finally{rendering=false;}
+  }
+
+  /* ===== 触发机制 ===== */
+  if(document.readyState==='loading'){
+    document.addEventListener('readystatechange',()=>{if(document.readyState==='interactive')renderOnce();},{once:true});
+  }else renderOnce();
+
+  setInterval(renderOnce,CFG.refreshMs);
+  const mo=new MutationObserver(()=>renderOnce());
+  mo.observe(document.body,{childList:true,subtree:true});
+  const _ps=history.pushState,_rs=history.replaceState;
+  history.pushState=function(){_ps.apply(this,arguments);renderOnce();};
+  history.replaceState=function(){_rs.apply(this,arguments);renderOnce();};
+  window.addEventListener('popstate',renderOnce);
+  window.addEventListener('hashchange',renderOnce);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)renderOnce();});
+  window.addEventListener('focus',renderOnce);
+})();
+</script>
