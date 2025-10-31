@@ -3,7 +3,6 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
     include-all: true
-    max-failed-times: 2
       
   - name: "Final"
     type: fallback
@@ -34,27 +33,26 @@ proxy-groups:
   - name: "HK"
     type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
-    max-failed-times: 2
     include-all: true
-    filter: "🇭🇰.*(Sharon|Neburst)"
+    filter: "🇭🇰"
     
   - name: "SG"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    filter: "🇸🇬.*(Bage|Legend)"
+    filter: "🇸🇬"
     
   - name: "JP"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: "🇯🇵.*(BW)"
+    filter: "🇯🇵"
 
   - name: "US"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: "🇺🇸.*(BWH|Bage)"
+    filter: "🇺🇸"
 
 rule-providers:
 
