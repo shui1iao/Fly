@@ -137,6 +137,7 @@ rule-providers:
 rules:
   - DOMAIN,cdn.lilyemby.my,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
+  - DOMAIN,lite.cn2gias.uk.US
   - DOMAIN-SUFFIX,nodeseek.com,JP
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
