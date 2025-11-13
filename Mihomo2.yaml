@@ -50,7 +50,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud.png
-    filter: "^(?!.*(?:Sharon|Ali|Bage|Bandwagon)).*$"
+    filter: "^(?!.*(?:Sharon|Ali|Bage|Bandwagon|Dler)).*$"
     
   - name: "Dler-HK"
     type: url-test
