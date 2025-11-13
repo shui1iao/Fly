@@ -57,14 +57,12 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
     filter: "香港"
-    hidden: true
 
   - name: "Dler-JP"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/DlerCloud(1).png
     filter: "日本"
-    hidden: true
 
 rule-providers:
 
