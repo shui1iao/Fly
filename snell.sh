@@ -73,7 +73,7 @@ install_snell() {
 
     # --- 步骤 2: 下载、解压并部署 Snell ---
     echo "--> 正在下载、解压并部署 Snell 服务器程序..."
-    if ! wget -q --show-progress https://dl.nssurge.com/snell/snell-server-v5.0.0-linux-amd64.zip -O snell.zip; then
+    if ! wget -q --show-progress https://dl.nssurge.com/snell/snell-server-v5.0.1-linux-amd64.zip -O snell.zip; then
         echo "错误：Snell 下载失败！请检查网络或链接是否有效。"
         exit 1
     fi
