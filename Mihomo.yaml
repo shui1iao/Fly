@@ -147,7 +147,7 @@ rules:
   - DOMAIN,cdn.lilyemby.my,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
   - DOMAIN,lite.cn2gias.uk,US
-  - DOMAIN-SUFFIX,nodeseek.com,JP
+  - DOMAIN-SUFFIX,nodeseek.com,SG
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
   - RULE-SET,PayPal,HK
