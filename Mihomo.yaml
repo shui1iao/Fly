@@ -58,7 +58,7 @@ proxy-groups:
 
   - name: "US"
     type: url-test
-    include-all: tru
+    include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "🇺🇸"
 
