@@ -104,9 +104,9 @@ footer {
 /* 1. 针对按钮底座（Track）应用高斯模糊 */
 .server-info-tab > div {
     /* 覆盖原有的 bg-stone-100/70 */
-    background-color: rgba(255, 255, 255, 0.4) !important; 
-    backdrop-filter: blur(15px) saturate(150%) !important;
-    -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
+    background-color: rgba(255, 255, 255, 0.3) !important; 
+    backdrop-filter: blur(10px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
     /* 移除原有边框或添加透明边框以对齐 */
     border: 1px solid rgba(0,0,0,0) !important; 
     box-shadow: none !important;
@@ -115,7 +115,7 @@ footer {
 /* 2. 暗色模式适配 */
 .dark .server-info-tab > div {
     /* 覆盖原有的 dark:bg-stone-800/70 */
-    background-color: rgba(0, 0, 0, 0.4) !important; 
+    background-color: rgba(0, 0, 0, 0.3) !important; 
     border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
@@ -130,18 +130,18 @@ section.flex.items-center.my-2.w-full > div.bg-border {
 /* 1. 定位滑块：它是 server-info-tab 下面的那个 absolute 层 */
 .server-info-tab div.absolute.inset-0.z-10 {
     /* 覆盖原本的 bg-white，改为半透明白色 */
-    background-color: rgba(255, 255, 255, 0.3) !important; 
+    background-color: rgba(255, 255, 255, 0.2) !important; 
     
     /* 加上毛玻璃滤镜 */
-    backdrop-filter: blur(15px) saturate(150%) !important;
-    -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
+    backdrop-filter: blur(10px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
 }
 
 /* 2. 暗色模式下的滑块 */
 .dark .server-info-tab div.absolute.inset-0.z-10 {
     /* 覆盖 dark:bg-stone-700 */
-    background-color: rgba(0, 0, 0, 0.5) !important; 
-    border-color: rgba(255, 255, 255, 0.15) !important;
+    background-color: rgba(0, 0, 0, 0.2) !important; 
+    border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* ========== 详情/网络 字体全强制纯黑 ========== */
@@ -156,15 +156,15 @@ section.flex.items-center.my-2.w-full > div.bg-border {
 
 /* 卡片高斯模糊 */
 .bg-card\/70 {
-  background-color: rgba(255, 255, 255, 0.4) !important;
-  backdrop-filter: blur(15px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(10px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
   border: 1px solid rgba(0,0,0,0) !important;
   transition: background-color .2s ease, color .2s ease, opacity .2s ease;
 }
 
 .dark .bg-card\/70 {
-  background-color: rgba(0, 0, 0, 0.4) !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
   border-color: rgba(255,255,255,.1) !important;
 }
 
@@ -172,11 +172,11 @@ section.flex.items-center.my-2.w-full > div.bg-border {
 
 .bg-white\/70, .bg-black\/70 {
 
-  background-color: rgba(255, 255, 255, 0.4) !important;
+  background-color: rgba(255, 255, 255, 0.3) !important;
 
-  backdrop-filter: blur(15px) saturate(150%) !important;
+  backdrop-filter: blur(10px) saturate(120%) !important;
 
-  -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
 
   border: 1px solid rgba(0,0,0,0) !important;
 
@@ -188,9 +188,9 @@ section.flex.items-center.my-2.w-full > div.bg-border {
 
 .dark .bg-white\/70, .dark .bg-black\/70 {
 
-  background-color: rgba(0, 0, 0, 0.4) !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
 
-  border-color: rgba(255,255,255,.14) !important;
+  border-color: rgba(255,255,255,.1) !important;
 
 }
 
@@ -213,13 +213,13 @@ section.flex.items-center.my-2.w-full > div.bg-border {
 /* —— 进   条毛������ —— */
 .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:first-child,
 .bg-secondary.h-\[3px\].rounded-sm {
-  background-color: rgba(255,255,255,0.4) !important;
-  -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
-  backdrop-filter: blur(15px) saturate(150%) !important;
+  background-color: rgba(255,255,255,0.3) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
+  backdrop-filter: blur(10px) saturate(120%) !important;
 }
 .dark .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:first-child,
 .dark .bg-secondary.h-\[3px\].rounded-sm {
-  background-color: rgba(0,0,0,0.4) !important;
+  background-color: rgba(0,0,0,0.3) !important;
 }
 .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:last-child,
 .bg-secondary.h-\[3px\].rounded-sm > .absolute.inset-0.rounded-full:last-child {
@@ -233,9 +233,9 @@ section.flex.items-center.my-2.w-full > div.bg-border {
 /* ========== 探针栏毛玻璃背景 ========== */
 section.flex.items-center.cursor-pointer.text-sm.font-medium,
 section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium {
-  background-color: rgba(255, 255, 255, 0.4) !important;
-  backdrop-filter: blur(15px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(10px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
   border: none !important;
   border-radius: 9999px !important;
   padding: 6px 12px !important;
@@ -246,7 +246,7 @@ section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium {
 /* ========== 亮色模式���悬停变    ========== */
 section.flex.items-center.cursor-pointer.text-sm.font-medium:hover,
 section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium:hover {
-  background-color: rgba(255, 255, 255, 0.55) !important; /* 亮一点，与卡片一致 */
+  background-color: rgba(255, 255, 255, 0.4) !important; /* 亮一点，与卡片一致 */
   border-color: rgba(0, 0, 0, 0) !important;
 }
 
@@ -260,15 +260,15 @@ section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium:hover
 /* ========== 暗色模式下悬停变亮 ========== */
 .dark section.flex.items-center.cursor-pointer.text-sm.font-medium:hover,
 .dark section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium:hover {
-  background-color: rgba(0, 0, 0, 0.5) !important; /* 与卡片一致 */
+  background-color: rgba(0, 0, 0, 0.4) !important; /* 与卡片一致 */
   border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 /* ========== 管理后台按钮：毛玻璃 + 悬停变亮 ========== */
 a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50 {
-  background-color: rgba(255, 255, 255, 0.4) !important;
-  backdrop-filter: blur(15px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(15px) saturate(150%) !important;
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(10px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
   border: none !important;
   border-radius: 9999px !important;
   padding: 6px 12px !important;
@@ -278,31 +278,65 @@ a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-5
 }
 
 .dark a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50 {
-  background-color: rgba(0, 0, 0, 0.4) !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: white !important;
 }
 
 /* 亮色模式下悬停变亮 */
 a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50:hover {
-  background-color: rgba(255, 255, 255, 0.55) !important;
+  background-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 /* 暗色模式下悬停变亮 */
 .dark a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50:hover {
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.4) !important;
 }
 
+/* ========== 修改图表轴文字颜色 (ms数字) ========== */
+
+/* 亮色模式：强制 Y 轴和 X 轴文字为黑色 */
+.recharts-cartesian-axis-tick-value {
+    fill: #000000 !important;
+}
+
+/* 暗色模式：强制 Y 轴和 X 轴文字为白色 */
+.dark .recharts-cartesian-axis-tick-value {
+    fill: #FFFFFF !important;
+}
+
+/* 针对 Y 轴特定刻度文字的增强选择器 (防止被插件原样式覆盖) */
+.yAxis .recharts-cartesian-axis-tick-value tspan {
+    fill: #000000 !important;
+}
+
+.dark .yAxis .recharts-cartesian-axis-tick-value tspan {
+    fill: #FFFFFF !important;
+}
+
+/* ========== 2. 修改 详情/网络 按钮字体颜色 ========== */
+/* 亮色模式：强制纯黑 */
+.server-info-tab p, 
+.server-info-tab div {
+    color: #000000 !important;
+}
+
+/* 深色模式：强制纯白 */
+.dark .server-info-tab p, 
+.dark .server-info-tab div {
+    color: #FFFFFF !important;
+}
 </style>
 
 <style id="hover-color-no-scale">
 /* 卡片 */
 .bg-card\/70:hover {
   transform: none !important;
-  background-color: rgba(255, 255, 255, 0.55) !important;
+  background-color: rgba(255, 255, 255, 0.4) !important;
 }
 .dark .bg-card\/70:hover {
   transform: none !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.4) !important;
 }
 </style>
+
