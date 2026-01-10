@@ -101,21 +101,15 @@ install_anytls() {
     read -p "请输入 anytls 的密码 (留空则随机生成): " PASSWORD
     if [ -z "$PASSWORD" ]; then
         # --- 新的密码生成逻辑 ---
-        # 1. 生成14位字母和数字
         ALPHANUM=$(< /dev/urandom tr -dc 'A-Za-z0-9' | head -c 14)
-        
-        # 2. 从 '-/@' 中随机选择两个不同的特殊字符
         SPECIAL_CHARS='-/@'
         S1_INDEX=$(($RANDOM % 3))
         S1=${SPECIAL_CHARS:$S1_INDEX:1}
-        REMAINING_CHARS=${SPECIAL_CHARS//$S1/} # 移除已选的字符
+        REMAINING_CHARS=${SPECIAL_CHARS//$S1/}
         S2_INDEX=$(($RANDOM % 2))
         S2=${REMAINING_CHARS:$S2_INDEX:1}
-        
-        # 3. 组合所有字符并打乱顺序
         COMBINED_CHARS="${ALPHANUM}${S1}${S2}"
         PASSWORD=$(echo "$COMBINED_CHARS" | grep -o . | shuf | tr -d '\n')
-        
         echo -e "    密码未输入，使用随机密码: ${GREEN}$PASSWORD${NC}"
     fi
 
@@ -157,8 +151,8 @@ EOF
     echo -e "端口 (Port)      : ${GREEN}${PORT}${NC}"
     echo -e "密码 (Password)  : ${GREEN}${PASSWORD}${NC}"
     echo "------------------------------------------"
-    echo "mihimo 客户端配置:"
-    echo -e "${GREEN}  - { \"name\": \"VPS\", \"type\": \"anytls\", \"server\": \"${ip_address}\", \"port\": ${PORT}, \"password\": \"${PASSWORD}\", \"udp\": true, \"skip-cert-verify\": true }${NC}"
+    echo "客户端配置:"
+    echo -e "${GREEN}VPS = anytls, ${ip_address}, ${PORT}, password=\"${PASSWORD}\", skip-cert-verify=true, udp-relay=true${NC}"
     echo "------------------------------------------"
 }
 
@@ -209,21 +203,15 @@ modify_config() {
     read -p "请输入新的密码 (留空则随机生成): " PASSWORD
     if [ -z "$PASSWORD" ]; then
         # --- 新的密码生成逻辑 ---
-        # 1. 生成14位字母和数字
         ALPHANUM=$(< /dev/urandom tr -dc 'A-Za-z0-9' | head -c 14)
-        
-        # 2. 从 '-/@' 中随机选择两个不同的特殊字符
         SPECIAL_CHARS='-/@'
         S1_INDEX=$(($RANDOM % 3))
         S1=${SPECIAL_CHARS:$S1_INDEX:1}
-        REMAINING_CHARS=${SPECIAL_CHARS//$S1/} # 移除已选的字符
+        REMAINING_CHARS=${SPECIAL_CHARS//$S1/}
         S2_INDEX=$(($RANDOM % 2))
         S2=${REMAINING_CHARS:$S2_INDEX:1}
-        
-        # 3. 组合所有字符并打乱顺序
         COMBINED_CHARS="${ALPHANUM}${S1}${S2}"
         PASSWORD=$(echo "$COMBINED_CHARS" | grep -o . | shuf | tr -d '\n')
-        
         echo -e "    密码未输入，使用随机密码: ${GREEN}$PASSWORD${NC}"
     fi
 
@@ -262,8 +250,8 @@ EOF
     echo -e "新端口 (Port)      : ${GREEN}${PORT}${NC}"
     echo -e "新密码 (Password)  : ${GREEN}${PASSWORD}${NC}"
     echo "------------------------------------------"
-    echo "mihimo 客户端配置:"
-    echo -e "${GREEN}  - { \"name\": \"VPS\", \"type\": \"anytls\", \"server\": \"${ip_address}\", \"port\": ${PORT}, \"password\": \"${PASSWORD}\", \"udp\": true, \"skip-cert-verify\": true }${NC}"
+    echo "客户端配置:"
+    echo -e "${GREEN}VPS = anytls, ${ip_address}, ${PORT}, password=\"${PASSWORD}\", skip-cert-verify=true, udp-relay=true${NC}"
     echo "------------------------------------------"
 }
 
@@ -291,8 +279,8 @@ view_config() {
     echo -e "端口 (Port)      : ${GREEN}${port}${NC}"
     echo -e "密码 (Password)  : ${GREEN}${password}${NC}"
     echo "------------------------------------------"
-    echo "mihimo 客户端配置:"
-    echo -e "${GREEN}  - { \"name\": \"VPS\", \"type\": \"anytls\", \"server\": \"${ip_address}\", \"port\": ${port}, \"password\": \"${password}\", \"udp\": true, \"skip-cert-verify\": true }${NC}"
+    echo "客户端配置:"
+    echo -e "${GREEN}VPS = anytls, ${ip_address}, ${port}, password=\"${password}\", skip-cert-verify=true, udp-relay=true${NC}"
     echo "------------------------------------------"
 }
 
