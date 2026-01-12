@@ -152,7 +152,7 @@ EOF
     echo -e "密码 (Password)  : ${GREEN}${PASSWORD}${NC}"
     echo "------------------------------------------"
     echo "客户端配置:"
-    echo -e "${GREEN}VPS = anytls, ${ip_address}, ${PORT}, password=\"${PASSWORD}\", skip-cert-verify=true, udp-relay=true${NC}"
+    echo -e "${GREEN}VPS = anytls, ${ip_address}, ${PORT}, password=\"${PASSWORD}\", skip-cert-verify=true, udp-relay=true${NC}, reuse=false"
     echo "------------------------------------------"
 }
 
@@ -251,7 +251,7 @@ EOF
     echo -e "新密码 (Password)  : ${GREEN}${PASSWORD}${NC}"
     echo "------------------------------------------"
     echo "客户端配置:"
-    echo -e "${GREEN}VPS = anytls, ${ip_address}, ${PORT}, password=\"${PASSWORD}\", skip-cert-verify=true, udp-relay=true${NC}"
+    echo -e "${GREEN}VPS = anytls, ${ip_address}, ${PORT}, password=\"${PASSWORD}\", skip-cert-verify=true, udp-relay=true${NC}, reuse=false"
     echo "------------------------------------------"
 }
 
@@ -280,7 +280,7 @@ view_config() {
     echo -e "密码 (Password)  : ${GREEN}${password}${NC}"
     echo "------------------------------------------"
     echo "客户端配置:"
-    echo -e "${GREEN}VPS = anytls, ${ip_address}, ${port}, password=\"${password}\", skip-cert-verify=true, udp-relay=true${NC}"
+    echo -e "${GREEN}VPS = anytls, ${ip_address}, ${port}, password=\"${password}\", skip-cert-verify=true, udp-relay=true${NC}, reuse=false"
     echo "------------------------------------------"
 }
 
