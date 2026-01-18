@@ -62,280 +62,157 @@
 </script>
 
 <style>
-/* ========== 简炼版自定义样式 ========== */
-
-/* 隐藏新增的服务器状态详情栏 (CPU/Mem/Disk/TCP等) */
-div.mb-2.flex.flex-wrap.items-center.gap-4 {
-    display: none !important;
-}
-
-/* 1. 隐藏顶部功能按钮 (搜索、语言、主题、图片管理) */
-button[title="Search"], 
-button[id^="radix-:r"], 
-button:has(.lucide-sun, .lucide-moon, .lucide-image-minus) {
-    display: none !important;
-}
-
-/* 2. 隐藏标题栏装饰 (分隔线、哪吒监控文字) */
-section.cursor-pointer div.bg-border, 
-section.cursor-pointer p.opacity-40 {
-    display: none !important;
-}
-
-/* 3. 隐藏内容区标题与时间行 (概览、当前时间) */
-p.text-base.font-semibold, 
-div.flex.items-center.gap-1:has(p.opacity-50, [data-issues-count-animation]) {
-    display: none !important;
-}
-
-/* 4. 隐藏功能按钮组 (Map/Chart 蓝色按钮、Sort 排序按钮) */
-section.flex.items-center.gap-2.w-full.overflow-hidden,
-button.rounded-\[50px\].flex.items-center.gap-1.p-\[10px\] {
-    display: none !important;
-}
-
-/* 5. 隐藏页脚 */
+/* ========== 1. 元素隐藏模块 (清理 UI) ========== */
+div.mb-2.flex.flex-wrap.items-center.gap-4,
+button[title="Search"], button[id^="radix-:r"], button:has(.lucide-sun, .lucide-moon, .lucide-image-minus),
+section.cursor-pointer div.bg-border, section.cursor-pointer p.opacity-40,
+p.text-base.font-semibold, div.flex.items-center.gap-1:has(p.opacity-50, [data-issues-count-animation]),
+section.flex.items-center.gap-2.w-full.overflow-hidden, button.rounded-\[50px\].flex.items-center.gap-1.p-\[10px\],
 footer {
     display: none !important;
 }
 
-/* ========== 详情/网络 切换按钮毛玻璃化 ========== */
-
-/* 1. 针对按钮底座（Track）应用高斯模糊 */
-.server-info-tab > div {
-    /* 覆盖原有的 bg-stone-100/70 */
-    background-color: rgba(255, 255, 255, 0.4) !important; 
-    backdrop-filter: blur(12px) saturate(150%) !important;
-    -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
-    /* 移除原有边框或添加透明边框以对齐 */
-    border: 1px solid rgba(0,0,0,0) !important; 
-    box-shadow: none !important;
+/* ========== 2. 精准字体与元素颜色控制 (浅黑深柔白) ========== */
+/* 浅色模式：文字、开关圆点纯黑 */
+p, span, a, div, button,
+.text-muted-foreground, .text-neutral-500, .text-neutral-400,
+.recharts-text, .recharts-cartesian-axis-tick-value {
+    color: #000000 !important;
+}
+.recharts-text tspan, .recharts-cartesian-axis-tick-value {
+    fill: #000000 !important;
+}
+/* 开关圆点 - 浅色模式 */
+button[role="switch"] span {
+    background-color: #000000 !important;
 }
 
-/* 2. 暗色模式适配 */
-.dark .server-info-tab > div {
-    /* 覆盖原有的 dark:bg-stone-800/70 */
-    background-color: rgba(0, 0, 0, 0.4) !important; 
-    border-color: rgba(255, 255, 255, 0.1) !important;
+/* 深色模式：改为更亮的柔白色 (#F0F0F0)，恢复 0.5 阴影 */
+.dark p, .dark span, .dark a, .dark div, .dark button,
+.dark .text-muted-foreground, .dark .text-neutral-500,
+.dark .recharts-text, .dark .recharts-cartesian-axis-tick-value {
+    color: #f0f0f0 !important; 
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important; /* 恢复 0.5 阴影 */
+}
+.dark .recharts-text tspan, .dark .recharts-cartesian-axis-tick-value {
+    fill: #f0f0f0 !important;
+}
+/* 开关圆点 - 深色模式同步柔白 */
+.dark button[role="switch"] span {
+    background-color: #f0f0f0 !important;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
-/* ========== 隐藏按钮两侧线条（保留占位） ========== */
-section.flex.items-center.my-2.w-full > div.bg-border {
-    background-color: transparent !important; /* 变透明，而不是 display:none */
-    border: none !important;                  /* 确保没有残留边框 */
+/* ========== 3. 开关组件 (Switch - 玻璃质感修复) ========== */
+button[role="switch"] {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.3s ease !important;
 }
 
-/* ========== 详情/网络 激活滑块毛玻璃化 ========== */
+button[role="switch"][data-state="checked"] {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+}
 
-/* 1. 定位滑块：它是 server-info-tab 下面的那个 absolute 层 */
-.server-info-tab div.absolute.inset-0.z-10 {
-    /* 覆盖原本的 bg-white，改为半透明白色 */
+.dark button[role="switch"] {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+.dark button[role="switch"][data-state="checked"] {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ========== 4. 服务器卡片 (Cards) ========== */
+[class*="bg-card"], .bg-card\/70 {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important;
+    border-radius: 16px !important;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.dark [class*="bg-card"], .dark .bg-card\/70 {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* 卡片悬停反馈 */
+[class*="bg-card"]:hover, .bg-card\/70:hover { 
     background-color: rgba(255, 255, 255, 0.3) !important; 
-    
-    /* 加上毛玻璃滤镜 */
-    backdrop-filter: blur(12px) saturate(150%) !important;
-    -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
 }
+.dark [class*="bg-card"]:hover, .dark .bg-card\/70:hover { background-color: rgba(255, 255, 255, 0.08) !important; }
 
-/* 2. 暗色模式下的滑块 */
-.dark .server-info-tab div.absolute.inset-0.z-10 {
-    /* 覆盖 dark:bg-stone-700 */
-    background-color: rgba(0, 0, 0, 0.3) !important; 
-    border-color: rgba(255, 255, 255, 0.1) !important;
+/* ========== 5. 管理后台按钮 (Dashboard) ========== */
+body a[href="/dashboard"] {
+    opacity: 1 !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) saturate(120%) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important;
+    border-radius: 9999px !important;
+    padding: 6px 14px !important;
+    min-height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    transition: all 0.25s ease-in-out !important;
 }
+.dark body a[href="/dashboard"] { background-color: rgba(0, 0, 0, 0.05) !important; }
+body a[href="/dashboard"]:hover { background-color: rgba(255, 255, 255, 0.3) !important; }
 
-/* ========== 详情/网络 字体全强制纯黑 ========== */
-.server-info-tab p {
-    color: #000000 !important;
+/* ========== 6. 在线状态按钮 (Online Status) ========== */
+button.bg-white\/70, 
+button.dark\:bg-black\/70 {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) saturate(120%) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important;
+    border-radius: 9999px !important;
+    padding: 2px 8px !important;
 }
+.dark button.bg-white\/70, .dark button.dark\:bg-black\/70 { background-color: rgba(0, 0, 0, 0.05) !important; }
 
-/* 如果你发现未选中的文字还是灰色的，加上这一行确保容器颜色也被覆盖 */
-.server-info-tab div {
-    color: #000000 !important;
+/* ========== 7. 探针列表栏 (Probe Bars) ========== */
+section.flex.items-center.cursor-pointer.text-sm, 
+section.flex.items-center.cursor-pointer.sm\:text-base {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) saturate(120%) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important;
+    border-radius: 9999px !important;
+    padding: 6px 14px !important;
 }
+.dark section.flex.items-center.cursor-pointer { background-color: rgba(0, 0, 0, 0.05) !important; }
 
-/* 卡片高斯模糊 */
-.bg-card\/70 {
-  background-color: rgba(255, 255, 255, 0.4) !important;
-  backdrop-filter: blur(12px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
-  border: 1px solid rgba(0,0,0,0) !important;
-  transition: background-color .2s ease, color .2s ease, opacity .2s ease;
+/* ========== 8. 切换座与进度条轨道 ========== */
+.server-info-tab > div {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) saturate(120%) !important;
 }
+.dark .server-info-tab > div { background-color: rgba(0, 0, 0, 0.05) !important; }
 
-.dark .bg-card\/70 {
-  background-color: rgba(0, 0, 0, 0.4) !important;
-  border-color: rgba(255,255,255,.1) !important;
-}
-
-/* ========== 在线按钮默认立体毛玻璃效果 ========== */
-
-.bg-white\/70, .bg-black\/70 {
-
-  background-color: rgba(255, 255, 255, 0.4) !important;
-
-  backdrop-filter: blur(12px) saturate(150%) !important;
-
-  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
-
-  border: 1px solid rgba(0,0,0,0) !important;
-
-  border-radius: 9999px !important;
-
-  transition: background-color .2s ease, color .2s ease, opacity .2s ease;
-
-}
-
-.dark .bg-white\/70, .dark .bg-black\/70 {
-
-  background-color: rgba(0, 0, 0, 0.4) !important;
-
-  border-color: rgba(255,255,255,.1) !important;
-
-}
-
-/* ========== 字体颜色 ========== */
-.text-muted-foreground { color: black !important; }
-.dark .text-muted-foreground,
-.dark .text-\[10px\].text-muted-foreground {
-    color: white !important;
-}
-.text-neutral-500,
-.text-neutral-800,
-.text-neutral-600 { color: black !important; }
-.dark .text-neutral-500,
-.dark .text-neutral-800,
-.dark .text-neutral-600,
-.dark .text-neutral-400,
-.dark .text-neutral-300 { color: white !important; }
-
-
-/* —— 进   条毛������ —— */
 .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:first-child,
 .bg-secondary.h-\[3px\].rounded-sm {
-  background-color: rgba(255,255,255,0.4) !important;
-  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
-  backdrop-filter: blur(12px) saturate(150%) !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) saturate(120%) !important;
 }
 .dark .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:first-child,
-.dark .bg-secondary.h-\[3px\].rounded-sm {
-  background-color: rgba(0,0,0,0.4) !important;
-}
-.relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:last-child,
-.bg-secondary.h-\[3px\].rounded-sm > .absolute.inset-0.rounded-full:last-child {
-  background: linear-gradient(90deg, #00d26a, #00b05c) !important; /* 明   绿色渐变 */
-}
-.dark .relative[class*="h-1.5"] > .absolute.inset-0.rounded-full:last-child,
-.dark .bg-secondary.h-\[3px\].rounded-sm > .absolute.inset-0.rounded-full:last-child {
-  background: linear-gradient(90deg, #00d26a, #00b05c) !important;
-}
+.dark .bg-secondary.h-\[3px\].rounded-sm { background-color: rgba(0, 0, 0, 0.05) !important; }
 
-/* ========== 探针栏毛玻璃背景 ========== */
-section.flex.items-center.cursor-pointer.text-sm.font-medium,
-section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium {
-  background-color: rgba(255, 255, 255, 0.4) !important;
-  backdrop-filter: blur(12px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
-  border: none !important;
-  border-radius: 9999px !important;
-  padding: 6px 12px !important;
-  box-shadow: none !important;
-  transition: all 0.3s ease !important;
-}
-
-/* ========== 亮色模式���悬停变    ========== */
-section.flex.items-center.cursor-pointer.text-sm.font-medium:hover,
-section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium:hover {
-  background-color: rgba(255, 255, 255, 0.5) !important; /* 亮一点，与卡片一致 */
-  border-color: rgba(0, 0, 0, 0) !important;
-}
-
-/* ========== 暗色模式下样式 ========== */
-.dark section.flex.items-center.cursor-pointer.text-sm.font-medium,
-.dark section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium {
-  background-color: rgba(0, 0, 0, 0.5) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-/* ========== 暗色模式下悬停变亮 ========== */
-.dark section.flex.items-center.cursor-pointer.text-sm.font-medium:hover,
-.dark section.flex.items-center.cursor-pointer.sm\:text-base.text-sm.font-medium:hover {
-  background-color: rgba(0, 0, 0, 0.5) !important; /* 与卡片一致 */
-  border-color: rgba(255, 255, 255, 0.5) !important;
-}
-
-/* ========== 管理后台按钮：毛玻璃 + 悬停变亮 ========== */
-a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50 {
-  background-color: rgba(255, 255, 255, 0.4) !important;
-  backdrop-filter: blur(12px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
-  border: none !important;
-  border-radius: 9999px !important;
-  padding: 6px 12px !important;
-  box-shadow: none !important;
-  transition: all 0.3s ease !important;
-  opacity: 1 !important; /* 去除原有透明效果 */
-}
-
-.dark a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50 {
-  background-color: rgba(0, 0, 0, 0.4) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  color: white !important;
-}
-
-/* 亮色模式下悬停变亮 */
-a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50:hover {
-  background-color: rgba(255, 255, 255, 0.5) !important;
-}
-
-/* 暗色模式下悬停变亮 */
-.dark a[href="/dashboard"].flex.items-center.text-nowrap.text-sm.font-medium.opacity-50:hover {
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-
-/* ========== 修改图表轴文字颜色 (ms数字) ========== */
-
-/* 亮色模式：强制 Y 轴和 X 轴文字为黑色 */
-.recharts-cartesian-axis-tick-value {
-    fill: #000000 !important;
-}
-
-/* 暗色模式：强制 Y 轴和 X 轴文字为白色 */
-.dark .recharts-cartesian-axis-tick-value {
-    fill: #FFFFFF !important;
-}
-
-/* 针对 Y 轴特定刻度文字的增强选择器 (防止被插件原样式覆盖) */
-.yAxis .recharts-cartesian-axis-tick-value tspan {
-    fill: #000000 !important;
-}
-
-.dark .yAxis .recharts-cartesian-axis-tick-value tspan {
-    fill: #FFFFFF !important;
-}
-
-/* ========== 2. 修改 详情/网络 按钮字体颜色 ========== */
-/* 亮色模式：强制纯黑 */
-.server-info-tab p, 
-.server-info-tab div {
-    color: #000000 !important;
-}
-
-/* 深色模式：强制纯白 */
-.dark .server-info-tab p, 
-.dark .server-info-tab div {
-    color: #FFFFFF !important;
-}
+/* 装饰细节 */
+.server-info-tab div.absolute.inset-0.z-10 { background-color: rgba(255, 255, 255, 0.2) !important; }
+section.flex.items-center.my-2.w-full > div.bg-border { background-color: transparent !important; border: none !important; }
 </style>
 
-<style id="hover-color-no-scale">
-/* 卡片 */
-.bg-card\/70:hover {
-  transform: none !important;
-  background-color: rgba(255, 255, 255, 0.5) !important;
-}
-.dark .bg-card\/70:hover {
-  transform: none !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-</style>
+<script>
+    // 强制探针默认开启深色模式
+    (function() {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+    })();
+</script>
