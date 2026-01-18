@@ -72,11 +72,12 @@ footer {
     display: none !important;
 }
 
-/* ========== 2. 精准字体与元素颜色控制 (浅黑深柔白) ========== */
-/* 浅色模式：文字、开关圆点纯黑 */
+/* ========== 2. 精准字体与元素颜色控制 (浅黑深铂金) ========== */
+/* 浅色模式：文字、开关圆点、图标纯黑 */
 p, span, a, div, button,
 .text-muted-foreground, .text-neutral-500, .text-neutral-400,
-.recharts-text, .recharts-cartesian-axis-tick-value {
+.recharts-text, .recharts-cartesian-axis-tick-value,
+img[alt="BackIcon"] { /* 修复返回图标颜色 */
     color: #000000 !important;
 }
 .recharts-text tspan, .recharts-cartesian-axis-tick-value {
@@ -87,23 +88,24 @@ button[role="switch"] span {
     background-color: #000000 !important;
 }
 
-/* 深色模式：改为更亮的柔白色 (#F0F0F0)，恢复 0.5 阴影 */
+/* 深色模式：改为柔和的铂金色 (#E5E5E5) */
 .dark p, .dark span, .dark a, .dark div, .dark button,
 .dark .text-muted-foreground, .dark .text-neutral-500,
-.dark .recharts-text, .dark .recharts-cartesian-axis-tick-value {
-    color: #f0f0f0 !important; 
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important; /* 恢复 0.5 阴影 */
+.dark .recharts-text, .dark .recharts-cartesian-axis-tick-value,
+.dark img[alt="BackIcon"] { /* 修复返回图标颜色 */
+    color: #e5e5e5 !important; 
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
 }
 .dark .recharts-text tspan, .dark .recharts-cartesian-axis-tick-value {
-    fill: #f0f0f0 !important;
+    fill: #e5e5e5 !important;
 }
-/* 开关圆点 - 深色模式同步柔白 */
+/* 开关圆点 - 深色模式同步铂金色 */
 .dark button[role="switch"] span {
-    background-color: #f0f0f0 !important;
+    background-color: #e5e5e5 !important;
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
-/* ========== 3. 开关组件 (Switch - 玻璃质感修复) ========== */
+/* ========== 3. 开关组件 (Switch - 玻璃质感) ========== */
 button[role="switch"] {
     background-color: rgba(255, 255, 255, 0.05) !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
