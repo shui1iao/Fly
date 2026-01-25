@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # =================================================================
-# anytls 管理脚本 (自动更新版 + 双端配置显示)
+# anytls 管理脚本 (修复 Mihomo 缩进版)
 # 描述: 自动获取 GitHub 最新版本安装，同时显示 Surge 和 Mihomo 配置。
 # =================================================================
 
@@ -29,14 +29,14 @@ check_anytls_status() {
 show_menu() {
     clear
     echo "=================================================="
-    echo "          anytls-go 综合管理脚本 (v1.2)"
+    echo "          anytls-go 综合管理脚本 (v1.3)"
     echo "=================================================="
     check_anytls_status
     echo "--------------------------------------------------"
-    echo "1. 安装 anytls (自动下载最新版)"
+    echo "1. 安装 anytls"
     echo "2. 卸载 anytls"
     echo "3. 修改 anytls 配置 (端口/密码)"
-    echo "4. 查看 anytls 配置 (Surge & Mihomo)"
+    echo "4. 查看 anytls 配置"
     echo "5. 启动 anytls 服务"
     echo "6. 停止 anytls 服务"
     echo "7. 重启 anytls 服务"
@@ -74,7 +74,8 @@ display_configuration() {
     
     echo ""
     echo "2. Mihomo (Clash Meta) 配置文件:"
-    echo -e "${GREEN}- {\"name\":\"VPS\",\"server\":\"${ip}\",\"port\":${port},\"password\":\"${pwd}\",\"skip-cert-verify\":true,\"reuse\":false,\"type\":\"anytls\"}${NC}"
+    # 注意：下面这一行前面已经加了两个空格
+    echo -e "${GREEN}  - {\"name\":\"VPS\",\"server\":\"${ip}\",\"port\":${port},\"password\":\"${pwd}\",\"skip-cert-verify\":true,\"reuse\":false,\"type\":\"anytls\"}${NC}"
     echo "------------------------------------------"
 }
 
