@@ -10,16 +10,6 @@ proxy-groups:
     proxies: 
       - HK
       - JP
-      - SG
-      - US
-
-  - name: "Telegram"
-    type: fallback
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
-    proxies:
-      - SG
-      - HK
-      - JP
       - US
       
   - name: "AI"
@@ -28,7 +18,6 @@ proxy-groups:
     proxies:
       - JP
       - US
-      - SG
 
   - name: "Google"
     type: fallback
@@ -37,7 +26,6 @@ proxy-groups:
       - US
       - JP
       - HK
-      - SG
 
   - name: "HK"
     type: url-test
@@ -50,12 +38,6 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "🇯🇵"
-
-  - name: "SG"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    filter: "🇸🇬"
 
   - name: "US"
     type: url-test
@@ -163,7 +145,7 @@ rules:
   - RULE-SET,PayPal,HK
   - RULE-SET,YouTube,Final
   - RULE-SET,Google,Google
-  - RULE-SET,Telegram,Telegram
+  - RULE-SET,Telegram,Final
   - RULE-SET,Apple,DIRECT
   - RULE-SET,CDN,Final
   - RULE-SET,Proxy,Final
