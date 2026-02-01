@@ -10,6 +10,7 @@ proxy-groups:
     proxies: 
       - HK
       - JP
+      - SG
       - US
 
   - name: "Telegram"
@@ -27,6 +28,7 @@ proxy-groups:
     proxies:
       - JP
       - US
+      - SG
 
   - name: "Google"
     type: fallback
@@ -35,6 +37,7 @@ proxy-groups:
       - US
       - JP
       - HK
+      - SG
 
   - name: "HK"
     type: url-test
@@ -52,7 +55,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    filter: "🇯🇵🇸🇬"
+    filter: "🇸🇬"
 
   - name: "US"
     type: url-test
