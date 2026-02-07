@@ -8,6 +8,7 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
+      - HKT
       - HK
       - JP
       - SG
@@ -18,6 +19,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
     proxies:
       - SG
+      - HKT
       - HK
       - JP
       - US
@@ -36,14 +38,21 @@ proxy-groups:
     proxies:
       - US
       - JP
+      - HKT
       - HK
       - SG
+
+  - name: "HKT"
+    type: url-test
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+    include-all: true
+    filter:"HKT"
 
   - name: "HK"
     type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     include-all: true
-    filter: "🇭🇰"
+    filter: "^(?!.*HKT).*🇭🇰.*$"
     
   - name: "JP"
     type: url-test
