@@ -46,7 +46,7 @@ proxy-groups:
     type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     include-all: true
-    filter:"HKT"
+    filter: "HKT"
 
   - name: "HK"
     type: url-test
