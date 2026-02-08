@@ -13,16 +13,6 @@ proxy-groups:
       - JP
       - SG
       - US
-
-  - name: "Telegram"
-    type: fallback
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
-    proxies:
-      - SG
-      - HKT
-      - HK
-      - JP
-      - US
       
   - name: "AI"
     type: fallback
@@ -172,7 +162,7 @@ rules:
   - RULE-SET,PayPal,HK
   - RULE-SET,YouTube,Final
   - RULE-SET,Google,Google
-  - RULE-SET,Telegram,Telegram
+  - RULE-SET,Telegram,Final
   - RULE-SET,Apple,DIRECT
   - RULE-SET,CDN,Final
   - RULE-SET,Proxy,Final
