@@ -1,7 +1,7 @@
 <script>
     window.ForceUseSvgFlag=false;
-    window.CustomBackgroundImage = 'https://t.alcy.cc/ycy';
-    window.CustomMobileBackgroundImage = 'https://t.alcy.cc/ycy';
+    window.CustomBackgroundImage = 'https://tc.alcy.cc/tc/20260121/ce04f79ea6bb145af92bff3052f2c561.webp';
+    window.CustomMobileBackgroundImage = 'https://tc.alcy.cc/tc/20260121/ce04f79ea6bb145af92bff3052f2c561.webp';
     window.CustomLogo = 'https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/ID.PNG';
     window.DisableAnimatedMan = true;
     window.FixedTopServerName = true;
@@ -210,11 +210,3 @@ section.flex.items-center.cursor-pointer.sm\:text-base {
 .server-info-tab div.absolute.inset-0.z-10 { background-color: rgba(255, 255, 255, 0.2) !important; }
 section.flex.items-center.my-2.w-full > div.bg-border { background-color: transparent !important; border: none !important; }
 </style>
-
-<script>
-    // 强制探针默认开启深色模式
-    (function() {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-    })();
-</script>
