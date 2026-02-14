@@ -13,6 +13,16 @@ proxy-groups:
       - JP
       - SG
       - US
+
+  - name: "Telegram"
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+    proxies:
+      - SG
+      - HKT
+      - HK
+      - JP
+      - US
       
   - name: "AI"
     type: fallback
@@ -155,14 +165,14 @@ rules:
   - DOMAIN-SUFFIX,longemby.com,DIRECT
   - DOMAIN,cdn.lilyemby.my,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
-  - DOMAIN,lite.cn2gias.uk,US
+  - DOMAIN,lite.cn2gias.uk,Google
   - DOMAIN-SUFFIX,nodeseek.com,JP
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
   - RULE-SET,PayPal,HK
   - RULE-SET,YouTube,Final
   - RULE-SET,Google,Google
-  - RULE-SET,Telegram,Final
+  - RULE-SET,Telegram,Telegram
   - RULE-SET,Apple,DIRECT
   - RULE-SET,CDN,Final
   - RULE-SET,Proxy,Final
