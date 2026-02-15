@@ -73,7 +73,7 @@ footer {
 }
 
 /* ========== 2. 精准字体与元素颜色控制 (浅黑深铂金) ========== */
-/* 浅色模式：文字、开关圆点、图标纯黑 */
+/* 浅色模���：文字、开关圆点、图标纯黑 */
 p, span, a, div, button,
 .text-muted-foreground, .text-neutral-500, .text-neutral-400,
 .recharts-text, .recharts-cartesian-axis-tick-value,
@@ -209,4 +209,60 @@ section.flex.items-center.cursor-pointer.sm\:text-base {
 /* 装饰细节 */
 .server-info-tab div.absolute.inset-0.z-10 { background-color: rgba(255, 255, 255, 0.2) !important; }
 section.flex.items-center.my-2.w-full > div.bg-border { background-color: transparent !important; border: none !important; }
+
+/* ========== 9. 选项卡与时间选择器 (Tabs & Time Selectors) ========== */
+/* 针对外层容器：应用毛玻璃背景 */
+.bg-muted.rounded-full, 
+.dark\:bg-muted\/40.rounded-full {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important;
+}
+
+.dark .bg-muted.rounded-full, 
+.dark .dark\:bg-muted\/40.rounded-full {
+    background-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 针对选中的高亮背景 (那个白色的滑块) */
+div.absolute.inset-0.z-10.bg-white,
+div.absolute.inset-0.z-10.dark\:bg-background {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+    backdrop-filter: none !important; /* 避免嵌套模糊叠加导致发黑 */
+}
+
+.dark div.absolute.inset-0.z-10.bg-white,
+.dark div.absolute.inset-0.z-10.dark\:bg-background {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 修正不可用/灰度按钮的显示 */
+.cursor-not-allowed.opacity-40.grayscale {
+    filter: grayscale(1) !important;
+    opacity: 0.3 !important;
+}
+
+/* 移除原有的边框干扰 */
+.border-border\/60, .dark\:border-border\/40 {
+    border-color: transparent !important;
+}
+
+/* ========== 10. 流量信息精简：只保留 Loss ========== */
+/* 隐藏下载速度 (绿色) 和 上传速度 (红色) */
+div.flex.items-center.gap-2.text-\[12px\] > span.text-green-600,
+div.flex.items-center.gap-2.text-\[12px\] > span.dark\:text-green-400,
+div.flex.items-center.gap-2.text-\[12px\] > span.text-red-600,
+div.flex.items-center.gap-2.text-\[12px\] > span.dark\:text-red-500 {
+    display: none !important;
+}
+
+/* 确保剩下的 Loss 信息位置居中或对齐 (可选) */
+div.flex.items-center.gap-2.text-\[12px\] {
+    justify-content: flex-start; 
+    gap: 0 !important;
+}
 </style>
