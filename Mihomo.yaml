@@ -166,7 +166,6 @@ rules:
   - DOMAIN,cdn.lilyemby.my,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
   - DOMAIN,lite.cn2gias.uk,Google
-  - DOMAIN-SUFFIX,nodeseek.com,JP
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
   - RULE-SET,PayPal,HK
