@@ -1,10 +1,10 @@
 <script>
     window.ForceUseSvgFlag=false;
-    window.CustomBackgroundImage = 'https://tc.alcy.cc/tc/20260121/ce04f79ea6bb145af92bff3052f2c561.webp';
-    window.CustomMobileBackgroundImage = 'https://tc.alcy.cc/tc/20260121/ce04f79ea6bb145af92bff3052f2c561.webp';
-    window.CustomLogo = 'https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/ID.PNG';
     window.DisableAnimatedMan = true;
     window.FixedTopServerName = true;
+    window.CustomBackgroundImage = 'https://cdn.nodeimage.com/i/B4n068YjKt7f8iHQSB7RC0IGrlNifINf.webp';
+    window.CustomMobileBackgroundImage = 'https://cdn.nodeimage.com/i/eEv1D9BY7IABOXnF4fhnuQOkk78RaM07.webp';
+    window.CustomLogo = 'https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/ID.PNG';
 </script>
 
 <!-- 流量进度条 -->
@@ -25,17 +25,14 @@
     // 定义核心点击逻辑
     function autoClickNetwork() {
         // 1. 寻找目标容器
-        var container = document.querySelector('.server-info-tab');
-        
+        var container = document.querySelector('.server-info-tab');       
         // 2. 如果找到了容器，并且这个容器还没被我们“处理”过
         if (container && !container.dataset.hasAutoSwitched) {
-            var buttons = container.querySelectorAll('.cursor-pointer');
-            
+            var buttons = container.querySelectorAll('.cursor-pointer');        
             // 3. 确保按钮存在
             if (buttons.length >= 2) {
                 // 点击第二个按钮（网络）
-                buttons[1].click();
-                
+                buttons[1].click();           
                 // 4. 给这个容器打上“已处理”的标签
                 // 这样如果你手动点回“详情”，脚本看到标签就不会再强制切回去了
                 container.dataset.hasAutoSwitched = "true";
@@ -43,16 +40,13 @@
             }
         }
     }
-
     // A. 脚本刚加载时先尝试一次
     autoClickNetwork();
-
     // B. 创建监听器，盯着整个页面的一举一动
     var observer = new MutationObserver(function(mutations) {
         // 页面变动时，再次尝试执行
         autoClickNetwork();
     });
-
     // 开始监听 (body 及其子元素的变化)
     observer.observe(document.body, {
         childList: true,
@@ -72,8 +66,8 @@ footer {
     display: none !important;
 }
 
-/* ========== 2. 精准字体与元素颜色控制 (浅黑深铂金) ========== */
-/* 浅色模���：文字、开关圆点、图标纯黑 */
+/* ========== 2. 精准字体与元素�����������������������制 (���������������������黑深铂金) ========== */
+/* 浅色模�����：文字、开关圆点、图标纯黑 */
 p, span, a, div, button,
 .text-muted-foreground, .text-neutral-500, .text-neutral-400,
 .recharts-text, .recharts-cartesian-axis-tick-value,
