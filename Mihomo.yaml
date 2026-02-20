@@ -18,8 +18,9 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
     proxies:
-      - SG
       - HK
+      - HKT
+      - SG
       - JP
       - US
     
