@@ -19,8 +19,8 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
     proxies:
       - HK
-      - HKT
       - SG
+      - HKT
       - JP
       - US
     
