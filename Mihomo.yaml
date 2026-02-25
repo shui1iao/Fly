@@ -39,20 +39,20 @@ proxy-groups:
     type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     include-all: true
-    filter: "^(?!.*HKT).*.*$"
+    filter: "^(?!.*HKT).*🇭🇰.*$"
     
   - name: "JP"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: ""
+    filter: "🇯🇵"
 
 
   - name: "US"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: ""
+    filter: "🇺🇸"
 
 rule-providers:
 
