@@ -29,15 +29,6 @@ proxy-groups:
       - JP
       - US
 
-  - name: "Google"
-    type: fallback
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/google(2).png
-    proxies:
-      - US
-      - JP
-      - HKT
-      - HK
-
   - name: "HKT"
     type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
@@ -48,20 +39,20 @@ proxy-groups:
     type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     include-all: true
-    filter: "^(?!.*HKT).*🇭🇰.*$"
+    filter: "^(?!.*HKT).*.*$"
     
   - name: "JP"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: "🇯🇵"
+    filter: ""
 
 
   - name: "US"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: "🇺🇸"
+    filter: ""
 
 rule-providers:
 
@@ -79,22 +70,6 @@ rule-providers:
     nterval: 86400
     path: ./AI.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/AI.list
-
-  YouTube:
-    behavior: classical
-    type: http
-    format: text
-    nterval: 86400
-    path: ./YouTube.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/YouTube.list
-    
-  Google:
-    behavior: classical
-    type: http
-    format: text
-    nterval: 86400
-    path: ./Google.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Google.list
 
   Telegram:
     behavior: classical
@@ -156,12 +131,10 @@ rules:
   - DOMAIN-KEYWORD,longemby,DIRECT
   - DOMAIN,cdn.lilyemby.my,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
-  - DOMAIN,lite.cn2gias.uk,Google
+  - DOMAIN,lite.cn2gias.uk,US
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
   - RULE-SET,PayPal,HK
-  - RULE-SET,YouTube,Final
-  - RULE-SET,Google,Google
   - RULE-SET,Telegram,Telegram
   - RULE-SET,Apple,DIRECT
   - RULE-SET,CDN,Final
