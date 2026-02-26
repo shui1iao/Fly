@@ -26,8 +26,17 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies:
-      - JP
       - US
+      - JP
+
+  - name: Google
+    type: fallback
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/google(2).png
+    proxies:
+      - US
+      - JP
+      - HKT
+      - HK
 
   - name: "HKT"
     type: url-test
@@ -46,7 +55,6 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "🇯🇵"
-
 
   - name: "US"
     type: url-test
@@ -86,7 +94,23 @@ rule-providers:
     nterval: 86400
     path: ./Apple.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Apple.list
-    
+
+  YouTube:
+    behavior: classical
+    type: http
+    format: text
+    nterval: 86400
+    path: ./YouTube.list
+    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/YouTube.list
+  
+  Google:
+    behavior: classical
+    type: http
+    format: text
+    nterval: 86400
+    path: ./Google.list
+    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Google.list
+
   CDN:
     behavior: domain
     type: http
@@ -136,6 +160,8 @@ rules:
   - RULE-SET,AI,AI
   - RULE-SET,PayPal,HK
   - RULE-SET,Telegram,Telegram
+  - RULE-SET,YouTube,Final
+  - RULE-SET,Google,Google
   - RULE-SET,Apple,DIRECT
   - RULE-SET,CDN,Final
   - RULE-SET,Proxy,Final
