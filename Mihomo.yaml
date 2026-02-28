@@ -142,14 +142,6 @@ rule-providers:
     path: ./ChinaDomain.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/ChinaDomain.list
     
-  PayPal:
-    behavior: classical
-    type: http
-    format: text
-    nterval: 86400
-    path: ./PayPal.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/PayPal.list
-    
   LAN:
     behavior: classical
     interval: 86400
@@ -165,7 +157,6 @@ rules:
   - DOMAIN,lite.cn2gias.uk,Google
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
-  - RULE-SET,PayPal,HK
   - RULE-SET,Telegram,Telegram
   - RULE-SET,YouTube,Final
   - RULE-SET,Google,Google
