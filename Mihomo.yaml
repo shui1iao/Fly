@@ -17,8 +17,8 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
     proxies:
-      - HKT
       - Akari
+      - HKT
       - JP
       - US
       
@@ -155,6 +155,15 @@ rules:
   - DOMAIN,cdn.lilyemby.my,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
   - DOMAIN,lite.cn2gias.uk,Google
+
+  - IP-ASN, 44907, Final, no-resolve
+  - IP-ASN, 62014, Final, no-resolve
+  - IP-ASN, 59930, Google, no-resolve
+  - IP-ASN, 62041, Telegram, no-resolve
+  - IP-ASN, 211157, Telegram, no-resolve
+  - IP-CIDR, 5.28.192.0/18, Telegram, no-resolve
+  - IP-CIDR, 109.239.140.0/24, Telegram, no-resolve
+
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
   - RULE-SET,Telegram,Telegram
