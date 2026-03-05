@@ -1,31 +1,24 @@
 proxy-groups:
-  - name: Proxy
+  - name: "Proxy"
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
     include-all: true
-  - name: Final
+      
+  - name: "Final"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
-    proxies:
-      - HK
-      - JP
-      - SG
-      - US
-  - name: Telegram
-    type: fallback
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
-    proxies:
-      - SG
+    proxies: 
       - HK
       - JP
       - US
-  - name: AI
+      
+  - name: "AI"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies:
-      - JP
       - US
-      - SG
+      - JP
+
   - name: Google
     type: fallback
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/google(2).png
@@ -33,50 +26,34 @@ proxy-groups:
       - US
       - JP
       - HK
-      - SG
-  - name: HK
-    type: smart
+
+  - name: "HK"
+    type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     include-all: true
-    filter: 🇭🇰
-    policy-priority: "HKT:0.5"
-    uselightgbm: true
-    collectdata: false
-    strategy: sticky-sessions
-  - name: JP
-    type: smart
+    filter: "🇭🇰"
+    
+  - name: "JP"
+    type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: 🇯🇵
-    policy-priority: "DDPS:0.8"
-    uselightgbm: true
-    collectdata: false
-    strategy: sticky-sessions
-  - name: SG
-    type: smart
-    include-all: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    filter: 🇸🇬
-    policy-priority: ""
-    uselightgbm: true
-    collectdata: false
-    strategy: sticky-sessions
-  - name: US
-    type: smart
+    filter: "🇯🇵"
+
+  - name: "US"
+    type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: 🇺🇸
-    policy-priority: ""
-    uselightgbm: true
-    collectdata: false
-    strategy: sticky-sessions
+    filter: "🇺🇸"
+
 rule-providers:
+
   Speedtest:
     behavior: classical
     type: http
     nterval: 86400
     path: ./Speedtest.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest_No_Resolve.yaml
+    
   AI:
     behavior: classical
     type: http
@@ -84,20 +61,7 @@ rule-providers:
     nterval: 86400
     path: ./AI.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/AI.list
-  YouTube:
-    behavior: classical
-    type: http
-    format: text
-    nterval: 86400
-    path: ./YouTube.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/YouTube.list
-  Google:
-    behavior: classical
-    type: http
-    format: text
-    nterval: 86400
-    path: ./Google.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Google.list
+
   Telegram:
     behavior: classical
     type: http
@@ -105,6 +69,7 @@ rule-providers:
     nterval: 86400
     path: ./Telegram.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Telegram.list
+
   Apple:
     behavior: classical
     type: http
@@ -112,6 +77,23 @@ rule-providers:
     nterval: 86400
     path: ./Apple.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Apple.list
+
+  YouTube:
+    behavior: classical
+    type: http
+    format: text
+    nterval: 86400
+    path: ./YouTube.list
+    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/YouTube.list
+  
+  Google:
+    behavior: classical
+    type: http
+    format: text
+    nterval: 86400
+    path: ./Google.list
+    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Google.list
+
   CDN:
     behavior: domain
     type: http
@@ -119,6 +101,7 @@ rule-providers:
     nterval: 86400
     path: ./CDN.list
     url: https://ruleset.skk.moe/Clash/domainset/cdn.txt
+
   Proxy:
     behavior: classical
     type: http
@@ -126,6 +109,7 @@ rule-providers:
     nterval: 86400
     path: ./Proxy.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Proxy.list
+
   ChinaDomain:
     behavior: classical
     type: http
@@ -133,13 +117,7 @@ rule-providers:
     nterval: 86400
     path: ./ChinaDomain.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/ChinaDomain.list
-  PayPal:
-    behavior: classical
-    type: http
-    format: text
-    nterval: 86400
-    path: ./PayPal.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/PayPal.list
+    
   LAN:
     behavior: classical
     interval: 86400
@@ -147,22 +125,21 @@ rule-providers:
     format: text
     path: ./Lan.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Lan.list
+  
 rules:
-  - DOMAIN-SUFFIX,longemby.com,DIRECT
+  - DOMAIN-KEYWORD,longemby,DIRECT
   - DOMAIN,cdn.lilyemby.my,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
-  - DOMAIN,lite.cn2gias.uk,US
-  - DOMAIN-SUFFIX,nodeseek.com,JP
+  - DOMAIN,lite.cn2gias.uk,Google
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
-  - RULE-SET,PayPal,HK
+  - RULE-SET,Telegram,Final
   - RULE-SET,YouTube,Final
   - RULE-SET,Google,Google
-  - RULE-SET,Telegram,Telegram
   - RULE-SET,Apple,DIRECT
   - RULE-SET,CDN,Final
   - RULE-SET,Proxy,Final
-  - RULE-SET,ChinaDomain,DIRECT
-  - RULE-SET,LAN,DIRECT
+  - RULE-SET,ChinaDomain,DIRECT 
+  - RULE-SET,LAN,DIRECT 
   - GEOIP,CN,DIRECT
   - MATCH,Final
