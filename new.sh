@@ -43,8 +43,8 @@ apt-get install speedtest -y
 # 5. 交互式 BBR 配置
 echo -e "\n[5/5] 网络拥塞控制 (BBR) 配置"
 echo "请选择适合您当前网络环境的 BBR 配置方案："
-echo "  1) BBR (通用/线路机) "
-echo "  2) BBR (大窗口/落地机) "
+echo "  1) BBR (通用) "
+echo "  2) BBR (大窗口) "
 echo "  3) 跳过"
 read -p "请输入选项 [1/2/3]: " BBR_CHOICE
 
