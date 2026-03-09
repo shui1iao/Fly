@@ -12,15 +12,6 @@ proxy-groups:
       - Akari
       - JP
       - US
-
-  - name: "Telegram"
-    type: fallback
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
-    proxies:
-      - HKT
-      - Akari
-      - JP
-      - US
       
   - name: "AI"
     type: fallback
@@ -29,9 +20,9 @@ proxy-groups:
       - US
       - JP
 
-  - name: Google
+  - name: Emby
     type: fallback
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/google(2).png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
     proxies:
       - US
       - JP
@@ -95,22 +86,6 @@ rule-providers:
     path: ./Apple.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Apple.list
 
-  YouTube:
-    behavior: classical
-    type: http
-    format: text
-    nterval: 86400
-    path: ./YouTube.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/YouTube.list
-  
-  Google:
-    behavior: classical
-    type: http
-    format: text
-    nterval: 86400
-    path: ./Google.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Google.list
-
   CDN:
     behavior: domain
     type: http
@@ -147,21 +122,10 @@ rules:
   - DOMAIN-KEYWORD,longemby,DIRECT
   - DOMAIN,cdn.lilyemby.my,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
-  - DOMAIN,lite.cn2gias.uk,Google
-
-  #- IP-ASN, 44907, Final, no-resolve
-  #- IP-ASN, 62014, Final, no-resolve
-  #- IP-ASN, 59930, Google, no-resolve
-  #- IP-ASN, 62041, Telegram, no-resolve
-  #- IP-ASN, 211157, Telegram, no-resolve
-  #- IP-CIDR, 5.28.192.0/18, Telegram, no-resolve
-  #- IP-CIDR, 109.239.140.0/24, Telegram, no-resolve
-
+  - DOMAIN,lite.cn2gias.uk,Emby
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
-  - RULE-SET,Telegram,Telegram
-  - RULE-SET,YouTube,Final
-  - RULE-SET,Google,Google
+  - RULE-SET,Telegram,Final
   - RULE-SET,Apple,DIRECT
   - RULE-SET,CDN,Final
   - RULE-SET,Proxy,Final
