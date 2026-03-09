@@ -1,8 +1,4 @@
 proxy-groups:
-  - name: "Proxy"
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
-    include-all: true
       
   - name: "Final"
     type: fallback
@@ -18,14 +14,6 @@ proxy-groups:
     proxies:
       - US
       - JP
-
-  - name: Google
-    type: fallback
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/google(2).png
-    proxies:
-      - US
-      - JP
-      - HK
 
   - name: "HK"
     type: url-test
@@ -47,13 +35,6 @@ proxy-groups:
 
 rule-providers:
 
-  Speedtest:
-    behavior: classical
-    type: http
-    nterval: 86400
-    path: ./Speedtest.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest_No_Resolve.yaml
-    
   AI:
     behavior: classical
     type: http
@@ -77,22 +58,6 @@ rule-providers:
     nterval: 86400
     path: ./Apple.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Apple.list
-
-  YouTube:
-    behavior: classical
-    type: http
-    format: text
-    nterval: 86400
-    path: ./YouTube.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/YouTube.list
-  
-  Google:
-    behavior: classical
-    type: http
-    format: text
-    nterval: 86400
-    path: ./Google.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Google.list
 
   CDN:
     behavior: domain
@@ -127,15 +92,8 @@ rule-providers:
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Lan.list
   
 rules:
-  - DOMAIN-KEYWORD,longemby,DIRECT
-  - DOMAIN,cdn.lilyemby.my,DIRECT
-  - DOMAIN,dragonli.misaka.be,DIRECT
-  - DOMAIN,lite.cn2gias.uk,Google
-  - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
   - RULE-SET,Telegram,Final
-  - RULE-SET,YouTube,Final
-  - RULE-SET,Google,Google
   - RULE-SET,Apple,DIRECT
   - RULE-SET,CDN,Final
   - RULE-SET,Proxy,Final
