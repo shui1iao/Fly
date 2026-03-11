@@ -49,7 +49,7 @@ echo "  3) 跳过"
 read -p "请输入选项 [1/2/3]: " BBR_CHOICE
 
 # 写入主配置文件
-SYSCTL_FILE="/etc/sysctl.conf"
+SYSCTL_FILE="/etc/sysctl.d/99-custom.conf"
 
 if [[ "$BBR_CHOICE" == "1" ]]; then
     echo "正在应用 BBR (通用) 配置..."
@@ -80,7 +80,7 @@ net.ipv4.tcp_congestion_control=bbr
 net.ipv6.conf.all.forwarding=1
 net.ipv6.conf.default.forwarding=1
 EOF
-    sysctl -p && sysctl --system
+    sysctl --system
     echo "BBR (通用) 已生效。"
 
 elif [[ "$BBR_CHOICE" == "2" ]]; then
@@ -112,7 +112,7 @@ net.ipv4.tcp_congestion_control=bbr
 net.ipv6.conf.all.forwarding=1
 net.ipv6.conf.default.forwarding=1
 EOF
-    sysctl -p && sysctl --system
+    sysctl --system
     echo "BBR (大窗口) 已生效。"
 
 else
