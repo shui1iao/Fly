@@ -1,7 +1,5 @@
 export default async function (ctx) {
 
-  // 从 env 读取事件列表
-  // 格式: 名称|日期,名称|日期
   const raw = ctx.env.EVENTS || "考试|2026-06-01,生日|2026-08-12,新年|2027-01-01";
 
   const events = raw.split(",").map(e => {
@@ -28,8 +26,7 @@ export default async function (ctx) {
   function progress(days) {
     const total = 365;
     const passed = Math.max(0, total - days);
-    const percent = Math.min(100, Math.round((passed / total) * 100));
-    return percent;
+    return Math.min(1, passed / total);
   }
 
   const size = ctx.widgetFamily;
@@ -45,8 +42,7 @@ export default async function (ctx) {
   children.push({
     type: "text",
     text: "倒数日",
-    font: { size: "headline", weight: "bold" },
-    textColor: "#ffffff"
+    font: { size: "headline", weight: "bold" }
   });
 
   for (const e of display) {
@@ -55,42 +51,37 @@ export default async function (ctx) {
 
     children.push({
       type: "stack",
-      direction: "vertical",
+      direction: "column",
       gap: 4,
       children: [
 
         {
           type: "stack",
-          direction: "horizontal",
+          direction: "row",
           children: [
             {
               type: "text",
-              text: e.name,
-              font: { size: "body" },
-              textColor: "#ffffffcc"
+              text: e.name
             },
             {
               type: "spacer"
             },
             {
               type: "text",
-              text: `${e.days} 天`,
-              font: { size: "body", weight: "semibold" },
-              textColor: "#ffffff"
+              text: `${e.days} 天`
             }
           ]
         },
 
         {
           type: "progress",
-          value: p / 100
+          value: p
         },
 
         {
           type: "text",
           text: e.date,
-          font: { size: "caption2" },
-          textColor: "#ffffff66"
+          font: { size: "caption2" }
         }
 
       ]
@@ -99,14 +90,9 @@ export default async function (ctx) {
 
   return {
     type: "widget",
-
     url: "calshow://",
-
     padding: 16,
     gap: 10,
-
-    backgroundColor: "#111827",
-
     children
   };
 }
