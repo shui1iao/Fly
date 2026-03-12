@@ -1,98 +1,103 @@
-export default async function (ctx) {
+export default async function(ctx) {
+  // 从配置文件的 env 中读取用户填写的变量，提供默认值防错
+  const targetName = ctx.env.TARGET_NAME || "目标日";
+  const targetDateStr = ctx.env.TARGET_DATE || "2026-01-01";
 
-  const raw = ctx.env.EVENTS || "考试|2026-06-01,生日|2026-08-12,新年|2027-01-01";
-
-  const events = raw.split(",").map(e => {
-    const [name, date] = e.split("|");
-    return { name, date };
-  });
-
+  // 日期计算逻辑（抹平时间误差，只算天数）
   const now = new Date();
+  const target = new Date(targetDateStr);
+  now.setHours(0, 0, 0, 0);
+  target.setHours(0, 0, 0, 0);
 
-  function calc(event) {
-    const target = new Date(event.date);
-    const diff = target.getTime() - now.getTime();
-    const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+  const diffTime = target.getTime() - now.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const absDays = Math.abs(diffDays).toString();
 
-    return {
-      name: event.name,
-      date: event.date,
-      days
-    };
+  // 状态变量初始化
+  let titleText = "🗓️ 倒数日";
+  let descText = "";
+  let iconName = "calendar";
+  let bgColors = ["#1A1A2E", "#16213E"]; // 默认深色渐变
+
+  // 核心分支判断：未到、当天、已过期
+  if (diffDays > 0) {
+    descText = `距离 ${targetName} 还有`;
+    iconName = "clock.fill";
+    bgColors = ["#FF512F", "#F09819"]; // 橙色渐变
+  } else if (diffDays === 0) {
+    descText = `就是今天！`;
+    titleText = targetName;
+    iconName = "star.fill";
+    bgColors = ["#11998e", "#38ef7d"]; // 绿色渐变
+  } else {
+    descText = `${targetName} 已过去`;
+    iconName = "clock.badge.checkmark.fill";
+    bgColors = ["#3a6073", "#16222A"]; // 蓝灰渐变
   }
 
-  const results = events.map(calc).sort((a,b)=>a.days-b.days);
-
-  function progress(days) {
-    const total = 365;
-    const passed = Math.max(0, total - days);
-    return Math.min(1, passed / total);
-  }
-
-  const size = ctx.widgetFamily;
-
-  let showCount = 1;
-  if (size === "systemMedium") showCount = 2;
-  if (size === "systemLarge") showCount = 4;
-
-  const display = results.slice(0, showCount);
-
-  const children = [];
-
-  children.push({
-    type: "text",
-    text: "倒数日",
-    font: { size: "headline", weight: "bold" }
-  });
-
-  for (const e of display) {
-
-    const p = progress(e.days);
-
-    children.push({
-      type: "stack",
-      direction: "column",
-      gap: 4,
-      children: [
-
-        {
-          type: "stack",
-          direction: "row",
-          children: [
-            {
-              type: "text",
-              text: e.name
-            },
-            {
-              type: "spacer"
-            },
-            {
-              type: "text",
-              text: `${e.days} 天`
-            }
-          ]
-        },
-
-        {
-          type: "progress",
-          value: p
-        },
-
-        {
-          type: "text",
-          text: e.date,
-          font: { size: "caption2" }
-        }
-
-      ]
-    });
-  }
-
+  // 严格返回 Egern 支持的 Widget DSL JSON
   return {
     type: "widget",
-    url: "calshow://",
+    backgroundGradient: {
+      type: "linear",
+      colors: bgColors,
+      startPoint: { x: 0, y: 0 },
+      endPoint: { x: 1, y: 1 }
+    },
     padding: 16,
-    gap: 10,
-    children
+    children: [
+      // 顶部：图标 + 标题
+      {
+        type: "stack",
+        direction: "row",
+        alignItems: "center",
+        gap: 6,
+        children: [
+          {
+            type: "image",
+            src: `sf-symbol:${iconName}`,
+            color: "#FFFFFF",
+            width: 18,
+            height: 18
+          },
+          {
+            type: "text",
+            text: titleText,
+            font: { size: "headline", weight: "bold" },
+            textColor: "#FFFFFF"
+          }
+        ]
+      },
+      // 弹性空白，将内容推向两端
+      { type: "spacer" },
+      // 描述文本
+      {
+        type: "text",
+        text: descText,
+        font: { size: "subheadline", weight: "medium" },
+        textColor: "#FFFFFFCC"
+      },
+      // 底部：巨大数字 + "天"
+      {
+        type: "stack",
+        direction: "row",
+        alignItems: "end", // 底部对齐，让"天"字和数字底部平齐
+        gap: 4,
+        children: [
+          {
+            type: "text",
+            text: diffDays === 0 ? "0" : absDays,
+            font: { size: 42, weight: "heavy" }, 
+            textColor: "#FFFFFF"
+          },
+          {
+            type: "text",
+            text: "天",
+            font: { size: "headline", weight: "bold" },
+            textColor: "#FFFFFFCC"
+          }
+        ]
+      }
+    ]
   };
 }
