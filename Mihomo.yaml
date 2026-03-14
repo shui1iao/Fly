@@ -3,7 +3,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
     include-all: true
-    filter: "^(?!.*(?<!-)Flower).*$"
+    filter: "^(?!.*IEPL).*$"
       
   - name: "Final"
     type: fallback
@@ -57,28 +57,28 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
-    filter: "^(?=.*Flower)(?!.*-Flower|🇩🇪).*$"
+    filter: "实验"
     hidden: true
     
   - name: "Flower-HK"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
-    filter: "🇭🇰 Flower"
+    filter: "香港"
     hidden: true
 
   - name: "Flower-JP"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
-    filter: "🇯🇵 Flower"
+    filter: "日本"
     hidden: true
 
   - name: "Flower-DE"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
-    filter: "🇩🇪 Flower"
+    filter: "德国"
     hidden: true
 
 rule-providers:
