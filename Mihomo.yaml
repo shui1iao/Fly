@@ -26,6 +26,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
     proxies:
       - US
+      - Flower
       - Final
 
   - name: "HKT"
@@ -52,6 +53,13 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "🇺🇸"
 
+  - name: "Flower"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
+    filter: "^(?=.*Flower)(?!.*-Flower|🇩🇪).*$"
+    hidden: true
+    
   - name: "Flower-HK"
     type: url-test
     include-all: true
