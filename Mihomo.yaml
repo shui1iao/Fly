@@ -52,13 +52,13 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "🇺🇸"
 
-  - name: "FLower-HK"
+  - name: "Flower-HK"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
     filter: "🇭🇰 Flower"
 
-  - name: "FLower-JP"
+  - name: "Flower-JP"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
