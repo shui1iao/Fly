@@ -4,7 +4,7 @@
     window.FixedTopServerName = true;
     window.CustomBackgroundImage = 'https://cdn.nodeimage.com/i/B4n068YjKt7f8iHQSB7RC0IGrlNifINf.webp';
     window.CustomMobileBackgroundImage = 'https://cdn.nodeimage.com/i/eEv1D9BY7IABOXnF4fhnuQOkk78RaM07.webp';
-    window.CustomLogo = 'https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/ID.PNG';
+    window.CustomLogo = 'https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/ID.png';
 </script>
 
 <!-- 流量进度条 -->
