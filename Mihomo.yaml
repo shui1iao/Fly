@@ -74,6 +74,13 @@ proxy-groups:
     filter: "日本"
     hidden: true
 
+  - name: "Flower-SG"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
+    filter: "新加坡"
+    hidden: true
+
 rule-providers:
 
   Speedtest:
