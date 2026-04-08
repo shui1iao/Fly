@@ -12,6 +12,7 @@ proxy-groups:
       - HKT
       - Akari
       - JP
+      - SG
       - US
       
   - name: "AI"
@@ -20,6 +21,7 @@ proxy-groups:
     proxies:
       - JP
       - US
+      - SG
 
   - name: Emby
     type: fallback
@@ -46,6 +48,12 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "DDPS"
+
+  - name: "SG"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    filter: "Nube"
 
   - name: "US"
     type: url-test
