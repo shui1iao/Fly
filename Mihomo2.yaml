@@ -6,6 +6,7 @@ proxy-groups:
     proxies: 
       - HK
       - JP
+      - SG
       - US
       
   - name: "AI"
@@ -14,6 +15,7 @@ proxy-groups:
     proxies:
       - US
       - JP
+      - SG
 
   - name: "HK"
     type: url-test
@@ -26,6 +28,12 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "🇯🇵"
+    
+  - name: "SG"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    filter: "🇸🇬"
 
   - name: "US"
     type: url-test
