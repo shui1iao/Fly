@@ -21,7 +21,7 @@ proxy-groups:
       - US
       - JP
 
- - name: "Google"
+  - name: "Google"
     type: fallback
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/google(2).png
     proxies:
