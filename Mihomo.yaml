@@ -18,8 +18,15 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies:
-      - JP
       - US
+      - JP
+
+ - name: "Google"
+    type: fallback
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/google(2).png
+    proxies:
+      - US
+      - JP
 
   - name: Emby
     type: fallback
@@ -114,6 +121,14 @@ rule-providers:
     path: ./Apple.list
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Apple.list
 
+  Google:
+    behavior: classical
+    type: http
+    format: text
+    nterval: 86400
+    path: ./Google.list
+    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Google.list
+
   CDN:
     behavior: domain
     type: http
@@ -153,6 +168,7 @@ rules:
   - DOMAIN,lite.cn2gias.uk,Emby
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
+  - RULE-SET,Google,Google
   - RULE-SET,Telegram,Final
   - RULE-SET,Apple,DIRECT
   - RULE-SET,CDN,Final
