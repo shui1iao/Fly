@@ -27,6 +27,8 @@ proxy-groups:
     proxies:
       - US
       - JP
+      - HKT
+      - Akari
 
   - name: Emby
     type: fallback
