@@ -13,15 +13,8 @@ proxy-groups:
       - Akari
       - JP
       - US
-      
-  - name: "AI"
-    type: fallback
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
-    proxies:
-      - US
-      - JP
 
-  - name: "Google"
+  - name: "Google&AI"
     type: fallback
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/google(2).png
     proxies:
@@ -49,18 +42,21 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     include-all: true
     filter: "Akari"
+    hidden: true
     
   - name: "JP"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: "DDPS"
+    filter: "Claw"
+    hidden: true
     
   - name: "US"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "BWH"
+    hidden: true
 
   - name: "Flower"
     type: url-test
@@ -81,13 +77,6 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
     filter: "日本"
-    hidden: true
-
-  - name: "Flower-SG"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
-    filter: "新加坡"
     hidden: true
 
 rule-providers:
@@ -169,8 +158,8 @@ rules:
   - DOMAIN,dragonli.misaka.be,DIRECT
   - DOMAIN,lite.cn2gias.uk,Emby
   - RULE-SET,Speedtest,Proxy
-  - RULE-SET,AI,AI
-  - RULE-SET,Google,Google
+  - RULE-SET,AI,Google&AI
+  - RULE-SET,Google,Google&AI
   - RULE-SET,Telegram,Final
   - RULE-SET,Apple,DIRECT
   - RULE-SET,CDN,Final
