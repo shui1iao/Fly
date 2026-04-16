@@ -3,7 +3,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
     include-all: true
-    filter: "^(?!.*IEPL).*$"
+    filter: "^(?!.*(?:IEPL|流媒体)).*$"
       
   - name: "Final"
     type: fallback
@@ -13,6 +13,7 @@ proxy-groups:
       - Akari
       - JP
       - US
+      - Download
 
   - name: "Google&AI"
     type: fallback
@@ -57,6 +58,12 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "BWH"
     hidden: true
+
+  - name: "Download"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
+    filter: "流媒体"
 
   - name: "Flower"
     type: url-test
