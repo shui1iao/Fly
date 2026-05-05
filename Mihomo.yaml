@@ -3,14 +3,13 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
     include-all: true
-    filter: "^(?!.*(?:IEPL|流媒体)).*$"
+    filter: "^(?!.*(?:IEPL)).*$"
       
   - name: "Final"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
-      - HKT
-      - Akari
+      - HK
       - JP
       - US
 
@@ -20,8 +19,7 @@ proxy-groups:
     proxies:
       - US
       - JP
-      - HKT
-      - Akari
+      - HK
 
   - name: Emby
     type: fallback
@@ -31,18 +29,11 @@ proxy-groups:
       - Flower
       - Final
 
-  - name: "HKT"
+  - name: "HK"
     type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     include-all: true
-    filter: "HKT"
-
-  - name: "Akari"
-    type: url-test
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
-    include-all: true
-    filter: "Akari"
-    hidden: true
+    filter: "Akari|Peekabo"
     
   - name: "JP"
     type: url-test
