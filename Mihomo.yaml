@@ -39,7 +39,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: "Claw"
+    filter: "🇯🇵.*(Akari)"
     hidden: true
     
   - name: "US"
