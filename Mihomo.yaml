@@ -42,6 +42,7 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "^(?!.*(?:IEPL|🇭🇰|🇸🇬|🇺🇸)).*$"
+    hidden: true
 
   - name: "SG"
     type: url-test
