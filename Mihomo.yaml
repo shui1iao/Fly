@@ -11,7 +11,6 @@ proxy-groups:
     proxies: 
       - HK
       - JP
-      - SG
       - US
 
   - name: "Google&AI"
@@ -20,7 +19,6 @@ proxy-groups:
     proxies:
       - US
       - JP
-      - SG
       - HK
 
   - name: Emby
@@ -42,13 +40,6 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "^(?!.*(?:IEPL|🇭🇰|🇸🇬|🇺🇸)).*$"
-    hidden: true
-
-  - name: "SG"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    filter: "^(?!.*(?:IEPL|🇭🇰|🇯🇵|🇺🇸)).*$"
     hidden: true
     
   - name: "US"
@@ -146,7 +137,6 @@ rule-providers:
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Lan.list
   
 rules:
-  - DOMAIN-KEYWORD,nodeseek,SG
   - DOMAIN-KEYWORD,longemby,DIRECT
   - DOMAIN,cdn.lilyemby.my,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
