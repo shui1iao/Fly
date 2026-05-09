@@ -11,13 +11,14 @@ proxy-groups:
     proxies: 
       - HK
       - JP
+      - SG
 
-  - name: "Google&AI"
+  - name: "AI"
     type: fallback
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/google(2).png
     proxies:
       - JP
-      - HK
+      - SG
 
   - name: Emby
     type: fallback
@@ -37,6 +38,12 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "^(?!.*(?:IEPL|🇭🇰|🇸🇬|🇺🇸)).*$"
+
+  - name: "SG"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    filter: "^(?!.*(?:IEPL|🇭🇰|🇯🇵|🇺🇸)).*$"
 
   - name: "Flower"
     type: url-test
@@ -138,8 +145,8 @@ rules:
   - DOMAIN,dragonli.misaka.be,DIRECT
   - DOMAIN,lite.cn2gias.uk,Emby
   - RULE-SET,Speedtest,Proxy
-  - RULE-SET,AI,Google&AI
-  - RULE-SET,Google,Google&AI
+  - RULE-SET,AI,AI
+  - RULE-SET,Google,Final
   - RULE-SET,Telegram,Final
   - RULE-SET,Apple,DIRECT
   - RULE-SET,CDN,Final
