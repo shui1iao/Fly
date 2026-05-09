@@ -11,13 +11,11 @@ proxy-groups:
     proxies: 
       - HK
       - JP
-      - US
 
   - name: "Google&AI"
     type: fallback
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/google(2).png
     proxies:
-      - US
       - JP
       - HK
 
@@ -25,7 +23,6 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
     proxies:
-      - US
       - Flower
       - Final
 
@@ -40,14 +37,6 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "^(?!.*(?:IEPL|🇭🇰|🇸🇬|🇺🇸)).*$"
-    hidden: true
-    
-  - name: "US"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: "BWH"
-    hidden: true
 
   - name: "Flower"
     type: url-test
@@ -61,6 +50,13 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
     filter: "香港实验性"
+    hidden: true
+
+  - name: "Flower-JP"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
+    filter: "日本实验性"
     hidden: true
 
 rule-providers:
