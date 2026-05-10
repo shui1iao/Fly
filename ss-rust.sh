@@ -53,6 +53,26 @@ check_ss_rust_status() {
     fi
 }
 
+# --- 函数: URI 编码 / Base64(URL-safe) ---
+urlencode() {
+    local LC_ALL=C
+    local input="$1"
+    local output=""
+    local i char hex
+    for ((i = 0; i < ${#input}; i++)); do
+        char="${input:i:1}"
+        case "$char" in
+            [a-zA-Z0-9.~_-]) output+="$char" ;;
+            *) printf -v hex '%%%02X' "'$char"; output+="$hex" ;;
+        esac
+    done
+    printf '%s' "$output"
+}
+
+b64_urlsafe_nopad() {
+    printf '%s' "$1" | base64 -w 0 | tr '+/' '-_' | sed 's/=*$//'
+}
+
 # --- 函数: 确保 jq 已安装 ---
 ensure_jq() {
     if ! command -v jq &> /dev/null || ! command -v curl &> /dev/null; then
@@ -217,8 +237,14 @@ view_config_ss_rust() {
     echo -e "密码 (Password)  : ${GREEN}${password}${NC}"
     echo -e "加密 (Method)    : ${GREEN}${method}${NC}"
     echo "------------------------------------------"
+    local ss_userinfo=$(b64_urlsafe_nopad "${method}:${password}")
+    local ss_tag=$(urlencode "VPS")
+
     echo "Surge 客户端配置:"
     echo -e "${GREEN}VPS = ss, ${ip_address}, ${port}, encrypt-method=${method}, password=${password}, udp-relay=true${NC}"
+    echo "------------------------------------------"
+    echo "URI 格式:"
+    echo -e "${GREEN}ss://${ss_userinfo}@${ip_address}:${port}#${ss_tag}${NC}"
     echo "------------------------------------------"
 }
 
@@ -398,8 +424,16 @@ view_config_shadowtls() {
     echo -e "后端 SS 端口: ${GREEN}${server_port}${NC}"
     echo -e "伪装域名    : ${GREEN}${sni_host}${NC}"
     echo "------------------------------------------"
+    local ss_userinfo=$(b64_urlsafe_nopad "${ss_method}:${ss_password}")
+    local plugin_opts="shadow-tls;host=${sni_host};password=${stls_password};version=3"
+    local plugin_encoded=$(urlencode "$plugin_opts")
+    local ss_tag=$(urlencode "VPS")
+
     echo "Surge 客户端配置:"
     echo -e "${GREEN}VPS = ss, ${ip_address}, ${listen_port}, encrypt-method=${ss_method}, password=${ss_password}, shadow-tls-password=${stls_password}, shadow-tls-sni=${sni_host}, shadow-tls-version=3, udp-relay=true${NC}"
+    echo "------------------------------------------"
+    echo "URI 格式:"
+    echo -e "${GREEN}ss://${ss_userinfo}@${ip_address}:${listen_port}?plugin=${plugin_encoded}#${ss_tag}${NC}"
     echo "------------------------------------------"
 }
 
