@@ -26,6 +26,21 @@ urlencode() {
     printf '%s' "$output"
 }
 
+urlencode_anytls_auth() {
+    local LC_ALL=C
+    local input="$1"
+    local output=""
+    local i char hex
+    for ((i = 0; i < ${#input}; i++)); do
+        char="${input:i:1}"
+        case "$char" in
+            [a-zA-Z0-9.~_/-]) output+="$char" ;;
+            *) printf -v hex '%%%02X' "'$char"; output+="$hex" ;;
+        esac
+    done
+    printf '%s' "$output"
+}
+
 # --- 函数: 检查 anytls 安装和运行状态 ---
 check_anytls_status() {
     if [ -f /usr/local/bin/anytls-server ] && [ -f /etc/systemd/system/anytls.service ]; then
@@ -94,9 +109,9 @@ display_configuration() {
     echo -e "${GREEN}  - {\"name\":\"VPS\",\"server\":\"${ip}\",\"port\":${port},\"password\":\"${pwd}\",\"skip-cert-verify\":true,\"reuse\":false,\"type\":\"anytls\"}${NC}"
     echo ""
     echo "3. URI 格式:"
-    local pwd_encoded=$(urlencode "$pwd")
+    local pwd_encoded=$(urlencode_anytls_auth "$pwd")
     local tag_encoded=$(urlencode "VPS")
-    echo -e "${GREEN}anytls://${pwd_encoded}@${ip}:${port}/?insecure=1#${tag_encoded}${NC}"
+    echo -e "${GREEN}anytls://${pwd_encoded}@${ip}:${port}?security=tls&type=tcp&allowInsecure=1&insecure=1#${tag_encoded}${NC}"
     echo "------------------------------------------"
 }
 
