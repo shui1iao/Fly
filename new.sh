@@ -1,4 +1,5 @@
 #!/bin/bash
+VERSION="0.1.0"
 
 # 1. 环境检查
 if [[ $EUID -ne 0 ]]; then
