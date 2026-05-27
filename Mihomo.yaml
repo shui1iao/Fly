@@ -12,13 +12,23 @@ proxy-groups:
       - HK
       - SG
       - JP
+      - US
 
   - name: "AI"
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies:
       - JP
+      - US
       - SG
+
+  - name: "Google"
+    type: fallback
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/google(2).png
+    proxies:
+      - US
+      - JP
+      - HK
 
   - name: Emby
     type: fallback
@@ -44,6 +54,12 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇯🇵|🇺🇸)).*$"
+
+  - name: "US"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+    filter: "🇺🇸"
 
   - name: "Flower"
     type: url-test
@@ -153,7 +169,7 @@ rules:
   - DOMAIN,lite.cn2gias.uk,Emby
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
-  - RULE-SET,Google,Final
+  - RULE-SET,Google,Google
   - RULE-SET,Telegram,Final
   - RULE-SET,Apple,DIRECT
   - RULE-SET,CDN,Final
