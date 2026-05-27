@@ -59,7 +59,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: "🇺🇸"
+    filter: "PHX"
 
   - name: "Flower"
     type: url-test
@@ -87,6 +87,13 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
     filter: "新加坡"
+    hidden: true
+
+  - name: "Fly-US"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
+    filter: "美国"
     hidden: true
 
 rule-providers:
