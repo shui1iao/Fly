@@ -3,7 +3,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
     include-all: true
-    filter: "^(?!.*(?:IEPL|高速)).*$"
+    filter: "^(?!.*(?:IEPL)).*$"
       
   - name: "Final"
     type: fallback
@@ -21,15 +21,6 @@ proxy-groups:
       - US
       - JP
       - SG
-
-  - name: Emby
-    type: fallback
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
-    proxies:
-      - Fly-US
-      - Fly-JP
-      - Fly-HK      
-      - Final
 
   - name: "HK"
     type: url-test
@@ -55,32 +46,25 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "PHX"
     
-  - name: "Fly-HK"
+  - name: "Flower-HK"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
     filter: "香港"
     hidden: true
 
-  - name: "Fly-JP"
+  - name: "Flower-JP"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
     filter: "日本"
     hidden: true
 
-  - name: "Fly-SG"
+  - name: "Flower-SG"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
     filter: "新加坡"
-    hidden: true
-
-  - name: "Fly-US"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
-    filter: "美国"
     hidden: true
 
 rule-providers:
@@ -160,7 +144,7 @@ rules:
   - DOMAIN-KEYWORD,longemby,DIRECT
   - DOMAIN,cdn.lilyemby.my,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
-  - DOMAIN,lite.cn2gias.uk,Emby
+  - DOMAIN,sntp-lite.vvivv.top,DIRECT
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
   - RULE-SET,Google,AI
