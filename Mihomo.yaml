@@ -3,7 +3,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
     include-all: true
-    filter: "^(?!.*(?:IEPL)).*$"
+    filter: "^(?!.*(?:IEPL|高速)).*$"
       
   - name: "Final"
     type: fallback
@@ -50,21 +50,35 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
-    filter: "香港"
+    filter: "香港实验"
     hidden: true
 
   - name: "Flower-JP"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
-    filter: "日本"
+    filter: "日本实验"
     hidden: true
 
   - name: "Flower-SG"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
-    filter: "新加坡"
+    filter: "新加坡实验"
+    hidden: true
+
+  - name: "AWS-JP"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Amazon_1.png
+    filter: "日本高速"
+    hidden: true
+
+  - name: "AWS-SG"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Amazon_1.png
+    filter: "新加坡高速"
     hidden: true
 
 rule-providers:
