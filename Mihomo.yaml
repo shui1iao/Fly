@@ -22,6 +22,14 @@ proxy-groups:
       - JP
       - SG
 
+  - name: "Emby"
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
+    proxies:
+      - Flower
+      - AWS-JP
+      - Final
+
   - name: "HK"
     type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
@@ -45,6 +53,13 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "PHX"
+
+  - name: "Flower"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
+    filter: "实验"
+    hidden: true
     
   - name: "Flower-HK"
     type: url-test
@@ -158,7 +173,7 @@ rules:
   - DOMAIN-KEYWORD,longemby,DIRECT
   - DOMAIN,cdn.lilyemby.my,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
-  - DOMAIN,sntp-lite.vvivv.top,DIRECT
+  - DOMAIN,lite.cn2gias.uk,Emby
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
   - RULE-SET,Google,AI
