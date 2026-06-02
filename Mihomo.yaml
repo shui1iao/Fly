@@ -52,7 +52,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: "LA"
+    filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇯🇵|🇸🇬)).*$"
 
   - name: "Flower"
     type: url-test
