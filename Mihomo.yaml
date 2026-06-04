@@ -12,6 +12,7 @@ proxy-groups:
       - HK
       - JP
       - US
+      - AWS-JP
 
   - name: "AI"
     type: fallback
