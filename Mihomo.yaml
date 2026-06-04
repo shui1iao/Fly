@@ -47,7 +47,7 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇯🇵|🇺🇸)).*$
+    filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇯🇵|🇺🇸)).*$"
 
   - name: "US"
     type: url-test
