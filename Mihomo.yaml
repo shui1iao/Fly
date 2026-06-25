@@ -35,25 +35,25 @@ proxy-groups:
     type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     include-all: true
-    filter: "^(?!.*(?:IEPL|🇯🇵|🇸🇬|🇺🇸|🇨🇳|🇩🇪|🇲🇾|🇨🇳)).*$"
+    filter: "^(?!.*(?:IEPL|🇯🇵|🇸🇬|🇺🇸|🇨🇳|🇩🇪|🇨🇳)).*$"
     
   - name: "JP"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇸🇬|🇺🇸|🇨🇳|🇩🇪|🇲🇾|🇨🇳)).*$"
+    filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇸🇬|🇺🇸|🇨🇳|🇩🇪|🇨🇳)).*$"
 
   - name: "SG"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇯🇵|🇺🇸|🇨🇳|🇩🇪|🇲🇾|🇨🇳)).*$"
+    filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇯🇵|🇺🇸|🇨🇳|🇩🇪|🇨🇳)).*$"
 
   - name: "US"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇯🇵|🇸🇬|🇩🇪|🇲🇾|🇨🇳)).*$"
+    filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇯🇵|🇸🇬|🇩🇪|🇨🇳)).*$"
 
   - name: "Flower"
     type: url-test
@@ -157,8 +157,9 @@ rule-providers:
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Lan.list
   
 rules:
+  - DOMAIN,vip.shuijiao.li,DIRECT
+  - DOMAIN,vip.shuijiao.de,DIRECT
   - DOMAIN-KEYWORD,longemby,DIRECT
-  - DOMAIN,cdn.lilyemby.my,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
   - DOMAIN,lite.cn2gias.uk,Emby
   - RULE-SET,Speedtest,Proxy
