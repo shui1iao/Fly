@@ -157,8 +157,8 @@ rule-providers:
     url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Lan.list
   
 rules:
-  - DOMAIN,vip.shuijiao.li,DIRECT
-  - DOMAIN,vip.shuijiao.de,DIRECT
+  - DOMAIN-KEYWORD,vip.shuijiao,DIRECT
+  - DOMAIN,cola.11451453.xyz,DIRECT
   - DOMAIN-KEYWORD,longemby,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
   - DOMAIN,lite.cn2gias.uk,Emby
