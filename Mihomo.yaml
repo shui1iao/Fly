@@ -88,73 +88,74 @@ rule-providers:
   Speedtest:
     behavior: classical
     type: http
-    nterval: 86400
-    path: ./Speedtest.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Speedtest/Speedtest_No_Resolve.yaml
+    format: yaml
+    interval: 86400
+    path: ./rules/Shuijiao/Speedtest.yaml
+    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/Speedtest.yaml
     
   AI:
     behavior: classical
     type: http
-    format: text
-    nterval: 86400
-    path: ./AI.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/AI.list
+    format: yaml
+    interval: 86400
+    path: ./rules/Shuijiao/AI.yaml
+    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/AI.yaml
 
   Telegram:
     behavior: classical
     type: http
-    format: text
-    nterval: 86400
-    path: ./Telegram.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Telegram.list
+    format: yaml
+    interval: 86400
+    path: ./rules/Shuijiao/Telegram.yaml
+    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/Telegram.yaml
 
-  Apple:
+  AppleCN:
     behavior: classical
     type: http
-    format: text
-    nterval: 86400
-    path: ./Apple.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Apple.list
+    format: yaml
+    interval: 86400
+    path: ./rules/Shuijiao/AppleCN.yaml
+    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/AppleCN.yaml
 
   Google:
     behavior: classical
     type: http
-    format: text
-    nterval: 86400
-    path: ./Google.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Google.list
+    format: yaml
+    interval: 86400
+    path: ./rules/Shuijiao/Google.yaml
+    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/Google.yaml
 
   CDN:
-    behavior: domain
+    behavior: classical
     type: http
-    format: text
-    nterval: 86400
-    path: ./CDN.list
-    url: https://ruleset.skk.moe/Clash/domainset/cdn.txt
+    format: yaml
+    interval: 86400
+    path: ./rules/Shuijiao/CDN.yaml
+    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/Proxy.yaml
 
   Proxy:
     behavior: classical
     type: http
-    format: text
-    nterval: 86400
-    path: ./Proxy.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Proxy.list
+    format: yaml
+    interval: 86400
+    path: ./rules/Shuijiao/Proxy.yaml
+    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/Proxy.yaml
 
-  ChinaDomain:
+  China:
     behavior: classical
     type: http
-    format: text
-    nterval: 86400
-    path: ./ChinaDomain.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/ChinaDomain.list
+    format: yaml
+    interval: 86400
+    path: ./rules/Shuijiao/China.yaml
+    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/China.yaml
     
   LAN:
     behavior: classical
     interval: 86400
     type: http
-    format: text
-    path: ./Lan.list
-    url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Lan.list
+    format: yaml
+    path: ./rules/Shuijiao/LAN.yaml
+    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/LAN.yaml
   
 rules:
   - DOMAIN-KEYWORD,vip.shuijiao,DIRECT
@@ -166,10 +167,10 @@ rules:
   - RULE-SET,AI,AI
   - RULE-SET,Google,AI
   - RULE-SET,Telegram,Final
-  - RULE-SET,Apple,DIRECT
+  - RULE-SET,AppleCN,DIRECT
   - RULE-SET,CDN,Final
   - RULE-SET,Proxy,Final
-  - RULE-SET,ChinaDomain,DIRECT 
+  - RULE-SET,China,DIRECT 
   - RULE-SET,LAN,DIRECT 
   - GEOIP,CN,DIRECT
   - MATCH,Final
