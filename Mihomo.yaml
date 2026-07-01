@@ -125,13 +125,6 @@ rule-providers:
     path: ./rules/Shuijiao/Google.yaml
     url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/Google.yaml
 
-  CDN:
-    behavior: classical
-    type: http
-    format: yaml
-    interval: 86400
-    path: ./rules/Shuijiao/CDN.yaml
-    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/Proxy.yaml
 
   Proxy:
     behavior: classical
@@ -168,7 +161,6 @@ rules:
   - RULE-SET,Google,AI
   - RULE-SET,Telegram,Final
   - RULE-SET,AppleCN,DIRECT
-  - RULE-SET,CDN,Final
   - RULE-SET,Proxy,Final
   - RULE-SET,China,DIRECT 
   - RULE-SET,LAN,DIRECT 
