@@ -3,7 +3,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
     include-all: true
-    filter: "^(?!.*(?:IEPL|高速)).*$"
+    filter: "^(?!.*(?:IEPL|高速|香港Z)).*$"
       
   - name: "Final"
     type: fallback
@@ -67,6 +67,13 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
     filter: "香港实验"
+    hidden: true
+    
+  - name: "ikuu"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
+    filter: "香港Z"
     hidden: true
 
   - name: "Flower-JP"
