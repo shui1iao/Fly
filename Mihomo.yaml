@@ -35,7 +35,7 @@ proxy-groups:
     type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     include-all: true
-    filter: "^(?!.*(?:IEPL|🇯🇵|🇸🇬|🇺🇸|🇨🇳|🇩🇪|🇨🇳)).*$"
+    filter: "^(?!.*(?:IEPL|🇯🇵|🇸🇬|🇺🇸|🇨🇳|🇩🇪|🇨🇳|香港Z)).*$"
     
   - name: "JP"
     type: url-test
