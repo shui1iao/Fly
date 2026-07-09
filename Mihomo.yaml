@@ -99,6 +99,14 @@ rule-providers:
     interval: 86400
     path: ./rules/Shuijiao/Speedtest.yaml
     url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/Speedtest.yaml
+
+  GitHub:
+    behavior: classical
+    type: http
+    format: yaml
+    interval: 86400
+    path: ./rules/Shuijiao/GitHub.yaml
+    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/GitHub.yaml
     
   AI:
     behavior: classical
@@ -162,7 +170,8 @@ rules:
   - DOMAIN,cola.11451453.xyz,DIRECT
   - DOMAIN-KEYWORD,longemby,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
-  - DOMAIN,lite.cn2gias.uk,Emby
+  - DOMAIN,lite.cn2gias.uk,Emby】
+  - RULE-SET,GitHub,AI
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
   - RULE-SET,Google,AI
