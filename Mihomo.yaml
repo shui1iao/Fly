@@ -11,6 +11,7 @@ proxy-groups:
     proxies: 
       - HK
       - JP
+      - SG
       - US
       - AWS-JP
 
@@ -20,6 +21,7 @@ proxy-groups:
     proxies:
       - US
       - JP
+      - SG
       
   - name: "Emby"
     type: fallback
@@ -40,6 +42,12 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇸🇬|🇺🇸|🇨🇳|🇩🇪|🇨🇳)).*$"
+
+  - name: "SG"
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+    filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇯🇵|🇺🇸|🇨🇳|🇩🇪|🇨🇳)).*$"
 
   - name: "US"
     type: url-test
