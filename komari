@@ -4,7 +4,7 @@
     window.ForceUseSvgFlag=true;
     window.CustomBackgroundImage = 'https://t.alcy.cc/ycy';
     window.CustomMobileBackgroundImage = 'https://t.alcy.cc/ycy';
-    window.CustomLogo = 'https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/ID.PNG';
+    window.CustomLogo = 'https://raw.githubusercontent.com/shui1iao/Fly/refs/heads/main/ID.PNG';
     window.DisableAnimatedMan = true;
     window.FixedTopServerName = true;
 </script>

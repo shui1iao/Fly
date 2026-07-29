@@ -98,7 +98,7 @@ rule-providers:
     format: yaml
     interval: 86400
     path: ./rules/Shuijiao/Speedtest.yaml
-    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/Speedtest.yaml
+    url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/Speedtest.yaml
 
   GitHub:
     behavior: classical
@@ -106,7 +106,7 @@ rule-providers:
     format: yaml
     interval: 86400
     path: ./rules/Shuijiao/GitHub.yaml
-    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/GitHub.yaml
+    url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/GitHub.yaml
     
   AI:
     behavior: classical
@@ -114,7 +114,7 @@ rule-providers:
     format: yaml
     interval: 86400
     path: ./rules/Shuijiao/AI.yaml
-    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/AI.yaml
+    url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/AI.yaml
 
   Telegram:
     behavior: classical
@@ -122,7 +122,7 @@ rule-providers:
     format: yaml
     interval: 86400
     path: ./rules/Shuijiao/Telegram.yaml
-    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/Telegram.yaml
+    url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/Telegram.yaml
 
   AppleCN:
     behavior: classical
@@ -130,7 +130,7 @@ rule-providers:
     format: yaml
     interval: 86400
     path: ./rules/Shuijiao/AppleCN.yaml
-    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/AppleCN.yaml
+    url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/AppleCN.yaml
 
   Google:
     behavior: classical
@@ -138,7 +138,7 @@ rule-providers:
     format: yaml
     interval: 86400
     path: ./rules/Shuijiao/Google.yaml
-    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/Google.yaml
+    url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/Google.yaml
 
 
   Proxy:
@@ -147,7 +147,7 @@ rule-providers:
     format: yaml
     interval: 86400
     path: ./rules/Shuijiao/Proxy.yaml
-    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/Proxy.yaml
+    url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/Proxy.yaml
 
   China:
     behavior: classical
@@ -155,7 +155,7 @@ rule-providers:
     format: yaml
     interval: 86400
     path: ./rules/Shuijiao/China.yaml
-    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/China.yaml
+    url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/China.yaml
     
   LAN:
     behavior: classical
@@ -163,7 +163,7 @@ rule-providers:
     type: http
     format: yaml
     path: ./rules/Shuijiao/LAN.yaml
-    url: https://raw.githubusercontent.com/shuijiao1/Shuijiao-Rules/main/Mihomo/LAN.yaml
+    url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/LAN.yaml
   
 rules:
   - DOMAIN-KEYWORD,vip.shuijiao,DIRECT

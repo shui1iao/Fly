@@ -2,7 +2,7 @@
     window.ForceUseSvgFlag=false;
     window.DisableAnimatedMan = true;
     window.FixedTopServerName = true;
-    window.CustomLogo = 'https://raw.githubusercontent.com/shuijiao1/Fly/refs/heads/main/ID.png';
+    window.CustomLogo = 'https://raw.githubusercontent.com/shui1iao/Fly/refs/heads/main/ID.png';
 </script>
 
 <!-- 流量进度条 -->

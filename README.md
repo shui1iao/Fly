@@ -6,9 +6,9 @@
 
 新的脚本和工具请优先查看：
 
-- GUKO: https://github.com/shuijiao1/GUKO
-- VPS-Toolbox: https://github.com/shuijiao1/VPS-Toolbox
-- AnyTLS-Manager: https://github.com/shuijiao1/AnyTLS-Manager
-- SS-Rust-Manager: https://github.com/shuijiao1/SS-Rust-Manager
-- Realm-Manager: https://github.com/shuijiao1/Realm-Manager
-- Xray-VLESS-Manager: https://github.com/shuijiao1/Xray-VLESS-Manager
+- GUKO: https://github.com/shui1iao/GUKO
+- VPS-Toolbox: https://github.com/shui1iao/VPS-Toolbox
+- AnyTLS-Manager: https://github.com/shui1iao/AnyTLS-Manager
+- SS-Rust-Manager: https://github.com/shui1iao/SS-Rust-Manager
+- Realm-Manager: https://github.com/shui1iao/Realm-Manager
+- Xray-VLESS-Manager: https://github.com/shui1iao/Xray-VLESS-Manager

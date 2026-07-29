@@ -18,8 +18,16 @@ apt update && apt install curl wget unzip sudo iperf3 systemd-timesyncd tcptrace
 echo -e "\n[2/5] 配置 SSH 密钥与安全策略..."
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
-curl -sSLf https://github.com/shuijiao1.keys >> ~/.ssh/authorized_keys
+GITHUB_KEYS_URL="https://github.com/shui1iao.keys"
+FETCHED_KEYS=$(curl -sSLf --max-time 30 "$GITHUB_KEYS_URL" || true)
+if [ -z "$FETCHED_KEYS" ] || ! printf '%s\n' "$FETCHED_KEYS" | grep -qE '^(ssh|ecdsa)-'; then
+  echo "错误: 无法从 $GITHUB_KEYS_URL 获取公钥，为避免锁死主机已中止 SSH 硬化。" >&2
+  echo "请确认用户名/网络后重跑本脚本。" >&2
+  exit 1
+fi
+printf '%s\n' "$FETCHED_KEYS" >> ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
+grep -qE '^(ssh|ecdsa)-' ~/.ssh/authorized_keys || { echo "错误: authorized_keys 校验失败，已中止。" >&2; exit 1; }
 
 sed -i -e 's/^#\?PasswordAuthentication .*/PasswordAuthentication no/' \
        -e 's/^#\?PubkeyAuthentication .*/PubkeyAuthentication yes/' \
