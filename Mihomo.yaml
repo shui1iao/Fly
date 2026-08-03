@@ -3,7 +3,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
     include-all: true
-    filter: "^(?!.*(?:IEPL|高速|香港Z)).*$"
+    filter: "^(?!.*(?:IEPL|香港Z)).*$"
       
   - name: "Final"
     type: fallback
@@ -13,7 +13,6 @@ proxy-groups:
       - JP
       - SG
       - US
-      - AWS-JP
 
   - name: "AI"
     type: fallback
@@ -28,7 +27,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
     proxies:
       - Flower
-      - AWS-JP
+      - ikuu
       - Final
 
   - name: "HK"
@@ -41,19 +40,19 @@ proxy-groups:
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇸🇬|🇺🇸|🇨🇳|🇩🇪|🇨🇳)).*$"
+    filter: "^(?!.*(?:IEPL|🇭🇰|🇸🇬|🇺🇸|🇨🇳|🇩🇪|🇨🇳)).*$"
 
   - name: "SG"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇯🇵|🇺🇸|🇨🇳|🇩🇪|🇨🇳)).*$"
+    filter: "^(?!.*(?:IEPL|🇭🇰|🇯🇵|🇺🇸|🇨🇳|🇩🇪|🇨🇳)).*$"
 
   - name: "US"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: "^(?!.*(?:IEPL|高速|🇭🇰|🇯🇵|🇸🇬|🇩🇪|🇨🇳)).*$"
+    filter: "^(?!.*(?:IEPL|🇭🇰|🇯🇵|🇸🇬|🇩🇪|🇨🇳)).*$"
 
   - name: "Flower"
     type: url-test
@@ -81,13 +80,6 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
     filter: "日本实验"
-    hidden: true
-
-  - name: "AWS-JP"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Amazon_1.png
-    filter: "日本高速"
     hidden: true
 
 rule-providers:
