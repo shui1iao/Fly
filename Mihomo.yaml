@@ -13,6 +13,7 @@ proxy-groups:
       - JP
       - SG
       - US
+      - Flower
 
   - name: "AI"
     type: fallback
@@ -45,7 +46,7 @@ proxy-groups:
   - name: "SG"
     type: url-test
     include-all: true
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
     filter: "^(?!.*(?:IEPL|🇭🇰|🇯🇵|🇺🇸|🇨🇳|🇩🇪|🇨🇳)).*$"
 
   - name: "US"
