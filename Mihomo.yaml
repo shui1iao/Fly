@@ -35,25 +35,25 @@ proxy-groups:
     type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
     include-all: true
-    filter: "^(?!.*(Flower-|ikuu-|🇯🇵|🇸🇬|🇺🇸|🇨🇳|🇩🇪|🇨🇳)).*$"
+    filter: "^(?!.*(Flower-|ikuu-|🇯🇵|🇸🇬|🇺🇸|🇨🇳|🇩🇪|🇨🇳|🇬🇧|IEPL)).*$"
     
   - name: "JP"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    filter: "^(?!.*(Flower-|ikuu-|🇭🇰|🇸🇬|🇺🇸|🇨🇳|🇩🇪|🇨🇳)).*$"
+    filter: "^(?!.*(Flower-|ikuu-|🇭🇰|🇸🇬|🇺🇸|🇨🇳|🇩🇪|🇨🇳|🇬🇧|IEPL)).*$"
 
   - name: "SG"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    filter: "^(?!.*(Flower-|ikuu-|🇭🇰|🇯🇵|🇺🇸|🇨🇳|🇩🇪|🇨🇳)).*$"
+    filter: "^(?!.*(Flower-|ikuu-|🇭🇰|🇯🇵|🇺🇸|🇨🇳|🇩🇪|🇨🇳|🇬🇧|IEPL)).*$"
 
   - name: "US"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    filter: "^(?!.*(Flower-|ikuu-|🇭🇰|🇯🇵|🇸🇬|🇩🇪|🇨🇳)).*$"
+    filter: "^(?!.*(Flower-|ikuu-|🇭🇰|🇯🇵|🇸🇬|🇩🇪|🇨🇳|🇬🇧|IEPL)).*$"
 
   - name: "Flower"
     type: url-test
