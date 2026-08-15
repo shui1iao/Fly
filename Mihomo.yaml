@@ -10,8 +10,8 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
     proxies: 
       - HK
-      - JP
       - SG
+      - JP
       - US
       - Flower
 
@@ -19,9 +19,9 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies:
-      - US
-      - JP
       - SG
+      - JP
+      - US
       
   - name: "Emby"
     type: fallback
@@ -54,31 +54,13 @@ proxy-groups:
     include-all: true
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
     filter: "^(?!.*(Flower-|ikuu-|🇭🇰|🇯🇵|🇸🇬|🇩🇪|🇨🇳|🇬🇧|IEPL)).*$"
-
-  - name: "Flower"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
-    filter: "Flower-"
     
-  - name: "Flower-HK"
+  - name: "Flower"
     type: url-test
     include-all: true
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
     filter: "Flower-HK"
 
-  - name: "Flower-JP"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
-    filter: "Flower-JP"
-
-  - name: "Flower-DE"
-    type: url-test
-    include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/06jichang/FlowerCloud.png
-    filter: "德国"
-    
   - name: "ikuu"
     type: url-test
     include-all: true
@@ -94,14 +76,6 @@ rule-providers:
     interval: 86400
     path: ./rules/Shuijiao/Speedtest.yaml
     url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/Speedtest.yaml
-
-  GitHub:
-    behavior: classical
-    type: http
-    format: yaml
-    interval: 86400
-    path: ./rules/Shuijiao/GitHub.yaml
-    url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/GitHub.yaml
     
   AI:
     behavior: classical
@@ -135,7 +109,6 @@ rule-providers:
     path: ./rules/Shuijiao/Google.yaml
     url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/Google.yaml
 
-
   Proxy:
     behavior: classical
     type: http
@@ -166,10 +139,9 @@ rules:
   - DOMAIN-KEYWORD,longemby,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
   - DOMAIN,lite.cn2gias.uk,Emby
-  - RULE-SET,GitHub,AI
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
-  - RULE-SET,Google,AI
+  - RULE-SET,Google,Final
   - RULE-SET,Telegram,Final
   - RULE-SET,AppleCN,DIRECT
   - RULE-SET,Proxy,Final
