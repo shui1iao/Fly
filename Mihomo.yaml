@@ -3,7 +3,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
     include-all: true
-    filter: "^(?!.*(Flower-|ikuu-|IEPL)).*$"
+    filter: "^(?!.*(Flower-|ikuu-|IEPL|Ali.🇭🇰)).*$"
       
   - name: "Final"
     type: fallback
