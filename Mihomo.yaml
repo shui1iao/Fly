@@ -3,7 +3,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
     include-all: true
-    filter: "^(?!.*(Flower-|ikuu-|IEPL|Ali.🇭🇰)).*$"
+    filter: "^(?!.*(Flower-|ikuu-|IEPL)).*$"
       
   - name: "Final"
     type: fallback
@@ -19,9 +19,9 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
     proxies:
-      - US
       - SG
       - JP
+      - US
       
   - name: "Emby"
     type: fallback
@@ -134,7 +134,7 @@ rules:
   - DOMAIN,lite.cn2gias.uk,Emby
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
-  - RULE-SET,Google,AI
+  - RULE-SET,Google,Final
   - RULE-SET,Telegram,Final
   - RULE-SET,AppleCN,DIRECT
   - RULE-SET,Proxy,Final
