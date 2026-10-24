@@ -1,8 +1,10 @@
 #!name=TG重定向
-#!desc=Telegram链接跳转至Swiftgram
+#!desc=Telegram链接跳转至第三方客户端，参数app选择：sg=Swiftgram，na=Nagram
+#!arguments=app:sg
+#!arguments-desc=app：跳转目标客户端\nsg = Swiftgram（默认）\nna = Nagram
 
 [URL Rewrite]
-(https:\/\/)?t\.me\/(.+) sg://resolve?domain=$2 302
+(https:\/\/)?t\.me\/(.+) {{{app}}}://resolve?domain=$2 302
 
 [MITM]
 hostname = %APPEND% t.me
