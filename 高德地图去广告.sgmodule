@@ -32,6 +32,9 @@ DOMAIN-SUFFIX,u51.me,REJECT
 [URL Rewrite]
 ^https?:\/\/m5\.amap\.com\/ws\/valueadded\/ - reject
 ^https?:\/\/amap-aos-info-nogw\.amap\.com\/ws\/aos\/alimama\/splash_screen_rt - reject
+# 专用开屏路径补充，参考 a86492135/Surge-Plugin-Hub @ 444020f
+^https?:\/\/amap-aos-info-nogw\.amap\.com\/ws\/aos\/alimama\/splash_screen(?:\?|$) - reject
+^https?:\/\/m5\.amap\.com\/ws\/aos\/alimama\/splash_screen(?:_rt)?(?:\?|$) - reject
 
 [Map Local]
 # hostname = m*.amap.com, optimus-ads.amap.com, amap-aos-info-nogw.amap.com
