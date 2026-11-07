@@ -1,4 +1,5 @@
 #!name=TG重定向
+#!icon=https://telegram.org/img/t_logo.png
 #!desc=Telegram链接跳转至Swiftgram
 
 [URL Rewrite]
