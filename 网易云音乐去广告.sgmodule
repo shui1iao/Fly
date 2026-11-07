@@ -24,12 +24,19 @@
 DOMAIN,iadmusicmat.music.126.net,REJECT
 DOMAIN,iadmat.nosdn.127.net,REJECT
 DOMAIN,iadmatapk.nosdn.127.net,REJECT
+# 补齐原合集网易通用段中的音乐广告图片、视频素材主机
+DOMAIN,admusicpic.music.126.net,REJECT
+DOMAIN,iadmusicmatvideo.music.126.net,REJECT
 DOMAIN,httpdns.n.netease.com,REJECT
 DOMAIN,httpdns.music.163.com,REJECT
 
 [Map Local]
 # 屏蔽广告
 https?:\/\/(ipv4|interface\d?)\.music\.163.com\/e?api\/ad data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+# 新版 xeapi 开屏加载、预取；不扩展到 ad/listening、ad/power 等功能分支
+# 前缀参考 Keywos/rule @ 3c2f2b9；分支参考 alij23333/loon-plugins @ 423ae93
+^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/xeapi\/ad\/(?:get|loading\/(?:get|current|bidget)|prefetch\/select)(?:\/|\?|$) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # 今日运势 商城 Beat专区 音乐收藏家 | type:ACTIVITY | 低至5.2折
 ^https?:\/\/interface\d?\.music\.163\.com\/w?e?api\/(side-bar\/mini-program\/music-service\/account|delivery\/(batch-deliver|deliver)|moment\/tab\/info\/get|yunbei\/account\/entrance\/get) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
