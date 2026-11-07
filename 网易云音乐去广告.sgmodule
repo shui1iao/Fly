@@ -1,0 +1,64 @@
+#!name=网易云音乐去广告
+#!desc=提取自 fmz200 广告拦截&净化合集，仅包含网易云音乐相关规则。
+#!author=奶思[https://github.com/fmz200]
+#!homepage=https://github.com/fmz200/wool_scripts
+#!source=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Loon/plugin/blockAds.plugin
+#!arguments=DT:false,FX:true,MY:true,whyiyyybyt_enable:""
+#!arguments-desc=DT: 网易云音乐-[隐藏底部]笔记标签\n\nFX: 网易云音乐-[隐藏底部]发现标签\n\nMY: 网易云音乐-[隐藏底部]漫游标签\n\nwhyiyyybyt_enable: 网易云音乐-脚本开关\n可选值: 留空启用, # 禁用
+#!raw-url=https://raw.githubusercontent.com/shui1iao/Fly/main/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E5%8E%BB%E5%B9%BF%E5%91%8A.sgmodule
+
+# 规则来源：fmz200/wool_scripts，blockAds.plugin @ 4b7830670baf235ed945085cb926dc499cf619e0
+# 转换工具：Script-Hub-Org/Script-Hub / Rewrite-Parser.beta.js
+# 转换器版本：502cf03f7db2e077d96c07c2cb151a8f0b152a80
+# HTTPS 去广告需要开启 MITM，并安装、信任 Surge 的 MITM 证书。
+# 本模块为提取与格式转换；上游内容的署名及许可仍归各自作者。
+# 兼容性：含转义 JSON 参数，需 Surge iOS 5.21.0+ / Mac 6.8.0+。
+# 保留源默认值：隐藏漫游和发现，保留笔记；true 隐藏，false 保留。
+# wyres.js 读取 JSON/对象而非查询字符串，因此将 tab 参数改为等价 JSON。
+# 原插件的 PRGG 等九个推荐页参数没有定义，省略无效参数并使用上游脚本内置默认值。
+# 脚本开关 whyiyyybyt_enable：留空启用，填 # 禁用；不填写 true/false。
+
+[Rule]
+# hostname = ipv4.music.163.com, interface.music.163.com, interface3.music.163.com, interface9.music.163.com
+DOMAIN,iadmusicmat.music.126.net,REJECT
+DOMAIN,iadmat.nosdn.127.net,REJECT
+DOMAIN,iadmatapk.nosdn.127.net,REJECT
+DOMAIN,httpdns.n.netease.com,REJECT
+DOMAIN,httpdns.music.163.com,REJECT
+
+[Map Local]
+# 屏蔽广告
+https?:\/\/(ipv4|interface\d?)\.music\.163.com\/e?api\/ad data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+# 今日运势 商城 Beat专区 音乐收藏家 | type:ACTIVITY | 低至5.2折
+^https?:\/\/interface\d?\.music\.163\.com\/w?e?api\/(side-bar\/mini-program\/music-service\/account|delivery\/(batch-deliver|deliver)|moment\/tab\/info\/get|yunbei\/account\/entrance\/get) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+# 播放页歌名下方∶乐迷团｜关注｜播放页提示｜音乐应用红点｜播放提示
+^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(resource\/comments?\/musiciansaid|community\/friends\/fans-group\/artist\/group\/get|user\/sub\/artist|music\/songshare\/text\/recommend\/get|mine\/applet\/redpoint|resniche\/position\/play\/new\/get) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+# 搜索页热搜卡片｜猜你喜欢｜我的应用下方提醒
+^https?:\/\/interface\d?\.music\.163.com\/w?e?api\/(search\/(chart|default|rcmd\/keyword|specialkeyword)|resource-exposure\/|activity\/bonus\/playpage\/time\/query) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https?:\/\/interface\d?\.music\.163.com\/eapi\/(mlivestream\/entrance\/playpage|link\/(position\/show\/strategy|scene\/show)|ios\/version|v\d\/content\/exposure\/comment\/banner) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[Script]
+# mian | 热推、有话想说、分享一下、歌曲下的祝福等小提示去除 ｜ 评论区 乐迷、星评等级 关注 等 图标去除
+{{{whyiyyybyt_enable}}}NetEaseCloudMusic_mian = type=http-response, pattern=^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(batch|v\d\/resource\/comment\/floor\/get), script-path=https://raw.githubusercontent.com/Keywos/rule/main/script/wy/js/wyres.js, requires-body=true, binary-body-mode=true, engine=webview, timeout=20
+
+# tab
+{{{whyiyyybyt_enable}}}NetEaseCloudMusic_tab = type=http-response, pattern=^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/home\/framework\/tab, script-path=https://raw.githubusercontent.com/Keywos/rule/main/script/wy/js/wyres.js, requires-body=true, binary-body-mode=true, engine=webview, timeout=20, argument="{\"MY\":{{{MY}}},\"DT\":{{{DT}}},\"FX\":{{{FX}}}}"
+
+# 推荐 | home | 主页
+{{{whyiyyybyt_enable}}}NetEaseCloudMusic_home = type=http-response, pattern=^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(homepage\/block\/page|link\/page\/rcmd\/(resource\/show|block\/resource\/multi\/refresh)), script-path=https://raw.githubusercontent.com/Keywos/rule/main/script/wy/js/wyres.js, requires-body=true, binary-body-mode=true, engine=webview, timeout=20
+
+# 发现
+{{{whyiyyybyt_enable}}}NetEaseCloudMusic_fx = type=http-response, pattern=^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/page\/discovery\/resource\/show, script-path=https://raw.githubusercontent.com/Keywos/rule/main/script/wy/js/wyres.js, requires-body=true, binary-body-mode=true, engine=webview, timeout=20
+
+# 我的 MyPageBar ad
+{{{whyiyyybyt_enable}}}NetEaseCloudMusic_mybarad = type=http-response, pattern=^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/position\/show\/resource, script-path=https://raw.githubusercontent.com/Keywos/rule/main/script/wy/js/wyres.js, requires-body=true, binary-body-mode=true, engine=webview, timeout=20
+
+# 显示未关注你
+{{{whyiyyybyt_enable}}}NetEaseCloudMusic_foll = type=http-response, pattern=^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/user\/follow\/users\/mixed\/get, script-path=https://raw.githubusercontent.com/Keywos/rule/main/script/wy/js/wyres.js, requires-body=true, binary-body-mode=true, engine=webview, timeout=20
+
+[MITM]
+hostname = %APPEND% ipv4.music.163.com, interface.music.163.com, interface3.music.163.com, interface9.music.163.com

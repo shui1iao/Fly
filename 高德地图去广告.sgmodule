@@ -1,0 +1,42 @@
+#!name=高德地图去广告
+#!desc=提取自 fmz200 广告拦截&净化合集，仅包含高德地图相关规则。
+#!author=奶思[https://github.com/fmz200]
+#!homepage=https://github.com/fmz200/wool_scripts
+#!source=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Loon/plugin/blockAds.plugin
+#!raw-url=https://raw.githubusercontent.com/shui1iao/Fly/main/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%8E%BB%E5%B9%BF%E5%91%8A.sgmodule
+
+# 规则来源：fmz200/wool_scripts，blockAds.plugin @ 4b7830670baf235ed945085cb926dc499cf619e0
+# 转换工具：Script-Hub-Org/Script-Hub / Rewrite-Parser.beta.js
+# 转换器版本：502cf03f7db2e077d96c07c2cb151a8f0b152a80
+# HTTPS 去广告需要开启 MITM，并安装、信任 Surge 的 MITM 证书。
+# 本模块为提取与格式转换；上游内容的署名及许可仍归各自作者。
+
+[Rule]
+# hostname = m*.amap.com, optimus-ads.amap.com, amap-aos-info-nogw.amap.com
+DOMAIN-SUFFIX,adiu.amap.com,REJECT
+DOMAIN,aboard.apilocate.amap.com,REJECT
+DOMAIN,apiinit.amap.com,REJECT
+DOMAIN,icloud-amap.com,REJECT
+DOMAIN,logs.amap.com,REJECT
+DOMAIN-SUFFIX,dualstack-logs.amap.com,REJECT
+DOMAIN-SUFFIX,logs.amap.com,REJECT
+DOMAIN-SUFFIX,optimus-ads.amap.com,REJECT
+DOMAIN-SUFFIX,page.amap.com,REJECT
+DOMAIN,optimus-ads.amap.com,REJECT
+DOMAIN,optimus-ads.amap.com.w.alikunlun.com,REJECT
+DOMAIN-SUFFIX,shouji.sougou.com,REJECT
+DOMAIN,u51.me,REJECT
+DOMAIN-SUFFIX,u51.me,REJECT
+
+[URL Rewrite]
+^https?:\/\/m5\.amap\.com\/ws\/valueadded\/ - reject
+^https?:\/\/amap-aos-info-nogw\.amap\.com\/ws\/aos\/alimama\/splash_screen_rt - reject
+
+[Map Local]
+# hostname = m*.amap.com, optimus-ads.amap.com, amap-aos-info-nogw.amap.com
+^https?:\/\/m5\.amap\.com\/ws\/shield\/dsp\/app\/startup\/init\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https?:\/\/optimus-ads\.amap\.com\/uploadimg\/[a-zA-Z0-9]+.gif data-type=text data=" " status-code=200
+
+[MITM]
+hostname = %APPEND% m*.amap.com, optimus-ads.amap.com, amap-aos-info-nogw.amap.com
