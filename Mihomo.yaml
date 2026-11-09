@@ -22,15 +22,6 @@ proxy-groups:
       - SG
       - JP
       - US
-
-  - name: "Google"
-    type: fallback
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/google(2).png
-    proxies:
-      - US
-      - SG
-      - HK
-      - JP
       
   - name: "Emby"
     type: fallback
@@ -149,7 +140,7 @@ rules:
   - DOMAIN,lite.cn2gias.uk,Emby
   - RULE-SET,Speedtest,Proxy
   - RULE-SET,AI,AI
-  - RULE-SET,Google,Google
+  - RULE-SET,Google,AI
   - RULE-SET,Telegram,Final
   - RULE-SET,AppleCN,DIRECT
   - RULE-SET,Proxy,Final
