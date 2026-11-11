@@ -1,0 +1,36 @@
+#!name=闲鱼去广告
+#!desc=保守去除开屏、首页/同城/搜索及商品推荐中的明确广告；不净化功能入口。需 Surge iOS 5.14.0+ / Mac 5.9.0+，开启 MITM 并信任证书。未实机验证。
+#!author=来源：奶思(fmz200)、墨鱼(ddgksf2013)、树先生(ishowshu)；Fly 整理
+#!icon=https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/54/03/1e/54031e7d-9db5-d852-ea3f-78978eebb6a8/AppIcon-0-0-1x_U007epad-0-1-0-sRGB-85-220.png/512x512bb.jpg
+#!homepage=https://github.com/shui1iao/Fly
+#!source=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Loon/plugin/blockAds.plugin
+#!raw-url=https://raw.githubusercontent.com/shui1iao/Fly/main/%E9%97%B2%E9%B1%BC%E5%8E%BB%E5%B9%BF%E5%91%8A.sgmodule
+
+# SPDX-License-Identifier: GPL-3.0-only
+# 本模块以 fmz200/wool_scripts 的闲鱼规则为基础，2026-11-12 提取、缩窄并改为保守原生 jq。
+# 原规则作者：奶思 https://github.com/fmz200；协议字段对照：墨鱼 ddgksf2013、树先生 ishowshu。
+# 上游快照：fmz200/wool_scripts @ 009b501adaebb3428461e91c98a17a556249e076
+# 真正转换：Script-Hub-Org/Script-Hub / Rewrite-Parser.beta.js @ bc1b8b05138adead482d87b284c58a34d8470503
+# GPL v3，无担保；完整许可见同仓库 闲鱼去广告.LICENSE.txt。其它作者源码未随本模块再分发。
+# 需 Surge iOS 5.14.0+ / Mac 5.9.0+（原生 jq）；旧版本不支持，勿按完整模块使用。
+# 启用：导入模块，开启 MITM，安装并信任 Surge MITM 证书；关闭其它闲鱼净化模块以免叠加。
+# 只删除明确广告标记；不删除正常入口、搜索筛选、正常推荐或聊天/交易数据。未实机验证。
+# 不启用共享域名/AMDC/QUIC 拦截，不接触登录、聊天、下单、支付 API；无外部脚本依赖。
+
+[Body Rewrite]
+# 首页信息流：仅删除 bizType=AD；保留正常商品、频道、聊天房和未知卡片
+http-response-jq ^https:\/\/(g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlehome\.home\.nextfresh\/[0-9]+\.[0-9]+\/?(\?|$) '. as $original | try (if (.data.sections | type) == "array" then .data.sections |= map(select((try .data.bizType catch null) != "AD")) else . end) catch $original'
+# 同城信息流：仅删除 bizType=AD；不修改定位或导航
+http-response-jq ^https:\/\/(g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.local\.home\/[0-9]+\.[0-9]+\/?(\?|$) '. as $original | try (if (.data.sections | type) == "array" then .data.sections |= map(select((try .data.bizType catch null) != "AD")) else . end) catch $original'
+# 搜索结果：仅删除明确 isAliMaMaAD=true / "true" 的推广；保留其它结果及筛选
+http-response-jq ^https:\/\/(g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlemtopsearch\.search\/[0-9]+\.[0-9]+\/?(\?|$) '. as $original | try (if (.data.resultList | type) == "array" then .data.resultList |= map(select((try .data.item.main.exContent.isAliMaMaAD catch null) as $ad | ($ad != true and $ad != "true"))) else . end) catch $original'
+# 商品详情底部推荐：仅删除 cardData.bizType=mamaAD，不清空正常推荐
+http-response-jq ^https:\/\/(g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.item\.recommend\.list\/[0-9]+\.[0-9]+\/?(\?|$) '. as $original | try (if (.data.cardList | type) == "array" then .data.cardList |= map(select((try .cardData.bizType catch null) != "mamaAD")) else . end) catch $original'
+
+[Map Local]
+# 开屏专用接口返回 HTTP 200 + 空 JSON；不拦截其它 mtop API。
+^https:\/\/(g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlecommerce\.splash\.ads\/[0-9]+\.[0-9]+\/?(\?|$) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% acs.m.goofish.com, g-acs.m.goofish.com
+
