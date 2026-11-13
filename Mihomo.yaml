@@ -39,7 +39,7 @@ proxy-groups:
   - name: "SG"
     type: url-test
     include-all: true
-    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/01Country/Singapore(2).png
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/01Country/singapore(2).png
     filter: "^(?!.*(Flower-|ikuu-|🇭🇰|🇯🇵|🇺🇸|🇨🇳|🇩🇪|🇨🇳|🇬🇧|IEPL|🇪🇸)).*$"
     
   - name: "JP"
