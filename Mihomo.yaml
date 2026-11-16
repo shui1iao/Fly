@@ -19,9 +19,9 @@ proxy-groups:
     type: fallback
     icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/chatgpt(balck).png
     proxies:
+      - US
       - SG
       - JP
-      - US
       
   - name: "Emby"
     type: fallback
