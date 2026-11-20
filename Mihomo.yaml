@@ -69,6 +69,14 @@ rule-providers:
     interval: 86400
     path: ./rules/Shuijiao/Speedtest.yaml
     url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/Speedtest.yaml
+
+  PayPal:
+    behavior: classical
+    type: http
+    format: yaml
+    interval: 86400
+    path: ./rules/Shuijiao/PayPal.yaml
+    url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/PayPal.yaml
     
   AI:
     behavior: classical
@@ -133,6 +141,7 @@ rules:
   - DOMAIN,dragonli.misaka.be,DIRECT
   - DOMAIN,lite.cn2gias.uk,Emby
   - RULE-SET,Speedtest,Proxy
+  - RULE-SET,PayPal,AI
   - RULE-SET,AI,AI
   - RULE-SET,Google,AI
   - RULE-SET,Telegram,Final
