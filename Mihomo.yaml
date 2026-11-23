@@ -135,7 +135,6 @@ rule-providers:
     url: https://raw.githubusercontent.com/shui1iao/Shuijiao-Rules/main/Mihomo/LAN.yaml
   
 rules:
-  - DOMAIN-KEYWORD,vip.shuijiao,DIRECT
   - DOMAIN,cola.11451453.xyz,DIRECT
   - DOMAIN-KEYWORD,longemby,DIRECT
   - DOMAIN,dragonli.misaka.be,DIRECT
